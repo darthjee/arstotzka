@@ -2,7 +2,7 @@ GIT
   remote: git@github.com:Bidu/safe_attribute_assignment.git
   revision: a165696b994c7b62806d1cedce324e5ccc08c404
   specs:
-    safe_attribute_assignment (0.0.2)
+    safe_attribute_assignment (0.0.3)
       activesupport
 
 PATH
