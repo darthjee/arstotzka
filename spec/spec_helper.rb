@@ -2,6 +2,7 @@ require 'simplecov'
 SimpleCov.start
 
 require 'json_parser'
+require 'safe_attribute_assignment'
 
 support_files = File.expand_path("spec/support/**/*.rb")
 Dir[support_files].each { |file| require file  }

@@ -3,7 +3,7 @@ require 'spec_helper'
 describe JsonParser do
   class JsonParser::House
     include JsonParser
-    include SafeAttributeAssignment
+    include ::SafeAttributeAssignment
     attr_reader :json
 
     json_parse :age, :value, :floors
