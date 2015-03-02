@@ -1,0 +1,39 @@
+{
+  "id": 100,
+  "user": {
+    "name": "usuario"
+  },
+  "age": 20,
+  "father": {
+    "name": "father full name"
+  },
+  "hasMoney": true,
+  "house": {
+    "age": 20,
+    "value": 1000,
+    "floors": 3
+  },
+  "oldHouse": {
+    "age": 30,
+    "value": 500,
+    "floors": 1
+  },
+  "games": [
+    {
+      "name": "zelda",
+      "publisher": "nintendo"
+    }, {
+      "name": "mario",
+      "publisher": "nintendo"
+    }, {
+      "name": "sonic",
+      "publisher": "sega"
+    }
+  ],
+  "animals":[
+    {"race": {"species": {"name": "European squid"}}},
+    {"race": {"species": {"name": "Macaque monkey"}}},
+    {"race": {"species": {"name": "Mexican redknee tarantula"}}}
+  ]
+
+}
