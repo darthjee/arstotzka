@@ -10,7 +10,6 @@ PATH
   specs:
     json_parser (0.0.2)
       activesupport
-      safe_attribute_assignment (= 0.0.2)
 
 GEM
   remote: https://rubygems.org/
