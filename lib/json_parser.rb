@@ -1,3 +1,5 @@
+require 'active_support'
+
 module JsonParser
   extend ActiveSupport::Concern
 
