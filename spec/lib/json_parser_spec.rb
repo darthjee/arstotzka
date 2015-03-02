@@ -53,7 +53,7 @@ describe JsonParser do
   end
 
   let(:dummy) { JsonParser::Dummy.new(json) }
-  let(:json) { load_json_fixture_file('utils', 'json_parser.json') }
+  let(:json) { load_json_fixture_file('json_parser.json') }
   let(:value) { dummy.public_send(attribute) }
 
   context 'when parser is configured with no options' do
