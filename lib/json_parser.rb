@@ -1,6 +1,8 @@
 module JsonParser
   extend ActiveSupport::Concern
 
+  require 'json_parser/version'
+
   module ClassMethods
     def json_parse(*attr_names)
       options = {
