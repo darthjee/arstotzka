@@ -1,7 +1,8 @@
 source "https://rubygems.org"
 
-group :development do
+gemspec
+
+group :test do
   gem 'safe_attribute_assignment', '0.0.2', git: 'git@github.com:Bidu/safe_attribute_assignment.git'
 end
 
-gemspec
