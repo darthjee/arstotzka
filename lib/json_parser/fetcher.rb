@@ -20,8 +20,19 @@ class JsonParser::Fetcher
     return wrap(json) if path.empty?
     return crawl_array(json, path) if json.is_a? Array
 
-    key = path[0].camelize(:lower)
-    crawl(json[key], path[1,path.size])
+    key = change_case(path[0])
+    crawl(json[key] || json[key.to_sym], path[1,path.size])
+  end
+
+  def change_case(key)
+    case case_type
+    when :lower_camel
+      key.camelize(:lower)
+    when :upper_camel
+      key.camelize(:upper)
+    when :snake
+      key.underscore
+    end
   end
 
   def crawl_array(array, path)
@@ -52,5 +63,9 @@ class JsonParser::Fetcher
 
   def compact
     options[:compact]
+  end
+
+  def case_type
+    options[:case_type]
   end
 end

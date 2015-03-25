@@ -1,6 +1,6 @@
 GIT
   remote: git@github.com:Bidu/safe_attribute_assignment.git
-  revision: a165696b994c7b62806d1cedce324e5ccc08c404
+  revision: 7ccb0c0f56a1c5f8d3f844144d7b4148069bc2a0
   specs:
     safe_attribute_assignment (0.0.3)
       activesupport
@@ -8,13 +8,13 @@ GIT
 PATH
   remote: .
   specs:
-    json_parser (0.0.2)
+    json_parser (0.0.3)
       activesupport
 
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (4.2.0)
+    activesupport (4.2.1)
       i18n (~> 0.7)
       json (~> 1.7, >= 1.7.7)
       minitest (~> 5.1)
@@ -40,7 +40,7 @@ GEM
       multi_json (~> 1.0)
       simplecov-html (~> 0.8.0)
     simplecov-html (0.8.0)
-    thread_safe (0.3.4)
+    thread_safe (0.3.5)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
 
@@ -52,5 +52,5 @@ DEPENDENCIES
   json_parser!
   rake
   rspec (~> 2.14)
-  safe_attribute_assignment (= 0.0.2)!
+  safe_attribute_assignment (= 0.0.3)!
   simplecov
