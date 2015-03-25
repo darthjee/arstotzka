@@ -246,4 +246,34 @@ describe JsonParser do
       expect(value.map(&:publisher)).not_to include('sega')
     end
   end
+
+  context 'when using a snake case' do
+    class JsonParser::Dummy
+      include JsonParser
+
+      json_parse :snake_cased, case: :snake
+    end
+
+    let(:json) { { snake_cased: 'snake', snakeCased: 'Camel' }.stringify_keys }
+    let(:attribute) { :snake_cased }
+
+    it 'fetches from snake cased fields' do
+      expect(value).to eq('snake')
+    end
+  end
+
+  context 'when using a upper camel case' do
+    class JsonParser::Dummy
+      include JsonParser
+
+      json_parse :upper_case, case: :upper_camel
+    end
+
+    let(:json) { { UpperCase: 'upper', upperCase: 'lower' }.stringify_keys }
+    let(:attribute) { :upper_case }
+
+    it 'fetches from snake cased fields' do
+      expect(value).to eq('upper')
+    end
+  end
 end

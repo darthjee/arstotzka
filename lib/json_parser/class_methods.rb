@@ -7,7 +7,8 @@ module JsonParser::ClassMethods
       cached: false,
       class: nil,
       compact: false,
-      after: nil
+      after: nil,
+      case: :lower_camel
     }.merge(attr_names.extract_options!)
 
     builder = Builder.new(attr_names, self, options)
@@ -67,6 +68,10 @@ module JsonParser::ClassMethods
       options[:after] ? ":#{options[:after]}" : false
     end
 
+    def case_type
+      options[:case]
+    end
+
     def add_attr(attribute)
       @methods_def << <<-CODE
         def #{attribute}
@@ -82,7 +87,8 @@ module JsonParser::ClassMethods
             instance: self,
             class: #{clazz || 'nil'},
             compact: #{compact || 'false'},
-            after: #{after}
+            after: #{after},
+            case_type: :#{case_type}
           }
         ).fetch
       CODE
