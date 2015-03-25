@@ -21,7 +21,7 @@ class JsonParser::Fetcher
     return crawl_array(json, path) if json.is_a? Array
 
     key = change_case(path[0])
-    crawl(json[key], path[1,path.size])
+    crawl(json[key] || json[key.to_sym], path[1,path.size])
   end
 
   def change_case(key)

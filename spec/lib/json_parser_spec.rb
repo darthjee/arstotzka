@@ -249,8 +249,6 @@ describe JsonParser do
 
   context 'when using a snake case' do
     class JsonParser::Dummy
-      include JsonParser
-
       json_parse :snake_cased, case: :snake
     end
 
@@ -264,16 +262,35 @@ describe JsonParser do
 
   context 'when using a upper camel case' do
     class JsonParser::Dummy
-      include JsonParser
-
       json_parse :upper_case, case: :upper_camel
     end
 
     let(:json) { { UpperCase: 'upper', upperCase: 'lower' }.stringify_keys }
     let(:attribute) { :upper_case }
 
-    it 'fetches from snake cased fields' do
+    it 'fetches from upper camel cased fields' do
       expect(value).to eq('upper')
+    end
+  end
+
+  context 'when using a symbol keys' do
+    let(:json) { load_json_fixture_file('json_parser.json').symbolize_keys }
+    let(:attribute) { :id }
+
+    it 'fetches from symbol keys' do
+      expect(value).to eq(json[:id])
+    end
+
+    context 'parser finds a nil attribute' do
+      let(:attribute) { :model }
+
+      it 'returns nil' do
+        expect(value).to be_nil
+      end
+
+      it do
+        expect { value }.not_to raise_error
+      end
     end
   end
 end
