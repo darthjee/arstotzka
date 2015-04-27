@@ -293,4 +293,25 @@ describe JsonParser do
       end
     end
   end
+
+  context 'when using key with false value' do
+    let(:attribute) { :has_money }
+    before do
+      json['hasMoney'] = false
+    end
+
+    context 'with string keys' do
+      it { expect(value).to be_falsey }
+      it { expect(value).not_to be_nil }
+    end
+
+    context 'with symbol keys' do
+      before do
+        json.symbolize_keys!
+      end
+
+      it { expect(value).to be_falsey }
+      it { expect(value).not_to be_nil }
+    end
+  end
 end
