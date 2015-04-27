@@ -8,7 +8,7 @@ GIT
 PATH
   remote: .
   specs:
-    json_parser (0.1.0)
+    json_parser (0.1.1)
       activesupport
 
 GEM
