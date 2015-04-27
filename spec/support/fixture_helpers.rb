@@ -2,7 +2,7 @@ require 'active_support'
 
 module FixtureHelpers
   def load_fixture_file(filename)
-      File.read (['/home/favini/projetos/json_parser/spec', 'fixtures', filename].join('/'))
+      File.read (['./spec/', 'fixtures', filename].join('/'))
   end
 
   def load_json_fixture_file(filename)
