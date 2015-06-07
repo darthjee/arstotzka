@@ -314,4 +314,17 @@ describe JsonParser do
       it { expect(value).not_to be_nil }
     end
   end
+
+  context 'when casting the result' do
+    class JsonParser::Dummy
+      json_parse :float_value, type: :float
+    end
+
+    let(:json) { { floatValue: '1' } }
+    let(:attribute) { :float_value }
+
+    it do
+      expect(value).to be_a(Float)
+    end
+  end
 end

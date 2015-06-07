@@ -1,17 +1,30 @@
 class JsonParser::PostProcessor
   include OptionsParser
+  include TypeCast
 
   attr_reader :options
 
-  delegate :clazz, to: :options_object
+  delegate :clazz, :type, to: :options_object
 
   def initialize(options = {})
     @options = options
   end
 
-  def wrap(json)
-    return json unless clazz
-    return clazz.new json unless json.is_a? Array
-    json.map { |v| wrap v }
+  def wrap(value)
+    return value.map { |v| wrap v } if value.is_a?(Array)
+
+    value = cast(value) if has_type?
+    value = clazz.new(value) if clazz
+    value
+  end
+
+  private
+
+  def has_type?
+    type.present? && type != :none
+  end
+
+  def cast(value)
+    send("to_#{type}", value)
   end
 end

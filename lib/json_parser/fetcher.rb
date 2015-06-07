@@ -25,7 +25,7 @@ class JsonParser::Fetcher
   end
 
   def build_post_processor
-    JsonParser::PostProcessor.new(options.slice(:clazz))
+    JsonParser::PostProcessor.new(options.slice(:clazz, :type))
   end
 
   def crawl(json, path)
