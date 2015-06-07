@@ -6,8 +6,8 @@ class JsonParser::Crawler
   delegate :case_type, :compact, to: :options_object
 
   def initialize(path, options = {}, &block)
-    @path = path
     @options = options
+    @path = path.map { |p| change_case(p) }
     @post_process = block
   end
 
@@ -16,7 +16,7 @@ class JsonParser::Crawler
     return wrap(json) if is_ended?(index)
     return crawl_array(json, index) if json.is_a? Array
 
-    key = change_case(path[index])
+    key = path[index]
     value = json.key?(key) ? json[key] : json[key.to_sym]
     crawl(value, index + 1)
   end
