@@ -53,6 +53,7 @@ describe JsonParser::PostProcessor do
       let(:type) { :integer }
       let(:value) { '1' }
       let(:options) { { type: type } }
+      let(:cast) { result }
 
       shared_context 'a result that is type cast' do |types|
         types.each do |type, clazz|
@@ -60,33 +61,42 @@ describe JsonParser::PostProcessor do
             let(:type) { type }
 
             it do
-              expect(result).to be_a(clazz)
+              expect(cast).to be_a(clazz)
             end
           end
         end
       end
 
-      it_behaves_like 'a result that is type cast', {
-        integer: Integer,
-        float: Float,
-        string: String
-      }
+      shared_context 'casts basic types' do
+        it_behaves_like 'a result that is type cast', {
+          integer: Integer,
+          float: Float,
+          string: String
+        }
+      end
+
+      it_behaves_like 'casts basic types'
 
       context 'when processing an array' do
-        let(:value) { ['1'] }
-        let(:type) { :integer }
+        let(:value) { [1.0] }
+        let(:cast) { result.first }
 
-        it 'wraps each element' do
+        it_behaves_like 'casts basic types'
+
+        it do
           expect(result).to be_a(Array)
-          expect(result.first).to be_a(Integer)
         end
       end
 
       context 'when passing clazz parameter' do
+        let(:value) { 1 }
         let(:options) { { type: type, clazz: JsonParser::PostProcessor::DummyWrapper } }
+        let(:cast) { result.value }
 
-        it 'wraps each element' do
-          expect(result.value).to be_a(Integer)
+        it_behaves_like 'casts basic types'
+
+        it 'wraps the result inside the given class' do
+          expect(result).to be_a(JsonParser::PostProcessor::DummyWrapper)
         end
       end
     end
