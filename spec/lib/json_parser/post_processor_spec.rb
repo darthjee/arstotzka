@@ -62,6 +62,16 @@ describe JsonParser::PostProcessor do
         float: Float,
         string: String
       }
+
+      context 'when processing an array' do
+        let(:value) { ['1'] }
+        let(:type) { :integer }
+
+        it 'wraps each element' do
+          expect(result).to be_a(Array)
+          expect(result.first).to be_a(Integer)
+        end
+      end
     end
   end
 end
