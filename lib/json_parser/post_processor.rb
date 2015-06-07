@@ -1,7 +1,7 @@
 class JsonParser::PostProcessor
   attr_reader :options
 
-  delegate :clazz, :compact, to: :options_object
+  delegate :clazz, to: :options_object
 
   def initialize(options = {})
     @options = options
@@ -10,9 +10,7 @@ class JsonParser::PostProcessor
   def wrap(json)
     return json unless clazz
     return clazz.new json unless json.is_a? Array
-    json.map { |v| wrap v }.tap do |j|
-      j.compact! if compact
-    end
+    json.map { |v| wrap v }
   end
 
   private

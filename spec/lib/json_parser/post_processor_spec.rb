@@ -20,14 +20,6 @@ describe JsonParser::PostProcessor do
         it 'does not change the array' do
           expect(result).to eq(value)
         end
-
-        context 'with an array with a nil value as value' do
-          let(:value) { [nil] }
-
-          it 'does not change the array' do
-            expect(result).to eq(value)
-          end
-        end
       end
     end
 
