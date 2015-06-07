@@ -11,11 +11,11 @@ class JsonParser::PostProcessor
   end
 
   def wrap(value)
-    value = cast(value) unless value.is_a?(Array) || !type
+    return value.map { |v| wrap v } if value.is_a?(Array)
 
-    return value unless clazz || value.is_a?(Array)
-    return clazz.new value unless value.is_a? Array
-    value.map { |v| wrap v }
+    value = cast(value) if type
+    value = clazz.new(value) if clazz
+    value
   end
 
   def cast(value)
