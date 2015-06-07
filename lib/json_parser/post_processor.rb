@@ -1,4 +1,6 @@
 class JsonParser::PostProcessor
+  include OptionsParser
+
   attr_reader :options
 
   delegate :clazz, to: :options_object
@@ -11,11 +13,5 @@ class JsonParser::PostProcessor
     return json unless clazz
     return clazz.new json unless json.is_a? Array
     json.map { |v| wrap v }
-  end
-
-  private
-
-  def options_object
-    @options_object ||= OpenStruct.new options
   end
 end

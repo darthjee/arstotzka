@@ -1,4 +1,6 @@
 class JsonParser::Fetcher
+  include OptionsParser
+
   attr_reader :path, :json, :options
 
   delegate :after, :instance, :compact, :case_type, to: :options_object
@@ -17,10 +19,6 @@ class JsonParser::Fetcher
   end
 
   private
-
-  def options_object
-    @options_object ||= OpenStruct.new options
-  end
 
   def post_processor
     @post_processor ||= build_post_processor

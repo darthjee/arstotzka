@@ -17,6 +17,8 @@ module JsonParser::ClassMethods
   end
 
   class Builder
+    include OptionsParser
+
     attr_reader :attr_names, :options, :methods_def
 
     delegate :path, :cached, :compact, to: :options_object
@@ -36,10 +38,6 @@ module JsonParser::ClassMethods
     end
 
     private
-
-    def options_object
-      @options_object ||= OpenStruct.new options
-    end
 
     def init
       attr_names.each do |attr|
