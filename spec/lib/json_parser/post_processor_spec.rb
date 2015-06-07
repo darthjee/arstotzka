@@ -1,6 +1,14 @@
 require 'spec_helper'
 
 describe JsonParser::PostProcessor do
+
+  class JsonParser::PostProcessor::DummyWrapper
+    attr_reader :value
+    def initialize(value)
+      @value = value
+    end
+  end
+
   let(:options) { {} }
   let(:subject) { described_class.new options }
   let(:hash) { { a: 1 } }
@@ -42,6 +50,7 @@ describe JsonParser::PostProcessor do
     end
 
     context 'with type otpion' do
+      let(:type) { :integer }
       let(:value) { '1' }
       let(:options) { { type: type } }
 
@@ -70,6 +79,14 @@ describe JsonParser::PostProcessor do
         it 'wraps each element' do
           expect(result).to be_a(Array)
           expect(result.first).to be_a(Integer)
+        end
+      end
+
+      context 'when passing clazz parameter' do
+        let(:options) { { type: type, clazz: JsonParser::PostProcessor::DummyWrapper } }
+
+        it 'wraps each element' do
+          expect(result.value).to be_a(Integer)
         end
       end
     end

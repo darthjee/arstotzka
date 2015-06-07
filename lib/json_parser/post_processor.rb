@@ -11,7 +11,8 @@ class JsonParser::PostProcessor
   end
 
   def wrap(json)
-    return cast(json) unless clazz || json.is_a?(Array) || !type
+    json = cast(json) unless json.is_a?(Array) || !type
+
     return json unless clazz || json.is_a?(Array)
     return clazz.new json unless json.is_a? Array
     json.map { |v| wrap v }
