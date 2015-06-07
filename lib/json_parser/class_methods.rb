@@ -1,4 +1,5 @@
 module JsonParser::ClassMethods
+
   def json_parse(*attr_names)
     options = {
       path: nil,
@@ -16,7 +17,11 @@ module JsonParser::ClassMethods
   end
 
   class Builder
+    include OptionsParser
+
     attr_reader :attr_names, :options, :methods_def
+
+    delegate :path, :cached, :compact, to: :options_object
 
     def initialize(attr_names, instance, options)
       @attr_names = attr_names
@@ -40,10 +45,6 @@ module JsonParser::ClassMethods
       end
     end
 
-    def path
-      options[:path]
-    end
-
     def json_name
       options[:json]
     end
@@ -52,16 +53,8 @@ module JsonParser::ClassMethods
       options[:full_path] || [path, attribute].compact.join('.')
     end
 
-    def cached
-      options[:cached]
-    end
-
     def clazz
       options[:class]
-    end
-
-    def compact
-      options[:compact]
     end
 
     def after
@@ -85,7 +78,7 @@ module JsonParser::ClassMethods
         JsonParser::Fetcher.new(
           #{json_name}, '#{full_path(attribute)}', {
             instance: self,
-            class: #{clazz || 'nil'},
+            clazz: #{clazz || 'nil'},
             compact: #{compact || 'false'},
             after: #{after},
             case_type: :#{case_type}

@@ -1,5 +1,10 @@
 class JsonParser::Fetcher
+  include OptionsParser
+
   attr_reader :path, :json, :options
+
+  delegate :after, :instance, :compact, :case_type, to: :options_object
+  delegate :wrap, to: :post_processor
 
   def initialize(json, path, options = {})
     @path = path.to_s.split('.')
@@ -14,6 +19,14 @@ class JsonParser::Fetcher
   end
 
   private
+
+  def post_processor
+    @post_processor ||= build_post_processor
+  end
+
+  def build_post_processor
+    JsonParser::PostProcessor.new(options.slice(:clazz))
+  end
 
   def crawl(json, path)
     return nil if json.nil?
@@ -40,33 +53,5 @@ class JsonParser::Fetcher
     array.map { |j| crawl(j, path) }.tap do |a|
       a.compact! if compact
     end
-  end
-
-  def wrap(json)
-    return json unless clazz
-    return clazz.new json unless json.is_a? Array
-    json.map { |v| wrap v }.tap do |j|
-      j.compact! if compact
-    end
-  end
-
-  def clazz
-    options[:class]
-  end
-
-  def after
-    options[:after]
-  end
-
-  def instance
-    options[:instance]
-  end
-
-  def compact
-    options[:compact]
-  end
-
-  def case_type
-    options[:case_type]
   end
 end
