@@ -26,9 +26,13 @@ class JsonParser::Fetcher
   end
 
   def buidl_crawler
-    JsonParser::Crawler.new(options.slice(:case_type, :compact)) do |value|
+    JsonParser::Crawler.new(crawler_options) do |value|
       wrap(value)
     end
+  end
+
+  def crawler_options
+    options.slice(:case_type, :compact)
   end
 
   def post_processor
@@ -36,6 +40,10 @@ class JsonParser::Fetcher
   end
 
   def build_post_processor
-    JsonParser::PostProcessor.new(options.slice(:clazz, :type))
+    JsonParser::PostProcessor.new(post_processor_options)
+  end
+
+  def post_processor_options
+    options.slice(:clazz, :type)
   end
 end
