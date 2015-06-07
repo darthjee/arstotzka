@@ -20,7 +20,7 @@ module JsonParser::ClassMethods
   class Builder
     include OptionsParser
 
-    attr_reader :attr_names, :options, :methods_def
+    attr_reader :attr_names, :methods_def
 
     delegate :path, :cached, :compact, :type, to: :options_object
 

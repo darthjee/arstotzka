@@ -1,7 +1,7 @@
 class JsonParser::Fetcher
   include OptionsParser
 
-  attr_reader :path, :json, :options
+  attr_reader :path, :json
 
   delegate :after, :instance, to: :options_object
   delegate :wrap, to: :post_processor

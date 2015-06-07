@@ -1,7 +1,7 @@
 class JsonParser::Crawler
   include OptionsParser
 
-  attr_reader :post_process, :options
+  attr_reader :post_process
 
   delegate :case_type, :compact, to: :options_object
 

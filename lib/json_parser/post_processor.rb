@@ -2,8 +2,6 @@ class JsonParser::PostProcessor
   include OptionsParser
   include TypeCast
 
-  attr_reader :options
-
   delegate :clazz, :type, to: :options_object
 
   def initialize(options = {})
