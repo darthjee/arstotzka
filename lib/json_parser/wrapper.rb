@@ -11,7 +11,7 @@ class JsonParser::Wrapper
   def wrap(value)
     return value.map { |v| wrap v } if value.is_a?(Array)
 
-    value = cast(value) if has_type?
+    value = cast(value) if has_type? && !value.nil?
     value = clazz.new(value) if clazz
     value
   end
