@@ -2,6 +2,7 @@ module TypeCast
   extend ActiveSupport::Concern
 
   def to_integer(value)
+    return unless value.present?
     value.to_i
   end
 
@@ -10,6 +11,7 @@ module TypeCast
   end
 
   def to_float(value)
+    return unless value.present?
     value.to_f
   end
 end
