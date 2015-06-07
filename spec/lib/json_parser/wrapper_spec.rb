@@ -68,6 +68,14 @@ describe JsonParser::Wrapper do
         end
       end
 
+      context 'with nil value' do
+        let(:value) { nil }
+
+        it do
+          expect(result).to be_nil
+        end
+      end
+
       context 'when passing clazz parameter' do
         let(:value) { 1 }
         let(:options) { { type: type, clazz: JsonParser::Wrapper::DummyWrapper } }
