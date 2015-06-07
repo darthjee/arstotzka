@@ -1,6 +1,8 @@
 class JsonParser::Fetcher
   attr_reader :path, :json, :options
 
+  delegate :after, :instance, :compact, :case_type, :clazz, to: :options_object
+
   def initialize(json, path, options = {})
     @path = path.to_s.split('.')
     @json = json
@@ -14,6 +16,10 @@ class JsonParser::Fetcher
   end
 
   private
+
+  def options_object
+    @options_object ||= OpenStruct.new options
+  end
 
   def crawl(json, path)
     return nil if json.nil?
@@ -48,25 +54,5 @@ class JsonParser::Fetcher
     json.map { |v| wrap v }.tap do |j|
       j.compact! if compact
     end
-  end
-
-  def clazz
-    options[:class]
-  end
-
-  def after
-    options[:after]
-  end
-
-  def instance
-    options[:instance]
-  end
-
-  def compact
-    options[:compact]
-  end
-
-  def case_type
-    options[:case_type]
   end
 end

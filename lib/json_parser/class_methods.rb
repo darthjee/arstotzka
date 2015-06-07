@@ -85,7 +85,7 @@ module JsonParser::ClassMethods
         JsonParser::Fetcher.new(
           #{json_name}, '#{full_path(attribute)}', {
             instance: self,
-            class: #{clazz || 'nil'},
+            clazz: #{clazz || 'nil'},
             compact: #{compact || 'false'},
             after: #{after},
             case_type: :#{case_type}
