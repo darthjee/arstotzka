@@ -1,4 +1,4 @@
-class JsonParser::PostProcessor
+class JsonParser::Wrapper
   include OptionsParser
   include TypeCast
 

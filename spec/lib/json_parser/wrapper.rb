@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe JsonParser::PostProcessor do
+describe JsonParser::Wrapper do
 
-  class JsonParser::PostProcessor::DummyWrapper
+  class JsonParser::Wrapper::DummyWrapper
     attr_reader :value
     def initialize(value)
       @value = value
@@ -70,13 +70,13 @@ describe JsonParser::PostProcessor do
 
       context 'when passing clazz parameter' do
         let(:value) { 1 }
-        let(:options) { { type: type, clazz: JsonParser::PostProcessor::DummyWrapper } }
+        let(:options) { { type: type, clazz: JsonParser::Wrapper::DummyWrapper } }
         let(:cast) { result.value }
 
         it_behaves_like 'casts basic types'
 
         it 'wraps the result inside the given class' do
-          expect(result).to be_a(JsonParser::PostProcessor::DummyWrapper)
+          expect(result).to be_a(JsonParser::Wrapper::DummyWrapper)
         end
       end
 

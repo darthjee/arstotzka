@@ -4,7 +4,7 @@ class JsonParser::Fetcher
   attr_reader :path, :json
 
   delegate :after, :instance, to: :options_object
-  delegate :wrap, to: :post_processor
+  delegate :wrap, to: :wrapper
   delegate :crawl, to: :crawler
 
   def initialize(json, path, options = {})
@@ -35,15 +35,15 @@ class JsonParser::Fetcher
     options.slice(:case_type, :compact)
   end
 
-  def post_processor
-    @post_processor ||= build_post_processor
+  def wrapper
+    @wrapper ||= build_wrapper
   end
 
-  def build_post_processor
-    JsonParser::PostProcessor.new(post_processor_options)
+  def build_wrapper
+    JsonParser::Wrapper.new(wrapper_options)
   end
 
-  def post_processor_options
+  def wrapper_options
     options.slice(:clazz, :type)
   end
 end
