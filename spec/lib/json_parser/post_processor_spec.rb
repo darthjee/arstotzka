@@ -3,7 +3,7 @@ require 'spec_helper'
 describe JsonParser::PostProcessor do
   let(:options) { {} }
   let(:subject) { described_class.new options }
-  let(:hash) { { a: 1} }
+  let(:hash) { { a: 1 } }
 
   describe '#wrap' do
     let(:value) { hash }
@@ -37,6 +37,36 @@ describe JsonParser::PostProcessor do
         it 'returns an array of objects of the given class' do
           expect(result).to be_a(Array)
           expect(result.first).to be_a(OpenStruct)
+        end
+      end
+    end
+
+    context 'with type otpion' do
+      let(:value) { '1' }
+      let(:options) { { type: type } }
+
+      context 'with integer type' do
+        let(:type) { :integer }
+
+        it do
+          expect(result).to be_a(Integer)
+        end
+      end
+
+      context 'with float type' do
+        let(:type) { :float }
+
+        it do
+          expect(result).to be_a(Float)
+        end
+      end
+
+      context 'with string type' do
+        let(:value) { 1 }
+        let(:type) { :string }
+
+        it do
+          expect(result).to be_a(String)
         end
       end
     end

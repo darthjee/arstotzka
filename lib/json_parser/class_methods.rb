@@ -9,7 +9,8 @@ module JsonParser::ClassMethods
       class: nil,
       compact: false,
       after: nil,
-      case: :lower_camel
+      case: :lower_camel,
+      type: nil
     }.merge(attr_names.extract_options!)
 
     builder = Builder.new(attr_names, self, options)

@@ -4,6 +4,7 @@ require 'active_support/all'
 module JsonParser
   extend ActiveSupport::Concern
 
+  require 'concerns/type_cast'
   require 'concerns/options_parser'
   require 'json_parser/version'
   require 'json_parser/post_processor'
