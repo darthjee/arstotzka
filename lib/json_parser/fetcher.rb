@@ -1,57 +1,50 @@
 class JsonParser::Fetcher
   include OptionsParser
 
-  attr_reader :path, :json, :options
+  attr_reader :path, :json, :instance
 
-  delegate :after, :instance, :compact, :case_type, to: :options_object
-  delegate :wrap, to: :post_processor
+  delegate :after, to: :options_object
+  delegate :wrap, to: :wrapper
+  delegate :crawl, to: :crawler
 
-  def initialize(json, path, options = {})
+  def initialize(json, path, instance, options = {})
     @path = path.to_s.split('.')
     @json = json
+    @instance = instance
     @options = options
   end
 
   def fetch
-    value = crawl(json, path)
+    value = crawl(json)
     value = instance.send(after, value) if after
     value
   end
 
   private
 
-  def post_processor
-    @post_processor ||= build_post_processor
+  def crawler
+    @crawler ||= buidl_crawler
   end
 
-  def build_post_processor
-    JsonParser::PostProcessor.new(options.slice(:clazz, :type))
-  end
-
-  def crawl(json, path)
-    return nil if json.nil?
-    return wrap(json) if path.empty?
-    return crawl_array(json, path) if json.is_a? Array
-
-    key = change_case(path[0])
-    value = json.key?(key) ? json[key] : json[key.to_sym]
-    crawl(value, path[1,path.size])
-  end
-
-  def change_case(key)
-    case case_type
-    when :lower_camel
-      key.camelize(:lower)
-    when :upper_camel
-      key.camelize(:upper)
-    when :snake
-      key.underscore
+  def buidl_crawler
+    JsonParser::Crawler.new(path, crawler_options) do |value|
+      wrap(value)
     end
   end
 
-  def crawl_array(array, path)
-    array.map { |j| crawl(j, path) }.tap do |a|
-      a.compact! if compact
-    end
+  def crawler_options
+    options.slice(:case_type, :compact)
+  end
+
+  def wrapper
+    @wrapper ||= build_wrapper
+  end
+
+  def build_wrapper
+    JsonParser::Wrapper.new(wrapper_options)
+  end
+
+  def wrapper_options
+    options.slice(:clazz, :type)
   end
 end
