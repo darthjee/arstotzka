@@ -84,6 +84,26 @@ describe JsonParser::Wrapper do
         end
       end
 
+      context 'with blank value' do
+        let(:value) { '' }
+
+        it_behaves_like 'a result that is type cast', {
+          integer: NilClass,
+          float: NilClass,
+          string: String
+        }
+
+        context 'when passing clazz parameter' do
+          let(:options) { { type: type, clazz: JsonParser::Wrapper::DummyWrapper } }
+
+          it_behaves_like 'a result that is type cast', {
+            integer: NilClass,
+            float: NilClass,
+            string: JsonParser::Wrapper::DummyWrapper
+          }
+        end
+      end
+
       context 'when passing clazz parameter' do
         let(:value) { 1 }
         let(:options) { { type: type, clazz: JsonParser::Wrapper::DummyWrapper } }

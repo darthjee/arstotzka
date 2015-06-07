@@ -25,6 +25,7 @@ class JsonParser::Wrapper
   end
 
   def cast(value)
+    return unless value.present? || type.to_sym == :string
     send("to_#{type}", value)
   end
 end
