@@ -79,6 +79,15 @@ describe JsonParser::PostProcessor do
           expect(result).to be_a(JsonParser::PostProcessor::DummyWrapper)
         end
       end
+
+      context 'with none for type' do
+        let(:type) { :none }
+        let(:value) { 1.0 }
+
+        it 'does not cast the value' do
+          expect(result).to eq(value)
+        end
+      end
     end
   end
 end

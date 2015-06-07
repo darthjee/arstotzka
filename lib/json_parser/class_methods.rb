@@ -10,7 +10,7 @@ module JsonParser::ClassMethods
       compact: false,
       after: nil,
       case: :lower_camel,
-      type: nil
+      type: :none
     }.merge(attr_names.extract_options!)
 
     builder = Builder.new(attr_names, self, options)
@@ -83,7 +83,7 @@ module JsonParser::ClassMethods
             compact: #{compact || 'false'},
             after: #{after},
             case_type: :#{case_type},
-            type: #{type.nil? ? 'nil' : ":#{type}"}
+            type: :#{type}
           }
         ).fetch
       CODE
