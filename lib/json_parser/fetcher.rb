@@ -1,7 +1,8 @@
 class JsonParser::Fetcher
   attr_reader :path, :json, :options
 
-  delegate :after, :instance, :compact, :case_type, :clazz, to: :options_object
+  delegate :after, :instance, :compact, :case_type, to: :options_object
+  delegate :wrap, to: :post_processor
 
   def initialize(json, path, options = {})
     @path = path.to_s.split('.')
@@ -19,6 +20,14 @@ class JsonParser::Fetcher
 
   def options_object
     @options_object ||= OpenStruct.new options
+  end
+
+  def post_processor
+    @post_processor ||= build_post_processor
+  end
+
+  def build_post_processor
+    JsonParser::PostProcessor.new(options.slice(:clazz, :compact))
   end
 
   def crawl(json, path)
@@ -45,14 +54,6 @@ class JsonParser::Fetcher
   def crawl_array(array, path)
     array.map { |j| crawl(j, path) }.tap do |a|
       a.compact! if compact
-    end
-  end
-
-  def wrap(json)
-    return json unless clazz
-    return clazz.new json unless json.is_a? Array
-    json.map { |v| wrap v }.tap do |j|
-      j.compact! if compact
     end
   end
 end
