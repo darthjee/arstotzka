@@ -3,7 +3,7 @@ class JsonParser::ClassMethods::Builder
 
   attr_reader :attr_names, :methods_def
 
-  delegate :path, :cached, :compact, :type, to: :options_object
+  delegate :path, :cached, :compact, :type, :after, to: :options_object
 
   def initialize(attr_names, instance, options)
     @attr_names = attr_names
@@ -39,12 +39,15 @@ class JsonParser::ClassMethods::Builder
     options[:class]
   end
 
-  def after
-    options[:after] ? ":#{options[:after]}" : false
-  end
-
   def case_type
     options[:case]
+  end
+
+  def fetcher_options
+    options.slice(:compact, :after, :type).merge({
+      clazz: clazz,
+      case_type: case_type
+    })
   end
 
   def add_attr(attribute)
@@ -58,14 +61,7 @@ class JsonParser::ClassMethods::Builder
   def attr_fetcher(attribute)
     <<-CODE
       JsonParser::Fetcher.new(
-        #{json_name}, '#{full_path(attribute)}', {
-          instance: self,
-          clazz: #{clazz || 'nil'},
-          compact: #{compact || 'false'},
-          after: #{after},
-          case_type: :#{case_type},
-          type: :#{type}
-        }
+        #{json_name}, '#{full_path(attribute)}', self, #{fetcher_options}
       ).fetch
     CODE
   end

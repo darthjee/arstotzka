@@ -1,15 +1,16 @@
 class JsonParser::Fetcher
   include OptionsParser
 
-  attr_reader :path, :json
+  attr_reader :path, :json, :instance
 
-  delegate :after, :instance, to: :options_object
+  delegate :after, to: :options_object
   delegate :wrap, to: :wrapper
   delegate :crawl, to: :crawler
 
-  def initialize(json, path, options = {})
+  def initialize(json, path, instance, options = {})
     @path = path.to_s.split('.')
     @json = json
+    @instance = instance
     @options = options
   end
 

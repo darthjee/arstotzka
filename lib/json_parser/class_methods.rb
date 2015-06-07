@@ -8,7 +8,7 @@ module JsonParser::ClassMethods
       cached: false,
       class: nil,
       compact: false,
-      after: nil,
+      after: false,
       case: :lower_camel,
       type: :none
     }.merge(attr_names.extract_options!)
