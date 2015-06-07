@@ -14,7 +14,7 @@ class JsonParser::Fetcher
   end
 
   def fetch
-    value = crawl(json, path)
+    value = crawl(json)
     value = instance.send(after, value) if after
     value
   end
@@ -26,7 +26,7 @@ class JsonParser::Fetcher
   end
 
   def buidl_crawler
-    JsonParser::Crawler.new(crawler_options) do |value|
+    JsonParser::Crawler.new(path, crawler_options) do |value|
       wrap(value)
     end
   end
