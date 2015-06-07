@@ -22,7 +22,7 @@ module JsonParser::ClassMethods
 
     attr_reader :attr_names, :options, :methods_def
 
-    delegate :path, :cached, :compact, to: :options_object
+    delegate :path, :cached, :compact, :type, to: :options_object
 
     def initialize(attr_names, instance, options)
       @attr_names = attr_names
@@ -82,7 +82,8 @@ module JsonParser::ClassMethods
             clazz: #{clazz || 'nil'},
             compact: #{compact || 'false'},
             after: #{after},
-            case_type: :#{case_type}
+            case_type: :#{case_type},
+            type: #{type.nil? ? 'nil' : ":#{type}"}
           }
         ).fetch
       CODE
