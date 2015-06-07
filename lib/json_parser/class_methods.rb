@@ -1,4 +1,5 @@
 module JsonParser::ClassMethods
+
   def json_parse(*attr_names)
     options = {
       path: nil,
@@ -18,6 +19,8 @@ module JsonParser::ClassMethods
   class Builder
     attr_reader :attr_names, :options, :methods_def
 
+    delegate :path, :cached, :compact, to: :options_object
+
     def initialize(attr_names, instance, options)
       @attr_names = attr_names
       @instance = instance
@@ -34,14 +37,14 @@ module JsonParser::ClassMethods
 
     private
 
+    def options_object
+      @options_object ||= OpenStruct.new options
+    end
+
     def init
       attr_names.each do |attr|
         add_attr(attr)
       end
-    end
-
-    def path
-      options[:path]
     end
 
     def json_name
@@ -52,16 +55,8 @@ module JsonParser::ClassMethods
       options[:full_path] || [path, attribute].compact.join('.')
     end
 
-    def cached
-      options[:cached]
-    end
-
     def clazz
       options[:class]
-    end
-
-    def compact
-      options[:compact]
     end
 
     def after
