@@ -116,4 +116,25 @@ describe JsonParser::Crawler do
       expect(value).to eq('upper')
     end
   end
+
+  context 'when using a symbol keys' do
+    let(:json) { load_json_fixture_file('json_parser.json').symbolize_keys }
+    let(:path) { [ 'id' ] }
+
+    it 'fetches from symbol keys' do
+      expect(value).to eq(json[:id])
+    end
+
+    context 'crawler finds a nil attribute' do
+      let(:path) { %w(car model) }
+
+      it 'returns nil' do
+        expect(value).to be_nil
+      end
+
+      it do
+        expect { value }.not_to raise_error
+      end
+    end
+  end
 end
