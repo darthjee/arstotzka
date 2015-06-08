@@ -96,4 +96,14 @@ describe JsonParser::Crawler do
       end
     end
   end
+
+  context 'when using a snake case' do
+    let(:json) { { snake_cased: 'snake', snakeCased: 'Camel' }.stringify_keys }
+    let(:path) { [ 'snake_cased' ] }
+    let(:options) { { case_type: :snake } }
+
+    it 'fetches from snake cased fields' do
+      expect(value).to eq('snake')
+    end
+  end
 end

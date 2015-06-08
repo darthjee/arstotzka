@@ -165,18 +165,6 @@ describe JsonParser do
     end
   end
 
-  context 'when using a snake case' do
-    class JsonParser::Dummy
-      json_parse :snake_cased, case: :snake
-    end
-
-    let(:json) { { snake_cased: 'snake', snakeCased: 'Camel' }.stringify_keys }
-    let(:attribute) { :snake_cased }
-
-    it 'fetches from snake cased fields' do
-      expect(value).to eq('snake')
-    end
-  end
 
   context 'when using a upper camel case' do
     class JsonParser::Dummy
