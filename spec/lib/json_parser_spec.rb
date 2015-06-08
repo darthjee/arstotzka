@@ -157,34 +157,6 @@ describe JsonParser do
     end
   end
 
-  context 'when dealing with json inside arrays' do
-    let(:attribute) { :species_name }
-    let(:expected) do
-      ['European squid', 'Macaque monkey', 'Mexican redknee tarantula']
-    end
-
-    it do
-      expect(value).to be_a(Array)
-    end
-
-    it 'parses them mapping arrays as sub parse' do
-      expect(value).to eq(expected)
-    end
-
-    context 'when there are nil values and compact is true' do
-      before do
-        json["animals"].last['race'] = nil
-      end
-      let(:expected) do
-        ['European squid', 'Macaque monkey']
-      end
-
-      it 'eliminate nil values' do
-        expect(value).to eq(expected)
-      end
-    end
-  end
-
   context 'when passing an after filter' do
     let(:attribute) { :games_filtered }
 

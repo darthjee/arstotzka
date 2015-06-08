@@ -51,4 +51,49 @@ describe JsonParser::Crawler do
       expect(value).to eq(json['hasMoney'])
     end
   end
+
+  context 'when dealing with json inside arrays' do
+    let(:path) { %w(animals race species name)}
+    let(:expected) do
+      ['European squid', 'Macaque monkey', 'Mexican redknee tarantula']
+    end
+
+    it do
+      expect(value).to be_a(Array)
+    end
+
+    it 'parses them mapping arrays as sub parse' do
+      expect(value).to eq(expected)
+    end
+
+    context 'when there are nil values' do
+      context 'with compact option as false' do
+        let(:options) { { compact: false } }
+        before do
+          json["animals"].last['race'] = nil
+        end
+        let(:expected) do
+          ['European squid', 'Macaque monkey', nil]
+        end
+
+        it 'eliminate nil values' do
+          expect(value).to eq(expected)
+        end
+      end
+
+      context 'with compact option' do
+        let(:options) { { compact: true } }
+        before do
+          json["animals"].last['race'] = nil
+        end
+        let(:expected) do
+          ['European squid', 'Macaque monkey']
+        end
+
+        it 'eliminate nil values' do
+          expect(value).to eq(expected)
+        end
+      end
+    end
+  end
 end
