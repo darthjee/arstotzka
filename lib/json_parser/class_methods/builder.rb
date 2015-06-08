@@ -44,7 +44,7 @@ class JsonParser::ClassMethods::Builder
   end
 
   def fetcher_options
-    options.slice(:compact, :after, :type).merge({
+    options.slice(:compact, :after, :type, :flatten).merge({
       clazz: clazz,
       case_type: case_type
     })

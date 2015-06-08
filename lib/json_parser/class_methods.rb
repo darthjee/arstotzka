@@ -8,6 +8,7 @@ module JsonParser::ClassMethods
       cached: false,
       class: nil,
       compact: false,
+      flatten: false,
       after: false,
       case: :lower_camel,
       type: :none
