@@ -166,19 +166,6 @@ describe JsonParser do
   end
 
 
-  context 'when using a upper camel case' do
-    class JsonParser::Dummy
-      json_parse :upper_case, case: :upper_camel
-    end
-
-    let(:json) { { UpperCase: 'upper', upperCase: 'lower' }.stringify_keys }
-    let(:attribute) { :upper_case }
-
-    it 'fetches from upper camel cased fields' do
-      expect(value).to eq('upper')
-    end
-  end
-
   context 'when using a symbol keys' do
     let(:json) { load_json_fixture_file('json_parser.json').symbolize_keys }
     let(:attribute) { :id }

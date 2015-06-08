@@ -106,4 +106,14 @@ describe JsonParser::Crawler do
       expect(value).to eq('snake')
     end
   end
+
+  context 'when using a upper camel case' do
+    let(:json) { { UpperCase: 'upper', upperCase: 'lower' }.stringify_keys }
+    let(:path) { [ 'upper_case' ] }
+    let(:options) { { case_type: :upper_camel } }
+
+    it 'fetches from upper camel cased fields' do
+      expect(value).to eq('upper')
+    end
+  end
 end
