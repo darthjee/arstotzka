@@ -72,31 +72,6 @@ describe JsonParser do
     end
   end
 
-  context 'parser finds a nil attribute' do
-    let(:attribute) { :model }
-
-    it 'returns nil' do
-      expect(value).to be_nil
-    end
-
-    it do
-      expect { value }.not_to raise_error
-    end
-  end
-
-  context 'when json is instead of empty' do
-    let(:json) { nil }
-    let(:attribute) { :model }
-
-    it 'returns nil' do
-      expect(value).to be_nil
-    end
-
-    it do
-      expect { value }.not_to raise_error
-    end
-  end
-
   context 'when configuring full path' do
     let(:attribute) { :father_name }
 
