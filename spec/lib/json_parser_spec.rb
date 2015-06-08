@@ -165,9 +165,6 @@ describe JsonParser do
     end
   end
 
-
-
-
   context 'when casting the result' do
     class JsonParser::Dummy
       json_parse :float_value, type: :float
