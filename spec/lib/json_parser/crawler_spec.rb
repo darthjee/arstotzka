@@ -6,7 +6,7 @@ describe JsonParser::Crawler do
   end
   let(:block) { proc { |v| v } }
   let(:path) { '' }
-  let(:default_options) { { case_type: :snake} }
+  let(:default_options) { { case_type: :lower_camel} }
   let(:options) { {} }
   let(:json) { load_json_fixture_file('json_parser.json') }
   let(:value) { subject.crawl(json) }
@@ -41,6 +41,14 @@ describe JsonParser::Crawler do
 
     it do
       expect { value }.not_to raise_error
+    end
+  end
+
+  context 'with an snake case path' do
+    let(:path) { ['has_money'] }
+
+    it 'returns camel cased value' do
+      expect(value).to eq(json['hasMoney'])
     end
   end
 end

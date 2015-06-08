@@ -93,14 +93,6 @@ describe JsonParser do
     end
   end
 
-  context 'with an snake case option' do
-    let(:attribute) { :has_money }
-
-    it 'returns camel cased value' do
-      expect(value).to eq(json['hasMoney'])
-    end
-  end
-
   context 'when wrapping it with a class' do
     let(:attribute) { :house }
 
