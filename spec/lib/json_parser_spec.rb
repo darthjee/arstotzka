@@ -62,27 +62,6 @@ describe JsonParser do
     it 'retrieves attribute from base json' do
       expect(value).to eq(json['id'])
     end
-
-    context 'when calling the method twice' do
-      before do
-        dummy.public_send(attribute)
-      end
-
-      it 'retrieves attribute from base json' do
-        expect(value).to eq(json['id'])
-      end
-    end
-
-    context 'when changing json value' do
-      let!(:old_value) { json['id'] }
-      before do
-        dummy.id
-        json['id'] = 200
-      end
-      it 'retrieves the new value' do
-        expect(value).not_to eq(old_value)
-      end
-    end
   end
 
   context 'when parser is configured with a path' do
