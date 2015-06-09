@@ -1,72 +1,51 @@
 class JsonParser::Fetcher
-  attr_reader :path, :json, :options
+  include OptionsParser
 
-  def initialize(json, path, options = {})
+  attr_reader :path, :json, :instance
+
+  delegate :after, :flatten, to: :options_object
+  delegate :wrap, to: :wrapper
+  delegate :crawl, to: :crawler
+
+  def initialize(json, path, instance, options = {})
     @path = path.to_s.split('.')
     @json = json
+    @instance = instance
     @options = options
   end
 
   def fetch
-    value = crawl(json, path)
+    value = crawl(json)
+    value.flatten! if flatten && value.respond_to?(:flatten!)
     value = instance.send(after, value) if after
     value
   end
 
   private
 
-  def crawl(json, path)
-    return nil if json.nil?
-    return wrap(json) if path.empty?
-    return crawl_array(json, path) if json.is_a? Array
-
-    key = change_case(path[0])
-    value = json.key?(key) ? json[key] : json[key.to_sym]
-    crawl(value, path[1,path.size])
+  def crawler
+    @crawler ||= buidl_crawler
   end
 
-  def change_case(key)
-    case case_type
-    when :lower_camel
-      key.camelize(:lower)
-    when :upper_camel
-      key.camelize(:upper)
-    when :snake
-      key.underscore
+  def buidl_crawler
+    JsonParser::Crawler.new(path, crawler_options) do |value|
+      wrap(value)
     end
   end
 
-  def crawl_array(array, path)
-    array.map { |j| crawl(j, path) }.tap do |a|
-      a.compact! if compact
-    end
+  def crawler_options
+    options.slice(:case_type, :compact)
   end
 
-  def wrap(json)
-    return json unless clazz
-    return clazz.new json unless json.is_a? Array
-    json.map { |v| wrap v }.tap do |j|
-      j.compact! if compact
-    end
+  def wrapper
+    @wrapper ||= build_wrapper
   end
 
-  def clazz
-    options[:class]
+  def build_wrapper
+    JsonParser::Wrapper.new(wrapper_options)
   end
 
-  def after
-    options[:after]
-  end
-
-  def instance
-    options[:instance]
-  end
-
-  def compact
-    options[:compact]
-  end
-
-  def case_type
-    options[:case_type]
+  def wrapper_options
+    options.slice(:clazz, :type)
   end
 end
