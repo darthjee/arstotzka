@@ -5,7 +5,7 @@ require 'concern_builder'
 module JsonParser
   extend ActiveSupport::Concern
 
-  require 'concerns/type_cast'
+  require 'json_parser/type_cast'
   require 'json_parser/version'
   require 'json_parser/crawler'
   require 'json_parser/wrapper'
