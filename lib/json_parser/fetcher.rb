@@ -1,5 +1,5 @@
 class JsonParser::Fetcher
-  include OptionsParser
+  include ConcernBuilder::OptionsParser
 
   attr_reader :path, :json, :instance
 

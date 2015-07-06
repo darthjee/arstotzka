@@ -1,5 +1,5 @@
 class JsonParser::ClassMethods::Builder
-  include OptionsParser
+  include ConcernBuilder::OptionsParser
 
   attr_reader :attr_names, :methods_def
 
