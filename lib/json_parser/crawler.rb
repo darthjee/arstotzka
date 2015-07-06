@@ -1,5 +1,5 @@
 class JsonParser::Crawler
-  include OptionsParser
+  include ConcernBuilder::OptionsParser
 
   attr_reader :post_process, :path
 

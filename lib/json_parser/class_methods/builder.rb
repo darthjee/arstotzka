@@ -1,23 +1,6 @@
-class JsonParser::ClassMethods::Builder
-  include OptionsParser
-
-  attr_reader :attr_names, :methods_def
+class JsonParser::ClassMethods::Builder < ConcernBuilder
 
   delegate :path, :cached, :compact, :type, :after, to: :options_object
-
-  def initialize(attr_names, instance, options)
-    @attr_names = attr_names
-    @instance = instance
-    @options = options
-    @methods_def = []
-    init
-  end
-
-  def build
-    methods_def.each do |method_def|
-      @instance.module_eval(method_def, __FILE__, __LINE__ + 1)
-    end
-  end
 
   private
 

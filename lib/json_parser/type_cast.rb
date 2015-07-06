@@ -1,4 +1,4 @@
-module TypeCast
+module JsonParser::TypeCast
   extend ActiveSupport::Concern
 
   def to_integer(value)
