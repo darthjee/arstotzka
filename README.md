@@ -1,5 +1,8 @@
 Json Parser
 ========
+[![Code Climate](https://codeclimate.com/github/darthjee/json_parser/badges/gpa.svg)](https://codeclimate.com/github/darthjee/json_parser)
+[![Test Coverage](https://codeclimate.com/github/darthjee/json_parser/badges/coverage.svg)](https://codeclimate.com/github/darthjee/json_parser/coverage)
+[![Issue Count](https://codeclimate.com/github/darthjee/json_parser/badges/issue_count.svg)](https://codeclimate.com/github/darthjee/json_parser)
 
 This project allows for a quick hash / json data fetching in order to avoid code
 that tries to crawl through a hash and has to constantly check for nil values or missing keys
