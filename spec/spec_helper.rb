@@ -1,6 +1,7 @@
 require 'simplecov'
 SimpleCov.start
 
+require 'pry-nav'
 require 'json_parser'
 require 'safe_attribute_assignment'
 
