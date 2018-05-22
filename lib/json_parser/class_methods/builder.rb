@@ -1,5 +1,6 @@
-class JsonParser::ClassMethods::Builder < ConcernBuilder
+class JsonParser::ClassMethods::Builder < Sinclair
 
+  attr_reader :attr_names
   delegate :path, :cached, :compact, :type, :after, to: :options_object
 
   private

@@ -1,6 +1,6 @@
 require 'active_support'
 require 'active_support/all'
-require 'concern_builder'
+require 'sinclair'
 
 module JsonParser
   extend ActiveSupport::Concern

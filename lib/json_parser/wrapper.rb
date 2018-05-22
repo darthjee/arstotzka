@@ -1,5 +1,5 @@
 class JsonParser::Wrapper
-  include ConcernBuilder::OptionsParser
+  include Sinclair::OptionsParser
   include JsonParser::TypeCast
 
   delegate :clazz, :type, to: :options_object
