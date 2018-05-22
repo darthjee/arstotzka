@@ -3,6 +3,11 @@ class JsonParser::ClassMethods::Builder < Sinclair
   attr_reader :attr_names
   delegate :path, :cached, :compact, :type, :after, to: :options_object
 
+  def initialize(attr_names, clazz, options)
+    @attr_names = attr_names
+    super(clazz, options)
+  end
+
   private
 
   def init
@@ -35,11 +40,7 @@ class JsonParser::ClassMethods::Builder < Sinclair
   end
 
   def add_attr(attribute)
-    @methods_def << <<-CODE
-      def #{attribute}
-        #{cached ? cached_fetcher(attribute) : attr_fetcher(attribute)}
-      end
-    CODE
+    add_method attribute, "#{cached ? cached_fetcher(attribute) : attr_fetcher(attribute)}"
   end
 
   def attr_fetcher(attribute)
