@@ -1,0 +1,18 @@
+version: '2'
+services:
+  base: &base
+    image: ruby:2.4.0
+    working_dir: /home/app/json_parser
+    volumes:
+      - .:/home/app/json_parser
+      - json_parser_gems_2_4_0:/usr/local/bundle
+
+  #################### CONTAINERS ####################
+
+  json_parser:
+    <<: *base
+    container_name: json_parser
+    command: /bin/bash -c 'bundle install && bundle exec rspec'
+
+volumes:
+  json_parser_gems_2_4_0:
