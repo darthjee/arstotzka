@@ -18,7 +18,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_runtime_dependency 'activesupport', '~> 5.x'
-  spec.add_runtime_dependency 'concern_builder'
+  spec.add_runtime_dependency 'sinclair'
 
   spec.add_development_dependency 'safe_attribute_assignment'
   spec.add_development_dependency "bundler", "~> 1.6"
