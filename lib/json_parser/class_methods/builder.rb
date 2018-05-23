@@ -6,6 +6,7 @@ class JsonParser::ClassMethods::Builder < Sinclair
   def initialize(attr_names, clazz, options)
     @attr_names = attr_names
     super(clazz, options)
+    init
   end
 
   private
@@ -24,7 +25,7 @@ class JsonParser::ClassMethods::Builder < Sinclair
     options[:full_path] || [path, attribute].compact.join('.')
   end
 
-  def clazz
+  def wrapper_clazz
     options[:class]
   end
 
@@ -34,7 +35,7 @@ class JsonParser::ClassMethods::Builder < Sinclair
 
   def fetcher_options
     options.slice(:compact, :after, :type, :flatten).merge({
-      clazz: clazz,
+      clazz: wrapper_clazz,
       case_type: case_type
     })
   end
