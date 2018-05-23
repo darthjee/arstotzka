@@ -3,8 +3,20 @@ class JsonParser::Builder < Sinclair
   attr_reader :attr_names
 
   def initialize(attr_names, clazz, options)
+    super(clazz, {
+      path: nil,
+      json: :json,
+      full_path: nil,
+      cached: false,
+      class: nil,
+      compact: false,
+      flatten: false,
+      after: false,
+      case: :lower_camel,
+      type: :none
+    }.merge(options))
+
     @attr_names = attr_names
-    super(clazz, options)
     init
   end
 
