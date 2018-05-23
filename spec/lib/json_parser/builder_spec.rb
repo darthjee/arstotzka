@@ -13,6 +13,8 @@ describe JsonParser::Builder do
   let(:options) { {} }
   let(:attr_name) { :name }
   let(:attr_names) { [ attr_name ] }
+  let(:json) { {} }
+  let(:instance) { clazz.new(json) }
 
   subject do
     described_class.new(attr_names, clazz, options)
@@ -26,9 +28,7 @@ describe JsonParser::Builder do
     end
 
     context 'when building several attributes' do
-      let(:json) { {} }
       let(:attr_names) { [ :id, :name, :age ] }
-      let(:instance) { clazz.new(json) }
 
       before { subject.build }
 
@@ -45,16 +45,39 @@ describe JsonParser::Builder do
       context 'when json has the property' do
         let(:json) { { name: 'Robert' } }
 
-        it 'fetches safelly empty jsons' do
+        it 'fetches the value' do
           expect(instance.name).to eq('Robert')
         end
 
         context 'but key is a string' do
           let(:json) { { 'name' => 'Robert' } }
 
-          it 'fetches safelly empty jsons' do
+          it 'fetches the value' do
             expect(instance.name).to eq('Robert')
           end
+        end
+      end
+    end
+
+    context 'when value is deep within the json' do
+      let(:json) { { user: { name: 'Robert' } } }
+
+      before { subject.build }
+
+      context 'when defining a path' do
+        let(:options) { { path: 'user' } }
+
+        it 'fetches the value within the json' do
+          expect(instance.name).to eq('Robert')
+        end
+      end
+
+      context 'when defining a fullpath' do
+        let(:options) { { full_path: 'user.name' } }
+        let(:attr_name) { :the_name }
+
+        it 'fetches the value within the json' do
+          expect(instance.the_name).to eq('Robert')
         end
       end
     end
