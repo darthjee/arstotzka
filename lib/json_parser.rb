@@ -5,11 +5,10 @@ require 'sinclair'
 module JsonParser
   extend ActiveSupport::Concern
 
-  require 'json_parser/type_cast'
-  require 'json_parser/version'
-  require 'json_parser/crawler'
-  require 'json_parser/wrapper'
-  require 'json_parser/fetcher'
-  require 'json_parser/class_methods'
-  require 'json_parser/builder'
+  autoload :TypeCast,     'json_parser/type_cast'
+  autoload :Crawler,      'json_parser/crawler'
+  autoload :Wrapper,      'json_parser/wrapper'
+  autoload :Fetcher,      'json_parser/fetcher'
+  autoload :ClassMethods, 'json_parser/class_methods'
+  autoload :Builder,      'json_parser/builder'
 end
