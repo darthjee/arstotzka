@@ -1,7 +1,6 @@
 class JsonParser::Builder < Sinclair
 
   attr_reader :attr_names
-  delegate :path, :cached, :compact, :type, :after, to: :options_object
 
   def initialize(attr_names, clazz, options)
     @attr_names = attr_names
@@ -10,6 +9,8 @@ class JsonParser::Builder < Sinclair
   end
 
   private
+
+  delegate :path, :cached, :compact, :type, :after, to: :options_object
 
   def init
     attr_names.each do |attr|
