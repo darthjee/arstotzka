@@ -46,7 +46,7 @@ class JsonParser::Builder < Sinclair
 
   def attr_fetcher(attribute)
     <<-CODE
-      JsonParser::Fetcher.new(
+      ::JsonParser::Fetcher.new(
         #{json_name}, '#{full_path(attribute)}', self, #{fetcher_options}
       ).fetch
     CODE
