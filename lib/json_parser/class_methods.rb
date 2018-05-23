@@ -1,20 +1,21 @@
-module JsonParser::ClassMethods
+module JsonParser
+  module ClassMethods
+    def json_parse(*attr_names)
+      options = {
+        path: nil,
+        json: :json,
+        full_path: nil,
+        cached: false,
+        class: nil,
+        compact: false,
+        flatten: false,
+        after: false,
+        case: :lower_camel,
+        type: :none
+      }.merge(attr_names.extract_options!)
 
-  def json_parse(*attr_names)
-    options = {
-      path: nil,
-      json: :json,
-      full_path: nil,
-      cached: false,
-      class: nil,
-      compact: false,
-      flatten: false,
-      after: false,
-      case: :lower_camel,
-      type: :none
-    }.merge(attr_names.extract_options!)
-
-    builder = Builder.new(attr_names, self, options)
-    builder.build
+      builder = Builder.new(attr_names, self, options)
+      builder.build
+    end
   end
 end

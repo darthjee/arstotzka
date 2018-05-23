@@ -11,5 +11,5 @@ module JsonParser
   require 'json_parser/wrapper'
   require 'json_parser/fetcher'
   require 'json_parser/class_methods'
-  require 'json_parser/class_methods/builder'
+  require 'json_parser/builder'
 end
