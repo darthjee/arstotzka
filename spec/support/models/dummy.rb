@@ -1,6 +1,3 @@
-require_relative 'house'
-require_relative 'game'
-
 class JsonParser::Dummy
   include JsonParser
   attr_reader :json
