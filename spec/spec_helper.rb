@@ -1,9 +1,16 @@
 require 'simplecov'
 SimpleCov.start
 
+require 'pry-nav'
 require 'json_parser'
 require 'safe_attribute_assignment'
 
+module JsonParser
+  models = File.expand_path("spec/support/models/*.rb")
+  Dir[models].each do |file|
+    autoload file.gsub(/.*\/(.*)\..*/, '\1').camelize.to_sym, file
+  end
+end
 support_files = File.expand_path("spec/support/**/*.rb")
 Dir[support_files].each { |file| require file  }
 
