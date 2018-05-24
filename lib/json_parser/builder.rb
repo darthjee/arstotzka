@@ -22,7 +22,8 @@ class JsonParser::Builder < Sinclair
 
   private
 
-  delegate :path, :cached, :compact, :type, :after, to: :options_object
+  delegate :path, :full_path, :cached, :compact,
+           :type, :after, to: :options_object
 
   def init
     attr_names.each do |attr|
@@ -34,8 +35,8 @@ class JsonParser::Builder < Sinclair
     options[:json]
   end
 
-  def full_path(attribute)
-    options[:full_path] || [path, attribute].compact.join('.')
+  def real_path(attribute)
+    full_path || [path, attribute].compact.join('.')
   end
 
   def wrapper_clazz
@@ -60,7 +61,7 @@ class JsonParser::Builder < Sinclair
   def attr_fetcher(attribute)
     <<-CODE
       ::JsonParser::Fetcher.new(
-        #{json_name}, '#{full_path(attribute)}', self, #{fetcher_options}
+        #{json_name}, '#{real_path(attribute)}', self, #{fetcher_options}
       ).fetch
     CODE
   end
