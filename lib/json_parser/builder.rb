@@ -14,7 +14,7 @@ class JsonParser::Builder < Sinclair
       after: false,
       case: :lower_camel,
       type: :none
-    }.merge(options))
+    }.merge(options.symbolize_keys))
 
     @attr_names = attr_names
     init
