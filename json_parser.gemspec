@@ -22,8 +22,8 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency 'safe_attribute_assignment'
   spec.add_development_dependency "bundler", "~> 1.6"
-  spec.add_development_dependency "rake"
-  spec.add_development_dependency "rspec", "~> 2.14"
+  spec.add_development_dependency "rake", ">= 12.3.1"
+  spec.add_development_dependency "rspec", ">= 3.7"
   spec.add_development_dependency 'simplecov'
   spec.add_development_dependency 'pry-nav'
 end
