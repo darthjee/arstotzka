@@ -8,7 +8,7 @@ describe JsonParser::Fetcher do
     described_class.new json, path, instance, default_options.merge(options)
   end
   let(:path) { '' }
-  let(:default_options) { { case_type: :snake} }
+  let(:default_options) { { case_type: :snake } }
   let(:instance) { JsonParser::Fetcher::Dummy.new }
   let(:json) { load_json_fixture_file('json_parser.json') }
   let(:value) { subject.fetch }
@@ -69,6 +69,16 @@ describe JsonParser::Fetcher do
       it 'returns the fetched value non flattened' do
         expect(subject.fetch).to eq(json)
       end
+    end
+  end
+
+  describe 'after option' do
+    let(:instance) { MyParser.new(json) }
+    let(:json) { [ 100, 250, -25] }
+    let(:options) { { after: :sum } }
+
+    it 'applies after call ' do
+      expect(subject.fetch).to eq(325)
     end
   end
 end
