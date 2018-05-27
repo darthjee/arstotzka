@@ -1,14 +1,9 @@
 class JsonParser::Crawler
-  include Sinclair::OptionsParser
+  attr_reader :post_process, :path, :case_type, :compact
 
-  attr_reader :post_process, :path
-
-  delegate :case_type, :compact, to: :options_object
-
-  def initialize(path, options = {}, &block)
-    @options = {
-      case_type: :lower_camel
-    }.merge(options)
+  def initialize(path, case_type: :lower_camel, compact: :false, &block)
+    @case_type = case_type
+    @compact = compact
     @path = path.map { |p| change_case(p) }
     @post_process = block
   end
