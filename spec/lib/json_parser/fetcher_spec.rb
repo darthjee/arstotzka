@@ -80,4 +80,20 @@ describe JsonParser::Fetcher do
       expect(subject.fetch).to eq(325)
     end
   end
+
+  describe 'clazz options' do
+    let(:path) { 'name' }
+    let(:name) { 'Robert' }
+    let(:json) { { name: name } }
+    let(:options) { { clazz: wrapper } }
+    let(:wrapper) { JsonParser::Person }
+
+    it 'wraps the result in an object' do
+      expect(subject.fetch).to be_a(wrapper)
+    end
+
+    it 'sets the wrapper with the fetched value' do
+      expect(subject.fetch.name).to eq(name)
+    end
+  end
 end
