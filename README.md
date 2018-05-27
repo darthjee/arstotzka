@@ -22,24 +22,53 @@ Getting started
 
 2. Include in a class that you want to wrap a json/hash
   ```ruby
-  class Parser
+  class MyParser
     include JsonParser
-
-    attr_reader :json
-
-    def initialize(json)
-      @json = json
-    end
-  end
   ```
 
 3. Declare the keys you want to crawl
   ```ruby
-  class Parser
-    json_parse :id, :dog_name, cached: true
-    json_parse :age, type: :integer
+class MyParser
+  include JsonParser
+
+  json_parse :id
+  json_parse :name, :age, path: :person
+
+  attr_reader :json
+
+  def initialize(json = {})
+    @json = json
   end
+end
   ```
+
+  and let it fetch values from your hash
+
+
+  ```ruby
+  object = MyParser.new(
+    id: 10,
+    age: 22
+    person: {
+      name: 'Robert',
+      age: 22
+    }
+  )
+
+  object.name
+  #returns 'Robert'
+  ```
+
+  this is usefull when trying to fetch data from hashes missing nodes
+
+  ```ruby
+  MyParser.new.name
+  #returns nil
+  ```
+
+  4. fully customise the way you crawl / fetch the information with [Options](#options)
+
+  5. Create custom [typecast](#TypeCast}
 
 Options
 -------
@@ -53,3 +82,58 @@ Options
 - after: name of a method to be called after with the resulting value
 - case: case of the keys from the json (camel by default)
 - type: Type that the value must be cast into
+
+TypeCast
+--------
+The type casting, when the option `type` is passed, is done through the `JsonParser::TypeCast` which can
+be extended
+
+```ruby
+module JsonParser::TypeCast
+  def to_money_float(value)
+    value.gsub(/\$ */, '').to_f
+  end
+end
+```
+
+```ruby
+class MyParser
+  include JsonParser
+
+  json_parse :total_money, full_path: 'accounts.balance', after: :sum,
+                          cached: true, type: :money_float
+  json_parse :total_owed, full_path: 'loans.value', after: :sum,
+                          cached: true, type: :money_float
+
+  attr_reader :json
+
+  def initialize(json = {})
+    @json = json
+  end
+
+  private
+
+  #this method will receive the array of values resulting from the initial mapping
+  def sum(balances)
+    balances.sum if balances
+  end
+end
+```
+
+```ruby
+  object = MyParser.new(
+    accounts: [
+      { balance: '$ 1000.50', type: 'checking' },
+      { balance: '$ 150.10', type: 'savings' },
+      { balance: '$ -100.24', type: 'checking' }
+    ],
+    loans: [
+      { value: '$ 300.50', bank: 'the_bank' },
+      { value: '$ 150.10', type: 'the_other_bank' },
+      { value: '$ 100.24', type: 'the_same_bank' }
+    ]
+  )
+
+  object.balance
+#returns 1050.36
+```
