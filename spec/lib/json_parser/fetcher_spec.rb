@@ -5,10 +5,9 @@ describe JsonParser::Fetcher do
   end
 
   let(:subject) do
-    described_class.new json, path, instance, default_options.merge(options)
+    described_class.new json, path, instance, options
   end
   let(:path) { '' }
-  let(:default_options) { { case_type: :snake } }
   let(:instance) { JsonParser::Fetcher::Dummy.new }
   let(:json) { load_json_fixture_file('json_parser.json') }
   let(:value) { subject.fetch }

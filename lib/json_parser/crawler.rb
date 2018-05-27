@@ -6,7 +6,9 @@ class JsonParser::Crawler
   delegate :case_type, :compact, to: :options_object
 
   def initialize(path, options = {}, &block)
-    @options = options
+    @options = {
+      case_type: :lower_camel
+    }.merge(options)
     @path = path.map { |p| change_case(p) }
     @post_process = block
   end
