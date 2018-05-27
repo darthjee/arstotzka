@@ -1,15 +1,17 @@
 class JsonParser::Crawler
-  attr_reader :post_process, :path, :case_type, :compact
+  attr_reader :post_process, :path, :case_type, :compact, :default
 
-  def initialize(path, case_type: :lower_camel, compact: :false, &block)
+  def initialize(path, case_type: :lower_camel, compact: :false, default: nil, &block)
     @case_type = case_type
     @compact = compact
+    @default = default
     @path = path.map { |p| change_case(p) }
     @post_process = block
   end
 
   def crawl(json, index = 0)
-    return nil if json.nil?
+    return default if json.nil? && !is_ended?(index)
+    return nil if json.nil? && is_ended?(index)
     return wrap(json) if is_ended?(index)
     return crawl_array(json, index) if json.is_a? Array
 

@@ -8,7 +8,8 @@ describe JsonParser::Crawler do
   let(:path) { '' }
   let(:default_options) { { case_type: :lower_camel} }
   let(:options) { {} }
-  let(:json) { load_json_fixture_file('json_parser.json') }
+  let(:json_file) { 'json_parser.json' }
+  let(:json) { load_json_fixture_file(json_file) }
   let(:value) { subject.crawl(json) }
 
   context 'when parsing with a path' do
@@ -92,6 +93,49 @@ describe JsonParser::Crawler do
 
         it 'eliminate nil values' do
           expect(value).to eq(expected)
+        end
+      end
+    end
+  end
+
+  context 'with default option' do
+    let(:default_value) { 'NotFound' }
+    let(:options) { { default: default_value } }
+    let(:path) { %w(projects name) }
+
+    context 'when there is a key missing' do
+      it 'returns the default value' do
+        expect(value).to eq(default_value)
+      end
+
+      context 'when wrapping it with a class' do
+        let(:block) { proc { |v| JsonParser::Person.new(v) } }
+
+        it 'wrap it with the class' do
+          expect(value).to be_a(JsonParser::Person)
+        end
+
+        it 'wraps the default value' do
+          expect(value.name).to eq(default_value)
+        end
+      end
+    end
+
+    context 'when the key is not missing but the value is nil' do
+      let(:json_file) { 'person.json' }
+      let(:path) { %w(user name) }
+
+      it { expect(value).to be_nil }
+
+      context 'when wrapping it with a class' do
+        let(:block) { proc { |v| JsonParser::Person.new(v) } }
+
+        it 'wrap it with the class' do
+          expect(value).to be_a(JsonParser::Person)
+        end
+
+        it 'wraps the default value' do
+          expect(value.name).to be_nil
         end
       end
     end
