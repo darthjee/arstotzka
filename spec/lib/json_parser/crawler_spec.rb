@@ -47,6 +47,29 @@ describe JsonParser::Crawler do
     it 'returns the values as array of arrays' do
       expect(value).to eq([[1000.0, 1500.0], [50.0, -500.0]])
     end
+
+    context 'when there is a missing node' do
+      let(:json_file) { 'accounts_missing.json' }
+
+      it 'returns the missing values as nil' do
+        expect(value).to eq([[1000.0, nil], nil, nil])
+      end
+
+      context 'when setting a default' do
+        let(:options) { { default: 10 } }
+
+        it 'returns the missing values as default' do
+          expect(value).to eq([[1000.0, nil], 10, 10])
+        end
+      end
+
+      context 'when setting compact' do
+        let(:options) { { compact: true } }
+        it 'returns the missing values as nil' do
+          expect(value).to eq([[1000.0]])
+        end
+      end
+    end
   end
 
   context 'when json is empty' do

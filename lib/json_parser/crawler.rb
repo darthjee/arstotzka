@@ -1,7 +1,7 @@
 class JsonParser::Crawler
   attr_reader :post_process, :path, :case_type, :compact, :default
 
-  def initialize(path, case_type: :lower_camel, compact: :false, default: nil, &block)
+  def initialize(path, case_type: :lower_camel, compact: false, default: nil, &block)
     @case_type = case_type
     @compact = compact
     @default = default
