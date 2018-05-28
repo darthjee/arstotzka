@@ -1,14 +1,6 @@
 require 'spec_helper'
 
 describe JsonParser::Wrapper do
-
-  class JsonParser::Wrapper::DummyWrapper
-    attr_reader :value
-    def initialize(value)
-      @value = value
-    end
-  end
-
   let(:options) { {} }
   let(:subject) { described_class.new options }
   let(:hash) { { a: 1 } }
@@ -76,7 +68,7 @@ describe JsonParser::Wrapper do
         end
 
         context 'when passing clazz parameter' do
-          let(:options) { { type: type, clazz: JsonParser::Wrapper::DummyWrapper } }
+          let(:options) { { type: type, clazz: JsonParser::Wrapper::Dummy } }
 
           it do
             expect(result).to be_nil
@@ -94,25 +86,25 @@ describe JsonParser::Wrapper do
         }
 
         context 'when passing clazz parameter' do
-          let(:options) { { type: type, clazz: JsonParser::Wrapper::DummyWrapper } }
+          let(:options) { { type: type, clazz: JsonParser::Wrapper::Dummy } }
 
           it_behaves_like 'a result that is type cast', {
             integer: NilClass,
             float: NilClass,
-            string: JsonParser::Wrapper::DummyWrapper
+            string: JsonParser::Wrapper::Dummy
           }
         end
       end
 
       context 'when passing clazz parameter' do
         let(:value) { 1 }
-        let(:options) { { type: type, clazz: JsonParser::Wrapper::DummyWrapper } }
+        let(:options) { { type: type, clazz: JsonParser::Wrapper::Dummy } }
         let(:cast) { result.value }
 
         it_behaves_like 'casts basic types'
 
         it 'wraps the result inside the given class' do
-          expect(result).to be_a(JsonParser::Wrapper::DummyWrapper)
+          expect(result).to be_a(JsonParser::Wrapper::Dummy)
         end
       end
 

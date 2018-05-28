@@ -1,9 +1,6 @@
 require 'spec_helper'
 
 describe JsonParser::Fetcher do
-  class JsonParser::Fetcher::Dummy
-  end
-
   let(:subject) do
     described_class.new json, path, instance, options
   end
