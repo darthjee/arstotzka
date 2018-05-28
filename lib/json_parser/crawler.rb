@@ -10,9 +10,9 @@ class JsonParser::Crawler
   end
 
   def crawl(json, index = 0)
-    return default if json.nil? && !is_ended?(index)
-    return nil if json.nil? && is_ended?(index)
+    return wrap(default) if json.nil? && !is_ended?(index)
     return wrap(json) if is_ended?(index)
+    return nil if json.nil? && is_ended?(index)
     return crawl_array(json, index) if json.is_a? Array
 
     crawl(fetch(json, index), index + 1)
