@@ -40,6 +40,15 @@ describe JsonParser::Crawler do
     end
   end
 
+  context 'when there is an array of arrays' do
+    let(:json_file) { 'accounts.json' }
+    let(:path) { %w(banks accounts balance) }
+
+    it 'returns the values as array of arrays' do
+      expect(value).to eq([[1000.0, 1500.0], [50.0, -500.0]])
+    end
+  end
+
   context 'when json is empty' do
     let(:json) { nil }
     let(:path) { %w(car model) }
