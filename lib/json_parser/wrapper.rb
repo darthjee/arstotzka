@@ -1,11 +1,11 @@
 class JsonParser::Wrapper
-  include Sinclair::OptionsParser
   include JsonParser::TypeCast
 
-  delegate :clazz, :type, to: :options_object
+  attr_reader :clazz, :type
 
-  def initialize(options = {})
-    @options = options
+  def initialize(clazz: nil, type: nil)
+    @clazz = clazz
+    @type = type
   end
 
   def wrap(value)
