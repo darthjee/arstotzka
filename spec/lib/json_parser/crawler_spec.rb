@@ -18,6 +18,14 @@ describe JsonParser::Crawler do
     it 'retrieves attribute from base json' do
       expect(value).to eq(json['user']['name'])
     end
+
+    context 'when calling twice' do
+      before { subject.crawl(json) }
+
+      it 'can still crawl' do
+        expect(value).to eq(json['user']['name'])
+      end
+    end
   end
 
   context 'crawler finds a nil attribute' do
