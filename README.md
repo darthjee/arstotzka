@@ -16,9 +16,9 @@ Getting started
 ---------------
 1. Add JsonParser to your `Gemfile` and `bundle install`:
 
-    ```ruby
-    gem 'json_parser'
-    ```
+  ```ruby
+  gem 'json_parser'
+  ```
 
 2. Include in a class that you want to wrap a json/hash
   ```ruby
@@ -81,7 +81,8 @@ Options
 - flatten: indicator telling that to flattern the resulting array (false by default)
 - after: name of a method to be called after with the resulting value
 - case: case of the keys from the json (camel by default)
-- type: Type that the value must be cast into
+- type: Type that the value must be cast into ([TypeCast](#TypeCast))
+- default: Default value (prior to casting and wrapping)
 
 TypeCast
 --------
