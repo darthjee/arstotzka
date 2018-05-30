@@ -14,6 +14,9 @@ class MyParser
   json_parse :total_owed, full_path: 'loans.value', after: :sum,
                           cached: true, type: :money_float
 
+  json_parse :favorite_star, full_path: 'universe.star',
+             default: { name: 'Sun' }, class: MyParser::Star
+
   attr_reader :json
 
   def initialize(json = {})

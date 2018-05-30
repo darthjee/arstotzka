@@ -4,16 +4,17 @@ class JsonParser::Builder < Sinclair
 
   def initialize(attr_names, clazz, options)
     super(clazz, {
-      path: nil,
-      json: :json,
+      after:     false,
+      cached:    false,
+      case:      :lower_camel,
+      class:     nil,
+      compact:   false,
+      default:   nil,
+      flatten:   false,
       full_path: nil,
-      cached: false,
-      class: nil,
-      compact: false,
-      flatten: false,
-      after: false,
-      case: :lower_camel,
-      type: :none
+      json:      :json,
+      path:      nil,
+      type:      :none
     }.merge(options.symbolize_keys))
 
     @attr_names = attr_names
@@ -48,7 +49,7 @@ class JsonParser::Builder < Sinclair
   end
 
   def fetcher_options
-    options.slice(:compact, :after, :type, :flatten).merge({
+    options.slice(:compact, :after, :type, :flatten, :default).merge({
       clazz: wrapper_clazz,
       case_type: case_type
     })

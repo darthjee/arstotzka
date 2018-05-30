@@ -81,8 +81,8 @@ Options
 - flatten: indicator telling that to flattern the resulting array (false by default)
 - after: name of a method to be called after with the resulting value
 - case: case of the keys from the json (camel by default)
-- type: Type that the value must be cast into ([TypeCast](#TypeCast))
-- default: Default value (prior to casting and wrapping)
+- type: Type that the value must be cast into ([TypeCast](#typecast))
+- default: Default value (prior to casting and wrapping, see [Default](#default))
 
 TypeCast
 --------
@@ -138,3 +138,34 @@ end
   object.balance
 #returns 1050.36
 ```
+
+Default
+-------
+Default value returned before typecasting or class wrapping
+
+```ruby
+class MyParser
+  include JsonParser
+
+  json_parse :favorite_star, full_path: 'universe.star',
+             default: { name: 'Sun' }, class: MyParser::Star
+
+  attr_reader :json
+
+  def initialize(json = {})
+    @json = json
+  end
+end
+```
+
+
+```ruby
+  object = MyParser.new
+
+  object.favorite_star.name
+#returns "Sun"
+
+  object.favorite_star.class
+#returns MyParser::Star
+```
+

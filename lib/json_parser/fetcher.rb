@@ -34,7 +34,7 @@ class JsonParser::Fetcher
   end
 
   def crawler_options
-    options.slice(:case_type, :compact)
+    options.slice(:case_type, :compact, :default)
   end
 
   def wrapper
