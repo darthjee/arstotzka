@@ -31,6 +31,6 @@ class JsonParser::Wrapper
   end
 
   def cast(value)
-    send("to_#{type}", value)
+    public_send("to_#{type}", value)
   end
 end
