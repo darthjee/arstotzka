@@ -1,4 +1,4 @@
-class JsonParser::House
+class House
   include JsonParser
   include ::SafeAttributeAssignment
   attr_reader :json

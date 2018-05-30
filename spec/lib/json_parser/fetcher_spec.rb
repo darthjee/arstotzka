@@ -83,7 +83,7 @@ describe JsonParser::Fetcher do
     let(:name) { 'Robert' }
     let(:json) { { name: name } }
     let(:options) { { clazz: wrapper } }
-    let(:wrapper) { JsonParser::Person }
+    let(:wrapper) { Person }
 
     it 'wraps the result in an object' do
       expect(subject.fetch).to be_a(wrapper)

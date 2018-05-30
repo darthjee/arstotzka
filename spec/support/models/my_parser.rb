@@ -1,9 +1,3 @@
-module JsonParser::TypeCast
-  def to_money_float(value)
-    value.gsub(/\$ */, '').to_f
-  end
-end
-
 class MyParser
   include JsonParser
 
@@ -13,9 +7,6 @@ class MyParser
                           cached: true, type: :money_float
   json_parse :total_owed, full_path: 'loans.value', after: :sum,
                           cached: true, type: :money_float
-
-  json_parse :favorite_star, full_path: 'universe.star',
-             default: { name: 'Sun' }, class: MyParser::Star
 
   attr_reader :json
 
@@ -27,6 +18,11 @@ class MyParser
 
   def sum(balances)
     balances.sum if balances
+  end
+
+  models = File.expand_path("spec/support/models/my_parser/*.rb")
+  Dir[models].each do |file|
+    autoload file.gsub(/.*\/(.*)\..*/, '\1').camelize.to_sym, file
   end
 end
 

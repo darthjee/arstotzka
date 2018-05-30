@@ -149,10 +149,10 @@ describe JsonParser::Crawler do
       end
 
       context 'when wrapping it with a class' do
-        let(:block) { proc { |v| JsonParser::Person.new(v) } }
+        let(:block) { proc { |v| Person.new(v) } }
 
         it 'wrap it with the class' do
-          expect(value).to be_a(JsonParser::Person)
+          expect(value).to be_a(Person)
         end
 
         it 'wraps the default value' do
@@ -168,10 +168,10 @@ describe JsonParser::Crawler do
       it { expect(value).to be_nil }
 
       context 'when wrapping it with a class' do
-        let(:block) { proc { |v| JsonParser::Person.new(v) } }
+        let(:block) { proc { |v| Person.new(v) } }
 
         it 'wrap it with the class' do
-          expect(value).to be_a(JsonParser::Person)
+          expect(value).to be_a(Person)
         end
 
         it 'wraps the default value' do

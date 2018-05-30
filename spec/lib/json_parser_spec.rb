@@ -46,7 +46,7 @@ describe JsonParser do
     let(:attribute) { :house }
 
     it 'returns an onject wrap' do
-      expect(value).to be_a(JsonParser::House)
+      expect(value).to be_a(House)
     end
 
     it 'creates the object with the given json' do
@@ -61,7 +61,7 @@ describe JsonParser do
       it 'returns an array of json wrapped' do
         expect(value).to be_a(Array)
         value.each do |object|
-          expect(object).to be_a(JsonParser::Game)
+          expect(object).to be_a(Game)
         end
       end
 
@@ -76,7 +76,7 @@ describe JsonParser do
           value.each do |object|
             expect(object).to be_a(Array)
             object.each do |game|
-              expect(game).to be_a(JsonParser::Game)
+              expect(game).to be_a(Game)
             end
           end
         end
@@ -93,7 +93,7 @@ describe JsonParser do
     end
 
     it 'returns an onject wrap' do
-      expect(value).to be_a(JsonParser::House)
+      expect(value).to be_a(House)
     end
 
     it 'creates the object with the given json' do

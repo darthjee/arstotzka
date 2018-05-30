@@ -1,8 +1,7 @@
 require 'spec_helper'
 
-describe 'README' do
-  let(:clazz) { MyParser }
-  subject { clazz.new(hash) }
+describe MyParser do
+  subject { described_class.new(hash) }
 
   let(:hash) do
     {
@@ -36,7 +35,7 @@ describe 'README' do
     end
 
     context 'when person is missing' do
-      subject { clazz.new }
+      subject { described_class.new }
 
       it do
         expect { subject.name }.not_to raise_error

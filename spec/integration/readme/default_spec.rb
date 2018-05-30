@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'default option' do
   subject do
-    MyParser.new(hash).favorite_star
+    StarGazer.new(hash).favorite_star
   end
 
   let(:hash) { {} }
@@ -13,7 +13,7 @@ describe 'default option' do
     end
 
     it 'wraps the returned value in a class' do
-      expect(subject).to be_a(MyParser::Star)
+      expect(subject).to be_a(Star)
     end
   end
 
@@ -31,7 +31,7 @@ describe 'default option' do
     end
 
     it 'wraps the returned value in a class' do
-      expect(subject).to be_a(MyParser::Star)
+      expect(subject).to be_a(Star)
     end
   end
 end

@@ -1,4 +1,4 @@
-class MyParser::Star
+class Star
   attr_reader :name
 
   def initialize(name:)

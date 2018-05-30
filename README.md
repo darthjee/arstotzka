@@ -40,6 +40,7 @@ class MyParser
     @json = json
   end
 end
+
   ```
 
   and let it fetch values from your hash
@@ -68,7 +69,7 @@ end
 
   4. fully customise the way you crawl / fetch the information with [Options](#options)
 
-  5. Create custom [typecast](#TypeCast}
+  5. Create custom [typecast](#TypeCast)
 
 Options
 -------
@@ -144,11 +145,19 @@ Default
 Default value returned before typecasting or class wrapping
 
 ```ruby
-class MyParser
+class Star
+  attr_reader :name
+
+  def initialize(name:)
+    @name = name
+  end
+end
+
+class StarGazer
   include JsonParser
 
   json_parse :favorite_star, full_path: 'universe.star',
-             default: { name: 'Sun' }, class: MyParser::Star
+             default: { name: 'Sun' }, class: ::Star
 
   attr_reader :json
 
@@ -156,16 +165,17 @@ class MyParser
     @json = json
   end
 end
+
 ```
 
 
 ```ruby
-  object = MyParser.new
+star_gazer = StarGazer.new
 
-  object.favorite_star.name
+star_gazer.favorite_star.name
 #returns "Sun"
 
-  object.favorite_star.class
-#returns MyParser::Star
+star_gazer.favorite_star.class
+#returns Star
 ```
 

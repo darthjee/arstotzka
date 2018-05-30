@@ -92,11 +92,11 @@ describe JsonParser::Builder do
 
       context 'when wrapping with a class' do
         let(:json) { { person: name } }
-        let(:options) { { class: JsonParser::Person } }
+        let(:options) { { class: Person } }
         let(:attr_name) { :person }
 
         it do
-          expect(instance.person).to be_a(JsonParser::Person)
+          expect(instance.person).to be_a(Person)
         end
 
         it 'fills the new instance with the information fetched' do
@@ -104,7 +104,7 @@ describe JsonParser::Builder do
         end
 
         context 'when option key is a string' do
-          let(:options) { { 'class' => JsonParser::Person } }
+          let(:options) { { 'class' => Person } }
 
           it 'fills the new instance with the information fetched' do
             expect(instance.person.name).to eq(name)
