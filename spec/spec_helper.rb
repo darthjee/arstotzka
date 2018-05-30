@@ -1,5 +1,7 @@
 require 'simplecov'
-SimpleCov.start
+SimpleCov.start do
+  add_filter 'spec/support/models/'
+end
 
 require 'pry-nav'
 require 'json_parser'
