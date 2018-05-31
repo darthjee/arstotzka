@@ -1,14 +1,10 @@
 require 'spec_helper'
 
 describe JsonParser::Fetcher do
-  class JsonParser::Fetcher::Dummy
-  end
-
   let(:subject) do
-    described_class.new json, path, instance, default_options.merge(options)
+    described_class.new json, path, instance, options
   end
   let(:path) { '' }
-  let(:default_options) { { case_type: :snake} }
   let(:instance) { JsonParser::Fetcher::Dummy.new }
   let(:json) { load_json_fixture_file('json_parser.json') }
   let(:value) { subject.fetch }
@@ -69,6 +65,32 @@ describe JsonParser::Fetcher do
       it 'returns the fetched value non flattened' do
         expect(subject.fetch).to eq(json)
       end
+    end
+  end
+
+  describe 'after option' do
+    let(:instance) { MyParser.new(json) }
+    let(:json) { [ 100, 250, -25] }
+    let(:options) { { after: :sum } }
+
+    it 'applies after call ' do
+      expect(subject.fetch).to eq(325)
+    end
+  end
+
+  describe 'clazz options' do
+    let(:path) { 'name' }
+    let(:name) { 'Robert' }
+    let(:json) { { name: name } }
+    let(:options) { { clazz: wrapper } }
+    let(:wrapper) { Person }
+
+    it 'wraps the result in an object' do
+      expect(subject.fetch).to be_a(wrapper)
+    end
+
+    it 'sets the wrapper with the fetched value' do
+      expect(subject.fetch.name).to eq(name)
     end
   end
 end

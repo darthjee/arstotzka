@@ -1,4 +1,4 @@
-class JsonParser::Game
+class Game
   include JsonParser
   include SafeAttributeAssignment
   attr_reader :json

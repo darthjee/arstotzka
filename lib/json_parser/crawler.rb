@@ -1,22 +1,21 @@
 class JsonParser::Crawler
-  include Sinclair::OptionsParser
+  attr_reader :post_process, :path, :case_type, :compact, :default
 
-  attr_reader :post_process, :path
-
-  delegate :case_type, :compact, to: :options_object
-
-  def initialize(path, options = {}, &block)
-    @options = options
+  def initialize(path, case_type: :lower_camel, compact: false, default: nil, &block)
+    @case_type = case_type
+    @compact = compact
+    @default = default
     @path = path.map { |p| change_case(p) }
     @post_process = block
   end
 
   def crawl(json, index = 0)
-    return nil if json.nil?
     return wrap(json) if is_ended?(index)
     return crawl_array(json, index) if json.is_a? Array
 
     crawl(fetch(json, index), index + 1)
+  rescue NoMethodError
+    wrap(default)
   end
 
   private

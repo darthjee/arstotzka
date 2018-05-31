@@ -8,7 +8,8 @@ describe JsonParser::Crawler do
   let(:path) { '' }
   let(:default_options) { { case_type: :lower_camel} }
   let(:options) { {} }
-  let(:json) { load_json_fixture_file('json_parser.json') }
+  let(:json_file) { 'json_parser.json' }
+  let(:json) { load_json_fixture_file(json_file) }
   let(:value) { subject.crawl(json) }
 
   context 'when parsing with a path' do
@@ -16,6 +17,14 @@ describe JsonParser::Crawler do
 
     it 'retrieves attribute from base json' do
       expect(value).to eq(json['user']['name'])
+    end
+
+    context 'when calling twice' do
+      before { subject.crawl(json) }
+
+      it 'can still crawl' do
+        expect(value).to eq(json['user']['name'])
+      end
     end
   end
 
@@ -28,6 +37,38 @@ describe JsonParser::Crawler do
 
     it do
       expect { value }.not_to raise_error
+    end
+  end
+
+  context 'when there is an array of arrays' do
+    let(:json_file) { 'accounts.json' }
+    let(:path) { %w(banks accounts balance) }
+
+    it 'returns the values as array of arrays' do
+      expect(value).to eq([[1000.0, 1500.0], [50.0, -500.0]])
+    end
+
+    context 'when there is a missing node' do
+      let(:json_file) { 'accounts_missing.json' }
+
+      it 'returns the missing values as nil' do
+        expect(value).to eq([[1000.0, nil], nil, nil])
+      end
+
+      context 'when setting a default' do
+        let(:options) { { default: 10 } }
+
+        it 'returns the missing values as default' do
+          expect(value).to eq([[1000.0, nil], 10, 10])
+        end
+      end
+
+      context 'when setting compact' do
+        let(:options) { { compact: true } }
+        it 'returns the missing values as nil' do
+          expect(value).to eq([[1000.0]])
+        end
+      end
     end
   end
 
@@ -93,6 +134,59 @@ describe JsonParser::Crawler do
         it 'eliminate nil values' do
           expect(value).to eq(expected)
         end
+      end
+    end
+  end
+
+  context 'with default option' do
+    let(:default_value) { 'NotFound' }
+    let(:options) { { default: default_value } }
+    let(:path) { %w(projects name) }
+
+    context 'when there is a key missing' do
+      it 'returns the default value' do
+        expect(value).to eq(default_value)
+      end
+
+      context 'when wrapping it with a class' do
+        let(:block) { proc { |v| Person.new(v) } }
+
+        it 'wrap it with the class' do
+          expect(value).to be_a(Person)
+        end
+
+        it 'wraps the default value' do
+          expect(value.name).to eq(default_value)
+        end
+      end
+    end
+
+    context 'when the key is not missing but the value is nil' do
+      let(:json_file) { 'person.json' }
+      let(:path) { %w(user name) }
+
+      it { expect(value).to be_nil }
+
+      context 'when wrapping it with a class' do
+        let(:block) { proc { |v| Person.new(v) } }
+
+        it 'wrap it with the class' do
+          expect(value).to be_a(Person)
+        end
+
+        it 'wraps the default value' do
+          expect(value.name).to be_nil
+        end
+      end
+    end
+
+    context 'when the node is missing but default has the same node' do
+      let(:default_value) { { node: { value: 1 } } }
+      let(:path) { %w(node node node) }
+      let(:json) { {} }
+
+      it 'does not crawl through default value' do
+        expect(value).to eq(default_value)
       end
     end
   end

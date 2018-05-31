@@ -1,30 +1,36 @@
 class JsonParser::Wrapper
-  include Sinclair::OptionsParser
   include JsonParser::TypeCast
 
-  delegate :clazz, :type, to: :options_object
+  attr_reader :clazz, :type
 
-  def initialize(options = {})
-    @options = options
+  def initialize(clazz: nil, type: nil)
+    @clazz = clazz
+    @type = type
   end
 
   def wrap(value)
-    return value.map { |v| wrap v } if value.is_a?(Array)
-
-    value = cast(value) if has_type? && !value.nil?
-    return if value.nil?
-
-    value = clazz.new(value) if clazz
-    value
+    return wrap_array(value) if value.is_a?(Array)
+    wrap_element(value)
   end
 
   private
+
+  def wrap_element(value)
+    value = cast(value) if has_type? && !value.nil?
+    return if value.nil?
+
+    clazz ? clazz.new(value) : value
+  end
+
+  def wrap_array(array)
+    array.map { |v| wrap v }
+  end
 
   def has_type?
     type.present? && type != :none
   end
 
   def cast(value)
-    send("to_#{type}", value)
+    public_send("to_#{type}", value)
   end
 end

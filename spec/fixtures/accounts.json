@@ -1,0 +1,27 @@
+{
+  "banks": [
+    {
+      "name": "bank_1",
+      "accounts": [
+        {
+          "type": "savings",
+          "balance": 1000.00
+        }, {
+          "type": "checking",
+          "balance": 1500.00
+        }
+      ]
+    }, {
+      "name": "bank_2",
+      "accounts": [
+        {
+          "type": "savings",
+          "balance": 50.00
+        }, {
+          "type": "checking",
+          "balance": -500.00
+        }
+      ]
+    }
+  ]
+}
