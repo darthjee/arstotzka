@@ -179,6 +179,16 @@ describe JsonParser::Crawler do
         end
       end
     end
+
+    context 'when the node is missing but default has the same node' do
+      let(:default_value) { { node: { value: 1 } } }
+      let(:path) { %w(node node node) }
+      let(:json) { {} }
+
+      it 'does not crawl through default value' do
+        expect(value).to eq(default_value)
+      end
+    end
   end
 
   context 'when using a snake case' do
