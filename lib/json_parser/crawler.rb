@@ -9,16 +9,20 @@ class JsonParser::Crawler
     @post_process = block
   end
 
-  def crawl(json, index = 0)
-    return wrap(json) if is_ended?(index)
-    return crawl_array(json, index) if json.is_a? Array
-
-    crawl(fetch(json, index), index + 1)
+  def value(json, index = 0)
+    crawl(json, index)
   rescue NoMethodError, KeyError
     wrap(default)
   end
 
   private
+
+  def crawl(json, index = 0)
+    return wrap(json) if is_ended?(index)
+    return crawl_array(json, index) if json.is_a?(Array)
+
+    crawl(fetch(json, index), index + 1)
+  end
 
   def fetch(json, index)
     key = path[index]
@@ -45,7 +49,7 @@ class JsonParser::Crawler
   end
 
   def crawl_array(array, index)
-    array.map { |j| crawl(j, index) }.tap do |a|
+    array.map { |j| value(j, index) }.tap do |a|
       a.compact! if compact
     end
   end

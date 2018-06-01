@@ -10,7 +10,7 @@ describe JsonParser::Crawler do
   let(:options) { {} }
   let(:json_file) { 'json_parser.json' }
   let(:json) { load_json_fixture_file(json_file) }
-  let(:value) { subject.crawl(json) }
+  let(:value) { subject.value(json) }
 
   context 'when parsing with a path' do
     let(:path) { %w(user name) }
@@ -20,7 +20,7 @@ describe JsonParser::Crawler do
     end
 
     context 'when calling twice' do
-      before { subject.crawl(json) }
+      before { subject.value(json) }
 
       it 'can still crawl' do
         expect(value).to eq(json['user']['name'])

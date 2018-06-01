@@ -5,7 +5,6 @@ class JsonParser::Fetcher
 
   delegate :after, :flatten, to: :options_object
   delegate :wrap, to: :wrapper
-  delegate :crawl, to: :crawler
 
   def initialize(json, path, instance, options = {})
     @path = path.to_s.split('.')
@@ -15,7 +14,7 @@ class JsonParser::Fetcher
   end
 
   def fetch
-    value = crawl(json)
+    value = crawler.value(json)
     value.flatten! if flatten && value.respond_to?(:flatten!)
     value = instance.send(after, value) if after
     value
