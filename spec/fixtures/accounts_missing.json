@@ -8,6 +8,9 @@
           "balance": 1000.00
         }, {
           "type": "checking"
+        }, {
+          "type": "investiment",
+          "balance": null
         }
       ]
     }, {

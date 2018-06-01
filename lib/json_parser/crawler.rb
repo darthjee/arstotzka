@@ -14,7 +14,7 @@ class JsonParser::Crawler
     return crawl_array(json, index) if json.is_a? Array
 
     crawl(fetch(json, index), index + 1)
-  rescue NoMethodError
+  rescue NoMethodError, KeyError
     wrap(default)
   end
 
@@ -22,7 +22,7 @@ class JsonParser::Crawler
 
   def fetch(json, index)
     key = path[index]
-    json.key?(key) ? json[key] : json[key.to_sym]
+    json.key?(key) ? json.fetch(key) : json.fetch(key.to_sym)
   end
 
   def is_ended?(index)
