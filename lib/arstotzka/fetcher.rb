@@ -1,4 +1,4 @@
-class JsonParser::Fetcher
+class Arstotzka::Fetcher
   include Sinclair::OptionsParser
 
   attr_reader :path, :json, :instance
@@ -27,7 +27,7 @@ class JsonParser::Fetcher
   end
 
   def buidl_crawler
-    JsonParser::Crawler.new(crawler_options) do |value|
+    Arstotzka::Crawler.new(crawler_options) do |value|
       wrap(value)
     end
   end
@@ -41,7 +41,7 @@ class JsonParser::Fetcher
   end
 
   def build_wrapper
-    JsonParser::Wrapper.new(wrapper_options)
+    Arstotzka::Wrapper.new(wrapper_options)
   end
 
   def wrapper_options

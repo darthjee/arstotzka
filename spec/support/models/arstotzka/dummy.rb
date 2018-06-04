@@ -1,5 +1,5 @@
-class JsonParser::Dummy
-  include JsonParser
+class Arstotzka::Dummy
+  include Arstotzka
   attr_reader :json
 
   json_parse :id

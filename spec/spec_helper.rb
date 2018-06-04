@@ -4,7 +4,7 @@ SimpleCov.start do
 end
 
 require 'pry-nav'
-require 'json_parser'
+require 'arstotzka'
 require 'safe_attribute_assignment'
 
 support_files = File.expand_path("spec/support/**/*.rb")

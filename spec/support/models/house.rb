@@ -1,5 +1,5 @@
 class House
-  include JsonParser
+  include Arstotzka
   include ::SafeAttributeAssignment
   attr_reader :json
 

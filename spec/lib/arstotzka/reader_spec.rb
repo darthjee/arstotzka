@@ -20,7 +20,7 @@ shared_examples 'reader fetchin value' do
   end
 end
 
-describe JsonParser::Reader do
+describe Arstotzka::Reader do
   subject do
     described_class.new(path: path, case_type: case_type)
   end
@@ -99,7 +99,7 @@ describe JsonParser::Reader do
       it do
         expect do
           subject.read(json, index)
-        end.to raise_error(JsonParser::Exception::KeyNotFound)
+        end.to raise_error(Arstotzka::Exception::KeyNotFound)
       end
     end
   end

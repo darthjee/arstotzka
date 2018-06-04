@@ -1,12 +1,12 @@
 require 'spec_helper'
 
-describe JsonParser::Fetcher do
+describe Arstotzka::Fetcher do
   let(:subject) do
     described_class.new json, instance, options.merge(path: path)
   end
   let(:path) { '' }
-  let(:instance) { JsonParser::Fetcher::Dummy.new }
-  let(:json) { load_json_fixture_file('json_parser.json') }
+  let(:instance) { Arstotzka::Fetcher::Dummy.new }
+  let(:json) { load_json_fixture_file('arstotzka.json') }
   let(:value) { subject.fetch }
 
   context 'when fetching with no options' do

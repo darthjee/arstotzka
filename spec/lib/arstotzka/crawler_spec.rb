@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe JsonParser::Crawler do
+describe Arstotzka::Crawler do
   let(:subject) do
     described_class.new default_options.merge(options), &block
   end
@@ -8,7 +8,7 @@ describe JsonParser::Crawler do
   let(:path) { '' }
   let(:default_options) { { path: path, case_type: :lower_camel} }
   let(:options) { {} }
-  let(:json_file) { 'json_parser.json' }
+  let(:json_file) { 'arstotzka.json' }
   let(:json) { load_json_fixture_file(json_file) }
   let(:value) { subject.value(json) }
 
@@ -233,7 +233,7 @@ describe JsonParser::Crawler do
   end
 
   context 'when using a symbol keys' do
-    let(:json) { load_json_fixture_file('json_parser.json').symbolize_keys }
+    let(:json) { load_json_fixture_file('arstotzka.json').symbolize_keys }
     let(:path) { [ 'id' ] }
 
     it 'fetches from symbol keys' do

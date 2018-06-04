@@ -1,4 +1,4 @@
-class JsonParser::Wrapper::Dummy
+class Arstotzka::Wrapper::Dummy
   attr_reader :value
   def initialize(value)
     @value = value

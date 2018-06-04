@@ -1,5 +1,5 @@
 class StarGazer
-  include JsonParser
+  include Arstotzka
 
   json_parse :favorite_star, full_path: 'universe.star',
              default: { name: 'Sun' }, class: ::Star

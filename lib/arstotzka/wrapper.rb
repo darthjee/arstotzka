@@ -1,5 +1,5 @@
-class JsonParser::Wrapper
-  include JsonParser::TypeCast
+class Arstotzka::Wrapper
+  include Arstotzka::TypeCast
 
   attr_reader :clazz, :type
 

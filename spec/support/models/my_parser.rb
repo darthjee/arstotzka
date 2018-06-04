@@ -1,5 +1,5 @@
 class MyParser
-  include JsonParser
+  include Arstotzka
 
   json_parse :id
   json_parse :name, :age, path: :person
