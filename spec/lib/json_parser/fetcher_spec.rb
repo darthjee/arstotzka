@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe JsonParser::Fetcher do
   let(:subject) do
-    described_class.new json, path, instance, options
+    described_class.new json, instance, options.merge(path: path)
   end
   let(:path) { '' }
   let(:instance) { JsonParser::Fetcher::Dummy.new }

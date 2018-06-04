@@ -2,15 +2,15 @@ require 'spec_helper'
 
 describe JsonParser::Crawler do
   let(:subject) do
-    described_class.new path, default_options.merge(options), &block
+    described_class.new default_options.merge(options), &block
   end
   let(:block) { proc { |v| v } }
   let(:path) { '' }
-  let(:default_options) { { case_type: :lower_camel} }
+  let(:default_options) { { path: path, case_type: :lower_camel} }
   let(:options) { {} }
   let(:json_file) { 'json_parser.json' }
   let(:json) { load_json_fixture_file(json_file) }
-  let(:value) { subject.crawl(json) }
+  let(:value) { subject.value(json) }
 
   context 'when parsing with a path' do
     let(:path) { %w(user name) }
@@ -20,7 +20,7 @@ describe JsonParser::Crawler do
     end
 
     context 'when calling twice' do
-      before { subject.crawl(json) }
+      before { subject.value(json) }
 
       it 'can still crawl' do
         expect(value).to eq(json['user']['name'])
@@ -52,14 +52,14 @@ describe JsonParser::Crawler do
       let(:json_file) { 'accounts_missing.json' }
 
       it 'returns the missing values as nil' do
-        expect(value).to eq([[1000.0, nil], nil, nil])
+        expect(value).to eq([[1000.0, nil, nil], nil, nil])
       end
 
       context 'when setting a default' do
         let(:options) { { default: 10 } }
 
         it 'returns the missing values as default' do
-          expect(value).to eq([[1000.0, nil], 10, 10])
+          expect(value).to eq([[1000.0, 10, nil], 10, 10])
         end
       end
 
@@ -176,6 +176,27 @@ describe JsonParser::Crawler do
 
         it 'wraps the default value' do
           expect(value.name).to be_nil
+        end
+      end
+    end
+
+    context 'when the key last key is missing but the value is nil' do
+      let(:json_file) { 'person.json' }
+      let(:path) { %w(user nick_name) }
+
+      it 'returns the default value' do
+        expect(value).to eq(default_value)
+      end
+
+      context 'when wrapping it with a class' do
+        let(:block) { proc { |v| Person.new(v) } }
+
+        it 'wrap it with the class' do
+          expect(value).to be_a(Person)
+        end
+
+        it 'wraps the default value' do
+          expect(value.name).to eq(default_value)
         end
       end
     end

@@ -1,10 +1,7 @@
 module JsonParser
   module ClassMethods
-    def json_parse(*attr_names)
-      options = attr_names.extract_options!
-
-      builder = Builder.new(attr_names, self, options)
-      builder.build
+    def json_parse(*attr_names, **options)
+      Builder.new(attr_names, self, options).build
     end
   end
 end

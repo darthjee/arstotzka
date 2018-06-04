@@ -1,0 +1,9 @@
+{
+  "user": {
+    "name": "Robert",
+    "full_name": "Robert Smith",
+    "LoginName": "robsmith",
+    "birthDate": "03/07/1980",
+    "password_reminder": null
+  }
+}

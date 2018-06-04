@@ -18,7 +18,7 @@ describe JsonParser::Builder do
   let(:instance) { clazz.new(json) }
 
   subject do
-    described_class.new(attr_names, clazz, options)
+    described_class.new(attr_names, clazz, **options)
   end
 
   describe '#build' do
@@ -79,14 +79,6 @@ describe JsonParser::Builder do
           it 'fetches the value within the json' do
             expect(instance.the_name).to eq(name)
           end
-
-          context 'when option key is a string' do
-            let(:options) { { 'full_path' => 'user.name' } }
-
-            it 'fetches the value within the json' do
-              expect(instance.the_name).to eq(name)
-            end
-          end
         end
       end
 
@@ -101,14 +93,6 @@ describe JsonParser::Builder do
 
         it 'fills the new instance with the information fetched' do
           expect(instance.person.name).to eq(name)
-        end
-
-        context 'when option key is a string' do
-          let(:options) { { 'class' => Person } }
-
-          it 'fills the new instance with the information fetched' do
-            expect(instance.person.name).to eq(name)
-          end
         end
       end
     end

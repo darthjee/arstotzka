@@ -85,8 +85,7 @@ Options
 - type: Type that the value must be cast into ([TypeCast](#typecast))
 - default: Default value (prior to casting and wrapping, see [Default](#default))
 
-TypeCast
---------
+## TypeCast
 The type casting, when the option `type` is passed, is done through the `JsonParser::TypeCast` which can
 be extended
 
@@ -140,8 +139,7 @@ end
 #returns 1050.36
 ```
 
-Default
--------
+## Default
 Default value returned before typecasting or class wrapping
 
 ```ruby
