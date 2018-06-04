@@ -6,7 +6,7 @@ class JsonParser::Fetcher
   delegate :after, :flatten, to: :options_object
   delegate :wrap, to: :wrapper
 
-  def initialize(json, path, instance, options = {})
+  def initialize(json, instance, path:, **options)
     @path = path.to_s.split('.')
     @json = json
     @instance = instance
