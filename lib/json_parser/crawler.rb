@@ -5,7 +5,7 @@ class JsonParser::Crawler
     @case_type = case_type
     @compact = compact
     @default = default
-    @path = path.map { |p| change_case(p) }
+    @path = path
     @post_process = block
   end
 
@@ -18,34 +18,21 @@ class JsonParser::Crawler
   private
 
   def crawl(json, index = 0)
-    return wrap(json) if is_ended?(index)
+    return wrap(json) if reader.is_ended?(index)
     return crawl_array(json, index) if json.is_a?(Array)
 
-    crawl(fetch(json, index), index + 1)
+    crawl(reader.fetch(json, index), index + 1)
   end
 
-  def fetch(json, index)
-    key = path[index]
-    json.key?(key) ? json.fetch(key) : json.fetch(key.to_sym)
-  end
-
-  def is_ended?(index)
-    index >= path.size
+  def reader
+    @reader ||= JsonParser::Reader.new(
+      path: path,
+      case_type: case_type
+    )
   end
 
   def wrap(json)
     post_process.call(json)
-  end
-
-  def change_case(key)
-    case case_type
-    when :lower_camel
-      key.camelize(:lower)
-    when :upper_camel
-      key.camelize(:upper)
-    when :snake
-      key.underscore
-    end
   end
 
   def crawl_array(array, index)

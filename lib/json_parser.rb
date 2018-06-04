@@ -11,4 +11,5 @@ module JsonParser
   autoload :Fetcher,      'json_parser/fetcher'
   autoload :ClassMethods, 'json_parser/class_methods'
   autoload :Builder,      'json_parser/builder'
+  autoload :Reader,       'json_parser/reader'
 end
