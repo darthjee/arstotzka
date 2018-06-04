@@ -12,4 +12,5 @@ module JsonParser
   autoload :ClassMethods, 'json_parser/class_methods'
   autoload :Builder,      'json_parser/builder'
   autoload :Reader,       'json_parser/reader'
+  autoload :Exception,    'json_parser/exception'
 end
