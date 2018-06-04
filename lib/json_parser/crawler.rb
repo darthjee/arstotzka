@@ -2,7 +2,7 @@ module JsonParser
   class Crawler
     attr_reader :post_process, :path, :case_type, :compact, :default
 
-    def initialize(path, case_type: :lower_camel, compact: false, default: nil, &block)
+    def initialize(path:, case_type: :lower_camel, compact: false, default: nil, &block)
       @case_type = case_type
       @compact = compact
       @default = default
@@ -22,7 +22,7 @@ module JsonParser
       return wrap(json) if reader.is_ended?(index)
       return crawl_array(json, index) if json.is_a?(Array)
 
-      crawl(reader.fetch(json, index), index + 1)
+      crawl(reader.read(json, index), index + 1)
     end
 
     def reader

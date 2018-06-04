@@ -4,13 +4,13 @@ module JsonParser
 
     def initialize(path:, case_type:)
       @case_type = case_type
-      @path = path.map { |p| change_case(p) }
+      @path = path.map(&self.method(:change_case))
     end
 
-    def fetch(json, index)
+    def read(json, index)
       key = path[index]
 
-      raise Exception::KeyNotFound unless json&.key?(key) || json&.key?(key.to_sym)
+      check_key!(json, key)
 
       json.key?(key) ? json[key] : json[key.to_sym]
     end
@@ -20,6 +20,15 @@ module JsonParser
     end
 
     private
+
+    def check_key!(json, key)
+      return if has_key?(json, key)
+      raise Exception::KeyNotFound
+    end
+
+    def has_key?(json, key)
+      json&.key?(key) || json&.key?(key.to_sym)
+    end
 
     def change_case(key)
       case case_type

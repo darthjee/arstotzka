@@ -27,13 +27,13 @@ class JsonParser::Fetcher
   end
 
   def buidl_crawler
-    JsonParser::Crawler.new(path, crawler_options) do |value|
+    JsonParser::Crawler.new(crawler_options) do |value|
       wrap(value)
     end
   end
 
   def crawler_options
-    options.slice(:case_type, :compact, :default)
+    options.slice(:case_type, :compact, :default).merge(path: path)
   end
 
   def wrapper

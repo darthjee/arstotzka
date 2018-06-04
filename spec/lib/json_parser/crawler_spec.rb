@@ -2,11 +2,11 @@ require 'spec_helper'
 
 describe JsonParser::Crawler do
   let(:subject) do
-    described_class.new path, default_options.merge(options), &block
+    described_class.new default_options.merge(options), &block
   end
   let(:block) { proc { |v| v } }
   let(:path) { '' }
-  let(:default_options) { { case_type: :lower_camel} }
+  let(:default_options) { { path: path, case_type: :lower_camel} }
   let(:options) { {} }
   let(:json_file) { 'json_parser.json' }
   let(:json) { load_json_fixture_file(json_file) }
