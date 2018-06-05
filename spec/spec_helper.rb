@@ -8,7 +8,7 @@ require 'arstotzka'
 require 'safe_attribute_assignment'
 
 support_files = File.expand_path("spec/support/**/*.rb")
-Dir[support_files].each { |file| require file  }
+Dir[support_files].sort.each { |file| require file  }
 
 RSpec.configure do |config|
   config.treat_symbols_as_metadata_keys_with_true_values = true
