@@ -6,11 +6,11 @@ require 'arstotzka/version'
 Gem::Specification.new do |spec|
   spec.name          = "arstotzka"
   spec.version       = Arstotzka::VERSION
-  spec.authors       = ["Bidu Dev's Team"]
-  spec.email         = ["dev@bidu.com.br"]
-  spec.summary       = "Json Parser"
+  spec.authors       = ["Darthjee"]
+  spec.email         = ["dev@gmail.com"]
+  spec.summary       = "Arstotzka"
   spec.description   = spec.description
-  spec.homepage      = "https://github.com/Bidu/arstotzka"
+  spec.homepage      = "https://github.com/darthjee/arstotzka"
 
   spec.files         = `git ls-files`.split($/)
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f)  }
