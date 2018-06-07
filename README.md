@@ -4,6 +4,8 @@ Arstotzka
 [![Test Coverage](https://codeclimate.com/github/darthjee/arstotzka/badges/coverage.svg)](https://codeclimate.com/github/darthjee/arstotzka/coverage)
 [![Issue Count](https://codeclimate.com/github/darthjee/arstotzka/badges/issue_count.svg)](https://codeclimate.com/github/darthjee/arstotzka)
 
+![arstotzka](https://raw.githubusercontent.com/darthjee/arstotzka/master/arstotzka.jpg)
+
 This project allows for a quick hash / json data fetching in order to avoid code
 that tries to crawl through a hash and has to constantly check for nil values or missing keys
 
