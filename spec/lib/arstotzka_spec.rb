@@ -116,7 +116,7 @@ describe Arstotzka do
 
   context 'when casting the result' do
     class Arstotzka::Dummy
-      json_parse :float_value, type: :float
+      expose :float_value, type: :float
     end
 
     let(:json) { { floatValue: '1' } }

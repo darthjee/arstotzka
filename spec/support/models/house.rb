@@ -3,7 +3,7 @@ class House
   include ::SafeAttributeAssignment
   attr_reader :json
 
-  json_parse :age, :value, :floors
+  expose :age, :value, :floors
 
   def initialize(json)
     @json = json

@@ -2,14 +2,14 @@ class Arstotzka::Dummy
   include Arstotzka
   attr_reader :json
 
-  json_parse :id
-  json_parse :name, path: 'user'
-  json_parse :father_name, full_path: 'father.name'
-  json_parse :age, cached: true
-  json_parse :house, class: ::House
-  json_parse :old_house, class: ::House, cached: true
-  json_parse :games, class: ::Game
-  json_parse :games_filtered, class: ::Game, after: :filter_games, full_path: 'games'
+  expose :id
+  expose :name, path: 'user'
+  expose :father_name, full_path: 'father.name'
+  expose :age, cached: true
+  expose :house, class: ::House
+  expose :old_house, class: ::House, cached: true
+  expose :games, class: ::Game
+  expose :games_filtered, class: ::Game, after: :filter_games, full_path: 'games'
 
   def initialize(json)
     @json = json
