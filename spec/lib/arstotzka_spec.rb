@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe JsonParser do
-  let(:dummy) { JsonParser::Dummy.new(json) }
-  let(:json) { load_json_fixture_file('json_parser.json') }
+describe Arstotzka do
+  let(:dummy) { Arstotzka::Dummy.new(json) }
+  let(:json) { load_json_fixture_file('arstotzka.json') }
   let(:value) { dummy.public_send(attribute) }
 
   context 'when parser is configured with no options' do
@@ -115,8 +115,8 @@ describe JsonParser do
   end
 
   context 'when casting the result' do
-    class JsonParser::Dummy
-      json_parse :float_value, type: :float
+    class Arstotzka::Dummy
+      expose :float_value, type: :float
     end
 
     let(:json) { { floatValue: '1' } }

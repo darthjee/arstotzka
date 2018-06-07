@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe JsonParser::Builder do
+describe Arstotzka::Builder do
   let(:clazz) do
     Class.new.tap do |c|
       c.send(:attr_reader, :json)

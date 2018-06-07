@@ -1,4 +1,4 @@
-module JsonParser
+module Arstotzka
   class Crawler
     attr_reader :post_process, :path, :case_type, :compact, :default
 
@@ -26,7 +26,7 @@ module JsonParser
     end
 
     def reader
-      @reader ||= JsonParser::Reader.new(
+      @reader ||= Arstotzka::Reader.new(
         path: path,
         case_type: case_type
       )

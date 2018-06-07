@@ -1,4 +1,4 @@
-module JsonParser::TypeCast
+module Arstotzka::TypeCast
   extend ActiveSupport::Concern
 
   def to_integer(value)

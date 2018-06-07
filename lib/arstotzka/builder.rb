@@ -1,4 +1,4 @@
-class JsonParser::Builder < Sinclair
+class Arstotzka::Builder < Sinclair
 
   attr_reader :attr_names, :path, :full_path, :cached
 
@@ -59,7 +59,7 @@ class JsonParser::Builder < Sinclair
 
   def attr_fetcher(attribute)
     <<-CODE
-      ::JsonParser::Fetcher.new(
+      ::Arstotzka::Fetcher.new(
         #{json_name}, self, #{fetcher_options(attribute)}
       ).fetch
     CODE

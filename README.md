@@ -1,8 +1,8 @@
-Json Parser
+Arstotzka
 ========
-[![Code Climate](https://codeclimate.com/github/darthjee/json_parser/badges/gpa.svg)](https://codeclimate.com/github/darthjee/json_parser)
-[![Test Coverage](https://codeclimate.com/github/darthjee/json_parser/badges/coverage.svg)](https://codeclimate.com/github/darthjee/json_parser/coverage)
-[![Issue Count](https://codeclimate.com/github/darthjee/json_parser/badges/issue_count.svg)](https://codeclimate.com/github/darthjee/json_parser)
+[![Code Climate](https://codeclimate.com/github/darthjee/arstotzka/badges/gpa.svg)](https://codeclimate.com/github/darthjee/arstotzka)
+[![Test Coverage](https://codeclimate.com/github/darthjee/arstotzka/badges/coverage.svg)](https://codeclimate.com/github/darthjee/arstotzka/coverage)
+[![Issue Count](https://codeclimate.com/github/darthjee/arstotzka/badges/issue_count.svg)](https://codeclimate.com/github/darthjee/arstotzka)
 
 This project allows for a quick hash / json data fetching in order to avoid code
 that tries to crawl through a hash and has to constantly check for nil values or missing keys
@@ -14,32 +14,32 @@ Json Parser is also usefull when you need keys case changed or data type cast
 
 Getting started
 ---------------
-1. Add JsonParser to your `Gemfile` and `bundle install`:
+1. Add Arstotzka to your `Gemfile` and `bundle install`:
 
   ```ruby
-  gem 'json_parser'
+  gem 'arstotzka'
   ```
 
 2. Include in a class that you want to wrap a json/hash
   ```ruby
   class MyParser
-    include JsonParser
+    include Arstotzka
   ```
 
 3. Declare the keys you want to crawl
   ```ruby
-class MyParser
-  include JsonParser
+  class MyParser
+    include Arstotzka
 
-  json_parse :id
-  json_parse :name, :age, path: :person
+    expose :id
+    expose :name, :age, path: :person
 
-  attr_reader :json
+    attr_reader :json
 
-  def initialize(json = {})
-    @json = json
+    def initialize(json = {})
+      @json = json
+    end
   end
-end
 
   ```
 
@@ -86,11 +86,11 @@ Options
 - default: Default value (prior to casting and wrapping, see [Default](#default))
 
 ## TypeCast
-The type casting, when the option `type` is passed, is done through the `JsonParser::TypeCast` which can
+The type casting, when the option `type` is passed, is done through the `Arstotzka::TypeCast` which can
 be extended
 
 ```ruby
-module JsonParser::TypeCast
+module Arstotzka::TypeCast
   def to_money_float(value)
     value.gsub(/\$ */, '').to_f
   end
@@ -99,12 +99,12 @@ end
 
 ```ruby
 class MyParser
-  include JsonParser
+  include Arstotzka
 
-  json_parse :total_money, full_path: 'accounts.balance', after: :sum,
-                          cached: true, type: :money_float
-  json_parse :total_owed, full_path: 'loans.value', after: :sum,
-                          cached: true, type: :money_float
+  expose :total_money, full_path: 'accounts.balance', after: :sum,
+                       cached: true, type: :money_float
+  expose :total_owed, full_path: 'loans.value', after: :sum,
+                       cached: true, type: :money_float
 
   attr_reader :json
 
@@ -152,10 +152,10 @@ class Star
 end
 
 class StarGazer
-  include JsonParser
+  include Arstotzka
 
-  json_parse :favorite_star, full_path: 'universe.star',
-             default: { name: 'Sun' }, class: ::Star
+  expose :favorite_star, full_path: 'universe.star',
+         default: { name: 'Sun' }, class: ::Star
 
   attr_reader :json
 

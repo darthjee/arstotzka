@@ -1,9 +1,9 @@
 class Game
-  include JsonParser
+  include Arstotzka
   include SafeAttributeAssignment
   attr_reader :json
 
-  json_parse :name, :publisher
+  expose :name, :publisher
 
   def initialize(json)
     @json = json

@@ -1,16 +1,16 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'json_parser/version'
+require 'arstotzka/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "json_parser"
-  spec.version       = JsonParser::VERSION
+  spec.name          = "arstotzka"
+  spec.version       = Arstotzka::VERSION
   spec.authors       = ["Bidu Dev's Team"]
   spec.email         = ["dev@bidu.com.br"]
   spec.summary       = "Json Parser"
   spec.description   = spec.description
-  spec.homepage      = "https://github.com/Bidu/json_parser"
+  spec.homepage      = "https://github.com/Bidu/arstotzka"
 
   spec.files         = `git ls-files`.split($/)
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f)  }

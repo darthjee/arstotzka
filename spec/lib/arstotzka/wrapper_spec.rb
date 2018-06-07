@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe JsonParser::Wrapper do
+describe Arstotzka::Wrapper do
   let(:options) { {} }
   let(:subject) { described_class.new options }
   let(:hash) { { a: 1 } }
@@ -68,7 +68,7 @@ describe JsonParser::Wrapper do
         end
 
         context 'when passing clazz parameter' do
-          let(:options) { { type: type, clazz: JsonParser::Wrapper::Dummy } }
+          let(:options) { { type: type, clazz: Arstotzka::Wrapper::Dummy } }
 
           it do
             expect(result).to be_nil
@@ -86,25 +86,25 @@ describe JsonParser::Wrapper do
         }
 
         context 'when passing clazz parameter' do
-          let(:options) { { type: type, clazz: JsonParser::Wrapper::Dummy } }
+          let(:options) { { type: type, clazz: Arstotzka::Wrapper::Dummy } }
 
           it_behaves_like 'a result that is type cast', {
             integer: NilClass,
             float: NilClass,
-            string: JsonParser::Wrapper::Dummy
+            string: Arstotzka::Wrapper::Dummy
           }
         end
       end
 
       context 'when passing clazz parameter' do
         let(:value) { 1 }
-        let(:options) { { type: type, clazz: JsonParser::Wrapper::Dummy } }
+        let(:options) { { type: type, clazz: Arstotzka::Wrapper::Dummy } }
         let(:cast) { result.value }
 
         it_behaves_like 'casts basic types'
 
         it 'wraps the result inside the given class' do
-          expect(result).to be_a(JsonParser::Wrapper::Dummy)
+          expect(result).to be_a(Arstotzka::Wrapper::Dummy)
         end
       end
 

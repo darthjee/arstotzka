@@ -1,4 +1,4 @@
-module JsonParser
+module Arstotzka
   class Reader
     attr_reader :path, :case_type
 
