@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Arstotzka::Crawler do
@@ -6,14 +8,14 @@ describe Arstotzka::Crawler do
   end
   let(:block) { proc { |v| v } }
   let(:path) { '' }
-  let(:default_options) { { path: path, case_type: :lower_camel} }
+  let(:default_options) { { path: path, case_type: :lower_camel } }
   let(:options) { {} }
   let(:json_file) { 'arstotzka.json' }
   let(:json) { load_json_fixture_file(json_file) }
   let(:value) { subject.value(json) }
 
   context 'when parsing with a path' do
-    let(:path) { %w(user name) }
+    let(:path) { %w[user name] }
 
     it 'retrieves attribute from base json' do
       expect(value).to eq(json['user']['name'])
@@ -29,7 +31,7 @@ describe Arstotzka::Crawler do
   end
 
   context 'crawler finds a nil attribute' do
-    let(:path) { %w(car model) }
+    let(:path) { %w[car model] }
 
     it 'returns nil' do
       expect(value).to be_nil
@@ -42,7 +44,7 @@ describe Arstotzka::Crawler do
 
   context 'when there is an array of arrays' do
     let(:json_file) { 'accounts.json' }
-    let(:path) { %w(banks accounts balance) }
+    let(:path) { %w[banks accounts balance] }
 
     it 'returns the values as array of arrays' do
       expect(value).to eq([[1000.0, 1500.0], [50.0, -500.0]])
@@ -74,7 +76,7 @@ describe Arstotzka::Crawler do
 
   context 'when json is empty' do
     let(:json) { nil }
-    let(:path) { %w(car model) }
+    let(:path) { %w[car model] }
 
     it 'returns nil' do
       expect(value).to be_nil
@@ -94,7 +96,7 @@ describe Arstotzka::Crawler do
   end
 
   context 'when dealing with json inside arrays' do
-    let(:path) { %w(animals race species name)}
+    let(:path) { %w[animals race species name] }
     let(:expected) do
       ['European squid', 'Macaque monkey', 'Mexican redknee tarantula']
     end
@@ -111,7 +113,7 @@ describe Arstotzka::Crawler do
       context 'with compact option as false' do
         let(:options) { { compact: false } }
         before do
-          json["animals"].last['race'] = nil
+          json['animals'].last['race'] = nil
         end
         let(:expected) do
           ['European squid', 'Macaque monkey', nil]
@@ -125,7 +127,7 @@ describe Arstotzka::Crawler do
       context 'with compact option' do
         let(:options) { { compact: true } }
         before do
-          json["animals"].last['race'] = nil
+          json['animals'].last['race'] = nil
         end
         let(:expected) do
           ['European squid', 'Macaque monkey']
@@ -141,7 +143,7 @@ describe Arstotzka::Crawler do
   context 'with default option' do
     let(:default_value) { 'NotFound' }
     let(:options) { { default: default_value } }
-    let(:path) { %w(projects name) }
+    let(:path) { %w[projects name] }
 
     context 'when there is a key missing' do
       it 'returns the default value' do
@@ -163,7 +165,7 @@ describe Arstotzka::Crawler do
 
     context 'when the key is not missing but the value is nil' do
       let(:json_file) { 'person.json' }
-      let(:path) { %w(user name) }
+      let(:path) { %w[user name] }
 
       it { expect(value).to be_nil }
 
@@ -182,7 +184,7 @@ describe Arstotzka::Crawler do
 
     context 'when the key last key is missing but the value is nil' do
       let(:json_file) { 'person.json' }
-      let(:path) { %w(user nick_name) }
+      let(:path) { %w[user nick_name] }
 
       it 'returns the default value' do
         expect(value).to eq(default_value)
@@ -203,7 +205,7 @@ describe Arstotzka::Crawler do
 
     context 'when the node is missing but default has the same node' do
       let(:default_value) { { node: { value: 1 } } }
-      let(:path) { %w(node node node) }
+      let(:path) { %w[node node node] }
       let(:json) { {} }
 
       it 'does not crawl through default value' do
@@ -214,7 +216,7 @@ describe Arstotzka::Crawler do
 
   context 'when using a snake case' do
     let(:json) { { snake_cased: 'snake', snakeCased: 'Camel' }.stringify_keys }
-    let(:path) { [ 'snake_cased' ] }
+    let(:path) { ['snake_cased'] }
     let(:options) { { case_type: :snake } }
 
     it 'fetches from snake cased fields' do
@@ -224,7 +226,7 @@ describe Arstotzka::Crawler do
 
   context 'when using a upper camel case' do
     let(:json) { { UpperCase: 'upper', upperCase: 'lower' }.stringify_keys }
-    let(:path) { [ 'upper_case' ] }
+    let(:path) { ['upper_case'] }
     let(:options) { { case_type: :upper_camel } }
 
     it 'fetches from upper camel cased fields' do
@@ -234,14 +236,14 @@ describe Arstotzka::Crawler do
 
   context 'when using a symbol keys' do
     let(:json) { load_json_fixture_file('arstotzka.json').symbolize_keys }
-    let(:path) { [ 'id' ] }
+    let(:path) { ['id'] }
 
     it 'fetches from symbol keys' do
       expect(value).to eq(json[:id])
     end
 
     context 'crawler finds a nil attribute' do
-      let(:path) { %w(car model) }
+      let(:path) { %w[car model] }
 
       it 'returns nil' do
         expect(value).to be_nil

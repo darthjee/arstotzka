@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 module Arstotzka
   class Reader
     attr_reader :path, :case_type
 
     def initialize(path:, case_type:)
       @case_type = case_type
-      @path = path.map(&self.method(:change_case))
+      @path = path.map(&method(:change_case))
     end
 
     def read(json, index)
@@ -15,18 +17,18 @@ module Arstotzka
       json.key?(key) ? json[key] : json[key.to_sym]
     end
 
-    def is_ended?(index)
+    def ended?(index)
       index >= path.size
     end
 
     private
 
     def check_key!(json, key)
-      return if has_key?(json, key)
+      return if key?(json, key)
       raise Exception::KeyNotFound
     end
 
-    def has_key?(json, key)
+    def key?(json, key)
       json&.key?(key) || json&.key?(key.to_sym)
     end
 

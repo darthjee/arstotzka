@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Arstotzka::Wrapper do
@@ -79,20 +81,18 @@ describe Arstotzka::Wrapper do
       context 'with blank value' do
         let(:value) { '' }
 
-        it_behaves_like 'a result that is type cast', {
-          integer: NilClass,
-          float: NilClass,
-          string: String
-        }
+        it_behaves_like 'a result that is type cast',
+                        integer: NilClass,
+                        float: NilClass,
+                        string: String
 
         context 'when passing clazz parameter' do
           let(:options) { { type: type, clazz: Arstotzka::Wrapper::Dummy } }
 
-          it_behaves_like 'a result that is type cast', {
-            integer: NilClass,
-            float: NilClass,
-            string: Arstotzka::Wrapper::Dummy
-          }
+          it_behaves_like 'a result that is type cast',
+                          integer: NilClass,
+                          float: NilClass,
+                          string: Arstotzka::Wrapper::Dummy
         end
       end
 

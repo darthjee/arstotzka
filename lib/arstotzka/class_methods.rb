@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Arstotzka
   module ClassMethods
     def expose(*attr_names, **options)

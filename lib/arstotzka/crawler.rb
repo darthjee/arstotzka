@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Arstotzka
   class Crawler
     attr_reader :post_process, :path, :case_type, :compact, :default
@@ -19,7 +21,7 @@ module Arstotzka
     private
 
     def crawl(json, index = 0)
-      return wrap(json) if reader.is_ended?(index)
+      return wrap(json) if reader.ended?(index)
       return crawl_array(json, index) if json.is_a?(Array)
 
       crawl(reader.read(json, index), index + 1)

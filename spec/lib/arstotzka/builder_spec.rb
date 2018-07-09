@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Arstotzka::Builder do
   let(:clazz) do
     Class.new.tap do |c|
       c.send(:attr_reader, :json)
-      c.send(:define_method, :initialize) do |json={}|
+      c.send(:define_method, :initialize) do |json = {}|
         @json = json
       end
     end
@@ -13,7 +15,7 @@ describe Arstotzka::Builder do
   let(:options) { {} }
   let(:name) { 'Robert' }
   let(:attr_name) { :name }
-  let(:attr_names) { [ attr_name ] }
+  let(:attr_names) { [attr_name] }
   let(:json) { {} }
   let(:instance) { clazz.new(json) }
 
@@ -25,14 +27,14 @@ describe Arstotzka::Builder do
     it 'adds the reader' do
       expect do
         subject.build
-      end.to change { clazz.new.respond_to?(attr_name) }
+      end.to add_method(attr_name).to(clazz)
     end
 
     context 'after building' do
       before { subject.build }
 
       context 'when building several attributes' do
-        let(:attr_names) { [ :id, :name, :age ] }
+        let(:attr_names) { %i[id name age] }
 
         it 'adds all the readers' do
           attr_names.each do |attr|

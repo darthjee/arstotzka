@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Star
   attr_reader :name
 

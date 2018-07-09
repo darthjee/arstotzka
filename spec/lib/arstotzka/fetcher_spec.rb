@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Arstotzka::Fetcher do
@@ -41,7 +43,7 @@ describe Arstotzka::Fetcher do
   end
 
   describe 'flatten options' do
-    let(:json) { [[[1,2],[3,4]],[[5,6],[7,8]]] }
+    let(:json) { [[[1, 2], [3, 4]], [[5, 6], [7, 8]]] }
 
     context 'when flatten option is true' do
       let(:options) { { flatten: true } }
@@ -70,7 +72,7 @@ describe Arstotzka::Fetcher do
 
   describe 'after option' do
     let(:instance) { MyParser.new(json) }
-    let(:json) { [ 100, 250, -25] }
+    let(:json) { [100, 250, -25] }
     let(:options) { { after: :sum } }
 
     it 'applies after call ' do

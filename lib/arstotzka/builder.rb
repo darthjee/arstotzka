@@ -1,9 +1,10 @@
-class Arstotzka::Builder < Sinclair
+# frozen_string_literal: true
 
-  attr_reader :attr_names, :path, :full_path, :cached
+module Arstotzka
+  class Builder < Sinclair
+    attr_reader :attr_names, :path, :full_path, :cached
 
-  def initialize(attr_names, clazz, path: nil, full_path: nil, cached: false, **options)
-    super(clazz, {
+    DEFAULT_OPTIONS = {
       after:     false,
       case:      :lower_camel,
       class:     nil,
@@ -12,62 +13,66 @@ class Arstotzka::Builder < Sinclair
       flatten:   false,
       json:      :json,
       type:      :none
-    }.merge(options.symbolize_keys))
+    }.freeze
 
-    @attr_names = attr_names
-    @path = path
-    @full_path = full_path
-    @cached = cached
-    init
-  end
+    def initialize(attr_names, clazz, path: nil, full_path: nil, cached: false, **options)
+      super(clazz, DEFAULT_OPTIONS.merge(options.symbolize_keys))
 
-  private
-
-  def init
-    attr_names.each do |attr|
-      add_attr(attr)
+      @attr_names = attr_names
+      @path = path
+      @full_path = full_path
+      @cached = cached
+      init
     end
-  end
 
-  def real_path(attribute)
-    full_path || [path, attribute].compact.join('.')
-  end
+    private
 
-  def json_name
-    options[:json]
-  end
+    def init
+      attr_names.each do |attr|
+        add_attr(attr)
+      end
+    end
 
-  def wrapper_clazz
-    options[:class]
-  end
+    def real_path(attribute)
+      full_path || [path, attribute].compact.join('.')
+    end
 
-  def case_type
-    options[:case]
-  end
+    def json_name
+      options[:json]
+    end
 
-  def fetcher_options(attribute)
-    options.slice(:compact, :after, :type, :flatten, :default).merge({
-      clazz: wrapper_clazz,
-      case_type: case_type,
-      path: real_path(attribute)
-    })
-  end
+    def wrapper_clazz
+      options[:class]
+    end
 
-  def add_attr(attribute)
-    add_method attribute, "#{cached ? cached_fetcher(attribute) : attr_fetcher(attribute)}"
-  end
+    def case_type
+      options[:case]
+    end
 
-  def attr_fetcher(attribute)
-    <<-CODE
+    def fetcher_options(attribute)
+      options.slice(:compact, :after, :type, :flatten, :default).merge(
+        clazz: wrapper_clazz,
+        case_type: case_type,
+        path: real_path(attribute)
+      )
+    end
+
+    def add_attr(attribute)
+      add_method attribute, (cached ? cached_fetcher(attribute) : attr_fetcher(attribute)).to_s
+    end
+
+    def attr_fetcher(attribute)
+      <<-CODE
       ::Arstotzka::Fetcher.new(
         #{json_name}, self, #{fetcher_options(attribute)}
       ).fetch
-    CODE
-  end
+      CODE
+    end
 
-  def cached_fetcher(attribute)
-    <<-CODE
+    def cached_fetcher(attribute)
+      <<-CODE
       @#{attribute} ||= #{attr_fetcher(attribute)}
-    CODE
+      CODE
+    end
   end
 end
