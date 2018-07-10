@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Person
   attr_reader :name
 
@@ -5,4 +7,3 @@ class Person
     @name = name
   end
 end
-

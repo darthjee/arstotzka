@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'simplecov'
 SimpleCov.start do
   add_filter 'spec/support/models/'
@@ -7,14 +9,16 @@ require 'pry-nav'
 require 'arstotzka'
 require 'safe_attribute_assignment'
 
-support_files = File.expand_path("spec/support/**/*.rb")
-Dir[support_files].sort.each { |file| require file  }
+support_files = File.expand_path('spec/support/**/*.rb')
+Dir[support_files].sort.each { |file| require file }
 
 RSpec.configure do |config|
   config.treat_symbols_as_metadata_keys_with_true_values = true
   config.run_all_when_everything_filtered = true
   config.filter_run :focus
   config.filter_run_excluding :integration unless ENV['ALL']
+
+  config.include Sinclair::Matchers
 
   config.order = 'random'
 

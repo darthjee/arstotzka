@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 class StarGazer
   include Arstotzka
 
   expose :favorite_star, full_path: 'universe.star',
-         default: { name: 'Sun' }, class: ::Star
+                         default: { name: 'Sun' }, class: ::Star
 
   attr_reader :json
 
@@ -10,4 +12,3 @@ class StarGazer
     @json = json
   end
 end
-

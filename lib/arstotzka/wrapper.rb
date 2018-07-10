@@ -1,36 +1,40 @@
-class Arstotzka::Wrapper
-  include Arstotzka::TypeCast
+# frozen_string_literal: true
 
-  attr_reader :clazz, :type
+module Arstotzka
+  class Wrapper
+    include Arstotzka::TypeCast
 
-  def initialize(clazz: nil, type: nil)
-    @clazz = clazz
-    @type = type
-  end
+    attr_reader :clazz, :type
 
-  def wrap(value)
-    return wrap_array(value) if value.is_a?(Array)
-    wrap_element(value)
-  end
+    def initialize(clazz: nil, type: nil)
+      @clazz = clazz
+      @type = type
+    end
 
-  private
+    def wrap(value)
+      return wrap_array(value) if value.is_a?(Array)
+      wrap_element(value)
+    end
 
-  def wrap_element(value)
-    value = cast(value) if has_type? && !value.nil?
-    return if value.nil?
+    private
 
-    clazz ? clazz.new(value) : value
-  end
+    def wrap_element(value)
+      value = cast(value) if type? && !value.nil?
+      return if value.nil?
 
-  def wrap_array(array)
-    array.map { |v| wrap v }
-  end
+      clazz ? clazz.new(value) : value
+    end
 
-  def has_type?
-    type.present? && type != :none
-  end
+    def wrap_array(array)
+      array.map { |v| wrap v }
+    end
 
-  def cast(value)
-    public_send("to_#{type}", value)
+    def type?
+      type.present? && type != :none
+    end
+
+    def cast(value)
+      public_send("to_#{type}", value)
+    end
   end
 end

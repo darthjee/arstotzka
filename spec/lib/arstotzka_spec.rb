@@ -1,9 +1,12 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Arstotzka do
-  let(:dummy) { Arstotzka::Dummy.new(json) }
-  let(:json) { load_json_fixture_file('arstotzka.json') }
-  let(:value) { dummy.public_send(attribute) }
+  let(:dummy_class) { Arstotzka::Dummy }
+  let(:dummy)       { dummy_class.new(json) }
+  let(:json)        { load_json_fixture_file('arstotzka.json') }
+  let(:value)       { dummy.public_send(attribute) }
 
   context 'when parser is configured with no options' do
     let(:attribute) { :id }
@@ -115,12 +118,13 @@ describe Arstotzka do
   end
 
   context 'when casting the result' do
-    class Arstotzka::Dummy
-      expose :float_value, type: :float
-    end
-
-    let(:json) { { floatValue: '1' } }
+    let(:json)      { { floatValue: '1' } }
     let(:attribute) { :float_value }
+    let(:dummy_class) do
+      Class.new(Arstotzka::Dummy) do
+        expose :float_value, type: :float
+      end
+    end
 
     it do
       expect(value).to be_a(Float)

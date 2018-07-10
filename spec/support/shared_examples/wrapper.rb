@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 shared_context 'a result that is type cast' do |types|
   types.each do |type, clazz|
     context "with #{type} type" do
@@ -11,9 +13,8 @@ shared_context 'a result that is type cast' do |types|
 end
 
 shared_context 'casts basic types' do
-  it_behaves_like 'a result that is type cast', {
-    integer: Integer,
-    float: Float,
-    string: String
-  }
+  it_behaves_like 'a result that is type cast',
+                  integer: Integer,
+                  float: Float,
+                  string: String
 end
