@@ -3,7 +3,7 @@
 module Arstotzka
   # Crawl a json/hash through the path of keys
   # @example
-  #   crawler = Arstotzka::Crawler.new(%w(person information first_name)) { |v| v }
+  #   crawler = Arstotzka::Crawler.new(%w(person information first_name))
   #   hash = {
   #     person: {
   #       'information' => {
@@ -20,7 +20,7 @@ module Arstotzka
       @compact = compact
       @default = default
       @path = path
-      @post_process = block
+      @post_process = block || proc { |value| value }
     end
 
     def value(json, index = 0)
