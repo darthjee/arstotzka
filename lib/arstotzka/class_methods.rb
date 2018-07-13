@@ -31,7 +31,9 @@ module Arstotzka
     #   instance.cars       # returns 2
     #
     # @see Builder Arstotzka::Builder
-    # @see https://www.rubydoc.info/gems/activesupport/5.0.0.1/ActiveSupport/Concern ActiveSupport::Concern
+    # @see
+    #   https://www.rubydoc.info/gems/activesupport/5.0.0.1/ActiveSupport/Concern
+    #   ActiveSupport::Concern
     def expose(*attr_names, **options)
       Builder.new(attr_names, self, options).build
     end

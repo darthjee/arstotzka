@@ -44,26 +44,26 @@ module Arstotzka
       type:      :none
     }.freeze
 
-    # @overload initialize(attr_name, clazz, path: nil, full_path: nil, cached: false, after: false, _case: nil, _class: nil, compact: false, flatten: false, json: :json, type: :none)
-    #   @param attr_names [Array] list of attributes to be fetched from the hash/json
-    #   @param clazz [Class] class to receive the methods
-    #   @param path [String/Symbol] path of hash attributes to find the root
-    #     where the attribute live (then fetching it using the attribute name)
-    #   @param full_path [String/Symbol] path of hash attributes to find exacttly where the
-    #     value live (ignoring the attribute name)
-    #   @param cached [Boolean] flag if the result should be memorized instead of repeating
-    #     the crawling
-    #   @param after [String/Symbol] method to be called once the value is fetched remapping
+    # @param attr_names [Array] list of attributes to be fetched from the hash/json
+    # @param clazz [Class] class to receive the methods
+    # @param path [String/Symbol] path of hash attributes to find the root
+    #   where the attribute live (then fetching it using the attribute name)
+    # @param full_path [String/Symbol] path of hash attributes to find exacttly where the
+    #   value live (ignoring the attribute name)
+    # @param cached [Boolean] flag if the result should be memorized instead of repeating
+    #   the crawling
+    # @param options [Hash] hash containing extra options
+    #   - after [String/Symbol] method to be called once the value is fetched remapping
     #     the value
-    #   @param case [String/Symbol] flag definining on which case will the keys be defined
+    #   - case [String/Symbol] flag definining on which case will the keys be defined
     #     - lower_camel: keys in the hash are lowerCamelCase
     #     - upper_camel: keys in the hash are UpperCamelCase
     #     - snake: keys in the hash are snake_case
-    #   @param class [Class] when passed, wraps the result in an instance of the given class
-    #   @param compact [Boolean] flag to appli Array#compact thus removing nil results
-    #   @param flatten [Boolean] flag to aplly Array#flatten thus avoing nested arrays
-    #   @param json [String/Symbol] name of the method containing the Hash/json to be crawled
-    #   @param type [String/Symbol] type of the returned value (to use casting)
+    #   - class [Class] when passed, wraps the result in an instance of the given class
+    #   - compact [Boolean] flag to appli Array#compact thus removing nil results
+    #   - flatten [Boolean] flag to aplly Array#flatten thus avoing nested arrays
+    #   - json [String/Symbol] name of the method containing the Hash/json to be crawled
+    #   - type [String/Symbol] type of the returned value (to use casting)
     #     - integer
     #     - string
     #     - float

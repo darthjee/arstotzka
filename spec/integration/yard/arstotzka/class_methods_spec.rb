@@ -27,7 +27,6 @@ describe Arstotzka::ClassMethods do
     end
 
     describe '#age' do
-
       it 'crawls into the hash to find the value of the age' do
         expect(instance.age).to eq(20)
       end
