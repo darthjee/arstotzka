@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module Arstotzka
+  # As Arstotzka extends ActiveSupport::Concern, Arstotzka::ClassMethods define
+  # methods that will be available when defining a class that includes Arstotka
   module ClassMethods
     # expose a field from the json/hash as a method
     #
@@ -29,6 +31,7 @@ module Arstotzka
     #   instance.cars       # returns 2
     #
     # @see Builder Arstotzka::Builder
+    # @see https://www.rubydoc.info/gems/activesupport/5.0.0.1/ActiveSupport/Concern ActiveSupport::Concern
     def expose(*attr_names, **options)
       Builder.new(attr_names, self, options).build
     end

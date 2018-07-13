@@ -28,6 +28,8 @@ module Arstotzka
   #
   #   instance.age  # returns 20
   #   instance.cars # returns 2
+  #
+  # @see https://www.rubydoc.info/gems/sinclair Sinclair
   class Builder < Sinclair
     attr_reader :attr_names, :path, :full_path, :cached
 
