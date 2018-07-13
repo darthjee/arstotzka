@@ -26,8 +26,8 @@ module Arstotzka
   #   builder = Arstotzka::Builder.new([ :age, :cars ], MyModel, type: :integer)
   #   builder.build
   #
-  #   instance.age # returns 20
-  #   instance.car # returns 20
+  #   instance.age  # returns 20
+  #   instance.cars # returns 2
   class Builder < Sinclair
     attr_reader :attr_names, :path, :full_path, :cached
 
