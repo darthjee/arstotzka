@@ -1,6 +1,17 @@
 # frozen_string_literal: true
 
 module Arstotzka
+  # Crawl a json/hash through the path of keys
+  # @example
+  #   crawler = Arstotzka::Crawler.new(%w(person information first_name)) { |v| v }
+  #   hash = {
+  #     person: {
+  #       'information' => {
+  #         'firstName' => 'John'
+  #       }
+  #     }
+  #   }
+  #   crawler.value(hash) # returns 'John'
   class Crawler
     attr_reader :post_process, :path, :case_type, :compact, :default
 
