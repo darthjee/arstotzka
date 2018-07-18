@@ -13,8 +13,14 @@ module Arstotzka
   #   }
   #   crawler.value(hash) # returns 'John'
   class Crawler
-    attr_reader :post_process, :path, :case_type, :compact, :default
-
+    # @param path [Array] path of keys to be crawled
+    # @param case_type [Symbol] case type of the keys
+    #   - snake: snake_cased keys
+    #   - lower_camel: lowerCamelCased keys
+    #   - upper_camel: UperCamelCased keys
+    # @param compact [Boolean] flag signallying if nil values should be removed of an array
+    # @param default [Object] default value to be returned when failing to fetch a value
+    # @param &block [Proc] block to be ran over the fetched value before returning it
     def initialize(path:, case_type: :lower_camel, compact: false, default: nil, &block)
       @case_type = case_type
       @compact = compact
@@ -23,6 +29,60 @@ module Arstotzka
       @post_process = block || proc { |value| value }
     end
 
+    # crawls into the hash looking for all keys in the given path
+    # returning the final value
+    #
+    # @overload value(hash)
+    # @return [Object] value fetched from the last Hash#fetch call using the last part
+    #   of path
+    #
+    # @example
+    #   crawler = Arstotzka::Crawler.new(%w(person information first_name))
+    #   hash = {
+    #     person: {
+    #       'information' => {
+    #         'firstName' => 'John'
+    #       }
+    #     }
+    #   }
+    #   crawler.value(hash) # returns 'John'
+    #
+    # @example
+    #   crawler = Arstotzka::Crawler.new(
+    #     %w(companies games hero),
+    #     compact: true, case_type: :snake
+    #   )
+    #   games_hash = {
+    #     'companies' => [{
+    #       name: 'Lucas Pope',
+    #       games: [{
+    #         'name' => 'papers, please'
+    #       }, {
+    #         'name' => 'TheNextBigThing',
+    #         hero_name: 'Rakhar'
+    #       }]
+    #     }, {
+    #       name: 'Old Company'
+    #     }]
+    #   }
+    #
+    #   crawler.value(games_hash) # returns [['Rakhar']]
+    #
+    # @example
+    #   crawler = Arstotzka::Crawler.new(
+    #     %w(companies games hero),
+    #     compact: true, case_type: :snake, default: 'NO HERO'
+    #   )
+    #
+    #   crawler.value(games_hash) # returns [['NO HERO', 'Rakhar'], 'NO HERO']
+    #
+    # @example
+    #   crawler = Arstotzka::Crawler.new(
+    #     %w(companies games hero),
+    #     compact: true, case_type: :snake
+    #   ) { |value| value.&to_sym }
+    #
+    #   crawler.value(games_hash) # returns [[:Rakhar]]
     def value(json, index = 0)
       crawl(json, index)
     rescue Exception::KeyNotFound
@@ -30,6 +90,8 @@ module Arstotzka
     end
 
     private
+
+    attr_reader :post_process, :path, :case_type, :compact, :default
 
     def crawl(json, index = 0)
       return wrap(json) if reader.ended?(index)
