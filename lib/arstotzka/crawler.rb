@@ -20,7 +20,7 @@ module Arstotzka
     #   - upper_camel: UperCamelCased keys
     # @param compact [Boolean] flag signallying if nil values should be removed of an array
     # @param default [Object] default value to be returned when failing to fetch a value
-    # @param &block [Proc] block to be ran over the fetched value before returning it
+    # @param block [Proc] block to be ran over the fetched value before returning it
     def initialize(path:, case_type: :lower_camel, compact: false, default: nil, &block)
       @case_type = case_type
       @compact = compact
