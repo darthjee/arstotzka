@@ -31,8 +31,6 @@ module Arstotzka
   #
   # @see https://www.rubydoc.info/gems/sinclair Sinclair
   class Builder < Sinclair
-    attr_reader :attr_names, :json_name, :path, :full_path, :cached
-
     DEFAULT_OPTIONS = {
       after:     false,
       case:      :lower_camel,
@@ -84,6 +82,8 @@ module Arstotzka
     end
 
     private
+
+    attr_reader :attr_names, :json_name, :path, :full_path, :cached
 
     def init
       attr_names.each do |attr|
