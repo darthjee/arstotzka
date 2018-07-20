@@ -31,7 +31,7 @@ module Arstotzka
   #
   # @see https://www.rubydoc.info/gems/sinclair Sinclair
   class Builder < Sinclair
-    attr_reader :attr_names, :path, :full_path, :cached
+    attr_reader :attr_names, :json_name, :path, :full_path, :cached
 
     DEFAULT_OPTIONS = {
       after:     false,
@@ -52,28 +52,34 @@ module Arstotzka
     #   value live (ignoring the attribute name)
     # @param cached [Boolean] flag if the result should be memorized instead of repeating
     #   the crawling
+    # @param json [String/Symbol] name of the method containing the Hash/json to be crawled
     # @param options [Hash] hash containing extra options
-    #   - after [String/Symbol] method to be called once the value is fetched remapping
-    #     the value
-    #   - case [String/Symbol] flag definining on which case will the keys be defined
+    #   - case [String/Symbol] {Reader} flag definining on which case will the keys be defined
     #     - lower_camel: keys in the hash are lowerCamelCase
     #     - upper_camel: keys in the hash are UpperCamelCase
     #     - snake: keys in the hash are snake_case
-    #   - class [Class] when passed, wraps the result in an instance of the given class
-    #   - compact [Boolean] flag to appli Array#compact thus removing nil results
-    #   - flatten [Boolean] flag to aplly Array#flatten thus avoing nested arrays
-    #   - json [String/Symbol] name of the method containing the Hash/json to be crawled
-    #   - type [String/Symbol] type of the returned value (to use casting)
+    #   - compact [Boolean] {Crawler} flag to apply Array#compact thus removing nil results
+    #   - class [Class] {Fetcher} option thatwhen passed, wraps the result in an
+    #     instance of the given class
+    #   - after [String/Symbol] {Fetcher} option with the name of the method to be
+    #     called once the value is fetched for mapping the value
+    #   - flatten [Boolean] {Fetcher} flag to aplly Array#flatten thus
+    #     avoing nested arrays
+    #   - type [String/Symbol] {Fetcher} option declaring the type of the returned
+    #     value (to use casting)
     #     - integer
     #     - string
     #     - float
-    def initialize(attr_names, clazz, path: nil, full_path: nil, cached: false, **options)
+    def initialize(attr_names, clazz,
+                   json: :json, path: nil, full_path: nil, cached: false,
+                   **options)
       super(clazz, DEFAULT_OPTIONS.merge(options.symbolize_keys))
 
       @attr_names = attr_names
       @path = path
       @full_path = full_path
       @cached = cached
+      @json_name = json
       init
     end
 
@@ -87,10 +93,6 @@ module Arstotzka
 
     def real_path(attribute)
       full_path || [path, attribute].compact.join('.')
-    end
-
-    def json_name
-      options[:json]
     end
 
     def wrapper_clazz
