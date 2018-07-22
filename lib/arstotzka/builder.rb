@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 module Arstotzka
-  # Class responsible to orchestrate the addtion of method
+  # Class responsible to orchestrate the addtion of method that will
+  # crawl the hash for value
   #
   # @example
   #   class MyModel
