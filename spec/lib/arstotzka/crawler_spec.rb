@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe Arstotzka::Crawler do
-  let(:subject) do
+  subject do
     described_class.new default_options.merge(options), &block
   end
   let(:block) { proc { |v| v } }
@@ -13,6 +13,17 @@ describe Arstotzka::Crawler do
   let(:json_file) { 'arstotzka.json' }
   let(:json) { load_json_fixture_file(json_file) }
   let(:value) { subject.value(json) }
+
+  context 'when no block is given' do
+    let(:path) { %w[user name] }
+    subject do
+      described_class.new default_options.merge(options)
+    end
+
+    it 'retrieves attribute from base json' do
+      expect(value).to eq(json['user']['name'])
+    end
+  end
 
   context 'when parsing with a path' do
     let(:path) { %w[user name] }
