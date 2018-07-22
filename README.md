@@ -14,21 +14,38 @@ avoids method missing by aways having the declarated methods, even if that means
 
 Json Parser is also usefull when you need keys case changed or data type cast
 
-Getting started
+Instalation
 ---------------
 1. Add Arstotzka to your `Gemfile` and `bundle install`:
+  - Install it
+
+  ```ruby
+    gem install arstotzka
+  ```
+
+  - Or add Arstotka to you `Gemfile` and `bundle install`
 
   ```ruby
   gem 'arstotzka'
   ```
 
-2. Include in a class that you want to wrap a json/hash
+  ```bash
+    bundle install arstotzka
+  ```
+
+Yard Documentation
+-------------------
+https://www.rubydoc.info/gems/arstotzka/
+
+Getting Started
+---------------
+1. Include in a class that you want to wrap a json/hash
   ```ruby
   class MyParser
     include Arstotzka
   ```
 
-3. Declare the keys you want to crawl
+2. Declare the keys you want to crawl
   ```ruby
   class MyParser
     include Arstotzka
@@ -69,9 +86,9 @@ Getting started
   #returns nil
   ```
 
-  4. fully customise the way you crawl / fetch the information with [Options](#options)
+3. fully customise the way you crawl / fetch the information with [Options](#options)
 
-  5. Create custom [typecast](#TypeCast)
+4. Create custom [typecast](#TypeCast)
 
 Options
 -------
