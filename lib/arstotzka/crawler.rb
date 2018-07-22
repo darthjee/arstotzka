@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Arstotzka
-  # Crawl a json/hash through the path of keys
+  # Crawl a hash through the path of keys
   # @example
   #   crawler = Arstotzka::Crawler.new(%w(person information first_name))
   #   hash = {
@@ -83,8 +83,8 @@ module Arstotzka
     #   ) { |value| value.&to_sym }
     #
     #   crawler.value(games_hash) # returns [[:Rakhar]]
-    def value(json, index = 0)
-      crawl(json, index)
+    def value(hash, index = 0)
+      crawl(hash, index)
     rescue Exception::KeyNotFound
       wrap(default)
     end
@@ -93,11 +93,11 @@ module Arstotzka
 
     attr_reader :post_process, :path, :case_type, :compact, :default
 
-    def crawl(json, index = 0)
-      return wrap(json) if reader.ended?(index)
-      return crawl_array(json, index) if json.is_a?(Array)
+    def crawl(hash, index = 0)
+      return wrap(hash) if reader.ended?(index)
+      return crawl_array(hash, index) if hash.is_a?(Array)
 
-      crawl(reader.read(json, index), index + 1)
+      crawl(reader.read(hash, index), index + 1)
     end
 
     def reader
@@ -107,8 +107,8 @@ module Arstotzka
       )
     end
 
-    def wrap(json)
-      post_process.call(json)
+    def wrap(hash)
+      post_process.call(hash)
     end
 
     def crawl_array(array, index)

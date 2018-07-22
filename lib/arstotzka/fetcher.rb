@@ -6,13 +6,13 @@ module Arstotzka
   class Fetcher
     include Sinclair::OptionsParser
 
-    # @param json [Hash] Hash to be crawled for value
+    # @param hash [Hash] Hash to be crawled for value
     # @param instance [Object] object whose methods will be called after for processing
     # @param path [String/Symbol] complete path for fetching the value from hash
     # @param options [Hash] options that will be passed to {Crawler}, {Wrapper} and {Reader}
-    def initialize(json, instance, path:, **options)
+    def initialize(hash, instance, path:, **options)
       @path = path.to_s.split('.')
-      @json = json
+      @hash = hash
       @instance = instance
       @options = options
     end
@@ -65,7 +65,7 @@ module Arstotzka
     #                 #   Transaction.new(value: 50.23, type: 'income')
     #                 # ]
     def fetch
-      value = crawler.value(json)
+      value = crawler.value(hash)
       value.flatten! if flatten && value.respond_to?(:flatten!)
       value = instance.send(after, value) if after
       value
@@ -73,7 +73,7 @@ module Arstotzka
 
     private
 
-    attr_reader :path, :json, :instance
+    attr_reader :path, :hash, :instance
 
     delegate :after, :flatten, to: :options_object
     delegate :wrap, to: :wrapper

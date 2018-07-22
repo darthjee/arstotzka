@@ -9,12 +9,12 @@ module Arstotzka
       @path = path.map(&method(:change_case))
     end
 
-    def read(json, index)
+    def read(hash, index)
       key = path[index]
 
-      check_key!(json, key)
+      check_key!(hash, key)
 
-      json.key?(key) ? json[key] : json[key.to_sym]
+      hash.key?(key) ? hash[key] : hash[key.to_sym]
     end
 
     def ended?(index)
@@ -23,13 +23,13 @@ module Arstotzka
 
     private
 
-    def check_key!(json, key)
-      return if key?(json, key)
+    def check_key!(hash, key)
+      return if key?(hash, key)
       raise Exception::KeyNotFound
     end
 
-    def key?(json, key)
-      json&.key?(key) || json&.key?(key.to_sym)
+    def key?(hash, key)
+      hash&.key?(key) || hash&.key?(key.to_sym)
     end
 
     def change_case(key)
