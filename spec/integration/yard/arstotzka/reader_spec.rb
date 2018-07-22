@@ -22,7 +22,6 @@ describe Arstotzka::Reader do
       end
 
       context 'when using snake_case' do
-
         it 'fetches the value using snake case key' do
           expect(subject.read(hash, 1)).to eq('John')
         end

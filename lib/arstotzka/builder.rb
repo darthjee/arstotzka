@@ -53,11 +53,13 @@ module Arstotzka
     #   the crawling
     # @param json [String/Symbol] name of the method containing the Hash/json to be crawled
     # @param options [Hash] hash containing extra options
-    # @option options [String/Symbol] case:  {Reader} flag definining on which case will the keys be defined
+    # @option options [String/Symbol] case:  {Reader} flag definining on which case will
+    #   the keys be defined
     #   - lower_camel: keys in the hash are lowerCamelCase
     #   - upper_camel: keys in the hash are UpperCamelCase
     #   - snake: keys in the hash are snake_case
-    # @option options [Boolean] compact:  {Crawler} flag to apply Array#compact thus removing nil results
+    # @option options [Boolean] compact:  {Crawler} flag to apply Array#compact thus
+    #   removing nil results
     # @option options [Class] class:  {Fetcher} option thatwhen passed, wraps the result in an
     #   instance of the given class
     # @option options [String/Symbol] after:  {Fetcher} option with the name of the method to be

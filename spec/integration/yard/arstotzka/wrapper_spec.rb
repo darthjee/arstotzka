@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Arstotzka::Wrapper do
@@ -6,7 +8,6 @@ describe Arstotzka::Wrapper do
       subject { described_class.new(clazz: clazz, type: type) }
       let(:clazz) { nil }
       let(:type) { nil }
-
 
       context 'when definning clazz' do
         let(:clazz) { Person }
@@ -20,7 +21,7 @@ describe Arstotzka::Wrapper do
         let(:type) { :integer }
 
         it 'casts all values' do
-          expect(subject.wrap(['10', '20', '30'])).to eq([10, 20, 30])
+          expect(subject.wrap(%w[10 20 30])).to eq([10, 20, 30])
         end
       end
     end
