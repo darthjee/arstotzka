@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Collector
   class Game
     include Arstotzka
@@ -13,7 +15,7 @@ class Collector
 
     def ==(other)
       return false if other.class != self.class
-      self.name == other.name && self.played == other.played
+      name == other.name && played == other.played
     end
 
     def finished?

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Arstotzka do
@@ -79,15 +81,15 @@ describe Arstotzka do
 
     describe '#car_names' do
       it 'returns the nick names of the cars' do
-        expect(subject.car_names).to eq(%w(Betty Roger Geronimo MissingName))
+        expect(subject.car_names).to eq(%w[Betty Roger Geronimo MissingName])
       end
     end
 
     describe '#finished_games' do
       it 'returns the finished games' do
         expected = [
-          Collector::Game.new(name: "TheNextBigThing", played: 100.0),
-          Collector::Game.new(name: "Zelda", played: 90.0)
+          Collector::Game.new(name: 'TheNextBigThing', played: 100.0),
+          Collector::Game.new(name: 'Zelda', played: 90.0)
         ]
         expect(subject.finished_games).to eq(expected)
       end

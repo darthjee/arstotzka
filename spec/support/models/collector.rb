@@ -1,20 +1,22 @@
+# frozen_string_literal: true
+
 class Collector
   include Arstotzka
 
-  MALE  = 'male'
-  FEMALE= 'female'
+  MALE = 'male'
+  FEMALE = 'female'
 
   attr_reader :hash
 
   expose :full_name, :age, path: :person, json: :hash
   expose :gender, path: :person, type: :gender, json: :hash
   expose :car_names, flatten: true, compact: false, json: :hash,
-         default: 'MissingName',
-         full_path: 'collections.cars.units.nick_name'
+                     default: 'MissingName',
+                     full_path: 'collections.cars.units.nick_name'
   expose :finished_games, json: :hash,
-         flatten: true, class: Collector::Game,
-         after: :filter_finished,
-         full_path: 'collections.games.titles'
+                          flatten: true, class: Collector::Game,
+                          after: :filter_finished,
+                          full_path: 'collections.games.titles'
 
   def initialize(hash = {})
     @hash = hash
