@@ -12,15 +12,16 @@ describe Arstotzka::Builder do
     end
   end
 
-  let(:options) { {} }
-  let(:name) { 'Robert' }
-  let(:attr_name) { :name }
-  let(:attr_names) { [attr_name] }
-  let(:json) { {} }
-  let(:instance) { clazz.new(json) }
+  let(:options)      { {} }
+  let(:name)         { 'Robert' }
+  let(:attr_name)    { :name }
+  let(:attr_names)   { [attr_name] }
+  let(:json)         { {} }
+  let(:instance)     { clazz.new(json) }
+  let(:full_options) { described_class::DEFAULT_OPTIONS.merge(options) }
 
   subject do
-    described_class.new(attr_names, clazz, **options)
+    described_class.new(attr_names, clazz, **full_options)
   end
 
   describe '#build' do

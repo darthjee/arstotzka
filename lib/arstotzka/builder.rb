@@ -19,12 +19,14 @@ module Arstotzka
   #     'cars' => 2.0
   #   )
   #
-  #   builder = Arstotzka::Builder.new([ :first_name ], MyModel, full_path: 'name.first')
+  #   options = Arstotzka::Builder::DEFAULT_OPTIONS.merge(full_path: 'name.first')
+  #   builder = Arstotzka::Builder.new([ :first_name ], MyModel, options)
   #   builder.build
   #
   #   instance.first_name # returns 'John'
   #
-  #   builder = Arstotzka::Builder.new([ :age, :cars ], MyModel, type: :integer)
+  #   options = Arstotzka::Builder::DEFAULT_OPTIONS.merge(type: :integer)
+  #   builder = Arstotzka::Builder.new([ :age, :cars ], MyModel, options)
   #   builder.build
   #
   #   instance.age  # returns 20
@@ -33,11 +35,15 @@ module Arstotzka
   # @see https://www.rubydoc.info/gems/sinclair Sinclair
   class Builder < Sinclair
     DEFAULT_OPTIONS = {
+      json:     :json,
+      path:     nil,
+      full_path: nil,
+      cached: false,
       after:     false,
       case:      :lower_camel,
       class:     nil,
-      compact:   false,
-      default:   nil,
+      compact: false,
+      default: nil,
       flatten:   false,
       json:      :json,
       type:      :none
@@ -71,10 +77,8 @@ module Arstotzka
     #   - integer
     #   - string
     #   - float
-    def initialize(attr_names, clazz,
-                   json: :json, path: nil, full_path: nil, cached: false,
-                   **options)
-      super(clazz, DEFAULT_OPTIONS.merge(options.symbolize_keys))
+    def initialize(attr_names, clazz, json:, path:, full_path:, cached:, **options)
+      super(clazz, options)
 
       @attr_names = attr_names
       @path = path

@@ -35,6 +35,7 @@ module Arstotzka
     #   https://www.rubydoc.info/gems/activesupport/5.0.0.1/ActiveSupport/Concern
     #   ActiveSupport::Concern
     def expose(*attr_names, **options)
+      options = Builder::DEFAULT_OPTIONS.merge(options.symbolize_keys)
       Builder.new(attr_names, self, options).build
     end
   end
