@@ -12,7 +12,9 @@ that tries to crawl through a hash and has to constantly check for nil values or
 also, this concern, like openstruct, allow the json to be manipulated as an object, but
 avoids method missing by aways having the declarated methods, even if that means nil return
 
-Json Parser is also usefull when you need keys case changed or data type cast
+Arstotzka is also usefull when you need keys case changed or data type cast as it was developed
+to be a bridge between a rails application and a Java API (Java APIs use cameCase for
+JSON keys)
 
 Instalation
 ---------------
