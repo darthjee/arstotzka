@@ -5,6 +5,7 @@ require 'spec_helper'
 describe Arstotzka::Builder do
   describe 'yard' do
     let!(:instance) { klass.new(hash) }
+    let(:full_options) { described_class::DEFAULT_OPTIONS.merge(options) }
     let(:hash) do
       {
         'name' => { first: 'John', last: 'Williams' },
@@ -12,10 +13,12 @@ describe Arstotzka::Builder do
         'cars' => 2.0
       }
     end
+    let(:builder) { described_class.new(attributes, klass, full_options) }
 
     describe '#first_name' do
-      let(:klass)    { Class.new(MyModel) }
-      let(:builder)  { described_class.new([:first_name], klass, full_path: 'name.first') }
+      let(:klass)      { Class.new(MyModel) }
+      let(:attributes) { [:first_name] }
+      let(:options)    { { full_path: 'name.first' } }
 
       before do
         builder.build
@@ -27,8 +30,9 @@ describe Arstotzka::Builder do
     end
 
     describe '#age' do
-      let(:klass)    { Class.new(MyModel) }
-      let(:builder)  { described_class.new([:age, 'cars'], klass, type: :integer) }
+      let(:klass)      { Class.new(MyModel) }
+      let(:attributes) { [:age, 'cars'] }
+      let(:options) { { type: :integer } }
 
       before do
         builder.build
@@ -44,8 +48,9 @@ describe Arstotzka::Builder do
     end
 
     describe '#cars' do
-      let(:klass)    { Class.new(MyModel) }
-      let(:builder)  { described_class.new([:age, 'cars'], klass, type: :integer) }
+      let(:klass)      { Class.new(MyModel) }
+      let(:attributes) { [:age, 'cars'] }
+      let(:options) { { type: :integer } }
 
       before do
         builder.build
