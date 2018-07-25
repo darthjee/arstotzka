@@ -55,6 +55,8 @@ describe Arstotzka do
                 "name": "Zelda",
                 "played": "90%"
               }]
+            }, {
+              "producer": "BadCompany"
             }]
           }
         }

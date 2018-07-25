@@ -55,6 +55,8 @@ require 'sinclair'
 #             "name": "Zelda",
 #             "played": "90%"
 #           }]
+#         }, {
+#           "producer": "BadCompany"
 #         }]
 #       }
 #     }
@@ -135,7 +137,7 @@ require 'sinclair'
 #   class Collector
 #     expose :finished_games, json: :hash,
 #            flatten: true, class: Collector::Game,
-#            after: :filter_finished,
+#            after: :filter_finished, compact: true,
 #            full_path: 'collections.games.titles'
 #
 #     private
