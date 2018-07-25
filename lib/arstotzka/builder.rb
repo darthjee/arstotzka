@@ -45,7 +45,6 @@ module Arstotzka
       compact: false,
       default: nil,
       flatten:   false,
-      json:      :json,
       type:      :none
     }.freeze
 
