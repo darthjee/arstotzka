@@ -71,7 +71,7 @@ describe Arstotzka do
       it 'does not cache name' do
         expect do
           hash['person']['fullName'] = 'Robert'
-        end.to change { subject.full_name }.to('Robert')
+        end.to change(subject, :full_name).to('Robert')
       end
     end
 
@@ -89,7 +89,7 @@ describe Arstotzka do
       it 'does caches gender' do
         expect do
           hash['person']['gender'] = 'man'
-        end.not_to change { subject.gender }
+        end.not_to change(subject, :gender)
       end
     end
 
