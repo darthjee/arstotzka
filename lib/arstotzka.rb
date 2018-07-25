@@ -74,7 +74,7 @@ require 'sinclair'
 #     attr_reader :hash
 #
 #     expose :full_name, :age, path: :person, json: :hash
-#     expose :gender, path: :person, type: :gender, json: :hash
+#     expose :gender, path: :person, type: :gender, cached: true, json: :hash
 #
 #     def initialize(hash = {})
 #       @hash = hash
@@ -100,6 +100,12 @@ require 'sinclair'
 #   collector.full_name # returns 'Kelly Khan'
 #   collector.age       # returns 32
 #   collector.gender    # returns Collector::FEMALE
+#
+#   hash['person']['fullName'] = 'Robert'
+#   collector.full_name # returns 'Robert'
+#
+#   hash['person']['gender'] = 'man'
+#   collector.gender    # returns Collector::FEMALE as it was cached
 #
 # @example
 #   class Collector

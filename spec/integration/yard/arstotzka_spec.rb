@@ -67,6 +67,12 @@ describe Arstotzka do
       it 'returns the full_name' do
         expect(subject.full_name).to eq('Kelly Khan')
       end
+
+      it 'does not cache name' do
+        expect do
+          hash['person']['fullName'] = 'Robert'
+        end.to change { subject.full_name }.to('Robert')
+      end
     end
 
     describe '#age' do
@@ -78,6 +84,12 @@ describe Arstotzka do
     describe '#gender' do
       it 'returns person gender' do
         expect(subject.gender).to eq(Collector::FEMALE)
+      end
+
+      it 'does caches gender' do
+        expect do
+          hash['person']['gender'] = 'man'
+        end.not_to change { subject.gender }
       end
     end
 

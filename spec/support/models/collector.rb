@@ -9,7 +9,7 @@ class Collector
   attr_reader :hash
 
   expose :full_name, :age, path: :person, json: :hash
-  expose :gender, path: :person, type: :gender, json: :hash
+  expose :gender, path: :person, type: :gender, cached: true, json: :hash
   expose :car_names, flatten: true, compact: false, json: :hash,
                      default: 'MissingName',
                      full_path: 'collections.cars.units.nick_name'
