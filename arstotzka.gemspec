@@ -19,15 +19,16 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_runtime_dependency 'activesupport', '~> 5.x'
-  spec.add_runtime_dependency 'sinclair', '>= 1.1.1'
+  spec.add_runtime_dependency 'sinclair',      '>= 1.1.1'
 
-  spec.add_development_dependency 'bundler', '~> 1.6'
-  spec.add_development_dependency 'pry-nav'
-  spec.add_development_dependency 'rake', '>= 12.3.1'
-  spec.add_development_dependency 'rspec', '>= 3.7'
-  spec.add_development_dependency 'rubocop'
-  spec.add_development_dependency 'safe_attribute_assignment'
-  spec.add_development_dependency 'simplecov'
-  spec.add_development_dependency 'yard'
+  spec.add_development_dependency 'bundler',       '~> 1.17.x'
+  spec.add_development_dependency 'pry-nav',       '~> 0.2.4'
+  spec.add_development_dependency 'rake',          '>= 12.3.1'
+  spec.add_development_dependency 'rspec',         '>= 3.8'
+  spec.add_development_dependency 'rubocop',       '0.58.1'
+  spec.add_development_dependency 'rubocop-rspec', '1.30.0'
+  spec.add_development_dependency 'simplecov',     '~> 0.16.x'
+  spec.add_development_dependency 'yard',          '>= 0.9.18'
   spec.add_development_dependency 'yardstick',     '>= 0.9.9'
+  spec.add_development_dependency 'safe_attribute_assignment'
 end
