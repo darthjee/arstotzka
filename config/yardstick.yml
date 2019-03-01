@@ -18,10 +18,20 @@ rules:
     exclude: []
   ReturnTag:
     enabled: true
-    exclude: []
+    exclude:
+      - Arstotzka::Builder#attr_names
+      - Arstotzka::Builder#json_name
+      - Arstotzka::Builder#path
+      - Arstotzka::Builder#full_path
+      - Arstotzka::Builder#cached
   Summary::Presence:
     enabled: true
-    exclude: []
+    exclude: 
+      - Arstotzka::Builder#attr_names
+      - Arstotzka::Builder#json_name
+      - Arstotzka::Builder#path
+      - Arstotzka::Builder#full_path
+      - Arstotzka::Builder#cached
   Summary::Length:
     enabled: true
     exclude: []
