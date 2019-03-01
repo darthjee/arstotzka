@@ -1,11 +1,15 @@
 # frozen_string_literal: true
 
 module Arstotzka
+  # @api private
+  #
   # Class responsible for orquestrating the fetch value from the hash
   # and post-processing it
   class Fetcher
     include Sinclair::OptionsParser
 
+    # Creates an instance of Artotzka::Fetcher
+    #
     # @param hash [Hash] Hash to be crawled for value
     # @param instance [Object] object whose methods will be called after for processing
     # @param path [String/Symbol] complete path for fetching the value from hash
@@ -17,8 +21,12 @@ module Arstotzka
       @options = options
     end
 
-    # Crawls the hash for the value, applying then the final transformations on the final
-    # result (collection not value)
+    # Crawls the hash for the value
+    #
+    # After the crawling, final transformation is applied on
+    # the final result (collection not value)
+    #
+    # @return [Object] The final value found and transformed
     #
     # @example
     #   class Transaction
