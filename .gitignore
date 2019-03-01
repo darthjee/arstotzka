@@ -2,3 +2,6 @@ coverage
 Gemfile.lock
 .yardoc
 doc
+pkg
+measurement
+**/*.swp
