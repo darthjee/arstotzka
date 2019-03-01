@@ -1,18 +1,9 @@
 version: '2'
 services:
-  base: &base
-    image: ruby:2.4.0
-    working_dir: /home/app/arstotzka
-    volumes:
-      - .:/home/app/arstotzka
-      - arstotzka_gems_2_4_0:/usr/local/bundle
-
-  #################### CONTAINERS ####################
-
   arstotzka:
-    <<: *base
+    build: .
     container_name: arstotzka
+    working_dir: /home/app/app
+    volumes:
+      - .:/home/app/app
     command: /bin/bash -c 'bundle install && bundle exec rspec'
-
-volumes:
-  arstotzka_gems_2_4_0:
