@@ -29,4 +29,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'safe_attribute_assignment'
   spec.add_development_dependency 'simplecov'
   spec.add_development_dependency 'yard'
+  spec.add_development_dependency 'yardstick',     '>= 0.9.9'
 end
