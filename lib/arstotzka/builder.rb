@@ -4,6 +4,8 @@ module Arstotzka
   # Class responsible to orchestrate the addtion of method that will
   # crawl the hash for value
   #
+  # @api private
+  #
   # @example
   #   class MyModel
   #     attr_reader :json
