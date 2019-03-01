@@ -110,7 +110,9 @@ module Arstotzka
     #
     # Once the value is found (with final key), it is wrapped
     #
-    # If value found in any step (except finel step) and this is an Array, then next interations will happen with it element of the array, returning an array of results
+    # If value found in any step (except finel step) and this
+    # is an Array, then next interations will happen with it
+    # element of the array, returning an array of results
     #
     # @param [Hash] hash the hash to be crawled
     # @param [Integer] index the index of the key to be used in the current iteration
