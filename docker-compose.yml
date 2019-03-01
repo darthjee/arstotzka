@@ -1,18 +1,23 @@
 version: '3'
 services:
   base: &base
-    build: .
+    image: arstotzka
     working_dir: /home/app/app
     volumes:
       - .:/home/app/app
 
-  #################### CONTAINERS ####################
+  base_build:
+    <<: *base
+    build: .
+    command: echo done
 
   arstotzka:
     <<: *base
     container_name: arstotzka
+    depends_on: [base_build]
     command: /bin/bash -c 'rspec'
 
   test_all:
     <<: *base
+    depends_on: [base_build]
     command: /bin/bash -c 'rspec && yard && rake yardstick_measure && rake verify_measurements'
