@@ -1,9 +1,18 @@
 version: '2'
 services:
-  arstotzka:
+  base: &base
     build: .
-    container_name: arstotzka
     working_dir: /home/app/app
     volumes:
       - .:/home/app/app
-    command: /bin/bash -c 'bundle install && bundle exec rspec'
+
+  #################### CONTAINERS ####################
+
+  arstotzka:
+    <<: *base
+    container_name: arstotzka
+    command: /bin/bash -c 'rspec'
+
+  test_all:
+    <<: *base
+    command: /bin/bash -c 'rspec && yard && rake yardstick_measure && rake verify_measurements'
