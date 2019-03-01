@@ -24,6 +24,11 @@ rules:
       - Arstotzka::Builder#path
       - Arstotzka::Builder#full_path
       - Arstotzka::Builder#cached
+      - Arstotzka::Crawler#post_process
+      - Arstotzka::Crawler#path
+      - Arstotzka::Crawler#case_type
+      - Arstotzka::Crawler#compact
+      - Arstotzka::Crawler#default
   Summary::Presence:
     enabled: true
     exclude: 
@@ -32,6 +37,11 @@ rules:
       - Arstotzka::Builder#path
       - Arstotzka::Builder#full_path
       - Arstotzka::Builder#cached
+      - Arstotzka::Crawler#post_process
+      - Arstotzka::Crawler#path
+      - Arstotzka::Crawler#case_type
+      - Arstotzka::Crawler#compact
+      - Arstotzka::Crawler#default
   Summary::Length:
     enabled: true
     exclude: []
