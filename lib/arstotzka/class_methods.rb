@@ -5,6 +5,7 @@ module Arstotzka
   # methods that will be available when defining a class that includes Arstotka
   module ClassMethods
     # @api public
+    #
     # Expose a field from the json/hash as a method
     #
     # @example
