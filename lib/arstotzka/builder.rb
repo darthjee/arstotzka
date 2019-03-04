@@ -95,6 +95,8 @@ module Arstotzka
     # @private
     attr_reader :attr_names, :json_name, :path, :full_path, :cached
 
+    # @private
+    #
     # Initialize methods list
     #
     # @return nil
@@ -104,6 +106,8 @@ module Arstotzka
       end
     end
 
+    # @private
+    #
     # builds the complete key path to fetch value
     #
     # @param [String/Symbol] attribute name of the method / attribute
@@ -113,6 +117,8 @@ module Arstotzka
       full_path || [path, attribute].compact.join('.')
     end
 
+    # @private
+    #
     # Fetch class to wrap resulting value
     #
     # after fetching the value, when wrapper_clazz returns
@@ -126,6 +132,8 @@ module Arstotzka
       options[:class]
     end
 
+    # @private
+    #
     # Fetches the case of the keys
     #
     # case types can be
@@ -140,6 +148,8 @@ module Arstotzka
       options[:case]
     end
 
+    # @private
+    #
     # Options needed by fetcher
     #
     # @param [String/Symbol] attribute name of the method / attribute
@@ -155,6 +165,8 @@ module Arstotzka
       )
     end
 
+    # @private
+    #
     # Add method to the list of methods to be built
     #
     # @param [String/Symbol] attribute name of method / attribute

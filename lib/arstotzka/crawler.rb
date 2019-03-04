@@ -128,6 +128,8 @@ module Arstotzka
       crawl(reader.read(hash, index), index + 1)
     end
 
+    # @private
+    #
     # Builds a hash reader
     #
     # @return [Arstotzka::Reader] Object responsible for extracting values out of the hash
@@ -138,6 +140,8 @@ module Arstotzka
       )
     end
 
+    # @private
+    #
     # Wrap value with final calls
     #
     # The final value can be wrapped in a class, or processed
@@ -149,6 +153,8 @@ module Arstotzka
       post_process.call(value)
     end
 
+    # @private
+    #
     # Iterate over array applying #crawl over each element
     #
     # @param [Array] array the array of hashes be crawled
