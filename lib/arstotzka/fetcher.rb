@@ -81,33 +81,54 @@ module Arstotzka
 
     private
 
+    # @private
     attr_reader :path, :hash, :instance
 
     delegate :after, :flatten, to: :options_object
     delegate :wrap, to: :wrapper
 
+    # @private
+    #
+    # Returns an instance of Aristotzka::Craler
+    #
+    # craler will be responsible to crawl the hash for
+    # the final return
+    #
+    # @return [Arstotzka::Crawler] the crawler object
     def crawler
-      @crawler ||= buidl_crawler
+      @crawler ||=
+        Arstotzka::Crawler.new(crawler_options) do |value|
+          wrap(value)
+        end
     end
 
-    def buidl_crawler
-      Arstotzka::Crawler.new(crawler_options) do |value|
-        wrap(value)
-      end
-    end
-
+    # @private
+    #
+    # Hash for crawler initialization
+    #
+    # @return [Hash]
+    #
+    # @see #crawler
     def crawler_options
       options.slice(:case_type, :compact, :default).merge(path: path)
     end
 
+    # @private
+    #
+    # Wrapper responsible for wrapping the value found
+    #
+    # @return [Arstotzka::Wrapper] the wrapper
     def wrapper
-      @wrapper ||= build_wrapper
+      @wrapper ||= Arstotzka::Wrapper.new(wrapper_options)
     end
 
-    def build_wrapper
-      Arstotzka::Wrapper.new(wrapper_options)
-    end
-
+    # @private
+    #
+    # Hash for wrapper initialization
+    #
+    # @return [Hash]
+    #
+    # @see #wrapper
     def wrapper_options
       options.slice(:clazz, :type)
     end

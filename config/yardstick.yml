@@ -29,6 +29,9 @@ rules:
       - Arstotzka::Crawler#case_type
       - Arstotzka::Crawler#compact
       - Arstotzka::Crawler#default
+      - Arstotzka::Fetcher#path
+      - Arstotzka::Fetcher#hash
+      - Arstotzka::Fetcher#instance
   Summary::Presence:
     enabled: true
     exclude:
@@ -42,6 +45,9 @@ rules:
       - Arstotzka::Crawler#case_type
       - Arstotzka::Crawler#compact
       - Arstotzka::Crawler#default
+      - Arstotzka::Fetcher#path
+      - Arstotzka::Fetcher#hash
+      - Arstotzka::Fetcher#instance
   Summary::Length:
     enabled: true
     exclude: []
