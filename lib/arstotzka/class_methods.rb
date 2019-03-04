@@ -4,7 +4,10 @@ module Arstotzka
   # As Arstotzka extends ActiveSupport::Concern, Arstotzka::ClassMethods define
   # methods that will be available when defining a class that includes Arstotka
   module ClassMethods
+    private
+
     # @api public
+    # @!visibility public
     #
     # Expose a field from the json/hash as a method
     #
