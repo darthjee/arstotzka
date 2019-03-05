@@ -1,13 +1,19 @@
 # frozen_string_literal: true
 
 module Arstotzka
+  # @api private
+  #
   # Reads a value from a hash using the path as list of keys
   class Reader
+    # Creates a new instance of Reader
+    #
     # @param path [Array] path of keys broken down as array
     # @param case_type [Symbol] Case of the keys
     #   - lower_camel: keys in the hash are lowerCamelCase
     #   - upper_camel: keys in the hash are UpperCamelCase
     #   - snake: keys in the hash are snake_case
+    #
+    # @return [Aristotzka::Reader]
     def initialize(path:, case_type:)
       @case_type = case_type
       @path = path.map(&method(:change_case))
@@ -18,7 +24,7 @@ module Arstotzka
     # @param hash [Hash] hash to be read
     # @param index [Integer] Index of the key (in path) to be used
     #
-    # @return Object The value fetched from the hash
+    # @return [Object] The value fetched from the hash
     #
     # @example
     #   hash = {
@@ -55,6 +61,8 @@ module Arstotzka
       hash.key?(key) ? hash[key] : hash[key.to_sym]
     end
 
+    # @private
+    #
     # Checks if index is within path range
     #
     # @example
@@ -67,17 +75,52 @@ module Arstotzka
 
     private
 
+    # @private
     attr_reader :path, :case_type
 
+    # @private
+    #
+    # Checks if a hash contains or not the key
+    #
+    # if the key is not found, an execption is raised
+    #
+    # @raise Arstotzka::Exception::KeyNotFound
+    #
+    # @return [NilClass]
+    #
+    # @see #key?
     def check_key!(hash, key)
       return if key?(hash, key)
       raise Exception::KeyNotFound
     end
 
+    # @private
+    #
+    # Checks if a hash contains or not the key
+    #
+    # The check first happens using String key and,
+    # in case of not found, searches as symbol
+    #
+    # @param [Hash] hash Hash where the key will be found
+    # @param [String] key The key to be checked
+    #
+    # @return [Boolean]
+    #
+    # @see #check_key!
     def key?(hash, key)
       hash&.key?(key) || hash&.key?(key.to_sym)
     end
 
+    # @private
+    #
+    # Transforms the key to have the correct case
+    #
+    # the possible case_types (instance attribute) are
+    # - lower_camel: for cammel case with first letter lowercase
+    # - upper_camel: for cammel case with first letter uppercase
+    # - snake: for snake case
+    #
+    # @param [String] key the key to be transformed
     def change_case(key)
       case case_type
       when :lower_camel
