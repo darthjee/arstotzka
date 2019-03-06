@@ -1,4 +1,4 @@
-threshold: 81.7
+threshold: 100
 require_exact_threshold: false
 rules:
   ApiTag::Presence:
@@ -32,6 +32,11 @@ rules:
       - Arstotzka::Fetcher#path
       - Arstotzka::Fetcher#hash
       - Arstotzka::Fetcher#instance
+      - Arstotzka::Reader#path
+      - Arstotzka::Reader#case_type
+      - Arstotzka::Reader#change_case
+      - Arstotzka::Wrapper#clazz
+      - Arstotzka::Wrapper#type
   Summary::Presence:
     enabled: true
     exclude:
@@ -48,6 +53,11 @@ rules:
       - Arstotzka::Fetcher#path
       - Arstotzka::Fetcher#hash
       - Arstotzka::Fetcher#instance
+      - Arstotzka::Reader#path
+      - Arstotzka::Reader#case_type
+      - Arstotzka::Reader#change_case
+      - Arstotzka::Wrapper#clazz
+      - Arstotzka::Wrapper#type
   Summary::Length:
     enabled: true
     exclude: []
