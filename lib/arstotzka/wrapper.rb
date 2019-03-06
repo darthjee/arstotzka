@@ -19,7 +19,9 @@ module Arstotzka
 
     # wrap a value
     #
-    # @example
+    # @return [Object]
+    #
+    # @example Wrapping in a class
     #   class Person
     #     attr_reader :name
     #
@@ -31,9 +33,7 @@ module Arstotzka
     #   wrapper = Arstotzka::Wrapper.new(clazz: Person)
     #   wrapper.wrap('John') # retruns Person.new('John')
     #
-    # @return [Object]
-    #
-    # @example
+    # @example Casting type
     #   wrapper = Arstotzka::Wrapper.new(type: :integer)
     #   wrapper.wrap(['10', '20', '30']) # retruns [10, 20, 30]
     def wrap(value)
