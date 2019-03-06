@@ -15,30 +15,11 @@ module Arstotzka
   # - string
   # - float
   #
-  # @example Casting basic fields
-  #   class TypeCaster
-  #     include Arstotzka
+  # @example (see #to_integer)
   #
-  #     expose :age,     type: :integer, json: :@hash
-  #     expose :payload, type: :string, json: :@hash
-  #     expose :price,   type: :float, json: :@hash
+  # @example (see #to_string)
   #
-  #     def initialize(hash)
-  #       @hash = hash
-  #     end
-  #   end
-  #
-  #   hash = {
-  #     age: '10',
-  #     payload: { 'key' => 'value' },
-  #     price: '1.75'
-  #   }
-  #
-  #   model = TypeCaseter.new(hash)
-  #
-  #   model.age     # returns 10
-  #   model.payload # returns '{"key"=>"value"}'
-  #   model.price   # returns 1.75
+  # @example (see #to_float)
   #
   # @example Extending typecast
   #   class Car
@@ -84,9 +65,26 @@ module Arstotzka
   module TypeCast
     extend ActiveSupport::Concern
 
-    # converts a value to integer
+    # Converts a value to integer
     #
     # @return [Integer]
+    #
+    # @example Casting to Integer
+    #   class TypeCaster
+    #     include Arstotzka
+    #
+    #     expose :age,     type: :integer, json: :@hash
+    #
+    #     def initialize(hash)
+    #       @hash = hash
+    #     end
+    #   end
+    #
+    #   hash = {
+    #     age: '10',
+    #   }
+    #
+    #   TypeCaseter.new(age: '10').age
     def to_integer(value)
       value.to_i if value.present?
     end
@@ -94,6 +92,25 @@ module Arstotzka
     # converts value to string
     #
     # @return [String]
+    #
+    # @example Casting to String
+    #   class TypeCaster
+    #     include Arstotzka
+    #
+    #     expose :payload, type: :string, json: :@hash
+    #
+    #     def initialize(hash)
+    #       @hash = hash
+    #     end
+    #   end
+    #
+    #   hash = {
+    #     payload: { 'key' => 'value' },
+    #   }
+    #
+    #   model.TypeCaseter.new(hash)
+    #
+    #   model.payload # returns '{"key"=>"value"}'
     def to_string(value)
       value.to_s
     end
@@ -101,6 +118,23 @@ module Arstotzka
     # converts value to float
     #
     # @return [Float]
+    #
+    # @example Casting to Float
+    #   class TypeCaster
+    #     include Arstotzka
+    #
+    #     expose :price,   type: :float, json: :@hash
+    #
+    #     def initialize(hash)
+    #       @hash = hash
+    #     end
+    #   end
+    #
+    #   hash = {
+    #     price: '1.75'
+    #   }
+    #
+    #   TypeCaseter.new(price: '1.75').price # returns 1.75
     def to_float(value)
       value.to_f if value.present?
     end
