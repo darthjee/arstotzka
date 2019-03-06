@@ -64,9 +64,7 @@ describe Arstotzka do
 
       it 'returns an array of json wrapped' do
         expect(value).to be_a(Array)
-        value.each do |object|
-          expect(object).to be_a(Game)
-        end
+        expect(value).to all(be_a(Game))
       end
 
       context 'when dealing with multiple level arrays' do
@@ -78,12 +76,8 @@ describe Arstotzka do
 
         it 'returns an array of json wrapped' do
           expect(value).to be_a(Array)
-          value.each do |object|
-            expect(object).to be_a(Array)
-            object.each do |game|
-              expect(game).to be_a(Game)
-            end
-          end
+          expect(value).to all(be_a(Array))
+          expect(value).to all(all(be_a(Game)))
         end
       end
     end

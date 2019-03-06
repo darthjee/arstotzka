@@ -44,11 +44,6 @@ RSpec/FilePath:
     - 'spec/integration/yard/arstotzka/typecast_spec.rb'
     - 'spec/integration/yard/wrapper_spec.rb'
 
-# Offense count: 2
-RSpec/IteratedExpectation:
-  Exclude:
-    - 'spec/lib/arstotzka_spec.rb'
-
 # Offense count: 8
 # Configuration parameters: AggregateFailuresByDefault.
 RSpec/MultipleExpectations:
