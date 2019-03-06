@@ -31,13 +31,6 @@ RSpec/DescribeSymbol:
   Exclude:
     - 'spec/integration/yard/arstotzka_spec.rb'
 
-# Offense count: 2
-# Configuration parameters: CustomTransform, IgnoreMethods.
-RSpec/FilePath:
-  Exclude:
-    - 'spec/integration/yard/arstotzka/typecast_spec.rb'
-    - 'spec/integration/yard/wrapper_spec.rb'
-
 # Offense count: 8
 # Configuration parameters: AggregateFailuresByDefault.
 RSpec/MultipleExpectations:

@@ -1,28 +1,41 @@
-# frozen_string_literal: true
-
-require 'spec_helper'
+# frozen_string_literal: truie
 
 describe Arstotzka::Wrapper do
+  subject(:wrapper) { described_class.new(clazz: clazz, type: type) }
+
+  let(:type)  { nil }
+  let(:clazz) { nil }
+
   describe 'yard' do
     describe '#wrap' do
-      subject { described_class.new(clazz: clazz, type: type) }
-
-      let(:clazz) { nil }
-      let(:type) { nil }
-
-      context 'when definning clazz' do
+      context 'when clazz is defined' do
         let(:clazz) { Person }
+        let(:value) { 'john' }
 
-        it 'returns the valued wrapped in a class' do
-          expect(subject.wrap('John')).to eq(Person.new('John'))
+        it 'wraps value with the clazz' do
+          expect(subject.wrap(value)).to be_a(Person)
+          expect(subject.wrap(value).name).to eq(value)
         end
       end
 
-      context 'when defing type' do
-        let(:type) { :integer }
+      context 'when type is defined' do
+        let(:type)  { :integer }
+        let(:value) { %w[10 20 30] }
 
-        it 'casts all values' do
-          expect(subject.wrap(%w[10 20 30])).to eq([10, 20, 30])
+        it 'converts value to type' do
+          expect(subject.wrap(value)).to eq([10, 20, 30])
+        end
+      end
+
+      context 'when type and class is defined' do
+        let(:type)  { :string }
+        let(:clazz) { Request }
+        let(:value) { { 'key' => 'value' } }
+
+        it 'casts before wrapping' do
+          request = wrapper.wrap(value)
+          expect(request).to be_a(Request)
+          expect(request.payload).to eq('{"key"=>"value"}')
         end
       end
     end
