@@ -87,22 +87,20 @@ describe Arstotzka do
     let(:attribute) { :old_house }
     let!(:old_value) { json['oldHouse'] }
 
-    before do
-      dummy.old_house
-      json['oldHouse'] = {}
-    end
-
     it 'returns an onject wrap' do
       expect(value).to be_a(House)
     end
 
     it 'creates the object with the given json' do
-      expect(value.age).not_to eq(json['oldHouse']['age'])
       expect(value.age).to eq(old_value['age'])
-      expect(value.value).not_to eq(json['oldHouse']['value'])
       expect(value.value).to eq(old_value['value'])
-      expect(value.floors).not_to eq(json['oldHouse']['floors'])
       expect(value.floors).to eq(old_value['floors'])
+    end
+
+    it 'caches the resulting object' do
+      expect do
+        json['oldHouse'] = {}
+      end.not_to(change { dummy.old_house.age })
     end
   end
 

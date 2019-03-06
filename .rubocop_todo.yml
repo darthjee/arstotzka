@@ -32,12 +32,6 @@ RSpec/DescribeSymbol:
     - 'spec/integration/yard/arstotzka_spec.rb'
 
 # Offense count: 2
-# Configuration parameters: Max.
-RSpec/ExampleLength:
-  Exclude:
-    - 'spec/lib/arstotzka_spec.rb'
-
-# Offense count: 2
 # Configuration parameters: CustomTransform, IgnoreMethods.
 RSpec/FilePath:
   Exclude:
