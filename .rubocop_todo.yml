@@ -26,11 +26,6 @@ RSpec/DescribeClass:
   Exclude:
     - 'spec/integration/readme/default_spec.rb'
 
-# Offense count: 1
-RSpec/DescribeSymbol:
-  Exclude:
-    - 'spec/integration/yard/arstotzka_spec.rb'
-
 # Offense count: 8
 # Configuration parameters: AggregateFailuresByDefault.
 RSpec/MultipleExpectations:

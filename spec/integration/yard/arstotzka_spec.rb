@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe Arstotzka do
-  describe :yard do
+  describe 'yard' do
     subject { Collector.new(hash) }
 
     let(:hash) { JSON.parse json }
