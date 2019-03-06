@@ -2,6 +2,9 @@
 
 module Arstotzka
   # Crawl a hash through the path of keys
+  #
+  # @api private
+  #
   # @example
   #   crawler = Arstotzka::Crawler.new(%w(person information first_name))
   #   hash = {
@@ -13,6 +16,8 @@ module Arstotzka
   #   }
   #   crawler.value(hash) # returns 'John'
   class Crawler
+    # Creates a new instance of Crawler
+    #
     # @param path [Array] path of keys to be crawled
     # @param case_type [Symbol] case type of the keys
     #   - snake: snake_cased keys
@@ -29,9 +34,7 @@ module Arstotzka
       @post_process = block || proc { |value| value }
     end
 
-    # crawls into the hash looking for all keys in the given path
-    # returning the final value
-    #
+    # Crawls into the hash looking for all keys in the given path
     # @overload value(hash)
     # @return [Object] value fetched from the last Hash#fetch call using the last part
     #   of path
@@ -91,8 +94,33 @@ module Arstotzka
 
     private
 
+    # @private
     attr_reader :post_process, :path, :case_type, :compact, :default
 
+    # Fetch the value from hash by crawling the keys
+    #
+    # The crawling is similar to fetching values in a chain
+    # <code>
+    # { a: { b: 10 } }.fetch(:a).fetch(:b)
+    # </code>
+    # with added features like accessing string and
+    # symbol keys alike, wrapping the values in new objects,
+    # post processing the values, treating arrays as collection
+    # of hashes, etc...
+    #
+    # Once the value is found (with final key), it is wrapped
+    #
+    # If value found in any step (except finel step) and this
+    # is an Array, then next interations will happen with it
+    # element of the array, returning an array of results
+    #
+    # @param [Hash] hash the hash to be crawled
+    # @param [Integer] index the index of the key to be used in the current iteration
+    #
+    # @return [Object] value found at the lest key after transformation
+    #
+    # @see #wrap
+    # @see #crawl_array
     def crawl(hash, index = 0)
       return wrap(hash) if reader.ended?(index)
       return crawl_array(hash, index) if hash.is_a?(Array)
@@ -100,6 +128,11 @@ module Arstotzka
       crawl(reader.read(hash, index), index + 1)
     end
 
+    # @private
+    #
+    # Builds a hash reader
+    #
+    # @return [Arstotzka::Reader] Object responsible for extracting values out of the hash
     def reader
       @reader ||= Arstotzka::Reader.new(
         path: path,
@@ -107,10 +140,28 @@ module Arstotzka
       )
     end
 
-    def wrap(hash)
-      post_process.call(hash)
+    # @private
+    #
+    # Wrap value with final calls
+    #
+    # The final value can be wrapped in a class, or processed
+    # via instance method call
+    #
+    # @param [Object] value the value to be wrapped
+    # @return [Object] the post-processed / wraped value
+    def wrap(value)
+      post_process.call(value)
     end
 
+    # @private
+    #
+    # Iterate over array applying #crawl over each element
+    #
+    # @param [Array] array the array of hashes be crawled
+    # @param [Integer] index the index of the key to be used in the current iteration
+    #
+    # @return [Array] the new array with the individual values returned
+    # @see #crawl
     def crawl_array(array, index)
       array.map { |j| value(j, index) }.tap do |a|
         a.compact! if compact

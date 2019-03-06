@@ -1,11 +1,15 @@
 # frozen_string_literal: true
 
 module Arstotzka
+  # @api private
+  #
   # Class responsible for orquestrating the fetch value from the hash
   # and post-processing it
   class Fetcher
     include Sinclair::OptionsParser
 
+    # Creates an instance of Artotzka::Fetcher
+    #
     # @param hash [Hash] Hash to be crawled for value
     # @param instance [Object] object whose methods will be called after for processing
     # @param path [String/Symbol] complete path for fetching the value from hash
@@ -17,8 +21,12 @@ module Arstotzka
       @options = options
     end
 
-    # Crawls the hash for the value, applying then the final transformations on the final
-    # result (collection not value)
+    # Crawls the hash for the value
+    #
+    # After the crawling, final transformation is applied on
+    # the final result (collection not value)
+    #
+    # @return [Object] The final value found and transformed
     #
     # @example
     #   class Transaction
@@ -73,33 +81,54 @@ module Arstotzka
 
     private
 
+    # @private
     attr_reader :path, :hash, :instance
 
     delegate :after, :flatten, to: :options_object
     delegate :wrap, to: :wrapper
 
+    # @private
+    #
+    # Returns an instance of Aristotzka::Craler
+    #
+    # craler will be responsible to crawl the hash for
+    # the final return
+    #
+    # @return [Arstotzka::Crawler] the crawler object
     def crawler
-      @crawler ||= buidl_crawler
+      @crawler ||=
+        Arstotzka::Crawler.new(crawler_options) do |value|
+          wrap(value)
+        end
     end
 
-    def buidl_crawler
-      Arstotzka::Crawler.new(crawler_options) do |value|
-        wrap(value)
-      end
-    end
-
+    # @private
+    #
+    # Hash for crawler initialization
+    #
+    # @return [Hash]
+    #
+    # @see #crawler
     def crawler_options
       options.slice(:case_type, :compact, :default).merge(path: path)
     end
 
+    # @private
+    #
+    # Wrapper responsible for wrapping the value found
+    #
+    # @return [Arstotzka::Wrapper] the wrapper
     def wrapper
-      @wrapper ||= build_wrapper
+      @wrapper ||= Arstotzka::Wrapper.new(wrapper_options)
     end
 
-    def build_wrapper
-      Arstotzka::Wrapper.new(wrapper_options)
-    end
-
+    # @private
+    #
+    # Hash for wrapper initialization
+    #
+    # @return [Hash]
+    #
+    # @see #wrapper
     def wrapper_options
       options.slice(:clazz, :type)
     end

@@ -1,0 +1,69 @@
+threshold: 100
+require_exact_threshold: false
+rules:
+  ApiTag::Presence:
+    enabled: true
+    exclude: []
+  ApiTag::Inclusion:
+    enabled: true
+    exclude: []
+  ApiTag::ProtectedMethod:
+    enabled: true
+    exclude: []
+  ApiTag::PrivateMethod:
+    enabled: true
+    exclude: []
+  ExampleTag:
+    enabled: true
+    exclude: []
+  ReturnTag:
+    enabled: true
+    exclude:
+      - Arstotzka::Builder#attr_names
+      - Arstotzka::Builder#json_name
+      - Arstotzka::Builder#path
+      - Arstotzka::Builder#full_path
+      - Arstotzka::Builder#cached
+      - Arstotzka::Crawler#post_process
+      - Arstotzka::Crawler#path
+      - Arstotzka::Crawler#case_type
+      - Arstotzka::Crawler#compact
+      - Arstotzka::Crawler#default
+      - Arstotzka::Fetcher#path
+      - Arstotzka::Fetcher#hash
+      - Arstotzka::Fetcher#instance
+      - Arstotzka::Reader#path
+      - Arstotzka::Reader#case_type
+      - Arstotzka::Reader#change_case
+      - Arstotzka::Wrapper#clazz
+      - Arstotzka::Wrapper#type
+  Summary::Presence:
+    enabled: true
+    exclude:
+      - Arstotzka::Builder#attr_names
+      - Arstotzka::Builder#json_name
+      - Arstotzka::Builder#path
+      - Arstotzka::Builder#full_path
+      - Arstotzka::Builder#cached
+      - Arstotzka::Crawler#post_process
+      - Arstotzka::Crawler#path
+      - Arstotzka::Crawler#case_type
+      - Arstotzka::Crawler#compact
+      - Arstotzka::Crawler#default
+      - Arstotzka::Fetcher#path
+      - Arstotzka::Fetcher#hash
+      - Arstotzka::Fetcher#instance
+      - Arstotzka::Reader#path
+      - Arstotzka::Reader#case_type
+      - Arstotzka::Reader#change_case
+      - Arstotzka::Wrapper#clazz
+      - Arstotzka::Wrapper#type
+  Summary::Length:
+    enabled: true
+    exclude: []
+  Summary::Delimiter:
+    enabled: true
+    exclude: []
+  Summary::SingleLine:
+    enabled: true
+    exclude: []

@@ -4,7 +4,12 @@ module Arstotzka
   # As Arstotzka extends ActiveSupport::Concern, Arstotzka::ClassMethods define
   # methods that will be available when defining a class that includes Arstotka
   module ClassMethods
-    # expose a field from the json/hash as a method
+    private
+
+    # @api public
+    # @!visibility public
+    #
+    # Expose a field from the json/hash as a method
     #
     # @example
     #   class MyModel
@@ -30,9 +35,11 @@ module Arstotzka
     #   instance.age        # returns 20
     #   instance.cars       # returns 2
     #
+    # @return nil
+    #
     # @see Builder Arstotzka::Builder
     # @see
-    #   https://www.rubydoc.info/gems/activesupport/5.0.0.1/ActiveSupport/Concern
+    #   https://www.rubydoc.info/gems/activesupport/5.2.2/ActiveSupport/Concern
     #   ActiveSupport::Concern
     def expose(*attr_names, **options)
       options = Builder::DEFAULT_OPTIONS.merge(options.symbolize_keys)

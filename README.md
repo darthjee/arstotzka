@@ -156,8 +156,7 @@ end
     ]
   )
 
-  object.balance
-#returns 1050.36
+  object.total_money # returns 1050.36
 ```
 
 ## Default

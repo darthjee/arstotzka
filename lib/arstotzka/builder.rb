@@ -4,6 +4,8 @@ module Arstotzka
   # Class responsible to orchestrate the addtion of method that will
   # crawl the hash for value
   #
+  # @api private
+  #
   # @example
   #   class MyModel
   #     attr_reader :json
@@ -48,6 +50,7 @@ module Arstotzka
       type:      :none
     }.freeze
 
+    # Returns new instance of Arstotzka::Builder
     # @param attr_names [Array] list of attributes to be fetched from the hash/json
     # @param clazz [Class] class to receive the methods
     # @param path [String/Symbol] path of hash attributes to find the root
@@ -89,26 +92,71 @@ module Arstotzka
 
     private
 
+    # @private
     attr_reader :attr_names, :json_name, :path, :full_path, :cached
 
+    # @private
+    #
+    # Initialize methods list
+    #
+    # @return nil
     def init
       attr_names.each do |attr|
         add_attr(attr)
       end
     end
 
+    # @private
+    #
+    # builds the complete key path to fetch value
+    #
+    # @param [String/Symbol] attribute name of the method / attribute
+    #
+    # @return [String] the keys path
     def real_path(attribute)
       full_path || [path, attribute].compact.join('.')
     end
 
+    # @private
+    #
+    # Fetch class to wrap resulting value
+    #
+    # after fetching the value, when wrapper_clazz returns
+    # a Class object, the value will be wrapped with
+    # +wrapper_clazz.new(value)+
+    #
+    # @return [Class] the class to wrap the resulting value
+    #
+    # @see Arstotzka::Wrapper
     def wrapper_clazz
       options[:class]
     end
 
+    # @private
+    #
+    # Fetches the case of the keys
+    #
+    # case types can be
+    #   - lower_camel: keys in the hash are lowerCamelCase
+    #   - upper_camel: keys in the hash are UpperCamelCase
+    #   - snake: keys in the hash are snake_case
+    #
+    # @return [Symbol/String] defined case_type
+    #
+    # @see Arstotzka::Reader
     def case_type
       options[:case]
     end
 
+    # @private
+    #
+    # Options needed by fetcher
+    #
+    # @param [String/Symbol] attribute name of the method / attribute
+    #
+    # @return [Hash] options
+    #
+    # @see Arstotzka::Fetcher
     def fetcher_options(attribute)
       options.slice(:compact, :after, :type, :flatten, :default).merge(
         clazz: wrapper_clazz,
@@ -117,10 +165,27 @@ module Arstotzka
       )
     end
 
+    # @private
+    #
+    # Add method to the list of methods to be built
+    #
+    # @param [String/Symbol] attribute name of method / attribute
+    #
+    # @return nil
+    #
+    # @see Sinclair
     def add_attr(attribute)
       add_method attribute, (cached ? cached_fetcher(attribute) : attr_fetcher(attribute)).to_s
     end
 
+    # Returns the code needed to initialize fetcher
+    #
+    # @param [String/Symbol] attribute name of method / attribute
+    #
+    # @return [String] code
+    #
+    # @see Sinclair
+    # @see Artotzka::Fetcher
     def attr_fetcher(attribute)
       <<-CODE
       ::Arstotzka::Fetcher.new(
@@ -129,6 +194,13 @@ module Arstotzka
       CODE
     end
 
+    # Returns the code needed to initialize a fetche and cache it
+    #
+    # @param [String/Symbol] attribute name of method / attribute
+    #
+    # @return [String] code
+    #
+    # @see #attr_fetcher
     def cached_fetcher(attribute)
       <<-CODE
       @#{attribute} ||= #{attr_fetcher(attribute)}
