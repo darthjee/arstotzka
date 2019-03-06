@@ -36,6 +36,20 @@ module Arstotzka
     # @example Casting type
     #   wrapper = Arstotzka::Wrapper.new(type: :integer)
     #   wrapper.wrap(['10', '20', '30']) # retruns [10, 20, 30]
+    #
+    # @example Casting and Wrapping
+    #   class Request
+    #     attr_reader :payload
+    #
+    #     def initialize(payload)
+    #       @payload = payload
+    #     end
+    #   end
+    #
+    #   wrapper = Arstotzka::Wrapper.new(type: :string, clazz: Request)
+    #   request = wrapper.wrap(value)
+    #
+    #   request.payload  # returns '{"key"=>"value"}'
     def wrap(value)
       return wrap_array(value) if value.is_a?(Array)
       wrap_element(value)
