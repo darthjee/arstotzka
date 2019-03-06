@@ -70,6 +70,7 @@ describe MyParser do
 
     context 'when there is a node missing' do
       let(:hash) { {} }
+
       it 'returns nil' do
         expect(subject.total_money).to be_nil
       end

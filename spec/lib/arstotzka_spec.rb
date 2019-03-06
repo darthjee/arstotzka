@@ -35,6 +35,7 @@ describe Arstotzka do
   context 'when caching the value' do
     let(:attribute) { :age }
     let!(:old_value) { json['age'] }
+
     before do
       dummy.age
       json['age'] = old_value + 100
@@ -70,6 +71,7 @@ describe Arstotzka do
 
       context 'when dealing with multiple level arrays' do
         let(:attribute) { :games }
+
         before do
           json['games'].map! { |j| [j] }
         end
@@ -90,6 +92,7 @@ describe Arstotzka do
   context 'when wrapping it with a class and caching' do
     let(:attribute) { :old_house }
     let!(:old_value) { json['oldHouse'] }
+
     before do
       dummy.old_house
       json['oldHouse'] = {}

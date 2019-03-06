@@ -6,6 +6,7 @@ describe Arstotzka::Wrapper do
   describe 'yard' do
     describe '#wrap' do
       subject { described_class.new(clazz: clazz, type: type) }
+
       let(:clazz) { nil }
       let(:type) { nil }
 

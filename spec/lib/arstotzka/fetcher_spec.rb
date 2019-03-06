@@ -31,6 +31,7 @@ describe Arstotzka::Fetcher do
 
     context 'when changing json value' do
       let!(:old_value) { json['id'] }
+
       before do
         subject.fetch
         json['id'] = 200

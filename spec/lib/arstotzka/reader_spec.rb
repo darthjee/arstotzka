@@ -110,13 +110,13 @@ describe Arstotzka::Reader do
     context 'when index is within path' do
       let(:index) { 1 }
 
-      it { expect(subject.ended?(index)).to be_falsey }
+      it { expect(subject).not_to be_ended(index) }
     end
 
     context 'when index is outside path' do
       let(:index) { 2 }
 
-      it { expect(subject.ended?(index)).to be_truthy }
+      it { expect(subject).to be_ended(index) }
     end
   end
 end

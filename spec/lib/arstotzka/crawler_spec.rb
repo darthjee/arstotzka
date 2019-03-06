@@ -6,6 +6,7 @@ describe Arstotzka::Crawler do
   subject do
     described_class.new default_options.merge(options), &block
   end
+
   let(:block) { proc { |v| v } }
   let(:path) { '' }
   let(:default_options) { { path: path, case_type: :lower_camel } }
@@ -15,10 +16,11 @@ describe Arstotzka::Crawler do
   let(:value) { subject.value(json) }
 
   context 'when no block is given' do
-    let(:path) { %w[user name] }
     subject do
       described_class.new default_options.merge(options)
     end
+
+    let(:path) { %w[user name] }
 
     it 'retrieves attribute from base json' do
       expect(value).to eq(json['user']['name'])
@@ -78,6 +80,7 @@ describe Arstotzka::Crawler do
 
       context 'when setting compact' do
         let(:options) { { compact: true } }
+
         it 'returns the missing values as nil' do
           expect(value).to eq([[1000.0]])
         end
@@ -126,6 +129,7 @@ describe Arstotzka::Crawler do
         before do
           json['animals'].last['race'] = nil
         end
+
         let(:expected) do
           ['European squid', 'Macaque monkey', nil]
         end
@@ -140,6 +144,7 @@ describe Arstotzka::Crawler do
         before do
           json['animals'].last['race'] = nil
         end
+
         let(:expected) do
           ['European squid', 'Macaque monkey']
         end
@@ -268,6 +273,7 @@ describe Arstotzka::Crawler do
 
   context 'when using key with false value' do
     let(:path) { ['has_money'] }
+
     before do
       json['hasMoney'] = false
     end

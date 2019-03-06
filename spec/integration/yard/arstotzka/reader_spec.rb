@@ -63,13 +63,13 @@ describe Arstotzka::Reader do
     describe '#ended?' do
       context 'when the fetches have not ended' do
         it do
-          expect(subject.ended?(1)).to be_falsey
+          expect(subject).not_to be_ended(1)
         end
       end
 
       context 'when the fetches have ended' do
         it do
-          expect(subject.ended?(2)).to be_truthy
+          expect(subject).to be_ended(2)
         end
       end
     end
