@@ -11,16 +11,6 @@
 Metrics/ParameterLists:
   Max: 7
 
-# Offense count: 11
-# Configuration parameters: Prefixes.
-# Prefixes: when, with, without
-RSpec/ContextWording:
-  Exclude:
-    - 'spec/integration/yard/arstotzka/crawler_spec.rb'
-    - 'spec/lib/arstotzka/builder_spec.rb'
-    - 'spec/lib/arstotzka/crawler_spec.rb'
-    - 'spec/lib/arstotzka/reader_spec.rb'
-
 # Offense count: 1
 RSpec/DescribeClass:
   Exclude:

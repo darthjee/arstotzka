@@ -54,7 +54,7 @@ describe Arstotzka::Crawler do
           expect(subject.value(hash)).to eq([['Rakhar']])
         end
 
-        context 'and we set a default value' do
+        context 'with default value' do
           let(:options) { { compact: true, case_type: :snake, default: 'NO HERO' } }
 
           it 'return default value for missed keys' do
@@ -62,7 +62,7 @@ describe Arstotzka::Crawler do
           end
         end
 
-        context 'and we give a block' do
+        context 'when block is given' do
           subject do
             described_class.new(path: path, **options) { |value| value&.to_sym }
           end

@@ -25,13 +25,15 @@ describe Arstotzka::Builder do
   let(:full_options) { described_class::DEFAULT_OPTIONS.merge(options) }
 
   describe '#build' do
-    it 'adds the reader' do
-      expect do
-        subject.build
-      end.to add_method(attr_name).to(clazz)
+    context 'when it is called' do
+      it 'adds the reader' do
+        expect do
+          subject.build
+        end.to add_method(attr_name).to(clazz)
+      end
     end
 
-    context 'after building' do
+    context 'with being previously called' do
       before { subject.build }
 
       context 'when building several attributes' do
@@ -54,7 +56,7 @@ describe Arstotzka::Builder do
             expect(instance.name).to eq(name)
           end
 
-          context 'but key is a string' do
+          context 'when key is a string' do
             let(:json) { { 'name' => name } }
 
             it 'fetches the value' do

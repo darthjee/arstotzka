@@ -15,7 +15,7 @@ shared_examples 'reader fetchin value' do
     expect(subject.read(json, index)).to eq(expected)
   end
 
-  context 'and the json has symbolized_keys' do
+  context 'when the json has symbolized_keys' do
     it 'returns the evaluated value' do
       expect(subject.read(sym_json, index)).to eq(expected)
     end
@@ -45,14 +45,14 @@ describe Arstotzka::Reader do
         let(:json) { full_json['user'] }
         let(:index) { 1 }
 
-        context 'to snake_case' do
+        context 'with snake_case type' do
           let(:path) { %w[user FullName] }
           let(:expected) { json['full_name'] }
 
           it_behaves_like 'reader fetchin value'
         end
 
-        context 'to upper_camel' do
+        context 'with upper_camel type' do
           let(:case_type) { :upper_camel }
           let(:path) { %w[user login_name] }
           let(:expected) { json['LoginName'] }
@@ -60,7 +60,7 @@ describe Arstotzka::Reader do
           it_behaves_like 'reader fetchin value'
         end
 
-        context 'to lower_camel' do
+        context 'with lower_camel type' do
           let(:case_type) { :lower_camel }
           let(:path) { %w[user birth_date] }
           let(:expected) { json['birthDate'] }
@@ -78,7 +78,7 @@ describe Arstotzka::Reader do
           expect(subject.read(json, index)).to be_nil
         end
 
-        context 'but keys are symbol' do
+        context 'when keys are symbol' do
           it do
             expect(subject.read(sym_json, index)).to be_nil
           end

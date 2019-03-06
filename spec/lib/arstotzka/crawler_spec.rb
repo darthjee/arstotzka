@@ -43,7 +43,7 @@ describe Arstotzka::Crawler do
     end
   end
 
-  context 'crawler finds a nil attribute' do
+  context 'when crawler finds a nil attribute' do
     let(:path) { %w[car model] }
 
     it 'returns nil' do
@@ -260,7 +260,7 @@ describe Arstotzka::Crawler do
       expect(value).to eq(json[:id])
     end
 
-    context 'crawler finds a nil attribute' do
+    context 'when crawler finds a nil attribute' do
       let(:path) { %w[car model] }
 
       it 'returns nil' do
