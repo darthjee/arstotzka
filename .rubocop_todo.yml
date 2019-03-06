@@ -74,7 +74,3 @@ RSpec/NamedSubject:
 RSpec/NestedGroups:
   Max: 6
 
-# Offense count: 2
-RSpec/ScatteredLet:
-  Exclude:
-    - 'spec/lib/arstotzka/crawler_spec.rb'

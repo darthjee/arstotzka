@@ -126,12 +126,13 @@ describe Arstotzka::Crawler do
     context 'when there are nil values' do
       context 'with compact option as false' do
         let(:options) { { compact: false } }
-        before do
-          json['animals'].last['race'] = nil
-        end
 
         let(:expected) do
           ['European squid', 'Macaque monkey', nil]
+        end
+
+        before do
+          json['animals'].last['race'] = nil
         end
 
         it 'eliminate nil values' do
@@ -141,12 +142,13 @@ describe Arstotzka::Crawler do
 
       context 'with compact option' do
         let(:options) { { compact: true } }
-        before do
-          json['animals'].last['race'] = nil
-        end
 
         let(:expected) do
           ['European squid', 'Macaque monkey']
+        end
+
+        before do
+          json['animals'].last['race'] = nil
         end
 
         it 'eliminate nil values' do
