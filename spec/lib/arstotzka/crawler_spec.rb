@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe Arstotzka::Crawler do
-  subject do
+  subject(:crawler) do
     described_class.new default_options.merge(options), &block
   end
 
@@ -13,10 +13,10 @@ describe Arstotzka::Crawler do
   let(:options) { {} }
   let(:json_file) { 'arstotzka.json' }
   let(:json) { load_json_fixture_file(json_file) }
-  let(:value) { subject.value(json) }
+  let(:value) { crawler.value(json) }
 
   context 'when no block is given' do
-    subject do
+    subject(:crawler) do
       described_class.new default_options.merge(options)
     end
 
@@ -35,7 +35,7 @@ describe Arstotzka::Crawler do
     end
 
     context 'when calling twice' do
-      before { subject.value(json) }
+      before { crawler.value(json) }
 
       it 'can still crawl' do
         expect(value).to eq(json['user']['name'])

@@ -3,13 +3,14 @@
 require 'spec_helper'
 
 describe Arstotzka::Fetcher do
-  let(:subject) do
+  subject(:fetcher) do
     described_class.new json, instance, options.merge(path: path)
   end
+
   let(:path) { '' }
   let(:instance) { Arstotzka::Fetcher::Dummy.new }
   let(:json) { load_json_fixture_file('arstotzka.json') }
-  let(:value) { subject.fetch }
+  let(:value) { fetcher.fetch }
 
   context 'when fetching with no options' do
     let(:options) { {} }
@@ -21,7 +22,7 @@ describe Arstotzka::Fetcher do
 
     context 'when calling the method twice' do
       before do
-        subject.fetch
+        fetcher.fetch
       end
 
       it 'retrieves attribute from base json' do
@@ -33,7 +34,7 @@ describe Arstotzka::Fetcher do
       let!(:old_value) { json['id'] }
 
       before do
-        subject.fetch
+        fetcher.fetch
         json['id'] = 200
       end
 
@@ -50,14 +51,14 @@ describe Arstotzka::Fetcher do
       let(:options) { { flatten: true } }
 
       it 'returns the fetched value flattened' do
-        expect(subject.fetch).to eq((1..8).to_a)
+        expect(fetcher.fetch).to eq((1..8).to_a)
       end
 
       context 'when value is not an array' do
         let(:json) { 1 }
 
         it 'returns the fetched value flattened' do
-          expect(subject.fetch).to eq(1)
+          expect(fetcher.fetch).to eq(1)
         end
       end
     end
@@ -66,7 +67,7 @@ describe Arstotzka::Fetcher do
       let(:options) { { flatten: false } }
 
       it 'returns the fetched value non flattened' do
-        expect(subject.fetch).to eq(json)
+        expect(fetcher.fetch).to eq(json)
       end
     end
   end
@@ -77,7 +78,7 @@ describe Arstotzka::Fetcher do
     let(:options) { { after: :sum } }
 
     it 'applies after call ' do
-      expect(subject.fetch).to eq(325)
+      expect(fetcher.fetch).to eq(325)
     end
   end
 
@@ -89,11 +90,11 @@ describe Arstotzka::Fetcher do
     let(:wrapper) { Person }
 
     it 'wraps the result in an object' do
-      expect(subject.fetch).to be_a(wrapper)
+      expect(fetcher.fetch).to be_a(wrapper)
     end
 
     it 'sets the wrapper with the fetched value' do
-      expect(subject.fetch.name).to eq(name)
+      expect(fetcher.fetch.name).to eq(name)
     end
   end
 end

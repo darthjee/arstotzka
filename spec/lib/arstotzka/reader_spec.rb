@@ -4,26 +4,26 @@ require 'spec_helper'
 
 shared_examples 'reader fetchin value' do
   it do
-    expect { subject.read(json, index) }.not_to raise_error
+    expect { reader.read(json, index) }.not_to raise_error
   end
 
   it do
-    expect(subject.read(json, index)).not_to be_nil
+    expect(reader.read(json, index)).not_to be_nil
   end
 
   it 'returns the evaluated value' do
-    expect(subject.read(json, index)).to eq(expected)
+    expect(reader.read(json, index)).to eq(expected)
   end
 
   context 'when the json has symbolized_keys' do
     it 'returns the evaluated value' do
-      expect(subject.read(sym_json, index)).to eq(expected)
+      expect(reader.read(sym_json, index)).to eq(expected)
     end
   end
 end
 
 describe Arstotzka::Reader do
-  subject do
+  subject(:reader) do
     described_class.new(path: path, case_type: case_type)
   end
 
@@ -75,12 +75,12 @@ describe Arstotzka::Reader do
         let(:path) { %w[user password_reminder] }
 
         it do
-          expect(subject.read(json, index)).to be_nil
+          expect(reader.read(json, index)).to be_nil
         end
 
         context 'when keys are symbol' do
           it do
-            expect(subject.read(sym_json, index)).to be_nil
+            expect(reader.read(sym_json, index)).to be_nil
           end
         end
       end
@@ -90,7 +90,7 @@ describe Arstotzka::Reader do
         let(:json) { { key: 'symbol', 'key' => 'string' } }
 
         it 'fetches the string key first' do
-          expect(subject.read(json, index)).to eq('string')
+          expect(reader.read(json, index)).to eq('string')
         end
       end
     end
@@ -100,7 +100,7 @@ describe Arstotzka::Reader do
 
       it do
         expect do
-          subject.read(json, index)
+          reader.read(json, index)
         end.to raise_error(Arstotzka::Exception::KeyNotFound)
       end
     end
@@ -110,13 +110,13 @@ describe Arstotzka::Reader do
     context 'when index is within path' do
       let(:index) { 1 }
 
-      it { expect(subject).not_to be_ended(index) }
+      it { expect(reader).not_to be_ended(index) }
     end
 
     context 'when index is outside path' do
       let(:index) { 2 }
 
-      it { expect(subject).to be_ended(index) }
+      it { expect(reader).to be_ended(index) }
     end
   end
 end

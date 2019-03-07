@@ -5,7 +5,7 @@ require 'spec_helper'
 describe Arstotzka::Fetcher do
   describe 'yard' do
     describe '#fetch' do
-      subject { described_class.new(hash, instance, path: path, **options) }
+      subject(:fetcher) { described_class.new(hash, instance, path: path, **options) }
 
       let(:instance) { Account.new }
       let(:path) { 'transactions' }
@@ -31,11 +31,11 @@ describe Arstotzka::Fetcher do
 
       describe 'incoming transactions' do
         it 'returns only the income payments' do
-          expect(subject.fetch.count).to eq(2)
+          expect(fetcher.fetch.count).to eq(2)
         end
 
         it 'returns Transactions' do
-          expect(subject.fetch.map(&:class).uniq).to eq([Transaction])
+          expect(fetcher.fetch.map(&:class).uniq).to eq([Transaction])
         end
 
         it 'returns results wrapped in Transactions' do
@@ -43,7 +43,7 @@ describe Arstotzka::Fetcher do
             Transaction.new(value: 1000.53, type: 'income'),
             Transaction.new(value: 50.23, type: 'income')
           ]
-          expect(subject.fetch).to eq(expected)
+          expect(fetcher.fetch).to eq(expected)
         end
       end
     end

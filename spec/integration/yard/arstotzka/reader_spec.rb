@@ -4,7 +4,7 @@ require 'spec_helper'
 
 describe Arstotzka::Reader do
   describe 'yard' do
-    subject { described_class.new(path: path, case_type: case_type) }
+    subject(:reader) { described_class.new(path: path, case_type: case_type) }
 
     let(:path) { %w[person full_name] }
     let(:case_type) { :snake }
@@ -23,7 +23,7 @@ describe Arstotzka::Reader do
 
       context 'when using snake_case' do
         it 'fetches the value using snake case key' do
-          expect(subject.read(hash, 1)).to eq('John')
+          expect(reader.read(hash, 1)).to eq('John')
         end
 
         context 'when key is missing' do
@@ -31,7 +31,7 @@ describe Arstotzka::Reader do
 
           it do
             expect do
-              subject.read(hash, 1)
+              reader.read(hash, 1)
             end.to raise_error(Arstotzka::Exception::KeyNotFound)
           end
         end
@@ -46,7 +46,7 @@ describe Arstotzka::Reader do
             { maker: 'Ford', 'model' => 'Model A' },
             { maker: 'BMW', 'model' => 'Jetta' }
           ]
-          expect(subject.read(hash, 1)).to eq(expected)
+          expect(reader.read(hash, 1)).to eq(expected)
         end
       end
 
@@ -55,7 +55,7 @@ describe Arstotzka::Reader do
         let(:path) { %w[person age] }
 
         it 'fetches the value using uper camel case key' do
-          expect(subject.read(hash, 1)).to eq(23)
+          expect(reader.read(hash, 1)).to eq(23)
         end
       end
     end
@@ -63,13 +63,13 @@ describe Arstotzka::Reader do
     describe '#ended?' do
       context 'when the fetches have not ended' do
         it do
-          expect(subject).not_to be_ended(1)
+          expect(reader).not_to be_ended(1)
         end
       end
 
       context 'when the fetches have ended' do
         it do
-          expect(subject).to be_ended(2)
+          expect(reader).to be_ended(2)
         end
       end
     end

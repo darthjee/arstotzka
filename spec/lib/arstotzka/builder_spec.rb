@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe Arstotzka::Builder do
-  subject do
+  subject(:builder) do
     described_class.new(attr_names, clazz, **full_options)
   end
 
@@ -28,13 +28,13 @@ describe Arstotzka::Builder do
     context 'when it is called' do
       it 'adds the reader' do
         expect do
-          subject.build
+          builder.build
         end.to add_method(attr_name).to(clazz)
       end
     end
 
     context 'with being previously called' do
-      before { subject.build }
+      before { builder.build }
 
       context 'when building several attributes' do
         let(:attr_names) { %i[id name age] }

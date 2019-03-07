@@ -13,8 +13,8 @@ describe Arstotzka::Wrapper do
         let(:value) { 'john' }
 
         it 'wraps value with the clazz' do
-          expect(subject.wrap(value)).to be_a(Person)
-          expect(subject.wrap(value).name).to eq(value)
+          expect(wrapper.wrap(value)).to be_a(Person)
+          expect(wrapper.wrap(value).name).to eq(value)
         end
       end
 
@@ -23,7 +23,7 @@ describe Arstotzka::Wrapper do
         let(:value) { %w[10 20 30] }
 
         it 'converts value to type' do
-          expect(subject.wrap(value)).to eq([10, 20, 30])
+          expect(wrapper.wrap(value)).to eq([10, 20, 30])
         end
       end
 

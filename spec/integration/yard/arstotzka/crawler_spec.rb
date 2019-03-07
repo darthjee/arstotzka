@@ -4,7 +4,7 @@ require 'spec_helper'
 
 describe Arstotzka::Crawler do
   describe 'yard' do
-    subject do
+    subject(:crawler) do
       described_class.new(path: path, **options)
     end
 
@@ -21,13 +21,13 @@ describe Arstotzka::Crawler do
     end
 
     it 'crawls to find the value' do
-      expect(subject.value(hash)).to eq('John')
+      expect(crawler.value(hash)).to eq('John')
     end
 
     describe '#value' do
       context 'when hash contains the path' do
         it 'crawls to find the value' do
-          expect(subject.value(hash)).to eq('John')
+          expect(crawler.value(hash)).to eq('John')
         end
       end
 
@@ -51,24 +51,24 @@ describe Arstotzka::Crawler do
         end
 
         it 'crawls to find the value' do
-          expect(subject.value(hash)).to eq([['Rakhar']])
+          expect(crawler.value(hash)).to eq([['Rakhar']])
         end
 
         context 'with default value' do
           let(:options) { { compact: true, case_type: :snake, default: 'NO HERO' } }
 
           it 'return default value for missed keys' do
-            expect(subject.value(hash)).to eq([['NO HERO', 'Rakhar'], 'NO HERO'])
+            expect(crawler.value(hash)).to eq([['NO HERO', 'Rakhar'], 'NO HERO'])
           end
         end
 
         context 'when block is given' do
-          subject do
+          subject(:crawler) do
             described_class.new(path: path, **options) { |value| value&.to_sym }
           end
 
           it 'returns the post processed values' do
-            expect(subject.value(hash)).to eq([[:Rakhar]])
+            expect(crawler.value(hash)).to eq([[:Rakhar]])
           end
         end
       end

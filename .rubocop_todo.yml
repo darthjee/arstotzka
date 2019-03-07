@@ -16,20 +16,6 @@ Metrics/ParameterLists:
 RSpec/MultipleExpectations:
   Max: 3
 
-# Offense count: 56
-RSpec/NamedSubject:
-  Exclude:
-    - 'spec/integration/readme/my_parser_spec.rb'
-    - 'spec/integration/yard/arstotzka/crawler_spec.rb'
-    - 'spec/integration/yard/arstotzka/fetcher_spec.rb'
-    - 'spec/integration/yard/arstotzka/reader_spec.rb'
-    - 'spec/integration/yard/arstotzka/wrapper_spec.rb'
-    - 'spec/integration/yard/arstotzka_spec.rb'
-    - 'spec/lib/arstotzka/builder_spec.rb'
-    - 'spec/lib/arstotzka/crawler_spec.rb'
-    - 'spec/lib/arstotzka/fetcher_spec.rb'
-    - 'spec/lib/arstotzka/reader_spec.rb'
-
 # Offense count: 46
 RSpec/NestedGroups:
   Max: 6
