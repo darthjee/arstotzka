@@ -12,6 +12,12 @@ describe Arstotzka::Options do
       end
     end
 
+    describe '#path' do
+      it do
+        expect(subject.path).to be_nil
+      end
+    end
+
     describe '#full_path' do
       it do
         expect(subject.full_path).to be_nil
@@ -38,19 +44,102 @@ describe Arstotzka::Options do
 
     describe '#compact' do
       it do
-        expect(subject.case).to be_falsey
+        expect(subject.compact).to be_falsey
       end
     end
 
     describe '#default' do
       it do
-        expect(subject.case).to be_nil
+        expect(subject.default).to be_nil
+      end
+    end
+
+    describe '#flatten' do
+      it do
+        expect(subject.flatten).to be_falsey
       end
     end
 
     describe '#type' do
       it do
-        expect(subject.case).to eq(:none)
+        expect(subject.type).to eq(:none)
+      end
+    end
+  end
+
+  context 'when initializing with options' do
+    let(:options_hash) do
+      {
+        json:      :hash,
+        path:      'key.sub',
+        full_path: 'key.sub.fetch',
+        cached:    true,
+        after:     :method_call,
+        case:      :snake,
+        compact:   true,
+        default:   10,
+        flatten:   true,
+        type:      :integer,
+      }
+    end
+
+    describe '#json' do
+      it 'returns default json option' do
+        expect(subject.json).to eq(:hash)
+      end
+    end
+
+    describe '#path' do
+      it do
+        expect(subject.path).to eq('key.sub')
+      end
+    end
+
+    describe '#full_path' do
+      it do
+        expect(subject.full_path).to eq('key.sub.fetch')
+      end
+    end
+
+    describe '#cached' do
+      it do
+        expect(subject.cached).to be_truthy
+      end
+    end
+
+    describe '#after' do
+      it do
+        expect(subject.after).to eq(:method_call)
+      end
+    end
+
+    describe '#case' do
+      it do
+        expect(subject.case).to eq(:snake)
+      end
+    end
+
+    describe '#compact' do
+      it do
+        expect(subject.compact).to be_truthy
+      end
+    end
+
+    describe '#default' do
+      it do
+        expect(subject.default).to eq(10)
+      end
+    end
+
+    describe '#flatten' do
+      it do
+        expect(subject.flatten).to be_truthy
+      end
+    end
+
+    describe '#type' do
+      it do
+        expect(subject.type).to eq(:integer)
       end
     end
   end
