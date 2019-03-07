@@ -13,8 +13,7 @@ describe Arstotzka::Wrapper do
         let(:value) { 'john' }
 
         it 'wraps value with the clazz' do
-          expect(wrapper.wrap(value)).to be_a(Person)
-          expect(wrapper.wrap(value).name).to eq(value)
+          expect(wrapper.wrap(value)).to eq(Person.new(value))
         end
       end
 
@@ -28,13 +27,16 @@ describe Arstotzka::Wrapper do
       end
 
       context 'when type and class is defined' do
-        let(:type)  { :string }
-        let(:clazz) { Request }
-        let(:value) { { 'key' => 'value' } }
+        let(:type)    { :string }
+        let(:clazz)   { Request }
+        let(:value)   { { 'key' => 'value' } }
+        let(:request) { wrapper.wrap(value) }
+
+        it 'returns a wrapped object' do
+          expect(request).to be_a(Request)
+        end
 
         it 'casts before wrapping' do
-          request = wrapper.wrap(value)
-          expect(request).to be_a(Request)
           expect(request.payload).to eq('{"key"=>"value"}')
         end
       end

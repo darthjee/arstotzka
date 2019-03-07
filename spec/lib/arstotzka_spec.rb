@@ -53,17 +53,18 @@ describe Arstotzka do
       expect(value).to be_a(House)
     end
 
-    it 'creates the object with the given json' do
+    it 'creates the object with a method that is instantiated using the hash' do
       expect(value.age).to eq(json['house']['age'])
-      expect(value.value).to eq(json['house']['value'])
-      expect(value.floors).to eq(json['house']['floors'])
     end
 
     context 'when dealing with an array' do
       let(:attribute) { :games }
 
-      it 'returns an array of json wrapped' do
+      it 'returns an array' do
         expect(value).to be_a(Array)
+      end
+
+      it 'returns an array of json wrapped' do
         expect(value).to all(be_a(Game))
       end
 
@@ -74,9 +75,15 @@ describe Arstotzka do
           json['games'].map! { |j| [j] }
         end
 
-        it 'returns an array of json wrapped' do
+        it 'returns an array' do
           expect(value).to be_a(Array)
+        end
+
+        it 'returns an array of arrays' do
           expect(value).to all(be_a(Array))
+        end
+
+        it 'wraps each end element' do
           expect(value).to all(all(be_a(Game)))
         end
       end
@@ -93,8 +100,6 @@ describe Arstotzka do
 
     it 'creates the object with the given json' do
       expect(value.age).to eq(old_value['age'])
-      expect(value.value).to eq(old_value['value'])
-      expect(value.floors).to eq(old_value['floors'])
     end
 
     it 'caches the resulting object' do

@@ -11,11 +11,6 @@
 Metrics/ParameterLists:
   Max: 7
 
-# Offense count: 8
-# Configuration parameters: AggregateFailuresByDefault.
-RSpec/MultipleExpectations:
-  Max: 3
-
 # Offense count: 46
 RSpec/NestedGroups:
   Max: 5
