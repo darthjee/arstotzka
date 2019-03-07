@@ -19,7 +19,7 @@ describe Arstotzka::Options do
     end
 
     describe '#case' do
-      it do
+      it 'returns default case' do
         expect(subject.case).to eq(:lower_camel)
       end
     end
@@ -67,7 +67,7 @@ describe Arstotzka::Options do
     end
 
     describe '#type' do
-      it do
+      it 'returns none' do
         expect(subject.type).to eq(:none)
       end
     end
@@ -97,13 +97,13 @@ describe Arstotzka::Options do
     end
 
     describe '#after' do
-      it do
+      it 'returns method name' do
         expect(subject.after).to eq(:method_call)
       end
     end
 
     describe '#case' do
-      it do
+      it 'returns defined snake case' do
         expect(subject.case).to eq(:snake)
       end
     end
@@ -115,7 +115,7 @@ describe Arstotzka::Options do
     end
 
     describe '#default' do
-      it do
+      it 'returns defined default value' do
         expect(subject.default).to eq(10)
       end
     end
@@ -127,31 +127,31 @@ describe Arstotzka::Options do
     end
 
     describe '#full_path' do
-      it do
+      it 'returns defined full path' do
         expect(subject.full_path).to eq('key.sub.fetch')
       end
     end
 
     describe '#json' do
-      it 'returns default json option' do
+      it 'returns defined json option' do
         expect(subject.json).to eq(:hash)
       end
     end
 
     describe '#klass' do
-      it do
+      it 'returns defined class' do
         expect(subject.klass).to eq(Star)
       end
     end
 
     describe '#path' do
-      it do
+      it 'returns defined path' do
         expect(subject.path).to eq('key.sub')
       end
     end
 
     describe '#type' do
-      it do
+      it 'returns defined path' do
         expect(subject.type).to eq(:integer)
       end
     end
