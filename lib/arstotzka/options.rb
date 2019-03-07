@@ -9,7 +9,7 @@ module Arstotzka
       cached:    false,
       after:     false,
       case:      :lower_camel,
-      class:     nil,
+      klass:     nil,
       compact:   false,
       default:   nil,
       flatten:   false,
@@ -17,7 +17,11 @@ module Arstotzka
     }.freeze
 
     def initialize(options)
-      super(DEFAULT_OPTIONS.merge(options))
+      merged = DEFAULT_OPTIONS.merge(options)
+      klass = merged.delete(:class)
+      merged[:klass] ||= klass
+
+      super(merged)
     end
   end
 end

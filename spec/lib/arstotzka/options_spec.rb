@@ -54,6 +54,12 @@ describe Arstotzka::Options do
       end
     end
 
+    describe '#klass' do
+      it do
+        expect(subject.klass).to be_nil
+      end
+    end
+
     describe '#path' do
       it do
         expect(subject.path).to be_nil
@@ -78,6 +84,7 @@ describe Arstotzka::Options do
         flatten:   true,
         full_path: 'key.sub.fetch',
         json:      :hash,
+        klass:     Star,
         path:      'key.sub',
         type:      :integer,
       }
@@ -131,6 +138,12 @@ describe Arstotzka::Options do
       end
     end
 
+    describe '#klass' do
+      it do
+        expect(subject.klass).to eq(Star)
+      end
+    end
+
     describe '#path' do
       it do
         expect(subject.path).to eq('key.sub')
@@ -140,6 +153,24 @@ describe Arstotzka::Options do
     describe '#type' do
       it do
         expect(subject.type).to eq(:integer)
+      end
+    end
+  end
+
+  describe '#klass' do
+    context 'when initializing with old class key' do
+      let(:options_hash) { { class: Star } }
+
+      it do
+        expect(subject.klass).to eq(Star)
+      end
+    end
+
+    context 'when initializing with old class key and klass' do
+      let(:options_hash) { { class: Star, klass: Game } }
+
+      it do
+        expect(subject.klass).to eq(Game)
       end
     end
   end
