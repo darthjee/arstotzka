@@ -18,4 +18,4 @@ RSpec/MultipleExpectations:
 
 # Offense count: 46
 RSpec/NestedGroups:
-  Max: 6
+  Max: 5

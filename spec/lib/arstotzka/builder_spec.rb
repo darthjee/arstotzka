@@ -49,19 +49,19 @@ describe Arstotzka::Builder do
           expect(instance.name).to be_nil
         end
 
-        context 'when json has the property' do
+        context 'when json has the property as symbol key' do
           let(:json) { { name: name } }
 
           it 'fetches the value' do
             expect(instance.name).to eq(name)
           end
+        end
 
-          context 'when key is a string' do
-            let(:json) { { 'name' => name } }
+        context 'when json has the property as string key' do
+          let(:json) { { 'name' => name } }
 
-            it 'fetches the value' do
-              expect(instance.name).to eq(name)
-            end
+          it 'fetches the value' do
+            expect(instance.name).to eq(name)
           end
         end
       end
