@@ -3,6 +3,10 @@
 require 'spec_helper'
 
 describe Arstotzka::Builder do
+  subject(:builder) do
+    described_class.new(attr_names, clazz, **full_options)
+  end
+
   let(:clazz) do
     Class.new.tap do |c|
       c.send(:attr_reader, :json)
@@ -20,19 +24,17 @@ describe Arstotzka::Builder do
   let(:instance)     { clazz.new(json) }
   let(:full_options) { described_class::DEFAULT_OPTIONS.merge(options) }
 
-  subject do
-    described_class.new(attr_names, clazz, **full_options)
-  end
-
   describe '#build' do
-    it 'adds the reader' do
-      expect do
-        subject.build
-      end.to add_method(attr_name).to(clazz)
+    context 'when it is called' do
+      it 'adds the reader' do
+        expect do
+          builder.build
+        end.to add_method(attr_name).to(clazz)
+      end
     end
 
-    context 'after building' do
-      before { subject.build }
+    context 'with being previously called' do
+      before { builder.build }
 
       context 'when building several attributes' do
         let(:attr_names) { %i[id name age] }
@@ -47,19 +49,19 @@ describe Arstotzka::Builder do
           expect(instance.name).to be_nil
         end
 
-        context 'when json has the property' do
+        context 'when json has the property as symbol key' do
           let(:json) { { name: name } }
 
           it 'fetches the value' do
             expect(instance.name).to eq(name)
           end
+        end
 
-          context 'but key is a string' do
-            let(:json) { { 'name' => name } }
+        context 'when json has the property as string key' do
+          let(:json) { { 'name' => name } }
 
-            it 'fetches the value' do
-              expect(instance.name).to eq(name)
-            end
+          it 'fetches the value' do
+            expect(instance.name).to eq(name)
           end
         end
       end

@@ -37,7 +37,7 @@ Instalation
 
 Yard Documentation
 -------------------
-https://www.rubydoc.info/gems/arstotzka/1.0.3
+https://www.rubydoc.info/gems/arstotzka/1.0.4
 
 Getting Started
 ---------------

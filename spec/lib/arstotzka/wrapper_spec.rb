@@ -30,15 +30,21 @@ describe Arstotzka::Wrapper do
 
       it 'creates new instance from given class' do
         expect(result).to be_a(OpenStruct)
+      end
+
+      it 'uses the given value on object initialization' do
         expect(result.a).to eq(hash[:a])
       end
 
       context 'with an array as value' do
         let(:value) { [hash] }
 
-        it 'returns an array of objects of the given class' do
+        it 'returns an array' do
           expect(result).to be_a(Array)
-          expect(result.first).to be_a(OpenStruct)
+        end
+
+        it 'returns an array of objects of the given class' do
+          expect(result).to all(be_a(OpenStruct))
         end
       end
     end

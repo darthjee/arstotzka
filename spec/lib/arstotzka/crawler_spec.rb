@@ -3,22 +3,24 @@
 require 'spec_helper'
 
 describe Arstotzka::Crawler do
-  subject do
+  subject(:crawler) do
     described_class.new default_options.merge(options), &block
   end
+
   let(:block) { proc { |v| v } }
   let(:path) { '' }
   let(:default_options) { { path: path, case_type: :lower_camel } }
   let(:options) { {} }
   let(:json_file) { 'arstotzka.json' }
   let(:json) { load_json_fixture_file(json_file) }
-  let(:value) { subject.value(json) }
+  let(:value) { crawler.value(json) }
 
   context 'when no block is given' do
-    let(:path) { %w[user name] }
-    subject do
+    subject(:crawler) do
       described_class.new default_options.merge(options)
     end
+
+    let(:path) { %w[user name] }
 
     it 'retrieves attribute from base json' do
       expect(value).to eq(json['user']['name'])
@@ -33,7 +35,7 @@ describe Arstotzka::Crawler do
     end
 
     context 'when calling twice' do
-      before { subject.value(json) }
+      before { crawler.value(json) }
 
       it 'can still crawl' do
         expect(value).to eq(json['user']['name'])
@@ -41,7 +43,7 @@ describe Arstotzka::Crawler do
     end
   end
 
-  context 'crawler finds a nil attribute' do
+  context 'when crawler finds a nil attribute' do
     let(:path) { %w[car model] }
 
     it 'returns nil' do
@@ -78,6 +80,7 @@ describe Arstotzka::Crawler do
 
       context 'when setting compact' do
         let(:options) { { compact: true } }
+
         it 'returns the missing values as nil' do
           expect(value).to eq([[1000.0]])
         end
@@ -123,11 +126,13 @@ describe Arstotzka::Crawler do
     context 'when there are nil values' do
       context 'with compact option as false' do
         let(:options) { { compact: false } }
-        before do
-          json['animals'].last['race'] = nil
-        end
+
         let(:expected) do
           ['European squid', 'Macaque monkey', nil]
+        end
+
+        before do
+          json['animals'].last['race'] = nil
         end
 
         it 'eliminate nil values' do
@@ -137,11 +142,13 @@ describe Arstotzka::Crawler do
 
       context 'with compact option' do
         let(:options) { { compact: true } }
-        before do
-          json['animals'].last['race'] = nil
-        end
+
         let(:expected) do
           ['European squid', 'Macaque monkey']
+        end
+
+        before do
+          json['animals'].last['race'] = nil
         end
 
         it 'eliminate nil values' do
@@ -253,7 +260,7 @@ describe Arstotzka::Crawler do
       expect(value).to eq(json[:id])
     end
 
-    context 'crawler finds a nil attribute' do
+    context 'when crawler finds a nil attribute' do
       let(:path) { %w[car model] }
 
       it 'returns nil' do
@@ -268,6 +275,7 @@ describe Arstotzka::Crawler do
 
   context 'when using key with false value' do
     let(:path) { ['has_money'] }
+
     before do
       json['hasMoney'] = false
     end

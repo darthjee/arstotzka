@@ -35,6 +35,7 @@ describe Arstotzka do
   context 'when caching the value' do
     let(:attribute) { :age }
     let!(:old_value) { json['age'] }
+
     before do
       dummy.age
       json['age'] = old_value + 100
@@ -52,36 +53,38 @@ describe Arstotzka do
       expect(value).to be_a(House)
     end
 
-    it 'creates the object with the given json' do
+    it 'creates the object with a method that is instantiated using the hash' do
       expect(value.age).to eq(json['house']['age'])
-      expect(value.value).to eq(json['house']['value'])
-      expect(value.floors).to eq(json['house']['floors'])
     end
 
     context 'when dealing with an array' do
       let(:attribute) { :games }
 
-      it 'returns an array of json wrapped' do
+      it 'returns an array' do
         expect(value).to be_a(Array)
-        value.each do |object|
-          expect(object).to be_a(Game)
-        end
+      end
+
+      it 'returns an array of json wrapped' do
+        expect(value).to all(be_a(Game))
       end
 
       context 'when dealing with multiple level arrays' do
         let(:attribute) { :games }
+
         before do
           json['games'].map! { |j| [j] }
         end
 
-        it 'returns an array of json wrapped' do
+        it 'returns an array' do
           expect(value).to be_a(Array)
-          value.each do |object|
-            expect(object).to be_a(Array)
-            object.each do |game|
-              expect(game).to be_a(Game)
-            end
-          end
+        end
+
+        it 'returns an array of arrays' do
+          expect(value).to all(be_a(Array))
+        end
+
+        it 'wraps each end element' do
+          expect(value).to all(all(be_a(Game)))
         end
       end
     end
@@ -90,22 +93,19 @@ describe Arstotzka do
   context 'when wrapping it with a class and caching' do
     let(:attribute) { :old_house }
     let!(:old_value) { json['oldHouse'] }
-    before do
-      dummy.old_house
-      json['oldHouse'] = {}
-    end
 
     it 'returns an onject wrap' do
       expect(value).to be_a(House)
     end
 
     it 'creates the object with the given json' do
-      expect(value.age).not_to eq(json['oldHouse']['age'])
       expect(value.age).to eq(old_value['age'])
-      expect(value.value).not_to eq(json['oldHouse']['value'])
-      expect(value.value).to eq(old_value['value'])
-      expect(value.floors).not_to eq(json['oldHouse']['floors'])
-      expect(value.floors).to eq(old_value['floors'])
+    end
+
+    it 'caches the resulting object' do
+      expect do
+        json['oldHouse'] = {}
+      end.not_to(change { dummy.old_house.age })
     end
   end
 
