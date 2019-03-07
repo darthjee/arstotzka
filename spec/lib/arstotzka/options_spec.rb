@@ -6,33 +6,15 @@ describe Arstotzka::Options do
   context 'when initializing without options' do
     let(:options_hash) { {} }
 
-    describe '#json' do
-      it 'returns default json option' do
-        expect(subject.json).to eq(:json)
-      end
-    end
-
-    describe '#path' do
+    describe '#after' do
       it do
-        expect(subject.path).to be_nil
-      end
-    end
-
-    describe '#full_path' do
-      it do
-        expect(subject.full_path).to be_nil
+        expect(subject.after).to be_falsey
       end
     end
 
     describe '#cached' do
       it do
         expect(subject.cached).to be_falsey
-      end
-    end
-
-    describe '#after' do
-      it do
-        expect(subject.after).to be_falsey
       end
     end
 
@@ -60,6 +42,24 @@ describe Arstotzka::Options do
       end
     end
 
+    describe '#full_path' do
+      it do
+        expect(subject.full_path).to be_nil
+      end
+    end
+
+    describe '#json' do
+      it 'returns default json option' do
+        expect(subject.json).to eq(:json)
+      end
+    end
+
+    describe '#path' do
+      it do
+        expect(subject.path).to be_nil
+      end
+    end
+
     describe '#type' do
       it do
         expect(subject.type).to eq(:none)
@@ -70,35 +70,17 @@ describe Arstotzka::Options do
   context 'when initializing with options' do
     let(:options_hash) do
       {
-        json:      :hash,
-        path:      'key.sub',
-        full_path: 'key.sub.fetch',
-        cached:    true,
         after:     :method_call,
+        cached:    true,
         case:      :snake,
         compact:   true,
         default:   10,
         flatten:   true,
+        full_path: 'key.sub.fetch',
+        json:      :hash,
+        path:      'key.sub',
         type:      :integer,
       }
-    end
-
-    describe '#json' do
-      it 'returns default json option' do
-        expect(subject.json).to eq(:hash)
-      end
-    end
-
-    describe '#path' do
-      it do
-        expect(subject.path).to eq('key.sub')
-      end
-    end
-
-    describe '#full_path' do
-      it do
-        expect(subject.full_path).to eq('key.sub.fetch')
-      end
     end
 
     describe '#cached' do
@@ -134,6 +116,24 @@ describe Arstotzka::Options do
     describe '#flatten' do
       it do
         expect(subject.flatten).to be_truthy
+      end
+    end
+
+    describe '#full_path' do
+      it do
+        expect(subject.full_path).to eq('key.sub.fetch')
+      end
+    end
+
+    describe '#json' do
+      it 'returns default json option' do
+        expect(subject.json).to eq(:hash)
+      end
+    end
+
+    describe '#path' do
+      it do
+        expect(subject.path).to eq('key.sub')
       end
     end
 
