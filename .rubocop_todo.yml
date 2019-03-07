@@ -11,11 +11,6 @@
 Metrics/ParameterLists:
   Max: 7
 
-# Offense count: 1
-RSpec/DescribeClass:
-  Exclude:
-    - 'spec/integration/readme/default_spec.rb'
-
 # Offense count: 8
 # Configuration parameters: AggregateFailuresByDefault.
 RSpec/MultipleExpectations:
