@@ -14,9 +14,11 @@ module Arstotzka
     #   - snake: keys in the hash are snake_case
     #
     # @return [Aristotzka::Reader]
-    def initialize(path:, case_type:)
-      @case_type = case_type
-      @path = path.map(&method(:change_case))
+    def initialize(options = nil, **options_hash)
+      options ||= Arstotzka::Options.new(options_hash)
+
+      @options = options
+      @path = options.path.map(&method(:change_case))
     end
 
     # Reads the value of one key in the hash
@@ -76,7 +78,8 @@ module Arstotzka
     private
 
     # @private
-    attr_reader :path, :case_type
+    attr_reader :path, :options
+    delegate :case_type, to: :options
 
     # @private
     #
