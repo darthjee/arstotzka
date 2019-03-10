@@ -134,10 +134,7 @@ module Arstotzka
     #
     # @return [Arstotzka::Reader] Object responsible for extracting values out of the hash
     def reader
-      @reader ||= Arstotzka::Reader.new(
-        path: path,
-        case_type: case_type
-      )
+      @reader ||= Arstotzka::Reader.new(options)
     end
 
     # @private
