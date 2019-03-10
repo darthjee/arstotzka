@@ -119,18 +119,7 @@ module Arstotzka
     #
     # @return [Arstotzka::Wrapper] the wrapper
     def wrapper
-      @wrapper ||= Arstotzka::Wrapper.new(wrapper_options)
-    end
-
-    # @private
-    #
-    # Hash for wrapper initialization
-    #
-    # @return [Hash]
-    #
-    # @see #wrapper
-    def wrapper_options
-      options.to_h.slice(:clazz, :type)
+      @wrapper ||= Arstotzka::Wrapper.new(options)
     end
   end
 end
