@@ -26,11 +26,10 @@ module Arstotzka
     # @param compact [Boolean] flag signallying if nil values should be removed of an array
     # @param default [Object] default value to be returned when failing to fetch a value
     # @param block [Proc] block to be ran over the fetched value before returning it
-    def initialize(path:, case_type: :lower_camel, compact: false, default: nil, &block)
-      @case_type = case_type
-      @compact = compact
-      @default = default
-      @path = path
+    def initialize(options = nil, **options_hash, &block)
+      options ||= Arstotzka::Options.new(options_hash)
+      @options = options
+
       @post_process = block || proc { |value| value }
     end
 
@@ -95,7 +94,8 @@ module Arstotzka
     private
 
     # @private
-    attr_reader :post_process, :path, :case_type, :compact, :default
+    attr_reader :post_process, :options
+    delegate :path, :case_type, :compact, :default, to: :options
 
     # Fetch the value from hash by crawling the keys
     #
