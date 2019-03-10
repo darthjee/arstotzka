@@ -52,15 +52,15 @@ module Arstotzka
 
     # Returns new instance of Arstotzka::Builder
     # @param attr_names [Array] list of attributes to be fetched from the hash/json
-    # @param clazz [Class] class to receive the methods
-    # @param path [String/Symbol] path of hash attributes to find the root
-    #   where the attribute live (then fetching it using the attribute name)
-    # @param full_path [String/Symbol] path of hash attributes to find exacttly where the
-    #   value live (ignoring the attribute name)
-    # @param cached [Boolean] flag if the result should be memorized instead of repeating
-    #   the crawling
-    # @param json [String/Symbol] name of the method containing the Hash/json to be crawled
     # @param options [Hash] hash containing extra options
+    # @option optison [Class] klass: class to receive the methods
+    # @option options [String/Symbol] path: path of hash attributes to find the root
+    #   where the attribute live (then fetching it using the attribute name)
+    # @option options [String/Symbol] full_path: path of hash attributes to find exacttly where the
+    #   value live (ignoring the attribute name)
+    # @option options [String/Symbol] json: name of the method containing the Hash/json to be crawled
+    # @option options [Boolean] cached: flag if the result should be memorized instead of repeating
+    #   the crawling
     # @option options [String/Symbol] case:  {Reader} flag definining on which case will
     #   the keys be defined
     #   - lower_camel: keys in the hash are lowerCamelCase
@@ -79,21 +79,20 @@ module Arstotzka
     #   - integer
     #   - string
     #   - float
-    def initialize(attr_names, clazz, json:, path:, full_path:, cached:, **options)
-      super(clazz, options)
+    def initialize(attr_names, clazz, **options)
+      super(clazz)
+
+      @options = Options.new(options)
 
       @attr_names = attr_names
-      @path = path
-      @full_path = full_path
-      @cached = cached
-      @json_name = json
       init
     end
 
     private
 
     # @private
-    attr_reader :attr_names, :json_name, :path, :full_path, :cached
+    attr_reader :attr_names, :options
+    delegate :json_name, :path, :full_path, :cached, to: :options
 
     # @private
     #
@@ -129,7 +128,7 @@ module Arstotzka
     #
     # @see Arstotzka::Wrapper
     def wrapper_clazz
-      options[:class]
+      options.klass
     end
 
     # @private
@@ -145,7 +144,7 @@ module Arstotzka
     #
     # @see Arstotzka::Reader
     def case_type
-      options[:case]
+      options.to_h[:case]
     end
 
     # @private
@@ -158,7 +157,7 @@ module Arstotzka
     #
     # @see Arstotzka::Fetcher
     def fetcher_options(attribute)
-      options.slice(:compact, :after, :type, :flatten, :default).merge(
+      options.to_h.slice(:compact, :after, :type, :flatten, :default).merge(
         clazz: wrapper_clazz,
         case_type: case_type,
         path: real_path(attribute)
@@ -176,6 +175,10 @@ module Arstotzka
     # @see Sinclair
     def add_attr(attribute)
       add_method attribute, (cached ? cached_fetcher(attribute) : attr_fetcher(attribute)).to_s
+    end
+
+    def json_name
+      options.json
     end
 
     # Returns the code needed to initialize fetcher
