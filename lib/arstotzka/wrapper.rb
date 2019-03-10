@@ -12,9 +12,10 @@ module Arstotzka
     # @param clazz [Class] class to wrap the value
     # @param type [String/Symbol] type to cast the value. The
     #   possible type_cast is defined by {TypeCast}
-    def initialize(clazz: nil, type: nil)
-      @clazz = clazz
-      @type = type
+    def initialize(options = nil, **options_hash)
+      options ||= Arstotzka::Options.new(options_hash)
+
+      @options = options
     end
 
     # wrap a value
@@ -58,7 +59,8 @@ module Arstotzka
     private
 
     # @private
-    attr_reader :clazz, :type
+    attr_reader :options
+    delegate :clazz, :type, to: :options
 
     # @private
     #
