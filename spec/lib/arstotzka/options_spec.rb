@@ -187,4 +187,20 @@ describe Arstotzka::Options do
       end
     end
   end
+
+  describe '#merge' do
+    let(:options_hash) { { json: :hash, default: 10 } }
+
+    it do
+      expect(options.merge(default: 10)).to be_a(described_class)
+    end
+
+    it 'overrides values' do
+      expect(options.merge(default: 10).default).to eq(10)
+    end
+
+    it 'keeps not overriten value' do
+      expect(options.merge(default: 10).json).to eq(:hash)
+    end
+  end
 end
