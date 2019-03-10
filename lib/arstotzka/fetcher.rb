@@ -6,19 +6,19 @@ module Arstotzka
   # Class responsible for orquestrating the fetch value from the hash
   # and post-processing it
   class Fetcher
-    include Sinclair::OptionsParser
-
     # Creates an instance of Artotzka::Fetcher
     #
     # @param hash [Hash] Hash to be crawled for value
     # @param instance [Object] object whose methods will be called after for processing
     # @param path [String/Symbol] complete path for fetching the value from hash
     # @param options [Hash] options that will be passed to {Crawler}, {Wrapper} and {Reader}
-    def initialize(hash, instance, path:, **options)
-      @path = path.to_s.split('.')
+    def initialize(hash, instance, options = nil, **options_hash)
+      options ||= Arstotzka::Options.new(options_hash)
+      @options = options
+
+      @path = options.path.to_s.split('.')
       @hash = hash
       @instance = instance
-      @options = options
     end
 
     # Crawls the hash for the value
@@ -82,9 +82,9 @@ module Arstotzka
     private
 
     # @private
-    attr_reader :path, :hash, :instance
+    attr_reader :path, :hash, :instance, :options
 
-    delegate :after, :flatten, to: :options_object
+    delegate :after, :flatten, to: :options
     delegate :wrap, to: :wrapper
 
     # @private
@@ -110,7 +110,7 @@ module Arstotzka
     #
     # @see #crawler
     def crawler_options
-      options.slice(:case_type, :compact, :default).merge(path: path)
+      options.to_h.slice(:case_type, :compact, :default).merge(path: path)
     end
 
     # @private
@@ -130,7 +130,7 @@ module Arstotzka
     #
     # @see #wrapper
     def wrapper_options
-      options.slice(:clazz, :type)
+      options.to_h.slice(:clazz, :type)
     end
   end
 end
