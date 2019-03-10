@@ -10,13 +10,13 @@ module Arstotzka
     #
     # @param hash [Hash] Hash to be crawled for value
     # @param instance [Object] object whose methods will be called after for processing
-    # @param path [String/Symbol] complete path for fetching the value from hash
+    # @param keys [String/Symbol] complete keys for fetching the value from hash
     # @param options [Hash] options that will be passed to {Crawler}, {Wrapper} and {Reader}
     def initialize(hash, instance, options = nil, **options_hash)
       options ||= Arstotzka::Options.new(options_hash)
       @options = options
 
-      @path = options.path.to_s.split('.')
+      @keys = options.path.to_s.split('.')
       @hash = hash
       @instance = instance
     end
@@ -63,7 +63,7 @@ module Arstotzka
     #   }
     #   instance = Account.new
     #   fetcher = Arstotzka::Fetcher.new(hash, instance,
-    #     path: 'transactions',
+    #     keys: 'transactions',
     #     clazz: Transaction,
     #     after: :filter_income
     #   )
@@ -82,7 +82,7 @@ module Arstotzka
     private
 
     # @private
-    attr_reader :path, :hash, :instance, :options
+    attr_reader :keys, :hash, :instance, :options
 
     delegate :after, :flatten, to: :options
     delegate :wrap, to: :wrapper
@@ -110,7 +110,7 @@ module Arstotzka
     #
     # @see #crawler
     def crawler_options
-      options.to_h.slice(:case_type, :compact, :default).merge(path: path)
+      options.to_h.slice(:case_type, :compact, :default).merge(keys: keys)
     end
 
     # @private

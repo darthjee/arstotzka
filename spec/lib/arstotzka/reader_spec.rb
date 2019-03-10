@@ -24,10 +24,10 @@ end
 
 describe Arstotzka::Reader do
   subject(:reader) do
-    described_class.new(path: path, case_type: case_type)
+    described_class.new(keys: keys, case_type: case_type)
   end
 
-  let(:path) { %w[user full_name] }
+  let(:keys) { %w[user full_name] }
   let(:json_file) { 'complete_person.json' }
   let(:full_json) { load_json_fixture_file(json_file) }
   let(:json) { full_json }
@@ -41,12 +41,12 @@ describe Arstotzka::Reader do
 
       it_behaves_like 'reader fetchin value'
 
-      context 'when the path case is changed' do
+      context 'when the keys case is changed' do
         let(:json) { full_json['user'] }
         let(:index) { 1 }
 
         context 'with snake_case type' do
-          let(:path) { %w[user FullName] }
+          let(:keys) { %w[user FullName] }
           let(:expected) { json['full_name'] }
 
           it_behaves_like 'reader fetchin value'
@@ -54,7 +54,7 @@ describe Arstotzka::Reader do
 
         context 'with upper_camel type' do
           let(:case_type) { :upper_camel }
-          let(:path) { %w[user login_name] }
+          let(:keys) { %w[user login_name] }
           let(:expected) { json['LoginName'] }
 
           it_behaves_like 'reader fetchin value'
@@ -62,7 +62,7 @@ describe Arstotzka::Reader do
 
         context 'with lower_camel type' do
           let(:case_type) { :lower_camel }
-          let(:path) { %w[user birth_date] }
+          let(:keys) { %w[user birth_date] }
           let(:expected) { json['birthDate'] }
 
           it_behaves_like 'reader fetchin value'
@@ -72,7 +72,7 @@ describe Arstotzka::Reader do
       context 'when key is found but value is null' do
         let(:json) { full_json['user'] }
         let(:index) { 1 }
-        let(:path) { %w[user password_reminder] }
+        let(:keys) { %w[user password_reminder] }
 
         it do
           expect(reader.read(json, index)).to be_nil
@@ -86,7 +86,7 @@ describe Arstotzka::Reader do
       end
 
       context 'when json has both string and symble' do
-        let(:path) { %w[key] }
+        let(:keys) { %w[key] }
         let(:json) { { key: 'symbol', 'key' => 'string' } }
 
         it 'fetches the string key first' do
@@ -96,7 +96,7 @@ describe Arstotzka::Reader do
     end
 
     context 'when the key is missing' do
-      let(:path) { %w[age] }
+      let(:keys) { %w[age] }
 
       it do
         expect do
@@ -107,13 +107,13 @@ describe Arstotzka::Reader do
   end
 
   describe 'ended?' do
-    context 'when index is within path' do
+    context 'when index is within keys' do
       let(:index) { 1 }
 
       it { expect(reader).not_to be_ended(index) }
     end
 
-    context 'when index is outside path' do
+    context 'when index is outside keys' do
       let(:index) { 2 }
 
       it { expect(reader).to be_ended(index) }

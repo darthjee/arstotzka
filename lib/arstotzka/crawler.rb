@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Arstotzka
-  # Crawl a hash through the path of keys
+  # Crawl a hash through the keys of keys
   #
   # @api private
   #
@@ -18,7 +18,7 @@ module Arstotzka
   class Crawler
     # Creates a new instance of Crawler
     #
-    # @param path [Array] path of keys to be crawled
+    # @param keys [Array] keys of keys to be crawled
     # @param case_type [Symbol] case type of the keys
     #   - snake: snake_cased keys
     #   - lower_camel: lowerCamelCased keys
@@ -33,10 +33,10 @@ module Arstotzka
       @post_process = block || proc { |value| value }
     end
 
-    # Crawls into the hash looking for all keys in the given path
+    # Crawls into the hash looking for all keys in the given keys
     # @overload value(hash)
     # @return [Object] value fetched from the last Hash#fetch call using the last part
-    #   of path
+    #   of keys
     #
     # @example
     #   crawler = Arstotzka::Crawler.new(%w(person information first_name))
@@ -95,7 +95,7 @@ module Arstotzka
 
     # @private
     attr_reader :post_process, :options
-    delegate :path, :case_type, :compact, :default, to: :options
+    delegate :keys, :case_type, :compact, :default, to: :options
 
     # Fetch the value from hash by crawling the keys
     #

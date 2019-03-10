@@ -4,9 +4,9 @@ require 'spec_helper'
 
 describe Arstotzka::Reader do
   describe 'yard' do
-    subject(:reader) { described_class.new(path: path, case_type: case_type) }
+    subject(:reader) { described_class.new(keys: keys, case_type: case_type) }
 
-    let(:path) { %w[person full_name] }
+    let(:keys) { %w[person full_name] }
     let(:case_type) { :snake }
 
     describe '#read' do
@@ -27,7 +27,7 @@ describe Arstotzka::Reader do
         end
 
         context 'when key is missing' do
-          let(:path) { %w[person car_collection model] }
+          let(:keys) { %w[person car_collection model] }
 
           it do
             expect do
@@ -39,7 +39,7 @@ describe Arstotzka::Reader do
 
       context 'when using lowerCamel' do
         let(:case_type) { :lower_camel }
-        let(:path) { %w[person car_collection model] }
+        let(:keys) { %w[person car_collection model] }
 
         it 'fetches the value using lower camel case key' do
           expected = [
@@ -52,7 +52,7 @@ describe Arstotzka::Reader do
 
       context 'when using UpperCamel' do
         let(:case_type) { :upper_camel }
-        let(:path) { %w[person age] }
+        let(:keys) { %w[person age] }
 
         it 'fetches the value using uper camel case key' do
           expect(reader.read(hash, 1)).to eq(23)

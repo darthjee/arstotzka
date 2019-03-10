@@ -3,11 +3,11 @@
 module Arstotzka
   # @api private
   #
-  # Reads a value from a hash using the path as list of keys
+  # Reads a value from a hash using the keys as list of keys
   class Reader
     # Creates a new instance of Reader
     #
-    # @param path [Array] path of keys broken down as array
+    # @param keys [Array] keys of keys broken down as array
     # @param case_type [Symbol] Case of the keys
     #   - lower_camel: keys in the hash are lowerCamelCase
     #   - upper_camel: keys in the hash are UpperCamelCase
@@ -18,13 +18,13 @@ module Arstotzka
       options ||= Arstotzka::Options.new(options_hash)
 
       @options = options
-      @path = options.path.map(&method(:change_case))
+      @keys = options.keys.map(&method(:change_case))
     end
 
     # Reads the value of one key in the hash
     #
     # @param hash [Hash] hash to be read
-    # @param index [Integer] Index of the key (in path) to be used
+    # @param index [Integer] Index of the key (in keys) to be used
     #
     # @return [Object] The value fetched from the hash
     #
@@ -56,7 +56,7 @@ module Arstotzka
     #                        #   { maker: 'BMW', 'model' => 'Jetta' }
     #                        # ]
     def read(hash, index)
-      key = path[index]
+      key = keys[index]
 
       check_key!(hash, key)
 
@@ -65,20 +65,20 @@ module Arstotzka
 
     # @private
     #
-    # Checks if index is within path range
+    # Checks if index is within keys range
     #
     # @example
     #   reader = Arstotzka::Reader.new(%w(person full_name), case_type: :snake)
     #   reader.read(hash, 1) # returns false
     #   reader.read(hash, 2) # returns true
     def ended?(index)
-      index >= path.size
+      index >= keys.size
     end
 
     private
 
     # @private
-    attr_reader :path, :options
+    attr_reader :keys, :options
     delegate :case_type, to: :options
 
     # @private

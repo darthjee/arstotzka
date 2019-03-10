@@ -5,11 +5,11 @@ require 'spec_helper'
 describe Arstotzka::Crawler do
   describe 'yard' do
     subject(:crawler) do
-      described_class.new(path: path, **options)
+      described_class.new(keys: keys, **options)
     end
 
     let(:options) { {} }
-    let(:path)    { %w[person information first_name] }
+    let(:keys)    { %w[person information first_name] }
     let(:hash) do
       {
         person: {
@@ -25,14 +25,14 @@ describe Arstotzka::Crawler do
     end
 
     describe '#value' do
-      context 'when hash contains the path' do
+      context 'when hash contains the keys' do
         it 'crawls to find the value' do
           expect(crawler.value(hash)).to eq('John')
         end
       end
 
       context 'when we have an array of arrays' do
-        let(:path)    { %w[companies games hero_name] }
+        let(:keys)    { %w[companies games hero_name] }
         let(:options) { { compact: true, case_type: :snake } }
         let(:hash) do
           {
@@ -64,7 +64,7 @@ describe Arstotzka::Crawler do
 
         context 'when block is given' do
           subject(:crawler) do
-            described_class.new(path: path, **options) { |value| value&.to_sym }
+            described_class.new(keys: keys, **options) { |value| value&.to_sym }
           end
 
           it 'returns the post processed values' do
