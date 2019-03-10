@@ -20,6 +20,7 @@ module Arstotzka
       merged = DEFAULT_OPTIONS.merge(options)
       klass = merged.delete(:class)
       merged[:klass] ||= klass
+      warn ":class has been deprecated, prefer 'expose class: #{klass}'" if klass
 
       super(merged)
     end

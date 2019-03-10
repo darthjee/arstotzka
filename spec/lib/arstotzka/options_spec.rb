@@ -158,19 +158,32 @@ describe Arstotzka::Options do
   end
 
   describe '#klass' do
+    before do
+      allow_any_instance_of(described_class)
+        .to receive(:warn)
+    end
+
     context 'when initializing with old class key' do
       let(:options_hash) { { class: Star } }
 
-      it do
+      it 'returns the configured class' do
         expect(options.klass).to eq(Star)
+      end
+
+      it 'raises a warn' do
+        expect(options).to have_received(:warn)
       end
     end
 
     context 'when initializing with old class key and klass' do
       let(:options_hash) { { class: Star, klass: Game } }
 
-      it do
+      it 'returns the configured class' do
         expect(options.klass).to eq(Game)
+      end
+
+      it 'raises a warn' do
+        expect(options).to have_received(:warn)
       end
     end
   end
