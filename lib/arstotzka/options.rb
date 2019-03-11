@@ -39,9 +39,6 @@ module Arstotzka
       warn ":class has been deprecated, prefer 'expose class: #{klass}'" if klass
       options[:klass] ||= klass
 
-      case_type = options.delete(:case_type)
-      options[:case] = case_type if case_type
-
       options
     end
   end

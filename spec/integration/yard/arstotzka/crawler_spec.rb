@@ -33,7 +33,7 @@ describe Arstotzka::Crawler do
 
       context 'when we have an array of arrays' do
         let(:keys)    { %w[companies games hero_name] }
-        let(:options) { { compact: true, case_type: :snake } }
+        let(:options) { { compact: true, case: :snake } }
         let(:hash) do
           {
             'companies' => [{
@@ -55,7 +55,7 @@ describe Arstotzka::Crawler do
         end
 
         context 'with default value' do
-          let(:options) { { compact: true, case_type: :snake, default: 'NO HERO' } }
+          let(:options) { { compact: true, case: :snake, default: 'NO HERO' } }
 
           it 'return default value for missed keys' do
             expect(crawler.value(hash)).to eq([['NO HERO', 'Rakhar'], 'NO HERO'])
