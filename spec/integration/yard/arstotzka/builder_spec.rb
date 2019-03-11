@@ -5,7 +5,7 @@ require 'spec_helper'
 describe Arstotzka::Builder do
   describe 'yard' do
     let!(:instance) { klass.new(hash) }
-    let(:full_options) { described_class::DEFAULT_OPTIONS.merge(options) }
+    let(:full_options) { Arstotzka::Options::DEFAULT_OPTIONS.merge(options) }
     let(:hash) do
       {
         'name' => { first: 'John', last: 'Williams' },

@@ -22,7 +22,7 @@ describe Arstotzka::Builder do
   let(:attr_names)   { [attr_name] }
   let(:json)         { {} }
   let(:instance)     { klass.new(json) }
-  let(:full_options) { described_class::DEFAULT_OPTIONS.merge(options) }
+  let(:full_options) { Arstotzka::Options::DEFAULT_OPTIONS.merge(options) }
 
   describe '#build' do
     context 'when it is called' do

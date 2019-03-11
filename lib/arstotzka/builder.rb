@@ -36,20 +36,6 @@ module Arstotzka
   #
   # @see https://www.rubydoc.info/gems/sinclair Sinclair
   class Builder < Sinclair
-    DEFAULT_OPTIONS = {
-      json:     :json,
-      path:     nil,
-      full_path: nil,
-      cached: false,
-      after:     false,
-      case:      :lower_camel,
-      klass:     nil,
-      compact: false,
-      default: nil,
-      flatten:   false,
-      type:      :none
-    }.freeze
-
     # Returns new instance of Arstotzka::Builder
     #
     # @param attr_names [Array] list of attributes to be fetched from the hash/json
