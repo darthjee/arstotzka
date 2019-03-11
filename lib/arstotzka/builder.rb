@@ -133,22 +133,6 @@ module Arstotzka
 
     # @private
     #
-    # Fetches the case of the keys
-    #
-    # case types can be
-    #   - lower_camel: keys in the hash are lowerCamelCase
-    #   - upper_camel: keys in the hash are UpperCamelCase
-    #   - snake: keys in the hash are snake_case
-    #
-    # @return [Symbol/String] defined case_type
-    #
-    # @see Arstotzka::Reader
-    def case_type
-      options.to_h[:case]
-    end
-
-    # @private
-    #
     # Options needed by fetcher
     #
     # @param [String/Symbol] attribute name of the method / attribute
@@ -157,9 +141,8 @@ module Arstotzka
     #
     # @see Arstotzka::Fetcher
     def fetcher_options(attribute)
-      options.to_h.slice(:compact, :after, :type, :flatten, :default).merge(
+      options.to_h.slice(:case, :compact, :after, :type, :flatten, :default).merge(
         clazz: wrapper_clazz,
-        case_type: case_type,
         path: real_path(attribute)
       )
     end

@@ -9,7 +9,7 @@ describe Arstotzka::Crawler do
 
   let(:block) { proc { |v| v } }
   let(:keys) { '' }
-  let(:default_options) { { keys: keys, case_type: :lower_camel } }
+  let(:default_options) { { keys: keys, case: :lower_camel } }
   let(:options) { {} }
   let(:json_file) { 'arstotzka.json' }
   let(:json) { load_json_fixture_file(json_file) }
@@ -235,7 +235,7 @@ describe Arstotzka::Crawler do
   context 'when using a snake case' do
     let(:json) { { snake_cased: 'snake', snakeCased: 'Camel' }.stringify_keys }
     let(:keys) { ['snake_cased'] }
-    let(:options) { { case_type: :snake } }
+    let(:options) { { case: :snake } }
 
     it 'fetches from snake cased fields' do
       expect(value).to eq('snake')
@@ -245,7 +245,7 @@ describe Arstotzka::Crawler do
   context 'when using a upper camel case' do
     let(:json) { { UpperCase: 'upper', upperCase: 'lower' }.stringify_keys }
     let(:keys) { ['upper_case'] }
-    let(:options) { { case_type: :upper_camel } }
+    let(:options) { { case: :upper_camel } }
 
     it 'fetches from upper camel cased fields' do
       expect(value).to eq('upper')

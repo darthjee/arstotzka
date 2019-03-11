@@ -110,7 +110,7 @@ module Arstotzka
     #
     # @see #crawler
     def crawler_options
-      options.to_h.slice(:case_type, :compact, :default).merge(keys: keys)
+      options.to_h.slice(:case, :compact, :default).merge(keys: keys)
     end
 
     # @private

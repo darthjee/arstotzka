@@ -24,7 +24,7 @@ end
 
 describe Arstotzka::Reader do
   subject(:reader) do
-    described_class.new(keys: keys, case_type: case_type)
+    described_class.new(keys: keys, case: case_type)
   end
 
   let(:keys) { %w[user full_name] }

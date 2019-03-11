@@ -19,7 +19,7 @@ module Arstotzka
     # Creates a new instance of Crawler
     #
     # @param keys [Array] keys of keys to be crawled
-    # @param case_type [Symbol] case type of the keys
+    # @param case [Symbol] case type of the keys
     #   - snake: snake_cased keys
     #   - lower_camel: lowerCamelCased keys
     #   - upper_camel: UperCamelCased keys
@@ -52,7 +52,7 @@ module Arstotzka
     # @example
     #   crawler = Arstotzka::Crawler.new(
     #     %w(companies games hero),
-    #     compact: true, case_type: :snake
+    #     compact: true, case: :snake
     #   )
     #   games_hash = {
     #     'companies' => [{
@@ -73,7 +73,7 @@ module Arstotzka
     # @example
     #   crawler = Arstotzka::Crawler.new(
     #     %w(companies games hero),
-    #     compact: true, case_type: :snake, default: 'NO HERO'
+    #     compact: true, case: :snake, default: 'NO HERO'
     #   )
     #
     #   crawler.value(games_hash) # returns [['NO HERO', 'Rakhar'], 'NO HERO']
@@ -81,7 +81,7 @@ module Arstotzka
     # @example
     #   crawler = Arstotzka::Crawler.new(
     #     %w(companies games hero),
-    #     compact: true, case_type: :snake
+    #     compact: true, case: :snake
     #   ) { |value| value.&to_sym }
     #
     #   crawler.value(games_hash) # returns [[:Rakhar]]
@@ -95,7 +95,7 @@ module Arstotzka
 
     # @private
     attr_reader :post_process, :options
-    delegate :keys, :case_type, :compact, :default, to: :options
+    delegate :keys, :compact, :default, to: :options
 
     # Fetch the value from hash by crawling the keys
     #
