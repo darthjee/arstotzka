@@ -43,7 +43,7 @@ module Arstotzka
       cached: false,
       after:     false,
       case:      :lower_camel,
-      class:     nil,
+      klass:     nil,
       compact: false,
       default: nil,
       flatten:   false,
@@ -68,7 +68,7 @@ module Arstotzka
     #   - snake: keys in the hash are snake_case
     # @option options [Boolean] compact:  {Crawler} flag to apply Array#compact thus
     #   removing nil results
-    # @option options [Class] class:  {Fetcher} option thatwhen passed, wraps the result in an
+    # @option options [Class] klass:  {Fetcher} option thatwhen passed, wraps the result in an
     #   instance of the given class
     # @option options [String/Symbol] after:  {Fetcher} option with the name of the method to be
     #   called once the value is fetched for mapping the value

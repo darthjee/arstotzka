@@ -9,10 +9,10 @@ module Arstotzka
     expose :name, path: 'user'
     expose :father_name, full_path: 'father.name'
     expose :age, cached: true
-    expose :house, class: ::House
-    expose :old_house, class: ::House, cached: true
-    expose :games, class: ::Game
-    expose :games_filtered, class: ::Game, after: :filter_games, full_path: 'games'
+    expose :house, klass: ::House
+    expose :old_house, klass: ::House, cached: true
+    expose :games, klass: ::Game
+    expose :games_filtered, klass: ::Game, after: :filter_games, full_path: 'games'
 
     def initialize(json)
       @json = json

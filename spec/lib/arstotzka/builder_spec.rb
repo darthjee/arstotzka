@@ -89,7 +89,7 @@ describe Arstotzka::Builder do
 
       context 'when wrapping with a class' do
         let(:json) { { person: name } }
-        let(:options) { { class: Person } }
+        let(:options) { { klass: Person } }
         let(:attr_name) { :person }
 
         it do

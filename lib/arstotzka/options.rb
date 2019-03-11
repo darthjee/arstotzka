@@ -36,7 +36,7 @@ module Arstotzka
 
     def correct_keys(options)
       klass = options.delete(:class)
-      warn ":class has been deprecated, prefer 'expose class: #{klass}'" if klass
+      warn ":class has been deprecated, prefer 'expose klass: #{klass}'" if klass
       options[:klass] ||= klass
 
       options
