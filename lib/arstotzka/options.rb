@@ -57,11 +57,14 @@ module Arstotzka
       warn ":class has been deprecated, prefer 'expose klass: #{klass}'" if klass
       options[:klass] ||= klass
 
-      options = DEFAULT_OPTIONS.merge(options)
-
-      super(options)
+      super(DEFAULT_OPTIONS.merge(options))
     end
 
+    # @private
+    #
+    # Creates a new instance mergin the given hash with @options
+    #
+    # @return Arstotzka::Options
     def merge(options)
       self.class.new(to_h.merge(options))
     end
