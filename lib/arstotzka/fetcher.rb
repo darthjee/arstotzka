@@ -83,7 +83,6 @@ module Arstotzka
 
     # @private
     attr_reader :keys, :hash, :instance, :options
-
     delegate :after, :flatten, to: :options
     delegate :wrap, to: :wrapper
 
