@@ -28,7 +28,7 @@ module Arstotzka
     #   where the attribute live (then fetching it using the attribute name)
     # @option options [String/Symbol] full_path: path of hash attributes to find exacttly where the
     #   value live (ignoring the attribute name)
-    # @option options [String/Symbol] json: name of the method containing the Hash/json to be crawled
+    # @option options [String/Symbol] json: name of the method containing the hash to be crawled
     # @option options [Boolean] cached: flag if the result should be memorized instead of repeating
     #   the crawling
     # @option options [String/Symbol] case:  {Reader} flag definining on which case will

@@ -29,7 +29,7 @@ module Arstotzka
     #     - snake: snake_cased keys
     #     - lower_camel: lowerCamelCased keys
     #     - upper_camel: UperCamelCased keys
-    #   @option options compact [Boolean] flag signallying if nil values should be removed of an array
+    #   @option options compact [Boolean] flag signallying if nil values should be removed of array
     #   @option options default [Object] default value to be returned when failing to fetch a value
     #
     # @overload initialize(options, &block)

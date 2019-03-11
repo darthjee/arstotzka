@@ -21,7 +21,7 @@ module Arstotzka
                    Options.new(options)
                  else
                    options
-        end
+                 end
     end
   end
 end
