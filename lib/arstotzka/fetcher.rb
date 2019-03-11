@@ -12,8 +12,7 @@ module Arstotzka
     #
     # @param hash [Hash] Hash to be crawled for value
     # @param instance [Object] object whose methods will be called after for processing
-    # @param keys [String/Symbol] complete keys for fetching the value from hash
-    # @param options [Hash] options that will be passed to {Crawler}, {Wrapper} and {Reader}
+    # @param options_hash [Hash] options that will be passed to {Crawler}, {Wrapper} and {Reader}
     def initialize(hash, instance, options_hash = {})
       self.options = options_hash
 

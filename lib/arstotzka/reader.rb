@@ -9,13 +9,17 @@ module Arstotzka
 
     # Creates a new instance of Reader
     #
-    # @param keys [Array] keys of keys broken down as array
-    # @param case [Symbol] Case of the keys
-    #   - lower_camel: keys in the hash are lowerCamelCase
-    #   - upper_camel: keys in the hash are UpperCamelCase
-    #   - snake: keys in the hash are snake_case
+    # @overload initialize(options_hash={})
+    #   @param options_hash [Hash] options of initialization
+    #   @option options_hash keys [Array] keys of keys broken down as array
+    #   @option options_hash case [Symbol] Case of the keys
+    #     - lower_camel: keys in the hash are lowerCamelCase
+    #     - upper_camel: keys in the hash are UpperCamelCase
+    #     - snake: keys in the hash are snake_case
+    # @overload initialize(options)
+    #   @param options [Arstotzka::Options] options of initialization object
     #
-    # @return [Aristotzka::Reader]
+    # @return [Arstotzka::Reader]
     def initialize(options_hash = {})
       self.options = options_hash
 

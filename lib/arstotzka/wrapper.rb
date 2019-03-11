@@ -10,9 +10,16 @@ module Arstotzka
 
     # Returns a new instance of Wrapper
     #
-    # @param klass [Class] class to wrap the value
-    # @param type [String/Symbol] type to cast the value. The
-    #   possible type_cast is defined by {TypeCast}
+    # @overload initialize(options_hash={})
+    #   @param options_hash [Hash] options of initialization
+    #   @option options_hash klass [Class] class to wrap the value
+    #   @option options_hash type [String/Symbol] type to cast the value. The
+    #     possible type_cast is defined by {TypeCast}
+    #
+    # @overload initialize(options)
+    #   @param options [Arstotzka::Options] options of initialization object
+    #
+    # @return [Arstotzka::Wrapper]
     def initialize(options = {})
       self.options = options
     end

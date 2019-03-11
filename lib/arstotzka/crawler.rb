@@ -20,14 +20,20 @@ module Arstotzka
 
     # Creates a new instance of Crawler
     #
-    # @param keys [Array] keys of keys to be crawled
-    # @param case [Symbol] case type of the keys
-    #   - snake: snake_cased keys
-    #   - lower_camel: lowerCamelCased keys
-    #   - upper_camel: UperCamelCased keys
-    # @param compact [Boolean] flag signallying if nil values should be removed of an array
-    # @param default [Object] default value to be returned when failing to fetch a value
     # @param block [Proc] block to be ran over the fetched value before returning it
+    #
+    # @overload initialize(options_hash={}, &block)
+    #   @param options [Hash] options of initialization
+    #   @option options keys [Array] keys of keys to be crawled
+    #   @option options case [Symbol] case type of the keys
+    #     - snake: snake_cased keys
+    #     - lower_camel: lowerCamelCased keys
+    #     - upper_camel: UperCamelCased keys
+    #   @option options compact [Boolean] flag signallying if nil values should be removed of an array
+    #   @option options default [Object] default value to be returned when failing to fetch a value
+    #
+    # @overload initialize(options, &block)
+    #   @param options [Arstotzka::Options] options of initialization object
     def initialize(options = {}, &block)
       self.options = options
 
