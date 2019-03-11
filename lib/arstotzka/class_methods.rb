@@ -35,7 +35,7 @@ module Arstotzka
     #   instance.age        # returns 20
     #   instance.cars       # returns 2
     #
-    # @return nil
+    # @return [Array<Sinclair::MethodDefinition>]
     #
     # @see Builder Arstotzka::Builder
     # @see

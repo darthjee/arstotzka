@@ -6,7 +6,7 @@ module Arstotzka
   # @api private
   #
   # @example
-  #   crawler = Arstotzka::Crawler.new(%w(person information first_name))
+  #   crawler = Arstotzka::Crawler.new(keys: %w(person information first_name))
   #   hash = {
   #     person: {
   #       'information' => {
@@ -41,12 +41,12 @@ module Arstotzka
     end
 
     # Crawls into the hash looking for all keys in the given keys
-    # @overload value(hash)
+    #
     # @return [Object] value fetched from the last Hash#fetch call using the last part
     #   of keys
     #
     # @example
-    #   crawler = Arstotzka::Crawler.new(%w(person information first_name))
+    #   crawler = Arstotzka::Crawler.new(keys: %w(person information first_name))
     #   hash = {
     #     person: {
     #       'information' => {
@@ -58,7 +58,7 @@ module Arstotzka
     #
     # @example
     #   crawler = Arstotzka::Crawler.new(
-    #     %w(companies games hero),
+    #     keys: %w(companies games hero),
     #     compact: true, case: :snake
     #   )
     #   games_hash = {
@@ -79,7 +79,7 @@ module Arstotzka
     #
     # @example
     #   crawler = Arstotzka::Crawler.new(
-    #     %w(companies games hero),
+    #     keys: %w(companies games hero),
     #     compact: true, case: :snake, default: 'NO HERO'
     #   )
     #
@@ -87,7 +87,7 @@ module Arstotzka
     #
     # @example
     #   crawler = Arstotzka::Crawler.new(
-    #     %w(companies games hero),
+    #     keys: %w(companies games hero),
     #     compact: true, case: :snake
     #   ) { |value| value.&to_sym }
     #

@@ -63,7 +63,7 @@ module Arstotzka
     #   }
     #   instance = Account.new
     #   fetcher = Arstotzka::Fetcher.new(hash, instance,
-    #     keys: 'transactions',
+    #     path: 'transactions',
     #     klass: Transaction,
     #     after: :filter_income
     #   )

@@ -84,7 +84,7 @@ module Arstotzka
     #     age: '10',
     #   }
     #
-    #   TypeCaseter.new(age: '10').age
+    #   TypeCaster.new(age: '10').age
     def to_integer(value)
       value.to_i if value.present?
     end
@@ -108,7 +108,7 @@ module Arstotzka
     #     payload: { 'key' => 'value' },
     #   }
     #
-    #   model.TypeCaseter.new(hash)
+    #   model.TypeCaster.new(hash)
     #
     #   model.payload # returns '{"key"=>"value"}'
     def to_string(value)
@@ -134,7 +134,7 @@ module Arstotzka
     #     price: '1.75'
     #   }
     #
-    #   TypeCaseter.new(price: '1.75').price # returns 1.75
+    #   TypeCaster.new(price: '1.75').price # returns 1.75
     def to_float(value)
       value.to_f if value.present?
     end
