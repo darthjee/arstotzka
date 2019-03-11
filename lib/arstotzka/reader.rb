@@ -128,6 +128,8 @@ module Arstotzka
     # - snake: for snake case
     #
     # @param [String] key the key to be transformed
+    #
+    # @return [String] the string transformed
     def change_case(key)
       case options.case
       when :lower_camel
