@@ -60,10 +60,6 @@ module Arstotzka
       super(options)
     end
 
-    def case_type
-      self.case
-    end
-
     def merge(options)
       self.class.new(to_h.merge(options))
     end
