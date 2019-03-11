@@ -53,7 +53,9 @@ module Arstotzka
     # @see Arstotzka::Options::DEFAULT_OPTIONS
     # @return [Arstotzka::Options]
     def initialize(options)
-      options = correct_keys(options.dup)
+      klass = options.delete(:class)
+      warn ":class has been deprecated, prefer 'expose klass: #{klass}'" if klass
+      options[:klass] ||= klass
 
       options = DEFAULT_OPTIONS.merge(options)
 
@@ -62,16 +64,6 @@ module Arstotzka
 
     def merge(options)
       self.class.new(to_h.merge(options))
-    end
-
-    private
-
-    def correct_keys(options)
-      klass = options.delete(:class)
-      warn ":class has been deprecated, prefer 'expose klass: #{klass}'" if klass
-      options[:klass] ||= klass
-
-      options
     end
   end
 end
