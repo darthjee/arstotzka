@@ -11,7 +11,7 @@ describe Arstotzka::Fetcher do
       let(:path) { 'transactions' }
       let(:options) do
         {
-          clazz: Transaction,
+          klass: Transaction,
           after: :filter_income
         }
       end

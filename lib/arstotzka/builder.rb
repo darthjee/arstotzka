@@ -118,21 +118,6 @@ module Arstotzka
 
     # @private
     #
-    # Fetch class to wrap resulting value
-    #
-    # after fetching the value, when wrapper_clazz returns
-    # a Class object, the value will be wrapped with
-    # +wrapper_clazz.new(value)+
-    #
-    # @return [Class] the class to wrap the resulting value
-    #
-    # @see Arstotzka::Wrapper
-    def wrapper_clazz
-      options.klass
-    end
-
-    # @private
-    #
     # Options needed by fetcher
     #
     # @param [String/Symbol] attribute name of the method / attribute
@@ -141,8 +126,7 @@ module Arstotzka
     #
     # @see Arstotzka::Fetcher
     def fetcher_options(attribute)
-      options.to_h.slice(:case, :compact, :after, :type, :flatten, :default).merge(
-        clazz: wrapper_clazz,
+      options.to_h.slice(:klass, :case, :compact, :after, :type, :flatten, :default).merge(
         path: real_path(attribute)
       )
     end

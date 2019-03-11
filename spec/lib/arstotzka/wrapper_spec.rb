@@ -25,8 +25,8 @@ describe Arstotzka::Wrapper do
       end
     end
 
-    context 'with clazz otpion' do
-      let(:options) { { clazz: OpenStruct } }
+    context 'with klass otpion' do
+      let(:options) { { klass: OpenStruct } }
 
       it 'creates new instance from given class' do
         expect(result).to be_a(OpenStruct)
@@ -75,8 +75,8 @@ describe Arstotzka::Wrapper do
           expect(result).to be_nil
         end
 
-        context 'when passing clazz parameter' do
-          let(:options) { { type: type, clazz: Arstotzka::Wrapper::Dummy } }
+        context 'when passing klass parameter' do
+          let(:options) { { type: type, klass: Arstotzka::Wrapper::Dummy } }
 
           it do
             expect(result).to be_nil
@@ -92,8 +92,8 @@ describe Arstotzka::Wrapper do
                         float: NilClass,
                         string: String
 
-        context 'when passing clazz parameter' do
-          let(:options) { { type: type, clazz: Arstotzka::Wrapper::Dummy } }
+        context 'when passing klass parameter' do
+          let(:options) { { type: type, klass: Arstotzka::Wrapper::Dummy } }
 
           it_behaves_like 'a result that is type cast',
                           integer: NilClass,
@@ -102,9 +102,9 @@ describe Arstotzka::Wrapper do
         end
       end
 
-      context 'when passing clazz parameter' do
+      context 'when passing klass parameter' do
         let(:value) { 1 }
-        let(:options) { { type: type, clazz: Arstotzka::Wrapper::Dummy } }
+        let(:options) { { type: type, klass: Arstotzka::Wrapper::Dummy } }
         let(:cast) { result.value }
 
         it_behaves_like 'casts basic types'

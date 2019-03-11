@@ -4,10 +4,10 @@ require 'spec_helper'
 
 describe Arstotzka::Builder do
   subject(:builder) do
-    described_class.new(attr_names, clazz, **full_options)
+    described_class.new(attr_names, klass, **full_options)
   end
 
-  let(:clazz) do
+  let(:klass) do
     Class.new.tap do |c|
       c.send(:attr_reader, :json)
       c.send(:define_method, :initialize) do |json = {}|
@@ -21,7 +21,7 @@ describe Arstotzka::Builder do
   let(:attr_name)    { :name }
   let(:attr_names)   { [attr_name] }
   let(:json)         { {} }
-  let(:instance)     { clazz.new(json) }
+  let(:instance)     { klass.new(json) }
   let(:full_options) { described_class::DEFAULT_OPTIONS.merge(options) }
 
   describe '#build' do
@@ -29,7 +29,7 @@ describe Arstotzka::Builder do
       it 'adds the reader' do
         expect do
           builder.build
-        end.to add_method(attr_name).to(clazz)
+        end.to add_method(attr_name).to(klass)
       end
     end
 

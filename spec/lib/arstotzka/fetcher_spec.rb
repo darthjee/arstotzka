@@ -82,11 +82,11 @@ describe Arstotzka::Fetcher do
     end
   end
 
-  describe 'clazz options' do
+  describe 'klass options' do
     let(:path) { 'name' }
     let(:name) { 'Robert' }
     let(:json) { { name: name } }
-    let(:options) { { clazz: wrapper } }
+    let(:options) { { klass: wrapper } }
     let(:wrapper) { Person }
 
     it 'wraps the result in an object' do
