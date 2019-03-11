@@ -5,7 +5,7 @@ require 'active_support/all'
 require 'sinclair'
 
 # Concern that enables the translation of domain though the
-# usage of the class method  `expose`
+# usage of the class method  +expose+
 #
 # @example
 #   json = <<-JSON

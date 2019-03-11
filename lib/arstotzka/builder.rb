@@ -21,13 +21,13 @@ module Arstotzka
   #     'cars' => 2.0
   #   )
   #
-  #   options = Arstotzka::Builder::DEFAULT_OPTIONS.merge(full_path: 'name.first')
+  #   options = Arstotzka::Options::DEFAULT_OPTIONS.merge(full_path: 'name.first')
   #   builder = Arstotzka::Builder.new([ :first_name ], MyModel, options)
   #   builder.build
   #
   #   instance.first_name # returns 'John'
   #
-  #   options = Arstotzka::Builder::DEFAULT_OPTIONS.merge(type: :integer)
+  #   options = Arstotzka::Options::DEFAULT_OPTIONS.merge(type: :integer)
   #   builder = Arstotzka::Builder.new([ :age, :cars ], MyModel, options)
   #   builder.build
   #
