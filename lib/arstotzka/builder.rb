@@ -42,9 +42,14 @@ module Arstotzka
     # @param attr_names [Array] list of attributes to be fetched from the hash/json
     # @param clazz [Class] class to receive the methods
     #   (using {https://www.rubydoc.info/gems/sinclair Sinclair})
-    # @param options [Hash] hash containing extra options
     #
-    # @see Sinclair
+    # @overload initialize(attr_names, clazz, options_hash={})
+    #   @param options_hash [Hash] hash containing extra options
+    #
+    # @overload initialize(attr_names, clazz, options)
+    #   @param options [Arstotzka::Options] options of initialization object
+    #
+    # @see https://www.rubydoc.info/gems/sinclair Sinclair
     # @see Arstotzka::Options
     def initialize(attr_names, clazz, options={})
       super(clazz)
