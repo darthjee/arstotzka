@@ -6,15 +6,16 @@ module Arstotzka
   # Class responsible for orquestrating the fetch value from the hash
   # and post-processing it
   class Fetcher
+    include Base
+
     # Creates an instance of Artotzka::Fetcher
     #
     # @param hash [Hash] Hash to be crawled for value
     # @param instance [Object] object whose methods will be called after for processing
     # @param keys [String/Symbol] complete keys for fetching the value from hash
     # @param options [Hash] options that will be passed to {Crawler}, {Wrapper} and {Reader}
-    def initialize(hash, instance, options = nil, **options_hash)
-      options ||= Arstotzka::Options.new(options_hash)
-      @options = options
+    def initialize(hash, instance, options_hash = {})
+      self.options = options_hash
 
       @keys = options.path.to_s.split('.')
       @hash = hash

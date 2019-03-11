@@ -164,6 +164,7 @@ require 'sinclair'
 module Arstotzka
   extend ActiveSupport::Concern
 
+  autoload :Base,         'arstotzka/base'
   autoload :Options,      'arstotzka/options'
   autoload :Builder,      'arstotzka/builder'
   autoload :ClassMethods, 'arstotzka/class_methods'

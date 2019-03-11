@@ -6,16 +6,15 @@ module Arstotzka
   # Class responsible for wrapping / parsing a value fetched
   class Wrapper
     include Arstotzka::TypeCast
+    include Base
 
     # Returns a new instance of Wrapper
     #
     # @param klass [Class] class to wrap the value
     # @param type [String/Symbol] type to cast the value. The
     #   possible type_cast is defined by {TypeCast}
-    def initialize(options = nil, **options_hash)
-      options ||= Arstotzka::Options.new(options_hash)
-
-      @options = options
+    def initialize(options = {})
+      self.options = options
     end
 
     # wrap a value

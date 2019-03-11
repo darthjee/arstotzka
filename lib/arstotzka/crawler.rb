@@ -16,6 +16,8 @@ module Arstotzka
   #   }
   #   crawler.value(hash) # returns 'John'
   class Crawler
+    include Base
+
     # Creates a new instance of Crawler
     #
     # @param keys [Array] keys of keys to be crawled
@@ -26,9 +28,8 @@ module Arstotzka
     # @param compact [Boolean] flag signallying if nil values should be removed of an array
     # @param default [Object] default value to be returned when failing to fetch a value
     # @param block [Proc] block to be ran over the fetched value before returning it
-    def initialize(options = nil, **options_hash, &block)
-      options ||= Arstotzka::Options.new(options_hash)
-      @options = options
+    def initialize(options = {}, &block)
+      self.options = options
 
       @post_process = block || proc { |value| value }
     end

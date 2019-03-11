@@ -5,6 +5,8 @@ module Arstotzka
   #
   # Reads a value from a hash using the keys as list of keys
   class Reader
+    include Base
+
     # Creates a new instance of Reader
     #
     # @param keys [Array] keys of keys broken down as array
@@ -14,10 +16,9 @@ module Arstotzka
     #   - snake: keys in the hash are snake_case
     #
     # @return [Aristotzka::Reader]
-    def initialize(options = nil, **options_hash)
-      options ||= Arstotzka::Options.new(options_hash)
+    def initialize(options_hash = {})
+      self.options = options_hash
 
-      @options = options
       @keys = options.keys.map(&method(:change_case))
     end
 
