@@ -7,10 +7,10 @@ describe Arstotzka::Fetcher do
     described_class.new json, instance, options.merge(path: path)
   end
 
-  let(:path) { '' }
+  let(:path)     { '' }
   let(:instance) { Arstotzka::Fetcher::Dummy.new }
-  let(:json) { load_json_fixture_file('arstotzka.json') }
-  let(:value) { fetcher.fetch }
+  let(:json)     { load_json_fixture_file('arstotzka.json') }
+  let(:value)    { fetcher.fetch }
 
   context 'when fetching with no options' do
     let(:options) { {} }
@@ -74,8 +74,8 @@ describe Arstotzka::Fetcher do
 
   describe 'after option' do
     let(:instance) { MyParser.new(json) }
-    let(:json) { [100, 250, -25] }
-    let(:options) { { after: :sum } }
+    let(:json)     { [100, 250, -25] }
+    let(:options)  { { after: :sum } }
 
     it 'applies after call ' do
       expect(fetcher.fetch).to eq(325)
@@ -84,8 +84,8 @@ describe Arstotzka::Fetcher do
 
   describe 'klass options' do
     let(:path) { 'name' }
-    let(:name) { 'Robert' }
-    let(:json) { { name: name } }
+    let(:name)    { 'Robert' }
+    let(:json)    { { name: name } }
     let(:options) { { klass: wrapper } }
     let(:wrapper) { Person }
 

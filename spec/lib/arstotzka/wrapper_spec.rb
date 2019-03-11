@@ -5,7 +5,7 @@ require 'spec_helper'
 describe Arstotzka::Wrapper do
   let(:options) { {} }
   let(:subject) { described_class.new options }
-  let(:hash) { { a: 1 } }
+  let(:hash)    { { a: 1 } }
 
   describe '#wrap' do
     let(:value) { hash }
@@ -50,10 +50,10 @@ describe Arstotzka::Wrapper do
     end
 
     context 'with type otpion' do
-      let(:type) { :integer }
-      let(:value) { '1' }
+      let(:type)    { :integer }
+      let(:value)   { '1' }
       let(:options) { { type: type } }
-      let(:cast) { result }
+      let(:cast)    { result }
 
       it_behaves_like 'casts basic types'
 
@@ -105,7 +105,7 @@ describe Arstotzka::Wrapper do
       context 'when passing klass parameter' do
         let(:value) { 1 }
         let(:options) { { type: type, klass: Arstotzka::Wrapper::Dummy } }
-        let(:cast) { result.value }
+        let(:cast)    { result.value }
 
         it_behaves_like 'casts basic types'
 

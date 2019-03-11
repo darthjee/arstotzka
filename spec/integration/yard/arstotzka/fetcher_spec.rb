@@ -8,7 +8,7 @@ describe Arstotzka::Fetcher do
       subject(:fetcher) { described_class.new(hash, instance, path: path, **options) }
 
       let(:instance) { Account.new }
-      let(:path) { 'transactions' }
+      let(:path)     { 'transactions' }
       let(:options) do
         {
           klass: Transaction,

@@ -33,7 +33,7 @@ describe Arstotzka do
   end
 
   context 'when caching the value' do
-    let(:attribute) { :age }
+    let(:attribute)  { :age }
     let!(:old_value) { json['age'] }
 
     before do
@@ -91,7 +91,7 @@ describe Arstotzka do
   end
 
   context 'when wrapping it with a class and caching' do
-    let(:attribute) { :old_house }
+    let(:attribute)  { :old_house }
     let!(:old_value) { json['oldHouse'] }
 
     it 'returns an onject wrap' do

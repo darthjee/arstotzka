@@ -10,3 +10,6 @@ Metrics/BlockLength:
 
 Metrics/LineLength:
   Max: 100
+
+RSpec/AlignLeftLetBrace:
+  Enabled: true

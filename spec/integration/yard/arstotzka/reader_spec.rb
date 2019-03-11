@@ -6,7 +6,7 @@ describe Arstotzka::Reader do
   describe 'yard' do
     subject(:reader) { described_class.new(keys: keys, case: case_type) }
 
-    let(:keys) { %w[person full_name] }
+    let(:keys)      { %w[person full_name] }
     let(:case_type) { :snake }
 
     describe '#read' do
@@ -39,7 +39,7 @@ describe Arstotzka::Reader do
 
       context 'when using lowerCamel' do
         let(:case_type) { :lower_camel }
-        let(:keys) { %w[person car_collection model] }
+        let(:keys)      { %w[person car_collection model] }
 
         it 'fetches the value using lower camel case key' do
           expected = [

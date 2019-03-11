@@ -27,13 +27,13 @@ describe Arstotzka::Reader do
     described_class.new(keys: keys, case: case_type)
   end
 
-  let(:keys) { %w[user full_name] }
+  let(:keys)      { %w[user full_name] }
   let(:json_file) { 'complete_person.json' }
   let(:full_json) { load_json_fixture_file(json_file) }
-  let(:json) { full_json }
-  let(:sym_json) { json.symbolize_keys }
+  let(:json)      { full_json }
+  let(:sym_json)  { json.symbolize_keys }
   let(:case_type) { :snake }
-  let(:index) { 0 }
+  let(:index)     { 0 }
 
   describe '#read' do
     context 'when the key is found' do
@@ -42,7 +42,7 @@ describe Arstotzka::Reader do
       it_behaves_like 'reader fetchin value'
 
       context 'when the keys case is changed' do
-        let(:json) { full_json['user'] }
+        let(:json)  { full_json['user'] }
         let(:index) { 1 }
 
         context 'with snake_case type' do
@@ -54,7 +54,7 @@ describe Arstotzka::Reader do
 
         context 'with upper_camel type' do
           let(:case_type) { :upper_camel }
-          let(:keys) { %w[user login_name] }
+          let(:keys)     { %w[user login_name] }
           let(:expected) { json['LoginName'] }
 
           it_behaves_like 'reader fetchin value'
@@ -62,7 +62,7 @@ describe Arstotzka::Reader do
 
         context 'with lower_camel type' do
           let(:case_type) { :lower_camel }
-          let(:keys) { %w[user birth_date] }
+          let(:keys)     { %w[user birth_date] }
           let(:expected) { json['birthDate'] }
 
           it_behaves_like 'reader fetchin value'
@@ -72,7 +72,7 @@ describe Arstotzka::Reader do
       context 'when key is found but value is null' do
         let(:json) { full_json['user'] }
         let(:index) { 1 }
-        let(:keys) { %w[user password_reminder] }
+        let(:keys)  { %w[user password_reminder] }
 
         it do
           expect(reader.read(json, index)).to be_nil

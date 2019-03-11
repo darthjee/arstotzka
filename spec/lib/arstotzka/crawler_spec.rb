@@ -7,13 +7,13 @@ describe Arstotzka::Crawler do
     described_class.new default_options.merge(options), &block
   end
 
-  let(:block) { proc { |v| v } }
-  let(:keys) { '' }
+  let(:block)           { proc { |v| v } }
+  let(:keys)            { '' }
   let(:default_options) { { keys: keys, case: :lower_camel } }
-  let(:options) { {} }
-  let(:json_file) { 'arstotzka.json' }
-  let(:json) { load_json_fixture_file(json_file) }
-  let(:value) { crawler.value(json) }
+  let(:options)         { {} }
+  let(:json_file)       { 'arstotzka.json' }
+  let(:json)            { load_json_fixture_file(json_file) }
+  let(:value)           { crawler.value(json) }
 
   context 'when no block is given' do
     subject(:crawler) do
@@ -57,7 +57,7 @@ describe Arstotzka::Crawler do
 
   context 'when there is an array of arrays' do
     let(:json_file) { 'accounts.json' }
-    let(:keys) { %w[banks accounts balance] }
+    let(:keys)      { %w[banks accounts balance] }
 
     it 'returns the values as array of arrays' do
       expect(value).to eq([[1000.0, 1500.0], [50.0, -500.0]])
@@ -161,7 +161,7 @@ describe Arstotzka::Crawler do
   context 'with default option' do
     let(:default_value) { 'NotFound' }
     let(:options) { { default: default_value } }
-    let(:keys) { %w[projects name] }
+    let(:keys)    { %w[projects name] }
 
     context 'when there is a key missing' do
       it 'returns the default value' do
@@ -183,7 +183,7 @@ describe Arstotzka::Crawler do
 
     context 'when the key is not missing but the value is nil' do
       let(:json_file) { 'person.json' }
-      let(:keys) { %w[user name] }
+      let(:keys)      { %w[user name] }
 
       it { expect(value).to be_nil }
 
@@ -202,7 +202,7 @@ describe Arstotzka::Crawler do
 
     context 'when the key last key is missing but the value is nil' do
       let(:json_file) { 'person.json' }
-      let(:keys) { %w[user nick_name] }
+      let(:keys)      { %w[user nick_name] }
 
       it 'returns the default value' do
         expect(value).to eq(default_value)
@@ -223,8 +223,8 @@ describe Arstotzka::Crawler do
 
     context 'when the node is missing but default has the same node' do
       let(:default_value) { { node: { value: 1 } } }
-      let(:keys) { %w[node node node] }
-      let(:json) { {} }
+      let(:keys)          { %w[node node node] }
+      let(:json)          { {} }
 
       it 'does not crawl through default value' do
         expect(value).to eq(default_value)
@@ -234,7 +234,7 @@ describe Arstotzka::Crawler do
 
   context 'when using a snake case' do
     let(:json) { { snake_cased: 'snake', snakeCased: 'Camel' }.stringify_keys }
-    let(:keys) { ['snake_cased'] }
+    let(:keys)    { ['snake_cased'] }
     let(:options) { { case: :snake } }
 
     it 'fetches from snake cased fields' do
@@ -244,7 +244,7 @@ describe Arstotzka::Crawler do
 
   context 'when using a upper camel case' do
     let(:json) { { UpperCase: 'upper', upperCase: 'lower' }.stringify_keys }
-    let(:keys) { ['upper_case'] }
+    let(:keys)    { ['upper_case'] }
     let(:options) { { case: :upper_camel } }
 
     it 'fetches from upper camel cased fields' do

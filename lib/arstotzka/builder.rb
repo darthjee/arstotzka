@@ -51,7 +51,7 @@ module Arstotzka
     #
     # @see https://www.rubydoc.info/gems/sinclair Sinclair
     # @see Arstotzka::Options
-    def initialize(attr_names, clazz, options={})
+    def initialize(attr_names, clazz, options = {})
       super(clazz)
       self.options = options
 

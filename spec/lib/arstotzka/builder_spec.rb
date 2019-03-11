@@ -78,7 +78,7 @@ describe Arstotzka::Builder do
         end
 
         context 'when defining a fullpath' do
-          let(:options) { { full_path: 'user.name' } }
+          let(:options)   { { full_path: 'user.name' } }
           let(:attr_name) { :the_name }
 
           it 'fetches the value within the json' do
@@ -89,7 +89,7 @@ describe Arstotzka::Builder do
 
       context 'when wrapping with a class' do
         let(:json) { { person: name } }
-        let(:options) { { klass: Person } }
+        let(:options)   { { klass: Person } }
         let(:attr_name) { :person }
 
         it do
