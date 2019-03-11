@@ -36,18 +36,19 @@ module Arstotzka
   #
   # @see https://www.rubydoc.info/gems/sinclair Sinclair
   class Builder < Sinclair
+    include Base
     # Returns new instance of Arstotzka::Builder
     #
     # @param attr_names [Array] list of attributes to be fetched from the hash/json
-    # @param clazz [Class] class to receive the methods (using {Sinclair})
+    # @param clazz [Class] class to receive the methods
+    #   (using {https://www.rubydoc.info/gems/sinclair Sinclair})
     # @param options [Hash] hash containing extra options
     #
     # @see Sinclair
     # @see Arstotzka::Options
-    def initialize(attr_names, clazz, **options)
+    def initialize(attr_names, clazz, options={})
       super(clazz)
-
-      @options = Options.new(options)
+      self.options = options
 
       @attr_names = attr_names
       init
