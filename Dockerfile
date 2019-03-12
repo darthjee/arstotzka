@@ -1,8 +1,6 @@
-FROM darthjee/ruby_240:0.2.2
+FROM darthjee/ruby_gems:0.0.1
 
 USER app
-COPY ./ /home/app/app/
+COPY --chown=app ./ /home/app/app/
 
-RUN gem uninstall bundler
-RUN gem install bundler -v '1.17.3'
 RUN bundle install

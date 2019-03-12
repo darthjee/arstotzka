@@ -21,7 +21,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'activesupport', '~> 5.x'
   spec.add_runtime_dependency 'sinclair',      '>= 1.1.1'
 
-  spec.add_development_dependency 'bundler',       '~> 1.17.x'
+  spec.add_development_dependency 'bundler',       '~> 1.16.1'
   spec.add_development_dependency 'pry-nav',       '~> 0.2.4'
   spec.add_development_dependency 'rake',          '>= 12.3.1'
   spec.add_development_dependency 'rspec',         '>= 3.8'
