@@ -4,7 +4,7 @@ class StarGazer
   include Arstotzka
 
   expose :favorite_star, full_path: 'universe.star',
-                         default: { name: 'Sun' }, class: ::Star
+                         default: { name: 'Sun' }, klass: ::Star
 
   attr_reader :json
 

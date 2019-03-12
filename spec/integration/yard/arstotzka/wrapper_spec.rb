@@ -1,18 +1,18 @@
 # frozen_string_literal: truie
 
 describe Arstotzka::Wrapper do
-  subject(:wrapper) { described_class.new(clazz: clazz, type: type) }
+  subject(:wrapper) { described_class.new(klass: klass, type: type) }
 
   let(:type)  { nil }
-  let(:clazz) { nil }
+  let(:klass) { nil }
 
   describe 'yard' do
     describe '#wrap' do
-      context 'when clazz is defined' do
-        let(:clazz) { Person }
+      context 'when klass is defined' do
+        let(:klass) { Person }
         let(:value) { 'john' }
 
-        it 'wraps value with the clazz' do
+        it 'wraps value with the klass' do
           expect(wrapper.wrap(value)).to eq(Person.new(value))
         end
       end
@@ -28,7 +28,7 @@ describe Arstotzka::Wrapper do
 
       context 'when type and class is defined' do
         let(:type)    { :string }
-        let(:clazz)   { Request }
+        let(:klass)   { Request }
         let(:value)   { { 'key' => 'value' } }
         let(:request) { wrapper.wrap(value) }
 

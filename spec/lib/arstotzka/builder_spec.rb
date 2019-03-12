@@ -4,10 +4,10 @@ require 'spec_helper'
 
 describe Arstotzka::Builder do
   subject(:builder) do
-    described_class.new(attr_names, clazz, **full_options)
+    described_class.new(attr_names, klass, **full_options)
   end
 
-  let(:clazz) do
+  let(:klass) do
     Class.new.tap do |c|
       c.send(:attr_reader, :json)
       c.send(:define_method, :initialize) do |json = {}|
@@ -21,15 +21,15 @@ describe Arstotzka::Builder do
   let(:attr_name)    { :name }
   let(:attr_names)   { [attr_name] }
   let(:json)         { {} }
-  let(:instance)     { clazz.new(json) }
-  let(:full_options) { described_class::DEFAULT_OPTIONS.merge(options) }
+  let(:instance)     { klass.new(json) }
+  let(:full_options) { Arstotzka::Options::DEFAULT_OPTIONS.merge(options) }
 
   describe '#build' do
     context 'when it is called' do
       it 'adds the reader' do
         expect do
           builder.build
-        end.to add_method(attr_name).to(clazz)
+        end.to add_method(attr_name).to(klass)
       end
     end
 
@@ -78,7 +78,7 @@ describe Arstotzka::Builder do
         end
 
         context 'when defining a fullpath' do
-          let(:options) { { full_path: 'user.name' } }
+          let(:options)   { { full_path: 'user.name' } }
           let(:attr_name) { :the_name }
 
           it 'fetches the value within the json' do
@@ -89,7 +89,7 @@ describe Arstotzka::Builder do
 
       context 'when wrapping with a class' do
         let(:json) { { person: name } }
-        let(:options) { { class: Person } }
+        let(:options)   { { klass: Person } }
         let(:attr_name) { :person }
 
         it do

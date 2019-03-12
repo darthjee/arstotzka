@@ -22,72 +22,71 @@ Instalation
 1. Add Arstotzka to your `Gemfile` and `bundle install`:
   - Install it
 
-  ```ruby
-    gem install arstotzka
-  ```
+```ruby
+  gem install arstotzka
+```
 
-  - Or add Arstotka to you `Gemfile` and `bundle install`
+- Or add Arstotka to you `Gemfile` and `bundle install`
 
-  ```ruby
-  gem 'arstotzka'
-  ```
+```ruby
+gem 'arstotzka'
+```
 
-  ```bash
-    bundle install arstotzka
-  ```
+```bash
+  bundle install arstotzka
+```
 
 Yard Documentation
 -------------------
-https://www.rubydoc.info/gems/arstotzka/1.0.4
+https://www.rubydoc.info/gems/arstotzka/1.1.0
 
 Getting Started
 ---------------
 1. Include in a class that you want to wrap a json/hash
-  ```ruby
-  class MyParser
-    include Arstotzka
-  ```
+
+```ruby
+class MyParser
+  include Arstotzka
+end
+```
 
 2. Declare the keys you want to crawl
-  ```ruby
-  class MyParser
-    include Arstotzka
 
-    expose :id
-    expose :name, :age, path: :person
+```ruby
+class MyParser
+  include Arstotzka
 
-    attr_reader :json
+  expose :id
+  expose :name, :age, path: :person
 
-    def initialize(json = {})
-      @json = json
-    end
+  attr_reader :json
+
+  def initialize(json = {})
+    @json = json
   end
+end
 
-  ```
+```
 
-  and let it fetch values from your hash
+and let it fetch values from your hash
 
 
-  ```ruby
-  object = MyParser.new(
-    id: 10,
+```ruby
+MyParser.new(
+  id: 10,
+  age: 22
+  person: {
+    name: 'Robert',
     age: 22
-    person: {
-      name: 'Robert',
-      age: 22
-    }
-  )
+  }
+)
+```
 
-  object.name
-  #returns 'Robert'
-  ```
+this is usefull when trying to fetch data from hashes missing nodes
 
-  this is usefull when trying to fetch data from hashes missing nodes
-
-  ```ruby
-  MyParser.new.name
-  #returns nil
-  ```
+```ruby
+MyParser.new.name # returns nil
+```
 
 3. fully customise the way you crawl / fetch the information with [Options](#options)
 
@@ -99,7 +98,7 @@ Options
 - json: method that contains the hash to be parsed (json by default)
 - full_path: full path to fetch the value (empty by default)
 - cached: indicator that once the value has been fetched, it should be cached (false by default)
-- class: class to be used when wrapping the final value
+- klass: class to be used when wrapping the final value
 - compact: indicator telling to ignore nil values inside array (false by default)
 - flatten: indicator telling that to flattern the resulting array (false by default)
 - after: name of a method to be called after with the resulting value
@@ -144,20 +143,20 @@ end
 ```
 
 ```ruby
-  object = MyParser.new(
-    accounts: [
-      { balance: '$ 1000.50', type: 'checking' },
-      { balance: '$ 150.10', type: 'savings' },
-      { balance: '$ -100.24', type: 'checking' }
-    ],
-    loans: [
-      { value: '$ 300.50', bank: 'the_bank' },
-      { value: '$ 150.10', type: 'the_other_bank' },
-      { value: '$ 100.24', type: 'the_same_bank' }
-    ]
-  )
+object = MyParser.new(
+  accounts: [
+    { balance: '$ 1000.50', type: 'checking' },
+    { balance: '$ 150.10', type: 'savings' },
+    { balance: '$ -100.24', type: 'checking' }
+  ],
+  loans: [
+    { value: '$ 300.50', bank: 'the_bank' },
+    { value: '$ 150.10', type: 'the_other_bank' },
+    { value: '$ 100.24', type: 'the_same_bank' }
+  ]
+)
 
-  object.total_money # returns 1050.36
+object.total_money # returns 1050.36
 ```
 
 ## Default
@@ -176,7 +175,7 @@ class StarGazer
   include Arstotzka
 
   expose :favorite_star, full_path: 'universe.star',
-         default: { name: 'Sun' }, class: ::Star
+         default: { name: 'Sun' }, klass: ::Star
 
   attr_reader :json
 
@@ -187,14 +186,11 @@ end
 
 ```
 
-
 ```ruby
 star_gazer = StarGazer.new
 
-star_gazer.favorite_star.name
-#returns "Sun"
+star_gazer.favorite_star.name # returns "Sun"
 
-star_gazer.favorite_star.class
-#returns Star
+star_gazer.favorite_star.class # returns Star
 ```
 

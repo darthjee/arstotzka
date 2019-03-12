@@ -6,19 +6,19 @@ module Arstotzka
   # Class responsible for orquestrating the fetch value from the hash
   # and post-processing it
   class Fetcher
-    include Sinclair::OptionsParser
+    include Base
 
     # Creates an instance of Artotzka::Fetcher
     #
     # @param hash [Hash] Hash to be crawled for value
     # @param instance [Object] object whose methods will be called after for processing
-    # @param path [String/Symbol] complete path for fetching the value from hash
-    # @param options [Hash] options that will be passed to {Crawler}, {Wrapper} and {Reader}
-    def initialize(hash, instance, path:, **options)
-      @path = path.to_s.split('.')
+    # @param options_hash [Hash] options that will be passed to {Crawler}, {Wrapper} and {Reader}
+    def initialize(hash, instance, options_hash = {})
+      self.options = options_hash
+
+      @keys = options.path.to_s.split('.')
       @hash = hash
       @instance = instance
-      @options = options
     end
 
     # Crawls the hash for the value
@@ -64,7 +64,7 @@ module Arstotzka
     #   instance = Account.new
     #   fetcher = Arstotzka::Fetcher.new(hash, instance,
     #     path: 'transactions',
-    #     clazz: Transaction,
+    #     klass: Transaction,
     #     after: :filter_income
     #   )
     #
@@ -82,9 +82,8 @@ module Arstotzka
     private
 
     # @private
-    attr_reader :path, :hash, :instance
-
-    delegate :after, :flatten, to: :options_object
+    attr_reader :keys, :hash, :instance, :options
+    delegate :after, :flatten, to: :options
     delegate :wrap, to: :wrapper
 
     # @private
@@ -110,7 +109,7 @@ module Arstotzka
     #
     # @see #crawler
     def crawler_options
-      options.slice(:case_type, :compact, :default).merge(path: path)
+      options.merge(keys: keys)
     end
 
     # @private
@@ -119,18 +118,7 @@ module Arstotzka
     #
     # @return [Arstotzka::Wrapper] the wrapper
     def wrapper
-      @wrapper ||= Arstotzka::Wrapper.new(wrapper_options)
-    end
-
-    # @private
-    #
-    # Hash for wrapper initialization
-    #
-    # @return [Hash]
-    #
-    # @see #wrapper
-    def wrapper_options
-      options.slice(:clazz, :type)
+      @wrapper ||= Arstotzka::Wrapper.new(options)
     end
   end
 end

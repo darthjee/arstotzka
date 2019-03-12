@@ -5,13 +5,13 @@ require 'spec_helper'
 describe Arstotzka::Fetcher do
   describe 'yard' do
     describe '#fetch' do
-      subject(:fetcher) { described_class.new(hash, instance, path: path, **options) }
+      subject(:fetcher) { described_class.new(hash, instance, **options) }
 
       let(:instance) { Account.new }
-      let(:path) { 'transactions' }
       let(:options) do
         {
-          clazz: Transaction,
+          path:  'transactions',
+          klass: Transaction,
           after: :filter_income
         }
       end

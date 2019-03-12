@@ -5,7 +5,7 @@ require 'spec_helper'
 describe Arstotzka::Wrapper do
   let(:options) { {} }
   let(:subject) { described_class.new options }
-  let(:hash) { { a: 1 } }
+  let(:hash)    { { a: 1 } }
 
   describe '#wrap' do
     let(:value) { hash }
@@ -25,8 +25,8 @@ describe Arstotzka::Wrapper do
       end
     end
 
-    context 'with clazz otpion' do
-      let(:options) { { clazz: OpenStruct } }
+    context 'with klass otpion' do
+      let(:options) { { klass: OpenStruct } }
 
       it 'creates new instance from given class' do
         expect(result).to be_a(OpenStruct)
@@ -50,10 +50,10 @@ describe Arstotzka::Wrapper do
     end
 
     context 'with type otpion' do
-      let(:type) { :integer }
-      let(:value) { '1' }
+      let(:type)    { :integer }
+      let(:value)   { '1' }
       let(:options) { { type: type } }
-      let(:cast) { result }
+      let(:cast)    { result }
 
       it_behaves_like 'casts basic types'
 
@@ -75,8 +75,8 @@ describe Arstotzka::Wrapper do
           expect(result).to be_nil
         end
 
-        context 'when passing clazz parameter' do
-          let(:options) { { type: type, clazz: Arstotzka::Wrapper::Dummy } }
+        context 'when passing klass parameter' do
+          let(:options) { { type: type, klass: Arstotzka::Wrapper::Dummy } }
 
           it do
             expect(result).to be_nil
@@ -92,8 +92,8 @@ describe Arstotzka::Wrapper do
                         float: NilClass,
                         string: String
 
-        context 'when passing clazz parameter' do
-          let(:options) { { type: type, clazz: Arstotzka::Wrapper::Dummy } }
+        context 'when passing klass parameter' do
+          let(:options) { { type: type, klass: Arstotzka::Wrapper::Dummy } }
 
           it_behaves_like 'a result that is type cast',
                           integer: NilClass,
@@ -102,10 +102,10 @@ describe Arstotzka::Wrapper do
         end
       end
 
-      context 'when passing clazz parameter' do
+      context 'when passing klass parameter' do
         let(:value) { 1 }
-        let(:options) { { type: type, clazz: Arstotzka::Wrapper::Dummy } }
-        let(:cast) { result.value }
+        let(:options) { { type: type, klass: Arstotzka::Wrapper::Dummy } }
+        let(:cast)    { result.value }
 
         it_behaves_like 'casts basic types'
 

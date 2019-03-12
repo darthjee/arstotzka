@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative './collector/game'
+
 class Collector
   include Arstotzka
 
@@ -14,7 +16,7 @@ class Collector
                      default: 'MissingName',
                      full_path: 'collections.cars.units.nick_name'
   expose :finished_games, json: :hash,
-                          flatten: true, class: Collector::Game,
+                          flatten: true, klass: Collector::Game,
                           after: :filter_finished, compact: true,
                           full_path: 'collections.games.titles'
 

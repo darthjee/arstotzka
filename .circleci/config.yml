@@ -23,3 +23,6 @@ jobs:
       - run:
           name: Yardstick coverage check
           command: bundle exec rake verify_measurements
+      - run:
+          name: Check version documentation
+          command: scripts/check_readme.sh

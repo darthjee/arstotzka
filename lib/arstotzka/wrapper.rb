@@ -6,15 +6,22 @@ module Arstotzka
   # Class responsible for wrapping / parsing a value fetched
   class Wrapper
     include Arstotzka::TypeCast
+    include Base
 
     # Returns a new instance of Wrapper
     #
-    # @param clazz [Class] class to wrap the value
-    # @param type [String/Symbol] type to cast the value. The
-    #   possible type_cast is defined by {TypeCast}
-    def initialize(clazz: nil, type: nil)
-      @clazz = clazz
-      @type = type
+    # @overload initialize(options_hash={})
+    #   @param options_hash [Hash] options of initialization
+    #   @option options_hash klass [Class] class to wrap the value
+    #   @option options_hash type [String/Symbol] type to cast the value. The
+    #     possible type_cast is defined by {TypeCast}
+    #
+    # @overload initialize(options)
+    #   @param options [Arstotzka::Options] options of initialization object
+    #
+    # @return [Arstotzka::Wrapper]
+    def initialize(options = {})
+      self.options = options
     end
 
     # wrap a value
@@ -30,7 +37,7 @@ module Arstotzka
     #     end
     #   end
     #
-    #   wrapper = Arstotzka::Wrapper.new(clazz: Person)
+    #   wrapper = Arstotzka::Wrapper.new(klass: Person)
     #   wrapper.wrap('John') # retruns Person.new('John')
     #
     # @example Casting type
@@ -46,7 +53,7 @@ module Arstotzka
     #     end
     #   end
     #
-    #   wrapper = Arstotzka::Wrapper.new(type: :string, clazz: Request)
+    #   wrapper = Arstotzka::Wrapper.new(type: :string, klass: Request)
     #   request = wrapper.wrap(value)
     #
     #   request.payload  # returns '{"key"=>"value"}'
@@ -58,7 +65,8 @@ module Arstotzka
     private
 
     # @private
-    attr_reader :clazz, :type
+    attr_reader :options
+    delegate :klass, :type, to: :options
 
     # @private
     #
@@ -69,7 +77,7 @@ module Arstotzka
       value = cast(value) if type? && !value.nil?
       return if value.nil?
 
-      clazz ? clazz.new(value) : value
+      klass ? klass.new(value) : value
     end
 
     # @private

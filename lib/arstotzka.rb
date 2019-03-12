@@ -5,7 +5,7 @@ require 'active_support/all'
 require 'sinclair'
 
 # Concern that enables the translation of domain though the
-# usage of the class method  `expose`
+# usage of the class method  +expose+
 #
 # @example
 #   json = <<-JSON
@@ -142,7 +142,7 @@ require 'sinclair'
 #
 #   class Collector
 #     expose :finished_games, json: :hash,
-#            flatten: true, class: Collector::Game,
+#            flatten: true, klass: Collector::Game,
 #            after: :filter_finished, compact: true,
 #            full_path: 'collections.games.titles'
 #
@@ -164,6 +164,8 @@ require 'sinclair'
 module Arstotzka
   extend ActiveSupport::Concern
 
+  autoload :Base,         'arstotzka/base'
+  autoload :Options,      'arstotzka/options'
   autoload :Builder,      'arstotzka/builder'
   autoload :ClassMethods, 'arstotzka/class_methods'
   autoload :Crawler,      'arstotzka/crawler'

@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 module Arstotzka
-  # Crawl a hash through the path of keys
+  # Crawl a hash through the keys of keys
   #
   # @api private
   #
   # @example
-  #   crawler = Arstotzka::Crawler.new(%w(person information first_name))
+  #   crawler = Arstotzka::Crawler.new(keys: %w(person information first_name))
   #   hash = {
   #     person: {
   #       'information' => {
@@ -16,31 +16,37 @@ module Arstotzka
   #   }
   #   crawler.value(hash) # returns 'John'
   class Crawler
+    include Base
+
     # Creates a new instance of Crawler
     #
-    # @param path [Array] path of keys to be crawled
-    # @param case_type [Symbol] case type of the keys
-    #   - snake: snake_cased keys
-    #   - lower_camel: lowerCamelCased keys
-    #   - upper_camel: UperCamelCased keys
-    # @param compact [Boolean] flag signallying if nil values should be removed of an array
-    # @param default [Object] default value to be returned when failing to fetch a value
     # @param block [Proc] block to be ran over the fetched value before returning it
-    def initialize(path:, case_type: :lower_camel, compact: false, default: nil, &block)
-      @case_type = case_type
-      @compact = compact
-      @default = default
-      @path = path
+    #
+    # @overload initialize(options_hash={}, &block)
+    #   @param options [Hash] options of initialization
+    #   @option options keys [Array] keys of keys to be crawled
+    #   @option options case [Symbol] case type of the keys
+    #     - snake: snake_cased keys
+    #     - lower_camel: lowerCamelCased keys
+    #     - upper_camel: UperCamelCased keys
+    #   @option options compact [Boolean] flag signallying if nil values should be removed of array
+    #   @option options default [Object] default value to be returned when failing to fetch a value
+    #
+    # @overload initialize(options, &block)
+    #   @param options [Arstotzka::Options] options of initialization object
+    def initialize(options = {}, &block)
+      self.options = options
+
       @post_process = block || proc { |value| value }
     end
 
-    # Crawls into the hash looking for all keys in the given path
-    # @overload value(hash)
+    # Crawls into the hash looking for all keys in the given keys
+    #
     # @return [Object] value fetched from the last Hash#fetch call using the last part
-    #   of path
+    #   of keys
     #
     # @example
-    #   crawler = Arstotzka::Crawler.new(%w(person information first_name))
+    #   crawler = Arstotzka::Crawler.new(keys: %w(person information first_name))
     #   hash = {
     #     person: {
     #       'information' => {
@@ -52,8 +58,8 @@ module Arstotzka
     #
     # @example
     #   crawler = Arstotzka::Crawler.new(
-    #     %w(companies games hero),
-    #     compact: true, case_type: :snake
+    #     keys: %w(companies games hero),
+    #     compact: true, case: :snake
     #   )
     #   games_hash = {
     #     'companies' => [{
@@ -73,16 +79,16 @@ module Arstotzka
     #
     # @example
     #   crawler = Arstotzka::Crawler.new(
-    #     %w(companies games hero),
-    #     compact: true, case_type: :snake, default: 'NO HERO'
+    #     keys: %w(companies games hero),
+    #     compact: true, case: :snake, default: 'NO HERO'
     #   )
     #
     #   crawler.value(games_hash) # returns [['NO HERO', 'Rakhar'], 'NO HERO']
     #
     # @example
     #   crawler = Arstotzka::Crawler.new(
-    #     %w(companies games hero),
-    #     compact: true, case_type: :snake
+    #     keys: %w(companies games hero),
+    #     compact: true, case: :snake
     #   ) { |value| value.&to_sym }
     #
     #   crawler.value(games_hash) # returns [[:Rakhar]]
@@ -95,7 +101,8 @@ module Arstotzka
     private
 
     # @private
-    attr_reader :post_process, :path, :case_type, :compact, :default
+    attr_reader :post_process, :options
+    delegate :keys, :compact, :default, to: :options
 
     # Fetch the value from hash by crawling the keys
     #
@@ -134,10 +141,7 @@ module Arstotzka
     #
     # @return [Arstotzka::Reader] Object responsible for extracting values out of the hash
     def reader
-      @reader ||= Arstotzka::Reader.new(
-        path: path,
-        case_type: case_type
-      )
+      @reader ||= Arstotzka::Reader.new(options)
     end
 
     # @private

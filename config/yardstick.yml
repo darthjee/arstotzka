@@ -20,44 +20,32 @@ rules:
     enabled: true
     exclude:
       - Arstotzka::Builder#attr_names
+      - Arstotzka::Builder#options
       - Arstotzka::Builder#json_name
-      - Arstotzka::Builder#path
-      - Arstotzka::Builder#full_path
-      - Arstotzka::Builder#cached
       - Arstotzka::Crawler#post_process
-      - Arstotzka::Crawler#path
-      - Arstotzka::Crawler#case_type
-      - Arstotzka::Crawler#compact
-      - Arstotzka::Crawler#default
-      - Arstotzka::Fetcher#path
+      - Arstotzka::Crawler#options
+      - Arstotzka::Fetcher#keys
       - Arstotzka::Fetcher#hash
       - Arstotzka::Fetcher#instance
-      - Arstotzka::Reader#path
-      - Arstotzka::Reader#case_type
-      - Arstotzka::Reader#change_case
-      - Arstotzka::Wrapper#clazz
-      - Arstotzka::Wrapper#type
+      - Arstotzka::Fetcher#options
+      - Arstotzka::Reader#keys
+      - Arstotzka::Reader#options
+      - Arstotzka::Wrapper#options
   Summary::Presence:
     enabled: true
     exclude:
       - Arstotzka::Builder#attr_names
+      - Arstotzka::Builder#options
       - Arstotzka::Builder#json_name
-      - Arstotzka::Builder#path
-      - Arstotzka::Builder#full_path
-      - Arstotzka::Builder#cached
       - Arstotzka::Crawler#post_process
-      - Arstotzka::Crawler#path
-      - Arstotzka::Crawler#case_type
-      - Arstotzka::Crawler#compact
-      - Arstotzka::Crawler#default
-      - Arstotzka::Fetcher#path
+      - Arstotzka::Crawler#options
+      - Arstotzka::Fetcher#keys
       - Arstotzka::Fetcher#hash
       - Arstotzka::Fetcher#instance
-      - Arstotzka::Reader#path
-      - Arstotzka::Reader#case_type
-      - Arstotzka::Reader#change_case
-      - Arstotzka::Wrapper#clazz
-      - Arstotzka::Wrapper#type
+      - Arstotzka::Fetcher#options
+      - Arstotzka::Reader#keys
+      - Arstotzka::Reader#options
+      - Arstotzka::Wrapper#options
   Summary::Length:
     enabled: true
     exclude: []

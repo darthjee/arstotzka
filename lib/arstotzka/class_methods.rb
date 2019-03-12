@@ -35,14 +35,14 @@ module Arstotzka
     #   instance.age        # returns 20
     #   instance.cars       # returns 2
     #
-    # @return nil
+    # @return [Array<Sinclair::MethodDefinition>]
     #
     # @see Builder Arstotzka::Builder
     # @see
     #   https://www.rubydoc.info/gems/activesupport/5.2.2/ActiveSupport/Concern
     #   ActiveSupport::Concern
-    def expose(*attr_names, **options)
-      options = Builder::DEFAULT_OPTIONS.merge(options.symbolize_keys)
+    def expose(*attr_names, **options_hash)
+      options = Options.new(options_hash.symbolize_keys)
       Builder.new(attr_names, self, options).build
     end
   end
