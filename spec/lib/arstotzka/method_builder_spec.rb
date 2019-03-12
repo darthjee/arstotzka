@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe Arstotzka::Builder do
+describe Arstotzka::MethodBuilder do
   subject(:builder) do
     described_class.new(attr_names, klass, **full_options)
   end

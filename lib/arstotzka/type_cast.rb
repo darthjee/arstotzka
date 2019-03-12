@@ -5,7 +5,7 @@ module Arstotzka
   #
   # Concern with all the type cast methods to be used by {Wrapper}
   #
-  # Usage of typecast is defined by the configuration of {Builder} by the usage of
+  # Usage of typecast is defined by the configuration of {MethodBuilder} by the usage of
   # option type
   #
   # TypeCast can also be extended to include more types

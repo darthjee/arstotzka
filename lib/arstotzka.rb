@@ -159,19 +159,19 @@ require 'sinclair'
 #                            #   Collector::Game.new(name: "Zelda", played: 90.0)
 #                            # ]
 #
-# @see Arstotzka::Builder
+# @see Arstotzka::MethodBuilder
 # @see Arstotzka::ClassMethods
 module Arstotzka
   extend ActiveSupport::Concern
 
-  autoload :Base,         'arstotzka/base'
-  autoload :Options,      'arstotzka/options'
-  autoload :Builder,      'arstotzka/builder'
-  autoload :ClassMethods, 'arstotzka/class_methods'
-  autoload :Crawler,      'arstotzka/crawler'
-  autoload :Exception,    'arstotzka/exception'
-  autoload :Fetcher,      'arstotzka/fetcher'
-  autoload :Reader,       'arstotzka/reader'
-  autoload :Wrapper,      'arstotzka/wrapper'
-  autoload :TypeCast,     'arstotzka/type_cast'
+  autoload :Base,          'arstotzka/base'
+  autoload :Options,       'arstotzka/options'
+  autoload :MethodBuilder, 'arstotzka/method_builder'
+  autoload :ClassMethods,  'arstotzka/class_methods'
+  autoload :Crawler,       'arstotzka/crawler'
+  autoload :Exception,     'arstotzka/exception'
+  autoload :Fetcher,       'arstotzka/fetcher'
+  autoload :Reader,        'arstotzka/reader'
+  autoload :Wrapper,       'arstotzka/wrapper'
+  autoload :TypeCast,      'arstotzka/type_cast'
 end

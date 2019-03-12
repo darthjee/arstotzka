@@ -37,13 +37,13 @@ module Arstotzka
     #
     # @return [Array<Sinclair::MethodDefinition>]
     #
-    # @see Builder Arstotzka::Builder
+    # @see MethodBuilder Arstotzka::MethodBuilder
     # @see
     #   https://www.rubydoc.info/gems/activesupport/5.2.2/ActiveSupport/Concern
     #   ActiveSupport::Concern
     def expose(*attr_names, **options_hash)
       options = Options.new(options_hash.symbolize_keys)
-      Builder.new(attr_names, self, options).build
+      MethodBuilder.new(attr_names, self, options).build
     end
   end
 end

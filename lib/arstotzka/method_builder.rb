@@ -22,22 +22,22 @@ module Arstotzka
   #   )
   #
   #   options = Arstotzka::Options.new(full_path: 'name.first')
-  #   builder = Arstotzka::Builder.new([ :first_name ], MyModel, options)
+  #   builder = Arstotzka::MethodBuilder.new([ :first_name ], MyModel, options)
   #   builder.build
   #
   #   instance.first_name # returns 'John'
   #
   #   options = Arstotzka::Options.new(type: :integer)
-  #   builder = Arstotzka::Builder.new([ :age, :cars ], MyModel, options)
+  #   builder = Arstotzka::MethodBuilder.new([ :age, :cars ], MyModel, options)
   #   builder.build
   #
   #   instance.age  # returns 20
   #   instance.cars # returns 2
   #
   # @see https://www.rubydoc.info/gems/sinclair Sinclair
-  class Builder < Sinclair
+  class MethodBuilder < Sinclair
     include Base
-    # Returns new instance of Arstotzka::Builder
+    # Returns new instance of Arstotzka::MethodBuilder
     #
     # @param attr_names [Array] list of attributes to be fetched from the hash/json
     # @param clazz [Class] class to receive the methods

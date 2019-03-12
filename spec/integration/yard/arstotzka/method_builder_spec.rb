@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe Arstotzka::Builder do
+describe Arstotzka::MethodBuilder do
   describe 'yard' do
     let!(:instance) { klass.new(hash) }
     let(:options)   { Arstotzka::Options.new(options_hash) }

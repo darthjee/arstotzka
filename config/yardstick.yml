@@ -19,9 +19,9 @@ rules:
   ReturnTag:
     enabled: true
     exclude:
-      - Arstotzka::Builder#attr_names
-      - Arstotzka::Builder#options
-      - Arstotzka::Builder#json_name
+      - Arstotzka::MethodBuilder#attr_names
+      - Arstotzka::MethodBuilder#options
+      - Arstotzka::MethodBuilder#json_name
       - Arstotzka::Crawler#post_process
       - Arstotzka::Crawler#options
       - Arstotzka::Fetcher#keys
@@ -34,9 +34,9 @@ rules:
   Summary::Presence:
     enabled: true
     exclude:
-      - Arstotzka::Builder#attr_names
-      - Arstotzka::Builder#options
-      - Arstotzka::Builder#json_name
+      - Arstotzka::MethodBuilder#attr_names
+      - Arstotzka::MethodBuilder#options
+      - Arstotzka::MethodBuilder#json_name
       - Arstotzka::Crawler#post_process
       - Arstotzka::Crawler#options
       - Arstotzka::Fetcher#keys
