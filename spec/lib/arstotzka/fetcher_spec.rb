@@ -4,7 +4,7 @@ require 'spec_helper'
 
 describe Arstotzka::Fetcher do
   subject(:fetcher) do
-    described_class.new json, instance, options.merge(path: path)
+    described_class.new json, instance, options
   end
 
   let(:path)     { '' }
@@ -13,7 +13,7 @@ describe Arstotzka::Fetcher do
   let(:value)    { fetcher.fetch }
 
   context 'when fetching with no options' do
-    let(:options) { {} }
+    let(:options) { { path: path} }
     let(:path) { 'id' }
 
     it 'retrieves attribute from base json' do
@@ -48,7 +48,7 @@ describe Arstotzka::Fetcher do
     let(:json) { [[[1, 2], [3, 4]], [[5, 6], [7, 8]]] }
 
     context 'when flatten option is true' do
-      let(:options) { { flatten: true } }
+      let(:options) { { flatten: true, path: path } }
 
       it 'returns the fetched value flattened' do
         expect(fetcher.fetch).to eq((1..8).to_a)
@@ -64,7 +64,7 @@ describe Arstotzka::Fetcher do
     end
 
     context 'when flatten option is false' do
-      let(:options) { { flatten: false } }
+      let(:options) { { flatten: false, path: path } }
 
       it 'returns the fetched value non flattened' do
         expect(fetcher.fetch).to eq(json)
@@ -75,7 +75,7 @@ describe Arstotzka::Fetcher do
   describe 'after option' do
     let(:instance) { MyParser.new(json) }
     let(:json)     { [100, 250, -25] }
-    let(:options)  { { after: :sum } }
+    let(:options)  { { after: :sum, path: path } }
 
     it 'applies after call ' do
       expect(fetcher.fetch).to eq(325)
@@ -86,7 +86,7 @@ describe Arstotzka::Fetcher do
     let(:path) { 'name' }
     let(:name)    { 'Robert' }
     let(:json)    { { name: name } }
-    let(:options) { { klass: wrapper } }
+    let(:options) { { klass: wrapper, path: path } }
     let(:wrapper) { Person }
 
     it 'wraps the result in an object' do
