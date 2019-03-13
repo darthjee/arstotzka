@@ -13,7 +13,7 @@ describe Arstotzka::Fetcher do
   let(:value)    { fetcher.fetch }
 
   context 'when fetching with no options' do
-    let(:options) { { path: path} }
+    let(:options) { { path: path } }
     let(:path) { 'id' }
 
     it 'retrieves attribute from base json' do
