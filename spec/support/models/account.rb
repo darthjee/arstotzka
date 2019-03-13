@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Account
-  def initialize(json={})
+  def initialize(json = {})
     @json = json
   end
 

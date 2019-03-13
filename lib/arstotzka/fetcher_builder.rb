@@ -11,7 +11,7 @@ module Arstotzka
     end
 
     def build
-      Fetcher.new(nil, instance, fetcher_options)
+      Fetcher.new(instance, fetcher_options)
     end
 
     private

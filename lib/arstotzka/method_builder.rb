@@ -63,7 +63,7 @@ module Arstotzka
 
     # @private
     attr_reader :attr_names, :options
-    delegate :json_name, :path, :full_path, :cached, to: :options
+    delegate :path, :full_path, :cached, to: :options
 
     # @private
     #
@@ -115,10 +115,6 @@ module Arstotzka
       add_method attribute, (cached ? cached_fetcher(attribute) : attr_fetcher(attribute)).to_s
     end
 
-    def json_name
-      options.json
-    end
-
     # Returns the code needed to initialize fetcher
     #
     # @param [String/Symbol] attribute name of method / attribute
@@ -130,7 +126,7 @@ module Arstotzka
     def attr_fetcher(attribute)
       <<-CODE
       ::Arstotzka::Fetcher.new(
-        nil, self, #{fetcher_options(attribute)}
+        self, #{fetcher_options(attribute)}
       ).fetch
       CODE
     end

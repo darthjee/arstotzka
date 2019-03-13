@@ -4,7 +4,7 @@ require 'spec_helper'
 
 describe Arstotzka::Fetcher do
   subject(:fetcher) do
-    described_class.new nil, instance, options
+    described_class.new instance, options
   end
 
   let(:path)     { '' }
