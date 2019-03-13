@@ -70,6 +70,7 @@ module Arstotzka
     end
 
     def splitted_keys
+      return keys if keys
       return full_path.split('.') if full_path
       return [key.to_s] unless path&.present?
 

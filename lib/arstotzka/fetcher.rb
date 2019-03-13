@@ -112,7 +112,8 @@ module Arstotzka
     #
     # @see #crawler
     def crawler_options
-      options.merge(keys: keys)
+      options
+        .merge(keys: keys)
     end
 
     # @private

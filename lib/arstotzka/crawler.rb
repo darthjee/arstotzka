@@ -102,7 +102,7 @@ module Arstotzka
 
     # @private
     attr_reader :post_process, :options
-    delegate :keys, :compact, :default, to: :options
+    delegate :compact, :default, to: :options
 
     # Fetch the value from hash by crawling the keys
     #
