@@ -10,14 +10,14 @@ module Arstotzka
       @instance = instance
     end
 
-    def build(hash)
+    def build
       Fetcher.new(hash, instance, fetcher_options)
     end
 
     private
 
     attr_reader :options, :instance
-    delegate :key, :path, :full_path, to: :options
+    delegate :json, :key, :path, :full_path, to: :options
 
     # @private
     #
@@ -39,6 +39,10 @@ module Arstotzka
       options.merge(
         path: real_path
       )
+    end
+
+    def hash
+      instance.send(json)
     end
   end
 end

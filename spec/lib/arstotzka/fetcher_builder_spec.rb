@@ -7,7 +7,7 @@ describe Arstotzka::FetcherBuilder do
     described_class.new instance, options
   end
 
-  let(:instance) { Arstotzka::Fetcher::Dummy.new }
+  let(:instance) { Arstotzka::Dummy.new(hash) }
   let(:options)  { { path: 'person', key: :id } }
 
   let(:hash) do
@@ -17,7 +17,7 @@ describe Arstotzka::FetcherBuilder do
   end
 
   describe '#build' do
-    let(:fetcher) { builder.build(hash) }
+    let(:fetcher) { builder.build }
 
     it do
       expect(fetcher).to be_a(Arstotzka::Fetcher)
