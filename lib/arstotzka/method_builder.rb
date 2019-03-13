@@ -97,7 +97,7 @@ module Arstotzka
     #
     # @see Arstotzka::Fetcher
     def fetcher_options(attribute)
-      options.to_h.slice(:klass, :case, :compact, :after, :type, :flatten, :default).merge(
+      options.to_h.slice(:json, :klass, :case, :compact, :after, :type, :flatten, :default).merge(
         path: real_path(attribute)
       )
     end
@@ -130,7 +130,7 @@ module Arstotzka
     def attr_fetcher(attribute)
       <<-CODE
       ::Arstotzka::Fetcher.new(
-        #{json_name}, self, #{fetcher_options(attribute)}
+        nil, self, #{fetcher_options(attribute)}
       ).fetch
       CODE
     end

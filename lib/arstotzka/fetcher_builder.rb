@@ -11,7 +11,7 @@ module Arstotzka
     end
 
     def build
-      Fetcher.new(hash, instance, fetcher_options)
+      Fetcher.new(nil, instance, fetcher_options)
     end
 
     private
@@ -39,10 +39,6 @@ module Arstotzka
       options.merge(
         path: real_path
       )
-    end
-
-    def hash
-      instance.send(json)
     end
   end
 end

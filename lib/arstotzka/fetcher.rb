@@ -82,9 +82,13 @@ module Arstotzka
     private
 
     # @private
-    attr_reader :keys, :hash, :instance, :options
+    attr_reader :keys, :instance, :options
     delegate :after, :flatten, to: :options
     delegate :wrap, to: :wrapper
+
+    def hash
+      @hash ||= instance.send(:eval, options.json.to_s)
+    end
 
     # @private
     #

@@ -4,11 +4,11 @@ require 'spec_helper'
 
 describe Arstotzka::Fetcher do
   subject(:fetcher) do
-    described_class.new json, instance, options
+    described_class.new nil, instance, options
   end
 
   let(:path)     { '' }
-  let(:instance) { Arstotzka::Fetcher::Dummy.new }
+  let(:instance) { Arstotzka::Fetcher::Dummy.new(json) }
   let(:json)     { load_json_fixture_file('arstotzka.json') }
   let(:value)    { fetcher.fetch }
 
