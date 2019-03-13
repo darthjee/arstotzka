@@ -8,8 +8,13 @@ describe Arstotzka::FetcherBuilder do
   end
 
   let(:instance) { Arstotzka::Fetcher::Dummy.new }
-  let(:options)  { { path: 'id' } }
-  let(:hash)     { { id: 10 } }
+  let(:options)  { { path: 'person', key: :id } }
+
+  let(:hash) do
+    {
+      person: { id: 10 }
+    }
+  end
 
   describe '#build' do
     let(:fetcher) { builder.build(hash) }
