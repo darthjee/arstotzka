@@ -4,19 +4,17 @@ module Arstotzka
   class FetcherBuilder
     include Base
 
-    def initialize(instance, options_hash = {})
+    def initialize(options_hash = {})
       self.options = options_hash
-
-      @instance = instance
     end
 
-    def build
+    def build(instance)
       Fetcher.new(instance, fetcher_options)
     end
 
     private
 
-    attr_reader :options, :instance
+    attr_reader :options
     delegate :json, :key, :path, :full_path, to: :options
 
     # @private

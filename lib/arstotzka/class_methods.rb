@@ -8,6 +8,10 @@ module Arstotzka
       @fetcher_builders ||= {}
     end
 
+    def fetcher_for(attribute, instance)
+      fetcher_builders[attribute.to_sym].build(instance)
+    end
+
     private
 
     # @api public

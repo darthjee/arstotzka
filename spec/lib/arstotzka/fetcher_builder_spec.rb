@@ -4,7 +4,7 @@ require 'spec_helper'
 
 describe Arstotzka::FetcherBuilder do
   subject(:builder) do
-    described_class.new instance, options
+    described_class.new options
   end
 
   let(:instance) { Arstotzka::Dummy.new(hash) }
@@ -17,7 +17,7 @@ describe Arstotzka::FetcherBuilder do
   end
 
   describe '#build' do
-    let(:fetcher) { builder.build }
+    let(:fetcher) { builder.build(instance) }
 
     it do
       expect(fetcher).to be_a(Arstotzka::Fetcher)

@@ -78,32 +78,6 @@ module Arstotzka
 
     # @private
     #
-    # builds the complete key path to fetch value
-    #
-    # @param [String/Symbol] attribute name of the method / attribute
-    #
-    # @return [String] the keys path
-    def real_path(attribute)
-      full_path || [path, attribute].compact.join('.')
-    end
-
-    # @private
-    #
-    # Options needed by fetcher
-    #
-    # @param [String/Symbol] attribute name of the method / attribute
-    #
-    # @return [Hash] options
-    #
-    # @see Arstotzka::Fetcher
-    def fetcher_options(attribute)
-      options.to_h.slice(:json, :klass, :case, :compact, :after, :type, :flatten, :default).merge(
-        path: real_path(attribute)
-      )
-    end
-
-    # @private
-    #
     # Add method to the list of methods to be built
     #
     # @param [String/Symbol] attribute name of method / attribute
@@ -113,7 +87,7 @@ module Arstotzka
     # @see Sinclair
     def add_attr(attribute)
       add_method attribute, (cached ? cached_fetcher(attribute) : attr_fetcher(attribute)).to_s
-      klass.fetcher_builders
+      klass.fetcher_builders[attribute.to_sym] = FetcherBuilder.new(options.merge(key: attribute))
     end
 
     # Returns the code needed to initialize fetcher
@@ -126,9 +100,7 @@ module Arstotzka
     # @see Artotzka::Fetcher
     def attr_fetcher(attribute)
       <<-CODE
-      ::Arstotzka::Fetcher.new(
-        self, #{fetcher_options(attribute)}
-      ).fetch
+        self.class.fetcher_for(:#{attribute}, self).fetch
       CODE
     end
 
@@ -141,7 +113,7 @@ module Arstotzka
     # @see #attr_fetcher
     def cached_fetcher(attribute)
       <<-CODE
-      @#{attribute} ||= #{attr_fetcher(attribute)}
+        @#{attribute} ||= #{attr_fetcher(attribute)}
       CODE
     end
   end
