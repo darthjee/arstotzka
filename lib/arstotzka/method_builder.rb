@@ -40,19 +40,19 @@ module Arstotzka
     # Returns new instance of Arstotzka::MethodBuilder
     #
     # @param attr_names [Array] list of attributes to be fetched from the hash/json
-    # @param clazz [Class] class to receive the methods
+    # @param klass [Class] class to receive the methods
     #   (using {https://www.rubydoc.info/gems/sinclair Sinclair})
     #
-    # @overload initialize(attr_names, clazz, options_hash={})
+    # @overload initialize(attr_names, klass, options_hash={})
     #   @param options_hash [Hash] hash containing extra options
     #
-    # @overload initialize(attr_names, clazz, options)
+    # @overload initialize(attr_names, klass, options)
     #   @param options [Arstotzka::Options] options of initialization object
     #
     # @see https://www.rubydoc.info/gems/sinclair Sinclair
     # @see Arstotzka::Options
-    def initialize(attr_names, clazz, options = {})
-      super(clazz)
+    def initialize(attr_names, klass, options = {})
+      super(klass)
       self.options = options
 
       @attr_names = attr_names
@@ -113,6 +113,7 @@ module Arstotzka
     # @see Sinclair
     def add_attr(attribute)
       add_method attribute, (cached ? cached_fetcher(attribute) : attr_fetcher(attribute)).to_s
+      klass.fetcher_builders
     end
 
     # Returns the code needed to initialize fetcher

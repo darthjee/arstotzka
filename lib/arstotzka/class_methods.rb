@@ -4,6 +4,10 @@ module Arstotzka
   # As Arstotzka extends ActiveSupport::Concern, Arstotzka::ClassMethods define
   # methods that will be available when defining a class that includes Arstotka
   module ClassMethods
+    def fetcher_builders
+      @fetcher_builders ||= {}
+    end
+
     private
 
     # @api public

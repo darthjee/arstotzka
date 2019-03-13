@@ -9,6 +9,7 @@ describe Arstotzka::MethodBuilder do
 
   let(:klass) do
     Class.new.tap do |c|
+      c.send(:include, Arstotzka)
       c.send(:attr_reader, :json)
       c.send(:define_method, :initialize) do |json = {}|
         @json = json
