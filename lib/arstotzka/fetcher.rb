@@ -10,9 +10,13 @@ module Arstotzka
 
     # Creates an instance of Artotzka::Fetcher
     #
-    # @param hash [Hash] Hash to be crawled for value
     # @param instance [Object] object whose methods will be called after for processing
-    # @param options_hash [Hash] options that will be passed to {Crawler}, {Wrapper} and {Reader}
+    #
+    # @overload iniitalize(instance,  options_hash = {})
+    #   @param options_hash [Hash] options that will be passed to {Crawler}, {Wrapper} and {Reader}
+    #
+    # @overload iniitalize(instance,  options)
+    #   @param options [Arstotzka::Options] options that will be passed to {Crawler}, {Wrapper} and {Reader}
     def initialize(instance, options_hash = {})
       self.options = options_hash
 
@@ -26,7 +30,7 @@ module Arstotzka
     #
     # @return [Object] The final value found and transformed
     #
-    # @example
+    # @example Fetching with wrapping and processing
     #   class Transaction
     #     attr_reader :value, :type
     #
@@ -41,7 +45,13 @@ module Arstotzka
     #   end
     #
     #   class Account
+    #     def initialize(json = {})
+    #       @json = json
+    #     end
+    #
     #     private
+    #
+    #     attr_reader :json
     #
     #     def filter_income(transactions)
     #       transactions.select(&:positive?)
@@ -59,8 +69,10 @@ module Arstotzka
     #       { value: 101.00,  type: 'outcome' }
     #     ]
     #   }
+    #
     #   instance = Account.new
-    #   fetcher = Arstotzka::Fetcher.new(hash, instance,
+    #
+    #   fetcher = Arstotzka::Fetcher.new(instance,
     #     path: 'transactions',
     #     klass: Transaction,
     #     after: :filter_income

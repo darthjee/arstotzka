@@ -45,6 +45,7 @@ module Arstotzka
   #     attr_reader :json
   #
   #     expose :cars, full_path: 'cars.unit', type: :car
+  #
   #     def initialize(hash)
   #       @json = hash
   #     end
@@ -73,7 +74,7 @@ module Arstotzka
     #   class TypeCaster
     #     include Arstotzka
     #
-    #     expose :age,     type: :integer, json: :@hash
+    #     expose :age, type: :integer, json: :@hash
     #
     #     def initialize(hash)
     #       @hash = hash

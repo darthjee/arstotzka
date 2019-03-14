@@ -43,19 +43,19 @@ module Arstotzka
     #     ]
     #   }
     #
-    #   reader = Arstotzka::Reader.new(keys: %w(person full_name), case: :snake)
+    #   reader = Arstotzka::Reader.new(full_path: 'person.full_name', case: :snake)
     #   reader.read(hash, 1) # returns 'John'
     #
     # @example
-    #   reader = Arstotzka::Reader.new(keys: %w(person age), case: :upper_camel)
+    #   reader = Arstotzka::Reader.new(full_path: 'person.age', case: :upper_camel)
     #   reader.read(hash, 1) # returns 23
     #
     # @example
-    #   reader = Arstotzka::Reader.new(keys: %w(person car_collection model), case: :snake)
+    #   reader = Arstotzka::Reader.new(full_path: 'person.car_collection.model', case: :snake)
     #   reader.read(hash, 1) # raises {Arstotzka::Exception::KeyNotFound}
     #
     # @example
-    #   reader = Arstotzka::Reader.new(keys: %w(person car_collection model), case: :lower_camel)
+    #   reader = Arstotzka::Reader.new(full_path: 'person.car_collection.model', case: :lower_camel)
     #   reader.read(hash, 1) # returns [
     #                        #   { maker: 'Ford', 'model' => 'Model A' },
     #                        #   { maker: 'BMW', 'model' => 'Jetta' }

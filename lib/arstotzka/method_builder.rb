@@ -8,6 +8,8 @@ module Arstotzka
   #
   # @example
   #   class MyModel
+  #     include Arstotzka
+  #
   #     attr_reader :json
   #
   #     def initialize(json)
@@ -28,7 +30,7 @@ module Arstotzka
   #   instance.first_name # returns 'John'
   #
   #   options = Arstotzka::Options.new(type: :integer)
-  #   builder = Arstotzka::MethodBuilder.new([ :age, :cars ], MyModel, options)
+  #   builder = Arstotzka::MethodBuilder.new([ :age, 'cars' ], MyModel, options)
   #   builder.build
   #
   #   instance.age  # returns 20
@@ -80,7 +82,7 @@ module Arstotzka
     #
     # Add method to the list of methods to be built
     #
-    # @param [String/Symbol] attribute name of method / attribute
+    # @param [String,Symbol] attribute name of method / attribute
     #
     # @return nil
     #
@@ -92,9 +94,9 @@ module Arstotzka
 
     # Returns the code needed to initialize fetcher
     #
-    # @param [String/Symbol] attribute name of method / attribute
+    # @param [String,Symbol] attribute name of method / attribute
     #
-    # @return [String] code
+    # @return [String] method code
     #
     # @see Sinclair
     # @see Artotzka::Fetcher
@@ -108,9 +110,9 @@ module Arstotzka
 
     # Returns the code needed to initialize a fetche and cache it
     #
-    # @param [String/Symbol] attribute name of method / attribute
+    # @param [String,Symbol] attribute name of method / attribute
     #
-    # @return [String] code
+    # @return [String] method code
     #
     # @see #attr_fetcher
     def cached_fetcher(attribute)
