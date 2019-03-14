@@ -24,10 +24,11 @@ end
 
 describe Arstotzka::Reader do
   subject(:reader) do
-    described_class.new(keys: keys, case: case_type)
+    described_class.new(full_path: full_path, case: case_type)
   end
 
   let(:keys)      { %w[user full_name] }
+  let(:full_path) { keys.join('.') }
   let(:json_file) { 'complete_person.json' }
   let(:full_json) { load_json_fixture_file(json_file) }
   let(:json)      { full_json }

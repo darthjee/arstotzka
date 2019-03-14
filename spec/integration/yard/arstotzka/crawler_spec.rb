@@ -5,11 +5,12 @@ require 'spec_helper'
 describe Arstotzka::Crawler do
   describe 'yard' do
     subject(:crawler) do
-      described_class.new(keys: keys, **options)
+      described_class.new(full_path: full_path, **options)
     end
 
-    let(:options) { {} }
-    let(:keys)    { %w[person information first_name] }
+    let(:options)   { {} }
+    let(:keys)      { %w[person information first_name] }
+    let(:full_path) { keys.join('.') }
     let(:hash) do
       {
         person: {
@@ -64,7 +65,7 @@ describe Arstotzka::Crawler do
 
         context 'when block is given' do
           subject(:crawler) do
-            described_class.new(keys: keys, **options) { |value| value&.to_sym }
+            described_class.new(full_path: full_path, **options) { |value| value&.to_sym }
           end
 
           it 'returns the post processed values' do
