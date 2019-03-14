@@ -23,7 +23,7 @@ module Arstotzka
     def initialize(options_hash = {})
       self.options = options_hash
 
-      @keys = options.splitted_keys.map(&method(:change_case))
+      @keys = options.keys.map(&method(:change_case))
     end
 
     # Reads the value of one key in the hash

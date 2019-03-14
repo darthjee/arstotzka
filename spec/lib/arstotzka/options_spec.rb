@@ -206,7 +206,7 @@ describe Arstotzka::Options do
     end
   end
 
-  describe '#splitted_keys' do
+  describe '#keys' do
     let(:options_hash) { { path: path, key: key, full_path: full_path } }
     let(:key)          { :id }
     let(:path)         { nil }
@@ -215,7 +215,7 @@ describe Arstotzka::Options do
     context 'when full_path is nil' do
       context 'when path is nil' do
         it 'returns only the key' do
-          expect(options.splitted_keys).to eq(['id'])
+          expect(options.keys).to eq(['id'])
         end
       end
 
@@ -223,7 +223,7 @@ describe Arstotzka::Options do
         let(:path) { '' }
 
         it 'returns only the key' do
-          expect(options.splitted_keys).to eq(['id'])
+          expect(options.keys).to eq(['id'])
         end
       end
 
@@ -231,7 +231,7 @@ describe Arstotzka::Options do
         let(:path) { 'account.person' }
 
         it 'returns the path splitted and the key' do
-          expect(options.splitted_keys).to eq(%w[account person id])
+          expect(options.keys).to eq(%w[account person id])
         end
       end
     end
@@ -241,7 +241,7 @@ describe Arstotzka::Options do
 
       context 'when path is nil' do
         it 'returns empty array' do
-          expect(options.splitted_keys).to eq([])
+          expect(options.keys).to eq([])
         end
       end
 
@@ -249,7 +249,7 @@ describe Arstotzka::Options do
         let(:path) { '' }
 
         it 'returns empty array' do
-          expect(options.splitted_keys).to eq([])
+          expect(options.keys).to eq([])
         end
       end
 
@@ -257,7 +257,7 @@ describe Arstotzka::Options do
         let(:path) { 'account.person' }
 
         it 'returns empty array' do
-          expect(options.splitted_keys).to eq([])
+          expect(options.keys).to eq([])
         end
       end
     end
@@ -267,7 +267,7 @@ describe Arstotzka::Options do
 
       context 'when path is nil' do
         it 'returns splitted full path' do
-          expect(options.splitted_keys).to eq(%w[account person_id])
+          expect(options.keys).to eq(%w[account person_id])
         end
       end
 
@@ -275,7 +275,7 @@ describe Arstotzka::Options do
         let(:path) { '' }
 
         it 'returns splitted full path' do
-          expect(options.splitted_keys).to eq(%w[account person_id])
+          expect(options.keys).to eq(%w[account person_id])
         end
       end
 
@@ -283,7 +283,7 @@ describe Arstotzka::Options do
         let(:path) { 'account.person' }
 
         it 'returns splitted full path' do
-          expect(options.splitted_keys).to eq(%w[account person_id])
+          expect(options.keys).to eq(%w[account person_id])
         end
       end
     end

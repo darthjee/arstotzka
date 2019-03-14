@@ -69,8 +69,7 @@ module Arstotzka
       self.class.new(to_h.merge(options))
     end
 
-    def splitted_keys
-      return keys if keys
+    def keys
       return full_path.split('.') if full_path
       return [key.to_s] unless path&.present?
 
