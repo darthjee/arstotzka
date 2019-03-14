@@ -44,7 +44,7 @@ describe Arstotzka::Fetcher do
   end
 
   describe 'flatten options' do
-    let(:json) { { value: value } }
+    let(:json)  { { value: value } }
     let(:value) { [[[1, 2], [3, 4]], [[5, 6], [7, 8]]] }
 
     context 'when flatten option is true' do
