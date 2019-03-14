@@ -7,14 +7,13 @@ describe Arstotzka::Fetcher do
     described_class.new instance, options
   end
 
-  let(:path)     { '' }
   let(:instance) { Arstotzka::Fetcher::Dummy.new(json) }
   let(:json)     { load_json_fixture_file('arstotzka.json') }
   let(:value)    { fetcher.fetch }
 
   context 'when fetching with no options' do
-    let(:options) { { path: path } }
-    let(:path) { 'id' }
+    let(:options) { { key: key } }
+    let(:key) { 'id' }
 
     it 'retrieves attribute from base json' do
       expect(value).to eq(json['id'])
@@ -45,17 +44,18 @@ describe Arstotzka::Fetcher do
   end
 
   describe 'flatten options' do
-    let(:json) { [[[1, 2], [3, 4]], [[5, 6], [7, 8]]] }
+    let(:json) { { value: value } }
+    let(:value) { [[[1, 2], [3, 4]], [[5, 6], [7, 8]]] }
 
     context 'when flatten option is true' do
-      let(:options) { { flatten: true, path: path } }
+      let(:options) { { flatten: true, key: :value } }
 
       it 'returns the fetched value flattened' do
         expect(fetcher.fetch).to eq((1..8).to_a)
       end
 
       context 'when value is not an array' do
-        let(:json) { 1 }
+        let(:value) { 1 }
 
         it 'returns the fetched value flattened' do
           expect(fetcher.fetch).to eq(1)
@@ -64,18 +64,18 @@ describe Arstotzka::Fetcher do
     end
 
     context 'when flatten option is false' do
-      let(:options) { { flatten: false, path: path } }
+      let(:options) { { flatten: false, key: :value } }
 
       it 'returns the fetched value non flattened' do
-        expect(fetcher.fetch).to eq(json)
+        expect(fetcher.fetch).to eq(value)
       end
     end
   end
 
   describe 'after option' do
     let(:instance) { MyParser.new(json) }
-    let(:json)     { [100, 250, -25] }
-    let(:options)  { { after: :sum, path: path } }
+    let(:json)     { { value: [100, 250, -25] } }
+    let(:options)  { { after: :sum, key: :value } }
 
     it 'applies after call ' do
       expect(fetcher.fetch).to eq(325)

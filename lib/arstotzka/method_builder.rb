@@ -100,7 +100,9 @@ module Arstotzka
     # @see Artotzka::Fetcher
     def attr_fetcher(attribute)
       <<-CODE
-        self.class.fetcher_for(:#{attribute}, self).fetch
+        begin
+          self.class.fetcher_for(:#{attribute}, self).fetch
+        end
       CODE
     end
 

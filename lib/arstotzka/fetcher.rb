@@ -16,7 +16,6 @@ module Arstotzka
     def initialize(instance, options_hash = {})
       self.options = options_hash
 
-      @keys = options.path.to_s.split('.')
       @instance = instance
     end
 
@@ -81,7 +80,7 @@ module Arstotzka
     private
 
     # @private
-    attr_reader :keys, :instance, :options
+    attr_reader :instance, :options
     delegate :after, :flatten, to: :options
     delegate :wrap, to: :wrapper
 
@@ -99,21 +98,9 @@ module Arstotzka
     # @return [Arstotzka::Crawler] the crawler object
     def crawler
       @crawler ||=
-        Crawler.new(crawler_options) do |value|
+        Crawler.new(options) do |value|
           wrap(value)
         end
-    end
-
-    # @private
-    #
-    # Hash for crawler initialization
-    #
-    # @return [Hash]
-    #
-    # @see #crawler
-    def crawler_options
-      options
-        .merge(keys: keys)
     end
 
     # @private

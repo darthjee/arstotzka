@@ -74,7 +74,7 @@ module Arstotzka
       return full_path.split('.') if full_path
       return [key.to_s] unless path&.present?
 
-      [path, key].join('.').split('.')
+      [path, key].compact.join('.').split('.')
     end
   end
 end
