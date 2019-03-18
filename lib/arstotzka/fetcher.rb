@@ -10,14 +10,16 @@ module Arstotzka
 
     # Creates an instance of Artotzka::Fetcher
     #
-    # @param hash [Hash] Hash to be crawled for value
     # @param instance [Object] object whose methods will be called after for processing
-    # @param options_hash [Hash] options that will be passed to {Crawler}, {Wrapper} and {Reader}
-    def initialize(hash, instance, options_hash = {})
+    #
+    # @overload iniitalize(instance,  options_hash = {})
+    #   @param options_hash [Hash] options for {Crawler}, {Wrapper} and {Reader}
+    #
+    # @overload iniitalize(instance,  options)
+    #   @param options [Arstotzka::Options] options for {Crawler}, {Wrapper} and {Reader}
+    def initialize(instance, options_hash = {})
       self.options = options_hash
 
-      @keys = options.path.to_s.split('.')
-      @hash = hash
       @instance = instance
     end
 
@@ -28,7 +30,7 @@ module Arstotzka
     #
     # @return [Object] The final value found and transformed
     #
-    # @example
+    # @example Fetching with wrapping and processing
     #   class Transaction
     #     attr_reader :value, :type
     #
@@ -43,7 +45,13 @@ module Arstotzka
     #   end
     #
     #   class Account
+    #     def initialize(json = {})
+    #       @json = json
+    #     end
+    #
     #     private
+    #
+    #     attr_reader :json
     #
     #     def filter_income(transactions)
     #       transactions.select(&:positive?)
@@ -61,8 +69,10 @@ module Arstotzka
     #       { value: 101.00,  type: 'outcome' }
     #     ]
     #   }
+    #
     #   instance = Account.new
-    #   fetcher = Arstotzka::Fetcher.new(hash, instance,
+    #
+    #   fetcher = Arstotzka::Fetcher.new(instance,
     #     path: 'transactions',
     #     klass: Transaction,
     #     after: :filter_income
@@ -82,9 +92,13 @@ module Arstotzka
     private
 
     # @private
-    attr_reader :keys, :hash, :instance, :options
+    attr_reader :instance, :options
     delegate :after, :flatten, to: :options
     delegate :wrap, to: :wrapper
+
+    def hash
+      @hash ||= instance.send(:eval, options.json.to_s)
+    end
 
     # @private
     #
@@ -96,20 +110,9 @@ module Arstotzka
     # @return [Arstotzka::Crawler] the crawler object
     def crawler
       @crawler ||=
-        Arstotzka::Crawler.new(crawler_options) do |value|
+        Crawler.new(options) do |value|
           wrap(value)
         end
-    end
-
-    # @private
-    #
-    # Hash for crawler initialization
-    #
-    # @return [Hash]
-    #
-    # @see #crawler
-    def crawler_options
-      options.merge(keys: keys)
     end
 
     # @private
@@ -118,7 +121,7 @@ module Arstotzka
     #
     # @return [Arstotzka::Wrapper] the wrapper
     def wrapper
-      @wrapper ||= Arstotzka::Wrapper.new(options)
+      @wrapper ||= Wrapper.new(options)
     end
   end
 end

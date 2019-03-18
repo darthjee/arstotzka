@@ -11,4 +11,10 @@ class StarGazer
   def initialize(json = {})
     @json = json
   end
+
+  private
+
+  def only_yellow(stars)
+    stars.select(&:yellow?)
+  end
 end

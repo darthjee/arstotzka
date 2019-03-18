@@ -205,4 +205,87 @@ describe Arstotzka::Options do
       expect(options.merge(default: 10).json).to eq(:hash)
     end
   end
+
+  describe '#keys' do
+    let(:options_hash) { { path: path, key: key, full_path: full_path } }
+    let(:key)          { :id }
+    let(:path)         { nil }
+    let(:full_path)    { nil }
+
+    context 'when full_path is nil' do
+      context 'when path is nil' do
+        it 'returns only the key' do
+          expect(options.keys).to eq(['id'])
+        end
+      end
+
+      context 'when path is empty' do
+        let(:path) { '' }
+
+        it 'returns only the key' do
+          expect(options.keys).to eq(['id'])
+        end
+      end
+
+      context 'when path is not empty' do
+        let(:path) { 'account.person' }
+
+        it 'returns the path splitted and the key' do
+          expect(options.keys).to eq(%w[account person id])
+        end
+      end
+    end
+
+    context 'when full_path is empty' do
+      let(:full_path) { '' }
+
+      context 'when path is nil' do
+        it 'returns empty array' do
+          expect(options.keys).to eq([])
+        end
+      end
+
+      context 'when path is empty' do
+        let(:path) { '' }
+
+        it 'returns empty array' do
+          expect(options.keys).to eq([])
+        end
+      end
+
+      context 'when path is not empty' do
+        let(:path) { 'account.person' }
+
+        it 'returns empty array' do
+          expect(options.keys).to eq([])
+        end
+      end
+    end
+
+    context 'when full_path is not empty' do
+      let(:full_path) { 'account.person_id' }
+
+      context 'when path is nil' do
+        it 'returns splitted full path' do
+          expect(options.keys).to eq(%w[account person_id])
+        end
+      end
+
+      context 'when path is empty' do
+        let(:path) { '' }
+
+        it 'returns splitted full path' do
+          expect(options.keys).to eq(%w[account person_id])
+        end
+      end
+
+      context 'when path is not empty' do
+        let(:path) { 'account.person' }
+
+        it 'returns splitted full path' do
+          expect(options.keys).to eq(%w[account person_id])
+        end
+      end
+    end
+  end
 end

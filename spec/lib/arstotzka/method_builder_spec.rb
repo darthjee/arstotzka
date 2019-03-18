@@ -2,13 +2,14 @@
 
 require 'spec_helper'
 
-describe Arstotzka::Builder do
+describe Arstotzka::MethodBuilder do
   subject(:builder) do
     described_class.new(attr_names, klass, **full_options)
   end
 
   let(:klass) do
     Class.new.tap do |c|
+      c.send(:include, Arstotzka)
       c.send(:attr_reader, :json)
       c.send(:define_method, :initialize) do |json = {}|
         @json = json

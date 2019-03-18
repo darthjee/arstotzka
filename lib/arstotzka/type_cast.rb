@@ -5,7 +5,7 @@ module Arstotzka
   #
   # Concern with all the type cast methods to be used by {Wrapper}
   #
-  # Usage of typecast is defined by the configuration of {Builder} by the usage of
+  # Usage of typecast is defined by the configuration of {MethodBuilder} by the usage of
   # option type
   #
   # TypeCast can also be extended to include more types
@@ -45,6 +45,7 @@ module Arstotzka
   #     attr_reader :json
   #
   #     expose :cars, full_path: 'cars.unit', type: :car
+  #
   #     def initialize(hash)
   #       @json = hash
   #     end
@@ -73,7 +74,7 @@ module Arstotzka
     #   class TypeCaster
     #     include Arstotzka
     #
-    #     expose :age,     type: :integer, json: :@hash
+    #     expose :age, type: :integer, json: :@hash
     #
     #     def initialize(hash)
     #       @hash = hash

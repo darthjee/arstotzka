@@ -2,8 +2,10 @@
 
 require 'spec_helper'
 
-describe Arstotzka::Builder do
+describe Arstotzka::MethodBuilder do
   describe 'yard' do
+    subject(:builder) { described_class.new(attributes, klass, options) }
+
     let!(:instance) { klass.new(hash) }
     let(:options)   { Arstotzka::Options.new(options_hash) }
     let(:hash) do
@@ -13,7 +15,6 @@ describe Arstotzka::Builder do
         'cars' => 2.0
       }
     end
-    let(:builder) { described_class.new(attributes, klass, options) }
 
     describe '#first_name' do
       let(:klass)        { Class.new(MyModel) }

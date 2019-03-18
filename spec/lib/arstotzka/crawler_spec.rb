@@ -8,8 +8,9 @@ describe Arstotzka::Crawler do
   end
 
   let(:block)           { proc { |v| v } }
-  let(:keys)            { '' }
-  let(:default_options) { { keys: keys, case: :lower_camel } }
+  let(:keys)            { [] }
+  let(:full_path)       { keys.join('.') }
+  let(:default_options) { { full_path: full_path, case: :lower_camel } }
   let(:options)         { {} }
   let(:json_file)       { 'arstotzka.json' }
   let(:json)            { load_json_fixture_file(json_file) }

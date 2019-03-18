@@ -5,8 +5,8 @@ module Arstotzka
   #
   # @api private
   #
-  # @example
-  #   crawler = Arstotzka::Crawler.new(keys: %w(person information first_name))
+  # @example Simple usage
+  #   crawler = Arstotzka::Crawler.new(full_path: 'person.information.first_name')
   #   hash = {
   #     person: {
   #       'information' => {
@@ -45,21 +45,13 @@ module Arstotzka
     # @return [Object] value fetched from the last Hash#fetch call using the last part
     #   of keys
     #
-    # @example
-    #   crawler = Arstotzka::Crawler.new(keys: %w(person information first_name))
-    #   hash = {
-    #     person: {
-    #       'information' => {
-    #         'firstName' => 'John'
-    #       }
-    #     }
-    #   }
-    #   crawler.value(hash) # returns 'John'
+    # @example (see Arstotzka::Crawler)
     #
-    # @example
+    # @example Passing compact and case options
     #   crawler = Arstotzka::Crawler.new(
-    #     keys: %w(companies games hero),
-    #     compact: true, case: :snake
+    #     full_path: 'companies.games.hero',
+    #     compact:   true,
+    #     case:      :snake
     #   )
     #   games_hash = {
     #     'companies' => [{
@@ -77,18 +69,19 @@ module Arstotzka
     #
     #   crawler.value(games_hash) # returns [['Rakhar']]
     #
-    # @example
+    # @example Passing default option
     #   crawler = Arstotzka::Crawler.new(
-    #     keys: %w(companies games hero),
+    #     full_path: 'companies.games.hero',
     #     compact: true, case: :snake, default: 'NO HERO'
     #   )
     #
     #   crawler.value(games_hash) # returns [['NO HERO', 'Rakhar'], 'NO HERO']
     #
-    # @example
+    # @example Passing a post processor block
     #   crawler = Arstotzka::Crawler.new(
-    #     keys: %w(companies games hero),
-    #     compact: true, case: :snake
+    #     full_path: 'companies.games.hero',
+    #     compact:   true,
+    #     case: :    snake
     #   ) { |value| value.&to_sym }
     #
     #   crawler.value(games_hash) # returns [[:Rakhar]]
@@ -102,7 +95,7 @@ module Arstotzka
 
     # @private
     attr_reader :post_process, :options
-    delegate :keys, :compact, :default, to: :options
+    delegate :compact, :default, to: :options
 
     # Fetch the value from hash by crawling the keys
     #

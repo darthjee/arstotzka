@@ -13,7 +13,7 @@ module Arstotzka
     # @overload initialize(options_hash={})
     #   @param options_hash [Hash] options of initialization
     #   @option options_hash klass [Class] class to wrap the value
-    #   @option options_hash type [String/Symbol] type to cast the value. The
+    #   @option options_hash type [String,Symbol] type to cast the value. The
     #     possible type_cast is defined by {TypeCast}
     #
     # @overload initialize(options)

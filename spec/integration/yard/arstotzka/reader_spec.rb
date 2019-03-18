@@ -4,9 +4,10 @@ require 'spec_helper'
 
 describe Arstotzka::Reader do
   describe 'yard' do
-    subject(:reader) { described_class.new(keys: keys, case: case_type) }
+    subject(:reader) { described_class.new(full_path: full_path, case: case_type) }
 
     let(:keys)      { %w[person full_name] }
+    let(:full_path) { keys.join('.') }
     let(:case_type) { :snake }
 
     describe '#read' do
