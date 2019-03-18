@@ -11,7 +11,7 @@ describe Arstotzka::FetcherBuilder do
       let(:fetcher)  { builder.build(instance) }
       let(:instance) { MyModel.new(hash) }
 
-      context 'sample usage' do
+      context 'with sample usage' do
         let(:options_hash) { { key: :id, path: :person } }
 
         let(:hash) do
@@ -27,7 +27,7 @@ describe Arstotzka::FetcherBuilder do
         end
       end
 
-      context 'passing full path' do
+      context 'with passing full path' do
         let(:options_hash) do
           {
             key:       :player_ids,
@@ -71,7 +71,7 @@ describe Arstotzka::FetcherBuilder do
               { name: 'HB2840-B',    color: 'blue' },
               { name: 'Krypton Sun', color: 'red' },
               { name: 'HB0124-C',    color: 'yellow' },
-              { name: 'HB0942-C',    color: 'red' },
+              { name: 'HB0942-C',    color: 'red' }
             ]
           }
         end
@@ -81,9 +81,9 @@ describe Arstotzka::FetcherBuilder do
 
         it 'builds a fetcher capable of fetching and filtering value' do
           expect(fetcher.fetch).to eq([
-            Star.new(name: 'Sun', color: 'yellow'),
-            Star.new(name: 'HB0124-C', color: 'yellow')
-          ])
+                                        Star.new(name: 'Sun', color: 'yellow'),
+                                        Star.new(name: 'HB0124-C', color: 'yellow')
+                                      ])
         end
       end
     end

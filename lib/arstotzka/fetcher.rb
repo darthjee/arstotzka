@@ -13,10 +13,10 @@ module Arstotzka
     # @param instance [Object] object whose methods will be called after for processing
     #
     # @overload iniitalize(instance,  options_hash = {})
-    #   @param options_hash [Hash] options that will be passed to {Crawler}, {Wrapper} and {Reader}
+    #   @param options_hash [Hash] options for {Crawler}, {Wrapper} and {Reader}
     #
     # @overload iniitalize(instance,  options)
-    #   @param options [Arstotzka::Options] options that will be passed to {Crawler}, {Wrapper} and {Reader}
+    #   @param options [Arstotzka::Options] options for {Crawler}, {Wrapper} and {Reader}
     def initialize(instance, options_hash = {})
       self.options = options_hash
 
