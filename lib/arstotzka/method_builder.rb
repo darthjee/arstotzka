@@ -88,8 +88,8 @@ module Arstotzka
     #
     # @see Sinclair
     def add_attr(attribute)
+      klass.add_fetcher(attribute, options)
       add_method attribute, (cached ? cached_fetcher(attribute) : attr_fetcher(attribute)).to_s
-      klass.fetcher_builders[attribute.to_sym] = FetcherBuilder.new(options.merge(key: attribute))
     end
 
     # Returns the code needed to initialize fetcher

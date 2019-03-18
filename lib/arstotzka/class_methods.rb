@@ -4,8 +4,8 @@ module Arstotzka
   # As Arstotzka extends ActiveSupport::Concern, Arstotzka::ClassMethods define
   # methods that will be available when defining a class that includes Arstotka
   module ClassMethods
-    def fetcher_builders
-      @fetcher_builders ||= {}
+    def add_fetcher(attribute, options)
+      fetcher_builders[attribute.to_sym] = FetcherBuilder.new(options.merge(key: attribute))
     end
 
     # @api private
@@ -62,6 +62,10 @@ module Arstotzka
     def expose(*attr_names, **options_hash)
       options = Options.new(options_hash.symbolize_keys)
       MethodBuilder.new(attr_names, self, options).build
+    end
+
+    def fetcher_builders
+      @fetcher_builders ||= {}
     end
   end
 end
