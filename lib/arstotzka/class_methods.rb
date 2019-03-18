@@ -8,6 +8,16 @@ module Arstotzka
       @fetcher_builders ||= {}
     end
 
+    # @api private
+    #
+    # Return the fetcher for an attribute and instance
+    #
+    # a new fetcher is built everytime this method is called
+    #
+    # @param attribute [Symbol,String] Name of method that will use this Fetcher
+    # @param instance [Object] instance that will contain the Hash needed by fetcher
+    #
+    # @return [Arstotzka::Fetcher]
     def fetcher_for(attribute, instance)
       fetcher_builders[attribute.to_sym].build(instance)
     end
