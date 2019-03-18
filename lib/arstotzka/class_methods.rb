@@ -73,6 +73,7 @@ module Arstotzka
     end
 
     # @private
+    # @api private
     #
     # Map of FetcherBuilders
     #
