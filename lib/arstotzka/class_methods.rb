@@ -4,6 +4,14 @@ module Arstotzka
   # As Arstotzka extends ActiveSupport::Concern, Arstotzka::ClassMethods define
   # methods that will be available when defining a class that includes Arstotka
   module ClassMethods
+    # @api private
+    #
+    # Create builder that will be used to create Fetchers
+    #
+    # @param attribute [Symbol,String] attribute key
+    # @param options [Arstotzka::Options] fetcher options
+    #
+    # @return [Artotzka::FetcherBuilder]
     def add_fetcher(attribute, options)
       fetcher_builders[attribute.to_sym] = FetcherBuilder.new(options.merge(key: attribute))
     end
@@ -64,6 +72,11 @@ module Arstotzka
       MethodBuilder.new(attr_names, self, options).build
     end
 
+    # @private
+    #
+    # Map of FetcherBuilders
+    #
+    # @return [Hash<FetcherBuilder>]
     def fetcher_builders
       @fetcher_builders ||= {}
     end
