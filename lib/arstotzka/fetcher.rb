@@ -121,7 +121,7 @@ module Arstotzka
     #
     # @return [Arstotzka::Wrapper] the wrapper
     def wrapper
-      @wrapper ||= Wrapper.new(options)
+      @wrapper ||= Wrapper.new(options.merge(instance: instance))
     end
   end
 end

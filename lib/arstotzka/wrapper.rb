@@ -77,7 +77,11 @@ module Arstotzka
       value = cast(value) if type? && !value.nil?
       return if value.nil?
 
-      klass ? klass.new(value) : value
+      value = klass ? klass.new(value) : value
+
+      value = options.instance.send(options.wrap_each, value) if options.wrap_each
+
+      value
     end
 
     # @private

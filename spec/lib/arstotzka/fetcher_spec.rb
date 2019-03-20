@@ -98,4 +98,35 @@ describe Arstotzka::Fetcher do
       expect(fetcher.fetch.name).to eq(name)
     end
   end
+
+  describe 'wrap_each options' do
+    let(:full_path) { 'people.name' }
+    let(:instance)  { Group.new(json) }
+
+    let(:options_hash) do
+      {
+        full_path: full_path,
+        wrap_each: :create_person,
+        json: :@hash
+      }
+    end
+
+    let(:json) do
+      {
+        people: [
+          { name: 'Robert' },
+          { name: 'John' },
+          { name: 'Leeloo' }
+        ]
+      }
+    end
+
+    it do
+      expect(fetcher.fetch).to be_a(Array)
+    end
+
+    it 'calls the given method on each value' do
+      expect(fetcher.fetch).to all(be_a(Person))
+    end
+  end
 end
