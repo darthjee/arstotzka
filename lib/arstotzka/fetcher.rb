@@ -17,10 +17,8 @@ module Arstotzka
     #
     # @overload iniitalize(instance,  options)
     #   @param options [Arstotzka::Options] options for {Crawler}, {Wrapper} and {Reader}
-    def initialize(instance, options_hash = {})
+    def initialize(options_hash = {})
       self.options = options_hash
-
-      @instance = instance
     end
 
     # Crawls the hash for the value
@@ -93,7 +91,7 @@ module Arstotzka
 
     # @private
     attr_reader :instance, :options
-    delegate :after, :flatten, to: :options
+    delegate :instance, :after, :flatten, to: :options
     delegate :wrap, to: :wrapper
 
     def hash

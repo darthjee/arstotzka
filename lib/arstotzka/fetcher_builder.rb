@@ -156,7 +156,7 @@ module Arstotzka
     #
     # @return Arstotzka::Fetcher
     def build(instance)
-      Fetcher.new(instance, options)
+      Fetcher.new(options.merge(instance: instance))
     end
 
     private

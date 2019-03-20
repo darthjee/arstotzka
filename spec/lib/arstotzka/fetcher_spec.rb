@@ -4,7 +4,7 @@ require 'spec_helper'
 
 describe Arstotzka::Fetcher do
   subject(:fetcher) do
-    described_class.new instance, options
+    described_class.new options
   end
 
   let(:options)  { Arstotzka::Options.new(options_hash) }
@@ -13,7 +13,7 @@ describe Arstotzka::Fetcher do
   let(:value)    { fetcher.fetch }
 
   context 'when fetching with no options' do
-    let(:options_hash) { { key: key } }
+    let(:options_hash) { { instance: instance, key: key } }
     let(:key)          { 'id' }
 
     it 'retrieves attribute from base json' do
@@ -49,7 +49,9 @@ describe Arstotzka::Fetcher do
     let(:value) { [[[1, 2], [3, 4]], [[5, 6], [7, 8]]] }
 
     context 'when flatten option is true' do
-      let(:options_hash) { { flatten: true, key: :value } }
+      let(:options_hash) do
+        { instance: instance, flatten: true, key: :value }
+      end
 
       it 'returns the fetched value flattened' do
         expect(fetcher.fetch).to eq((1..8).to_a)
@@ -65,7 +67,9 @@ describe Arstotzka::Fetcher do
     end
 
     context 'when flatten option is false' do
-      let(:options_hash) { { flatten: false, key: :value } }
+      let(:options_hash) do
+        { instance: instance, flatten: false, key: :value }
+      end
 
       it 'returns the fetched value non flattened' do
         expect(fetcher.fetch).to eq(value)
@@ -74,9 +78,12 @@ describe Arstotzka::Fetcher do
   end
 
   describe 'after option' do
-    let(:instance)     { MyParser.new(json) }
-    let(:json)         { { value: [100, 250, -25] } }
-    let(:options_hash) { { after: :sum, key: :value } }
+    let(:instance) { MyParser.new(json) }
+    let(:json)     { { value: [100, 250, -25] } }
+
+    let(:options_hash) do
+      { instance: instance, after: :sum, key: :value }
+    end
 
     it 'applies after call ' do
       expect(fetcher.fetch).to eq(325)
@@ -84,11 +91,14 @@ describe Arstotzka::Fetcher do
   end
 
   describe 'klass options' do
-    let(:path)         { 'name' }
-    let(:name)         { 'Robert' }
-    let(:json)         { { name: name } }
-    let(:options_hash) { { klass: wrapper, path: path } }
-    let(:wrapper)      { Person }
+    let(:path)    { 'name' }
+    let(:name)    { 'Robert' }
+    let(:json)    { { name: name } }
+    let(:wrapper) { Person }
+
+    let(:options_hash) do
+      { instance: instance, klass: wrapper, path: path }
+    end
 
     it 'wraps the result in an object' do
       expect(fetcher.fetch).to be_a(wrapper)
@@ -105,6 +115,7 @@ describe Arstotzka::Fetcher do
 
     let(:options_hash) do
       {
+        instance:   instance,
         full_path:  full_path,
         after_each: :create_person,
         json:       :@hash,
