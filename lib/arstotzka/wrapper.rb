@@ -122,9 +122,9 @@ module Arstotzka
     end
 
     def after(value)
-      return value unless options.wrap_each
+      return value unless options.after_each
 
-      options.instance.send(options.wrap_each, value)
+      options.instance.send(options.after_each, value)
     end
   end
 end

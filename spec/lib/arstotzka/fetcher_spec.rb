@@ -99,15 +99,15 @@ describe Arstotzka::Fetcher do
     end
   end
 
-  describe 'wrap_each options' do
+  describe 'after_each options' do
     let(:full_path) { 'people.name' }
     let(:instance)  { Group.new(json) }
 
     let(:options_hash) do
       {
-        full_path: full_path,
-        wrap_each: :create_person,
-        json: :@hash
+        full_path:  full_path,
+        after_each: :create_person,
+        json:       :@hash
       }
     end
 
