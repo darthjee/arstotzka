@@ -107,16 +107,18 @@ describe Arstotzka::Fetcher do
       {
         full_path:  full_path,
         after_each: :create_person,
-        json:       :@hash
+        json:       :@hash,
+        compact:    true
       }
     end
 
     let(:json) do
       {
         people: [
-          { name: 'Robert' },
-          { name: 'John' },
-          { name: 'Leeloo' }
+          { name: 'Robert', age: 20 },
+          { name: 'John',   age: 25 },
+          { name: 'Leeloo', age: 3570 },
+          { age: 10 }
         ]
       }
     end
