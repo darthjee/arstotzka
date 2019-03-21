@@ -13,3 +13,7 @@ Metrics/LineLength:
 
 RSpec/AlignLeftLetBrace:
   Enabled: true
+
+Style/ClassAndModuleChildren:
+  Exclude:
+    - spec/integration/**/*.rb
