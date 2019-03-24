@@ -10,17 +10,13 @@ module Arstotzka
 
     # Creates an instance of Artotzka::Fetcher
     #
-    # @param instance [Object] object whose methods will be called after for processing
-    #
-    # @overload iniitalize(instance,  options_hash = {})
+    # @overload iniitalize(options_hash = {})
     #   @param options_hash [Hash] options for {Crawler}, {Wrapper} and {Reader}
     #
-    # @overload iniitalize(instance,  options)
+    # @overload iniitalize(options)
     #   @param options [Arstotzka::Options] options for {Crawler}, {Wrapper} and {Reader}
-    def initialize(instance, options_hash = {})
+    def initialize(options_hash = {})
       self.options = options_hash
-
-      @instance = instance
     end
 
     # Crawls the hash for the value
@@ -72,10 +68,11 @@ module Arstotzka
     #
     #   instance = Account.new
     #
-    #   fetcher = Arstotzka::Fetcher.new(instance,
-    #     path: 'transactions',
-    #     klass: Transaction,
-    #     after: :filter_income
+    #   fetcher = Arstotzka::Fetcher.new(
+    #     instance: instance,
+    #     path:     'transactions',
+    #     klass:    Transaction,
+    #     after:    :filter_income
     #   )
     #
     #   fetcher.fetch # retruns [
@@ -93,7 +90,7 @@ module Arstotzka
 
     # @private
     attr_reader :instance, :options
-    delegate :after, :flatten, to: :options
+    delegate :instance, :after, :flatten, to: :options
     delegate :wrap, to: :wrapper
 
     def hash
@@ -121,7 +118,7 @@ module Arstotzka
     #
     # @return [Arstotzka::Wrapper] the wrapper
     def wrapper
-      @wrapper ||= Wrapper.new(options)
+      @wrapper ||= Wrapper.new(options.merge(instance: instance))
     end
   end
 end

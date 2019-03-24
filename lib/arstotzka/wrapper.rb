@@ -74,10 +74,12 @@ module Arstotzka
     #
     # @return [Object]
     def wrap_element(value)
-      value = cast(value) if type? && !value.nil?
+      value = cast(value)
       return if value.nil?
 
-      klass ? klass.new(value) : value
+      value = wrap_in_class(value)
+
+      after(value)
     end
 
     # @private
@@ -108,7 +110,31 @@ module Arstotzka
     #
     # @return [Object]
     def cast(value)
+      return if value.nil?
+      return value unless type?
+
       public_send("to_#{type}", value)
+    end
+
+    # @private
+    #
+    # Wrap resulting value in class
+    #
+    # @return [Object] instance of +options.klass+
+    def wrap_in_class(value)
+      return value unless klass
+      klass.new(value)
+    end
+
+    # @private
+    #
+    # Process and wrap value trhough a method call
+    #
+    # @return [Object] result of method call
+    def after(value)
+      return value unless options.after_each
+
+      options.instance.send(options.after_each, value)
     end
   end
 end
