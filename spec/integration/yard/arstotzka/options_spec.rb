@@ -85,7 +85,9 @@ describe Arstotzka::Options do
       end
 
       before do
+        # rubocop:disable RSpec/SubjectStub
         allow(instance).to receive(:warn)
+        # rubocop:enable RSpec/SubjectStub
       end
 
       it 'Returns created users' do
@@ -93,9 +95,9 @@ describe Arstotzka::Options do
       end
 
       it 'Triggers warn 3 times' do
-        expect(instance).to receive(:warn).exactly(3).times
         instance.users
         instance.users
+        expect(instance).to have_received(:warn).exactly(3).times
       end
     end
 
