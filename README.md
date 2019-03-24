@@ -38,7 +38,7 @@ gem 'arstotzka'
 
 Yard Documentation
 -------------------
-https://www.rubydoc.info/gems/arstotzka/1.2.0
+https://www.rubydoc.info/gems/arstotzka/1.2.1
 
 Getting Started
 ---------------
@@ -94,17 +94,18 @@ MyParser.new.name # returns nil
 
 Options
 -------
-- path: path where to find the sub hash that contains the key (empty by default)
-- json: method that contains the hash to be parsed (json by default)
-- full_path: full path to fetch the value (empty by default)
-- cached: indicator that once the value has been fetched, it should be cached (false by default)
-- klass: class to be used when wrapping the final value
-- compact: indicator telling to ignore nil values inside array (false by default)
-- flatten: indicator telling that to flattern the resulting array (false by default)
-- after: name of a method to be called after with the resulting value
-- case: case of the keys from the json (camel by default)
-- type: Type that the value must be cast into ([TypeCast](#typecast))
+- after: Name of a method to be called after on the values returned
+- after_each: Name of a method to be called after each result
+- cached: Indicator that, once the value has been fetched, it should be cached (false by default)
+- case: Case of the keys from the json (lower_camel by default)
+- compact: Indicator telling to ignore nil values inside array (false by default)
 - default: Default value (prior to casting and wrapping, see [Default](#default))
+- flatten: Indicator telling that to flattern the resulting array (false by default)
+- full_path: Full path to fetch the value (empty by default)
+- klass: Class to be used when wrapping the final value
+- json: Method that contains the hash to be parsed (json by default)
+- path: Path where to find the sub hash that contains the key (empty by default)
+- type: Type that the value must be cast into ([TypeCast](#typecast))
 
 ## TypeCast
 The type casting, when the option `type` is passed, is done through the `Arstotzka::TypeCast` which can
