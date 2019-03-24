@@ -159,6 +159,8 @@ require 'sinclair'
 #                            #   Collector::Game.new(name: "Zelda", played: 90.0)
 #                            # ]
 #
+# @example (see Arstotzka::Options)
+#
 # @see Arstotzka::MethodBuilder
 # @see Arstotzka::ClassMethods
 module Arstotzka
