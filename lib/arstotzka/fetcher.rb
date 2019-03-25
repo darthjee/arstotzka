@@ -93,6 +93,7 @@ module Arstotzka
     delegate :instance, :after, :flatten, to: :options
     delegate :wrap, to: :wrapper
 
+    # rubocop:disable Metrics/AbcSize
     def hash
       @hash ||= case options.json.to_s
                 when /^@@.*/
@@ -103,6 +104,7 @@ module Arstotzka
                   instance.send(options.json.to_s)
                 end
     end
+    # rubocop:enable Metrics/AbcSize
 
     # @private
     #
