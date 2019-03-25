@@ -23,7 +23,6 @@ rules:
       - Arstotzka::Crawler#options
       - Arstotzka::Fetcher#instance
       - Arstotzka::Fetcher#options
-      - Arstotzka::Fetcher#hash
       - Arstotzka::FetcherBuilder#options
       - Arstotzka::MethodBuilder#attr_names
       - Arstotzka::MethodBuilder#options
@@ -38,7 +37,6 @@ rules:
       - Arstotzka::Crawler#options
       - Arstotzka::Fetcher#instance
       - Arstotzka::Fetcher#options
-      - Arstotzka::Fetcher#hash
       - Arstotzka::FetcherBuilder#options
       - Arstotzka::MethodBuilder#attr_names
       - Arstotzka::MethodBuilder#options

@@ -93,6 +93,11 @@ module Arstotzka
     delegate :instance, :after, :flatten, to: :options
     delegate :wrap, to: :wrapper
 
+    # @private
+    #
+    # Retrieves the hash to be crawled from the instance
+    #
+    # @return [Hash]
     # rubocop:disable Metrics/AbcSize
     def hash
       @hash ||= case options.json.to_s
