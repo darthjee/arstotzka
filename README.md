@@ -38,7 +38,7 @@ gem 'arstotzka'
 
 Yard Documentation
 -------------------
-https://www.rubydoc.info/gems/arstotzka/1.2.1
+https://www.rubydoc.info/gems/arstotzka/1.2.2
 
 Getting Started
 ---------------
