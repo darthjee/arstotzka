@@ -7,13 +7,13 @@ describe Arstotzka::Fetcher do
     described_class.new options
   end
 
-  let(:options)  { Arstotzka::Options.new(options_hash) }
+  let(:options)  { Arstotzka::Options.new(options_hash.merge(instance: instance)) }
   let(:instance) { Arstotzka::Fetcher::Dummy.new(json) }
   let(:json)     { load_json_fixture_file('arstotzka.json') }
   let(:value)    { fetcher.fetch }
 
   context 'when fetching with no options' do
-    let(:options_hash) { { instance: instance, key: key } }
+    let(:options_hash) { { key: key } }
     let(:key)          { 'id' }
 
     it 'retrieves attribute from base json' do
@@ -50,7 +50,7 @@ describe Arstotzka::Fetcher do
 
     context 'when flatten option is true' do
       let(:options_hash) do
-        { instance: instance, flatten: true, key: :value }
+        { flatten: true, key: :value }
       end
 
       it 'returns the fetched value flattened' do
@@ -68,7 +68,7 @@ describe Arstotzka::Fetcher do
 
     context 'when flatten option is false' do
       let(:options_hash) do
-        { instance: instance, flatten: false, key: :value }
+        { flatten: false, key: :value }
       end
 
       it 'returns the fetched value non flattened' do
@@ -82,7 +82,7 @@ describe Arstotzka::Fetcher do
     let(:json)     { { value: [100, 250, -25] } }
 
     let(:options_hash) do
-      { instance: instance, after: :sum, key: :value }
+      { after: :sum, key: :value }
     end
 
     it 'applies after call ' do
@@ -97,7 +97,7 @@ describe Arstotzka::Fetcher do
     let(:wrapper) { Person }
 
     let(:options_hash) do
-      { instance: instance, klass: wrapper, path: path }
+      { klass: wrapper, path: path }
     end
 
     it 'wraps the result in an object' do
@@ -115,7 +115,6 @@ describe Arstotzka::Fetcher do
 
     let(:options_hash) do
       {
-        instance:   instance,
         full_path:  full_path,
         after_each: :create_person,
         json:       :@hash,
@@ -140,6 +139,42 @@ describe Arstotzka::Fetcher do
 
     it 'calls the given method on each value' do
       expect(fetcher.fetch).to all(be_a(Person))
+    end
+  end
+
+  describe 'json options' do
+    context 'when json is a method' do
+      let(:instance)     { described_class::HashJson.new(hash) }
+      let(:hash)         { { name: 'John Doe' } }
+      let(:options_hash) { { key: :name, json: :hash } }
+
+      it 'fetches hash from given method' do
+        expect(fetcher.fetch).to eq('John Doe')
+      end
+    end
+
+    context 'when json is an instance variable' do
+      let(:instance)     { described_class::NoAccessor.new(hash) }
+      let(:hash)         { { name: 'John Doe' } }
+      let(:options_hash) { { key: :name, json: :@hash } }
+
+      it 'fetches hash from given method' do
+        expect(fetcher.fetch).to eq('John Doe')
+      end
+    end
+
+    context 'when json is an instance variable' do
+      let(:instance)     { described_class::ClassVariable.new }
+      let(:hash)         { { name: 'John Doe' } }
+      let(:options_hash) { { key: :name, json: :@@json } }
+
+      before do
+        described_class::ClassVariable.json = hash
+      end
+
+      it 'fetches hash from given method' do
+        expect(fetcher.fetch).to eq('John Doe')
+      end
     end
   end
 end
