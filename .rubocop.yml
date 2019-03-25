@@ -17,3 +17,7 @@ RSpec/AlignLeftLetBrace:
 Style/ClassAndModuleChildren:
   Exclude:
     - spec/integration/**/*.rb
+
+Style/ClassVars:
+  Exclude:
+    - spec/support/models/arstotzka/fetcher/class_variable.rb

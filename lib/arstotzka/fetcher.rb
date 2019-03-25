@@ -94,7 +94,14 @@ module Arstotzka
     delegate :wrap, to: :wrapper
 
     def hash
-      @hash ||= instance.send(:eval, options.json.to_s)
+      @hash ||= case options.json.to_s
+                when /^@@.*/
+                  instance.class.class_variable_get(options.json)
+                when /^@.*/
+                  then instance.instance_variable_get(options.json)
+                else
+                  instance.send(options.json.to_s)
+                end
     end
 
     # @private
