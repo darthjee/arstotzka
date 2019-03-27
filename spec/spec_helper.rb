@@ -8,6 +8,7 @@ end
 require 'pry-nav'
 require 'arstotzka'
 require 'safe_attribute_assignment'
+require 'sinclair/matchers'
 
 support_files = File.expand_path('spec/support/**/*.rb')
 Dir[support_files].sort.each { |file| require file }
