@@ -17,6 +17,10 @@ Arstotzka is also usefull when you need keys case changed or data type cast as i
 to be a bridge between a rails application and a Java API (Java APIs use cameCase for
 JSON keys)
 
+Yard Documentation
+-------------------
+https://www.rubydoc.info/gems/arstotzka/1.2.4
+
 Instalation
 ---------------
 1. Add Arstotzka to your `Gemfile` and `bundle install`:
@@ -35,10 +39,6 @@ gem 'arstotzka'
 ```bash
   bundle install arstotzka
 ```
-
-Yard Documentation
--------------------
-https://www.rubydoc.info/gems/arstotzka/1.2.3
 
 Getting Started
 ---------------
