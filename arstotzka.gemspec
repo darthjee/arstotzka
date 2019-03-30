@@ -5,13 +5,14 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'arstotzka/version'
 
 Gem::Specification.new do |gem|
-  gem.name          = 'arstotzka'
-  gem.version       = Arstotzka::VERSION
-  gem.authors       = ['Darthjee']
-  gem.email         = ['dev@gmail.com']
-  gem.summary       = 'Arstotzka'
-  gem.description   = gem.description
-  gem.homepage      = 'https://github.com/darthjee/arstotzka'
+  gem.name                  = 'arstotzka'
+  gem.version               = Arstotzka::VERSION
+  gem.authors               = ['Darthjee']
+  gem.email                 = ['dev@gmail.com']
+  gem.summary               = 'Arstotzka'
+  gem.description           = gem.description
+  gem.homepage              = 'https://github.com/darthjee/arstotzka'
+  gem.required_ruby_version = '>= 2.5.0'
 
   gem.files         = `git ls-files`.split($INPUT_RECORD_SEPARATOR)
   gem.executables   = gem.files.grep(%r{^bin/}) { |f| File.basename(f) }
