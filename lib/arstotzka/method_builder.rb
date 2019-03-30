@@ -89,7 +89,7 @@ module Arstotzka
     # @see Sinclair
     def add_attr(attribute)
       klass.add_fetcher(attribute, options)
-      add_method attribute, (cached ? cached_fetcher(attribute) : attr_fetcher(attribute)).to_s
+      add_method attribute, attr_fetcher(attribute), cached: cached
     end
 
     # Returns the code needed to initialize fetcher
@@ -105,19 +105,6 @@ module Arstotzka
         begin
           self.class.fetcher_for(:#{attribute}, self).fetch
         end
-      CODE
-    end
-
-    # Returns the code needed to initialize a fetche and cache it
-    #
-    # @param [String,Symbol] attribute name of method / attribute
-    #
-    # @return [String] method code
-    #
-    # @see #attr_fetcher
-    def cached_fetcher(attribute)
-      <<-CODE
-        @#{attribute} ||= #{attr_fetcher(attribute)}
       CODE
     end
   end
