@@ -29,7 +29,8 @@ module Arstotzka
     def fetcher_for(attribute, instance)
       builder = fetcher_builders[attribute.to_sym]
 
-      raise Exception::FetcherBuilderNotFound.new(attribute, self) unless builder
+      return superclass.fetcher_for(attribute, instance) if builder.nil? && superclass.include?(Arstotzka)
+      raise Exception::FetcherBuilderNotFound.new(attribute, instance.class) unless builder
 
       builder.build(instance)
     end
