@@ -106,23 +106,7 @@ module Arstotzka
     # @private
     delegate :instance, :after, :flatten, to: :options
     delegate :wrap, to: :wrapper
-    delegate :json, to: :options
-
-    # @private
-    #
-    # Retrieves the hash to be crawled from the instance
-    #
-    # @return [Hash]
-    def hash
-      @hash ||= case json.to_s
-                when /^@@.*/
-                  instance.class.class_variable_get(json)
-                when /^@.*/
-                  then instance.instance_variable_get(json)
-                else
-                  instance.send(json)
-                end
-    end
+    delegate :hash, to: :hash_reader
 
     # @private
     #
@@ -146,6 +130,10 @@ module Arstotzka
     # @return [Arstotzka::Wrapper] the wrapper
     def wrapper
       @wrapper ||= Wrapper.new(options.merge(instance: instance))
+    end
+
+    def hash_reader
+      @hash_reader ||= HashReader.new(options)
     end
   end
 end
