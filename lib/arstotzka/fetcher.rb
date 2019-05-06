@@ -86,6 +86,9 @@ module Arstotzka
       value
     end
 
+    # Checks if another instance equals self
+    #
+    # @return [TrueClass,FalseClass]
     def ==(other)
       return false unless other.class == self.class
       options == other.options &&
