@@ -19,32 +19,32 @@ describe Arstotzka do
   end
 
   describe '.fetcher_for' do
-    let(:klass)    { Class.new(Arstotzka::Dummy) }
+    let(:klass)    { Arstotzka::Dummy }
     let(:instance) { klass.new({}) }
-
-    before do
-      klass.add_fetcher(:new_attribute)
+    let(:expected) do
+      Arstotzka::Fetcher.new(
+        key: :name,
+        path: 'user',
+        instance: instance
+      )
     end
 
     it do
-      expect(klass.fetcher_for(:new_attribute, instance))
+      expect(klass.fetcher_for(:name, instance))
         .to be_a(Arstotzka::Fetcher)
     end
 
     it 'returns correct fetcher' do
-      expect(klass.fetcher_for(:new_attribute, instance))
-        .to eq(Arstotzka::Fetcher.new(
-                 key: :new_attributes,
-                 instance: instance
-               ))
+      expect(klass.fetcher_for(:name, instance))
+        .to eq(expected)
     end
 
     context 'when fetcher was never added' do
       it do
-        expect { klass.fetcher_for(:other_attribute, instance) }
+        expect { klass.fetcher_for(:new_attribute, instance) }
           .to raise_error(
             Arstotzka::Exception::FetcherBuilderNotFound,
-            "FetcherBuild not found for other_attribute on #{klass}"
+            "FetcherBuild not found for new_attribute on #{klass}"
           )
       end
     end

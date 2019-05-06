@@ -331,7 +331,7 @@ module Arstotzka
     # @return [TrueClass,FalseClass]
     def ==(other)
       return false unless other.class == self.class
-      options == other.options
+      to_h == other.to_h
     end
   end
 end
