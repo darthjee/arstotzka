@@ -86,7 +86,9 @@ module Arstotzka
       value
     end
 
-    # Checks if another instance equals self
+    # Checks if other equals self
+    #
+    # @param other [Object]
     #
     # @return [TrueClass,FalseClass]
     def ==(other)

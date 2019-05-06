@@ -27,13 +27,20 @@ module Arstotzka
     #
     # @return [Arstotzka::Fetcher]
     def fetcher_for(attribute, instance)
-      return builder_for(attribute).build(instance) if fetcher_for?(attribute)
+      return builder_for(attribute.to_sym).build(instance) if fetcher_for?(attribute.to_sym)
 
       raise Exception::FetcherBuilderNotFound.new(attribute, self)
     end
 
     protected
 
+    # @api private
+    #
+    # Checks if class can build a fetcher for attribute
+    #
+    # @param attribute [::Symbol]
+    #
+    # @return [TrueClass,FalseClass]
     def fetcher_for?(attribute)
       return true if fetcher_builders.key?(attribute)
       return unless superclass.include?(Arstotzka)
@@ -41,6 +48,13 @@ module Arstotzka
       superclass.fetcher_for?(attribute)
     end
 
+    # @api private
+    #
+    # Returns fetcher builder for an attribute
+    #
+    # @param attribute [::Symbol]
+    #
+    # @return [Arstotzka::FetcherBuilder]
     def builder_for(attribute)
       builder = fetcher_builders[attribute.to_sym]
       return superclass.builder_for(attribute) unless builder

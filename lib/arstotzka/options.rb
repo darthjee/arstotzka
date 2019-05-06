@@ -328,6 +328,8 @@ module Arstotzka
 
     # Checks if another instance equals self
     #
+    # @param other [Object]
+    #
     # @return [TrueClass,FalseClass]
     def ==(other)
       return false unless other.class == self.class

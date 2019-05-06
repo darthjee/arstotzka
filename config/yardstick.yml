@@ -21,6 +21,8 @@ rules:
     exclude:
       - Arstotzka::Crawler#post_process
       - Arstotzka::Crawler#options
+      - Arstotzka::Exception::FetcherBuilderNotFound#attribute
+      - Arstotzka::Exception::FetcherBuilderNotFound#klass
       - Arstotzka::Fetcher#instance
       - Arstotzka::Fetcher#options
       - Arstotzka::FetcherBuilder#options
@@ -34,6 +36,8 @@ rules:
     exclude:
       - Arstotzka::Crawler#post_process
       - Arstotzka::Crawler#options
+      - Arstotzka::Exception::FetcherBuilderNotFound#attribute
+      - Arstotzka::Exception::FetcherBuilderNotFound#klass
       - Arstotzka::Fetcher#instance
       - Arstotzka::Fetcher#options
       - Arstotzka::FetcherBuilder#options
