@@ -12,7 +12,7 @@ module Arstotzka
     # @param options [Arstotzka::Options] fetcher options
     #
     # @return [Artotzka::FetcherBuilder]
-    def add_fetcher(attribute, options)
+    def add_fetcher(attribute, options = {})
       fetcher_builders[attribute.to_sym] = FetcherBuilder.new(options.merge(key: attribute))
     end
 
