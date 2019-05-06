@@ -86,10 +86,19 @@ module Arstotzka
       value
     end
 
+    def ==(other)
+      return false unless other.class == self.class
+      options == other.options &&
+        instance == other.instance
+    end
+
+    protected
+
+    attr_reader :instance, :options
+
     private
 
     # @private
-    attr_reader :instance, :options
     delegate :instance, :after, :flatten, to: :options
     delegate :wrap, to: :wrapper
 

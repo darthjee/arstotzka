@@ -23,5 +23,10 @@ module Arstotzka
         g.publisher == 'sega'
       end
     end
+
+    def ==(other)
+      return false unless other.class == self.class
+      json == other.json
+    end
   end
 end

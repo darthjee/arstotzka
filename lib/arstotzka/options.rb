@@ -322,5 +322,10 @@ module Arstotzka
 
       [path, key].compact.join('.').split('.')
     end
+
+    def ==(other)
+      return false unless other.class == self.class
+      options == other.options
+    end
   end
 end
