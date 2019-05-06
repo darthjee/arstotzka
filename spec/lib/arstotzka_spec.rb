@@ -63,7 +63,7 @@ describe Arstotzka do
             .to raise_error(
               Arstotzka::Exception::FetcherBuilderNotFound,
               "FetcherBuild not found for new_attribute on #{klass}"
-          )
+            )
         end
       end
     end

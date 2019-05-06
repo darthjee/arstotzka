@@ -27,12 +27,25 @@ module Arstotzka
     #
     # @return [Arstotzka::Fetcher]
     def fetcher_for(attribute, instance)
+      return builder_for(attribute).build(instance) if fetcher_for?(attribute)
+
+      raise Exception::FetcherBuilderNotFound.new(attribute, self)
+    end
+
+    protected
+
+    def fetcher_for?(attribute)
+      return true if fetcher_builders.key?(attribute)
+      return unless superclass.include?(Arstotzka)
+
+      superclass.fetcher_for?(attribute)
+    end
+
+    def builder_for(attribute)
       builder = fetcher_builders[attribute.to_sym]
+      return superclass.builder_for(attribute) unless builder
 
-      return superclass.fetcher_for(attribute, instance) if builder.nil? && superclass.include?(Arstotzka)
-      raise Exception::FetcherBuilderNotFound.new(attribute, instance.class) unless builder
-
-      builder.build(instance)
+      builder
     end
 
     private
