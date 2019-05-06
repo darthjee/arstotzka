@@ -31,12 +31,22 @@ describe Arstotzka do
         .to be_a(Arstotzka::Fetcher)
     end
 
-    it do
+    it 'returns correct fetcher' do
       expect(klass.fetcher_for(:new_attribute, instance))
         .to eq(Arstotzka::Fetcher.new(
                  key: :new_attributes,
                  instance: instance
                ))
+    end
+
+    context 'when fetcher was never added' do
+      it do
+        expect { klass.fetcher_for(:other_attribute, instance) }
+          .to raise_error(
+            Arstotzka::Exception::FetcherBuilderNotFound,
+            "FetcherBuild not found for other_attribute on #{klass}"
+          )
+      end
     end
   end
 

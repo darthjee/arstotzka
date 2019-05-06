@@ -27,7 +27,11 @@ module Arstotzka
     #
     # @return [Arstotzka::Fetcher]
     def fetcher_for(attribute, instance)
-      fetcher_builders[attribute.to_sym].build(instance)
+      builder = fetcher_builders[attribute.to_sym]
+
+      raise Exception::FetcherBuilderNotFound.new(attribute, self) unless builder
+
+      builder.build(instance)
     end
 
     private
