@@ -26,3 +26,6 @@ jobs:
       - run:
           name: Check version documentation
           command: scripts/check_readme.sh
+      - run:
+          name: Rubycritcs check
+          command: scripts/rubycritic.sh
