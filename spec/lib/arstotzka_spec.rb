@@ -8,6 +8,38 @@ describe Arstotzka do
   let(:json)        { load_json_fixture_file('arstotzka.json') }
   let(:value)       { dummy.public_send(attribute) }
 
+  describe '.add_fether' do
+    let(:klass) { Class.new(Arstotzka::Dummy) }
+
+    it do
+      expect { klass.add_fetcher(:new_attribute) }
+        .to change { klass.send(:fetcher_builders).keys }
+        .to([:new_attribute])
+    end
+  end
+
+  describe '.fetcher_for' do
+    let(:klass)    { Class.new(Arstotzka::Dummy) }
+    let(:instance) { klass.new({}) }
+
+    before do
+      klass.add_fetcher(:new_attribute)
+    end
+
+    it do
+      expect(klass.fetcher_for(:new_attribute, instance))
+        .to be_a(Arstotzka::Fetcher)
+    end
+
+    it do
+      expect(klass.fetcher_for(:new_attribute, instance))
+        .to eq(Arstotzka::Fetcher.new(
+                 key: :new_attributes,
+                 instance: instance
+               ))
+    end
+  end
+
   context 'when parser is configured with no options' do
     let(:attribute) { :id }
 
