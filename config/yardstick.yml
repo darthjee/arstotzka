@@ -23,7 +23,6 @@ rules:
       - Arstotzka::Crawler#options
       - Arstotzka::Exception::FetcherBuilderNotFound#attribute
       - Arstotzka::Exception::FetcherBuilderNotFound#klass
-      - Arstotzka::Fetcher#instance
       - Arstotzka::Fetcher#options
       - Arstotzka::FetcherBuilder#options
       - Arstotzka::MethodBuilder#attr_names
@@ -38,7 +37,6 @@ rules:
       - Arstotzka::Crawler#options
       - Arstotzka::Exception::FetcherBuilderNotFound#attribute
       - Arstotzka::Exception::FetcherBuilderNotFound#klass
-      - Arstotzka::Fetcher#instance
       - Arstotzka::Fetcher#options
       - Arstotzka::FetcherBuilder#options
       - Arstotzka::MethodBuilder#attr_names

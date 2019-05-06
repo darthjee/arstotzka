@@ -99,7 +99,7 @@ module Arstotzka
 
     protected
 
-    attr_reader :instance, :options
+    attr_reader :options
 
     private
 
