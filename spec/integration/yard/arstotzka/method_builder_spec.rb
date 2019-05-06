@@ -31,8 +31,8 @@ describe Arstotzka::MethodBuilder do
     end
 
     describe '#age' do
-      let(:klass) { Class.new(MyModel) }
-      let(:attributes)   { [:age, 'cars'] }
+      let(:klass)        { Class.new(MyModel) }
+      let(:attributes)   { [:age, :cars] }
       let(:options_hash) { { type: :integer } }
 
       before do
@@ -49,8 +49,8 @@ describe Arstotzka::MethodBuilder do
     end
 
     describe '#cars' do
-      let(:klass) { Class.new(MyModel) }
-      let(:attributes)   { [:age, 'cars'] }
+      let(:klass)        { Class.new(MyModel) }
+      let(:attributes)   { [:age, :cars] }
       let(:options_hash) { { type: :integer } }
 
       before do

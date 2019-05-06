@@ -13,7 +13,7 @@ module Arstotzka
     #
     # @return [Artotzka::FetcherBuilder]
     def add_fetcher(attribute, options = {})
-      fetcher_builders[attribute.to_sym] = FetcherBuilder.new(options.merge(key: attribute))
+      fetcher_builders[attribute] = FetcherBuilder.new(options.merge(key: attribute))
     end
 
     # @api private
@@ -27,7 +27,7 @@ module Arstotzka
     #
     # @return [Arstotzka::Fetcher]
     def fetcher_for(attribute, instance)
-      return builder_for(attribute.to_sym).build(instance) if fetcher_for?(attribute.to_sym)
+      return builder_for(attribute).build(instance) if fetcher_for?(attribute)
 
       raise Exception::FetcherBuilderNotFound.new(attribute, self)
     end
@@ -56,7 +56,7 @@ module Arstotzka
     #
     # @return [Arstotzka::FetcherBuilder]
     def builder_for(attribute)
-      builder = fetcher_builders[attribute.to_sym]
+      builder = fetcher_builders[attribute]
       return superclass.builder_for(attribute) unless builder
 
       builder
@@ -101,7 +101,7 @@ module Arstotzka
     #   ActiveSupport::Concern
     def expose(*attr_names, **options_hash)
       options = Options.new(options_hash.symbolize_keys)
-      MethodBuilder.new(attr_names, self, options).build
+      MethodBuilder.new(attr_names.map(&:to_sym), self, options).build
     end
 
     # @private

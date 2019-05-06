@@ -5,7 +5,7 @@ module Arstotzka
     include Arstotzka
     attr_reader :json
 
-    expose :id
+    expose 'id'
     expose :name, path: 'user'
     expose :father_name, full_path: 'father.name'
     expose :age, cached: true

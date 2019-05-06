@@ -39,13 +39,6 @@ describe Arstotzka do
         .to eq(expected)
     end
 
-    context 'when fetching using string' do
-      it 'returns correct fetcher' do
-        expect(klass.fetcher_for('name', instance))
-          .to eq(expected)
-      end
-    end
-
     context 'when fetcher was never added' do
       it do
         expect { klass.fetcher_for(:new_attribute, instance) }
@@ -53,16 +46,6 @@ describe Arstotzka do
             Arstotzka::Exception::FetcherBuilderNotFound,
             "FetcherBuild not found for new_attribute on #{klass}"
         )
-      end
-
-      context 'when fetching using string' do
-        it do
-          expect { klass.fetcher_for('new_attribute', instance) }
-            .to raise_error(
-              Arstotzka::Exception::FetcherBuilderNotFound,
-              "FetcherBuild not found for new_attribute on #{klass}"
-          )
-        end
       end
     end
 
@@ -74,13 +57,6 @@ describe Arstotzka do
           .not_to raise_error
       end
 
-      context 'when fetching using string' do
-        it 'returns correct fetcher' do
-          expect(klass.fetcher_for('name', instance))
-            .to eq(expected)
-        end
-      end
-
       context 'when fetcher was never added' do
         it do
           expect { klass.fetcher_for(:new_attribute, instance) }
@@ -88,16 +64,6 @@ describe Arstotzka do
               Arstotzka::Exception::FetcherBuilderNotFound,
               "FetcherBuild not found for new_attribute on #{klass}"
           )
-        end
-
-        context 'when fetching using string' do
-          it do
-            expect { klass.fetcher_for('new_attribute', instance) }
-              .to raise_error(
-                Arstotzka::Exception::FetcherBuilderNotFound,
-                "FetcherBuild not found for new_attribute on #{klass}"
-            )
-          end
         end
       end
     end
