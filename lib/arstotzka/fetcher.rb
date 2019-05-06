@@ -81,7 +81,7 @@ module Arstotzka
     #                 # ]
     def fetch
       value = crawler.value(hash)
-      value.flatten! if flatten && value.respond_to?(:flatten!)
+      value.flatten! if flatten && value.is_a?(Array)
       value = instance.send(after, value) if after
       value
     end
@@ -106,24 +106,23 @@ module Arstotzka
     # @private
     delegate :instance, :after, :flatten, to: :options
     delegate :wrap, to: :wrapper
+    delegate :json, to: :options
 
     # @private
     #
     # Retrieves the hash to be crawled from the instance
     #
     # @return [Hash]
-    # rubocop:disable Metrics/AbcSize
     def hash
-      @hash ||= case options.json.to_s
+      @hash ||= case json.to_s
                 when /^@@.*/
-                  instance.class.class_variable_get(options.json)
+                  instance.class.class_variable_get(json)
                 when /^@.*/
-                  then instance.instance_variable_get(options.json)
+                  then instance.instance_variable_get(json)
                 else
-                  instance.send(options.json.to_s)
+                  instance.send(json)
                 end
     end
-    # rubocop:enable Metrics/AbcSize
 
     # @private
     #
