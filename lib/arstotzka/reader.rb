@@ -23,7 +23,7 @@ module Arstotzka
     def initialize(options_hash = {})
       self.options = options_hash
 
-      @keys = options.keys.map(&method(:change_case))
+      @keys = options.keys
     end
 
     # Reads the value of one key in the hash
@@ -63,7 +63,7 @@ module Arstotzka
     def read(hash, index)
       key = keys[index]
 
-      KeyReader.new(hash, key).read
+      KeyReader.new(hash, key, options).read
     end
 
     # @private
@@ -82,28 +82,5 @@ module Arstotzka
 
     # @private
     attr_reader :keys, :options
-
-    # @private
-    #
-    # Transforms the key to have the correct case
-    #
-    # the possible cases (instance attribute) are
-    # - lower_camel: for cammel case with first letter lowercase
-    # - upper_camel: for cammel case with first letter uppercase
-    # - snake: for snake case
-    #
-    # @param [String] key the key to be transformed
-    #
-    # @return [String] the string transformed
-    def change_case(key)
-      case options.case
-      when :lower_camel
-        key.camelize(:lower)
-      when :upper_camel
-        key.camelize(:upper)
-      when :snake
-        key.underscore
-      end
-    end
   end
 end
