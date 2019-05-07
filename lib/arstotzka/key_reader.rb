@@ -7,7 +7,8 @@ module Arstotzka
     # Creates a new instance of Reader
     #
     # @param [Hash] hash Hash where the key will be found
-    # @param [String] base_key The key to be checked (before case change)
+    # @param [String] base_key The key to be checked
+    #   (before case change)
     def initialize(hash, base_key, options_hash = {})
       self.options = options_hash
 
