@@ -36,8 +36,7 @@ module Arstotzka
     #   @param options [Arstotzka::Options] options of initialization object
     def initialize(options = {}, &block)
       self.options = options
-
-      @post_process = block || proc { |value| value }
+      @block = block
     end
 
     # Crawls into the hash looking for all keys in the given keys
@@ -94,7 +93,7 @@ module Arstotzka
     private
 
     # @private
-    attr_reader :post_process, :options
+    attr_reader :block, :options
     delegate :compact, :default, to: :options
 
     # Fetch the value from hash by crawling the keys
@@ -152,6 +151,15 @@ module Arstotzka
 
     # @private
     #
+    # Return post processor responsible for processing final result
+    #
+    # @return [Proc]
+    def post_process
+      @post_process ||= block || proc { |value| value }
+    end
+
+    # @private
+    #
     # Iterate over array applying #crawl over each element
     #
     # @param [Array] array the array of hashes be crawled
@@ -160,8 +168,8 @@ module Arstotzka
     # @return [Array] the new array with the individual values returned
     # @see #crawl
     def crawl_array(array, index)
-      array.map { |j| value(j, index) }.tap do |a|
-        a.compact! if compact
+      array.map { |element| value(element, index) }.tap do |new_array|
+        new_array.compact! if compact
       end
     end
   end

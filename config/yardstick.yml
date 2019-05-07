@@ -19,28 +19,30 @@ rules:
   ReturnTag:
     enabled: true
     exclude:
-      - Arstotzka::Crawler#post_process
+      - Arstotzka::Crawler#block
       - Arstotzka::Crawler#options
-      - Arstotzka::Fetcher#instance
+      - Arstotzka::Exception::FetcherBuilderNotFound#attribute
+      - Arstotzka::Exception::FetcherBuilderNotFound#klass
       - Arstotzka::Fetcher#options
       - Arstotzka::FetcherBuilder#options
+      - Arstotzka::HashReader#options
       - Arstotzka::MethodBuilder#attr_names
       - Arstotzka::MethodBuilder#options
-      - Arstotzka::Options#keys
       - Arstotzka::Reader#keys
       - Arstotzka::Reader#options
       - Arstotzka::Wrapper#options
   Summary::Presence:
     enabled: true
     exclude:
-      - Arstotzka::Crawler#post_process
+      - Arstotzka::Crawler#block
       - Arstotzka::Crawler#options
-      - Arstotzka::Fetcher#instance
+      - Arstotzka::Exception::FetcherBuilderNotFound#attribute
+      - Arstotzka::Exception::FetcherBuilderNotFound#klass
       - Arstotzka::Fetcher#options
       - Arstotzka::FetcherBuilder#options
+      - Arstotzka::HashReader#options
       - Arstotzka::MethodBuilder#attr_names
       - Arstotzka::MethodBuilder#options
-      - Arstotzka::Options#keys
       - Arstotzka::Reader#keys
       - Arstotzka::Reader#options
       - Arstotzka::Wrapper#options

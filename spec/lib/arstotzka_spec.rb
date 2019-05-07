@@ -8,6 +8,67 @@ describe Arstotzka do
   let(:json)        { load_json_fixture_file('arstotzka.json') }
   let(:value)       { dummy.public_send(attribute) }
 
+  describe '.add_fether' do
+    let(:klass) { Class.new(Arstotzka::Dummy) }
+
+    it do
+      expect { klass.add_fetcher(:new_attribute) }
+        .to change { klass.send(:fetcher_builders).keys }
+        .to([:new_attribute])
+    end
+  end
+
+  describe '.fetcher_for' do
+    let(:klass)    { Arstotzka::Dummy }
+    let(:instance) { klass.new({}) }
+    let(:expected) do
+      Arstotzka::Fetcher.new(
+        key: :name,
+        path: 'user',
+        instance: instance
+      )
+    end
+
+    it do
+      expect(klass.fetcher_for(:name, instance))
+        .to be_a(Arstotzka::Fetcher)
+    end
+
+    it 'returns correct fetcher' do
+      expect(klass.fetcher_for(:name, instance))
+        .to eq(expected)
+    end
+
+    context 'when fetcher was never added' do
+      it do
+        expect { klass.fetcher_for(:new_attribute, instance) }
+          .to raise_error(
+            Arstotzka::Exception::FetcherBuilderNotFound,
+            "FetcherBuild not found for new_attribute on #{klass}"
+          )
+      end
+    end
+
+    context 'when dealing with subclass' do
+      let(:klass) { Class.new(Arstotzka::Dummy) }
+
+      it do
+        expect { klass.fetcher_for(:name, instance) }
+          .not_to raise_error
+      end
+
+      context 'when fetcher was never added' do
+        it do
+          expect { klass.fetcher_for(:new_attribute, instance) }
+            .to raise_error(
+              Arstotzka::Exception::FetcherBuilderNotFound,
+              "FetcherBuild not found for new_attribute on #{klass}"
+            )
+        end
+      end
+    end
+  end
+
   context 'when parser is configured with no options' do
     let(:attribute) { :id }
 
@@ -128,6 +189,15 @@ describe Arstotzka do
 
     it do
       expect(value).to be_a(Float)
+    end
+  end
+
+  context 'when class is a child' do
+    let(:klass)     { Class.new(Arstotzka::Dummy) }
+    let(:attribute) { :name }
+
+    it 'retrieves attribute from base json' do
+      expect(value).to eq(json['user']['name'])
     end
   end
 end

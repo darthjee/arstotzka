@@ -11,10 +11,12 @@ module Arstotzka
     # Creates an instance of Artotzka::Fetcher
     #
     # @overload iniitalize(options_hash = {})
-    #   @param options_hash [Hash] options for {Crawler}, {Wrapper} and {Reader}
+    #   @param options_hash [Hash] options for {Crawler}, {Wrapper},
+    #   {Reader} and {HashReader}
     #
     # @overload iniitalize(options)
-    #   @param options [Arstotzka::Options] options for {Crawler}, {Wrapper} and {Reader}
+    #   @param options [Arstotzka::Options] options for {Crawler}, {Wrapper},
+    #   {Reader} and {HashReader}
     def initialize(options_hash = {})
       self.options = options_hash
     end
@@ -81,35 +83,32 @@ module Arstotzka
     #                 # ]
     def fetch
       value = crawler.value(hash)
-      value.flatten! if flatten && value.respond_to?(:flatten!)
+      value.flatten! if flatten && value.is_a?(Array)
       value = instance.send(after, value) if after
       value
     end
 
+    # Checks if other equals self
+    #
+    # @param other [Object]
+    #
+    # @return [TrueClass,FalseClass]
+    def ==(other)
+      return false unless other.class == self.class
+      options == other.options &&
+        instance == other.instance
+    end
+
+    protected
+
+    attr_reader :options
+
     private
 
     # @private
-    attr_reader :instance, :options
     delegate :instance, :after, :flatten, to: :options
     delegate :wrap, to: :wrapper
-
-    # @private
-    #
-    # Retrieves the hash to be crawled from the instance
-    #
-    # @return [Hash]
-    # rubocop:disable Metrics/AbcSize
-    def hash
-      @hash ||= case options.json.to_s
-                when /^@@.*/
-                  instance.class.class_variable_get(options.json)
-                when /^@.*/
-                  then instance.instance_variable_get(options.json)
-                else
-                  instance.send(options.json.to_s)
-                end
-    end
-    # rubocop:enable Metrics/AbcSize
+    delegate :hash, to: :hash_reader
 
     # @private
     #
@@ -133,6 +132,15 @@ module Arstotzka
     # @return [Arstotzka::Wrapper] the wrapper
     def wrapper
       @wrapper ||= Wrapper.new(options.merge(instance: instance))
+    end
+
+    # @api private
+    #
+    # Reader responsible for fetching hash from instance
+    #
+    # @return [Arstotzka::HashReader]
+    def hash_reader
+      @hash_reader ||= HashReader.new(options)
     end
   end
 end

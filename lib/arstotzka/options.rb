@@ -316,11 +316,24 @@ module Arstotzka
       self.class.new(to_h.merge(options))
     end
 
+    # Retuns all keys used when fetching
+    #
+    # @return [Array<String>]
     def keys
       return full_path.split('.') if full_path
       return [key.to_s] unless path&.present?
 
       [path, key].compact.join('.').split('.')
+    end
+
+    # Checks if another instance equals self
+    #
+    # @param other [Object]
+    #
+    # @return [TrueClass,FalseClass]
+    def ==(other)
+      return false unless other.class == self.class
+      to_h == other.to_h
     end
   end
 end

@@ -41,7 +41,7 @@ module Arstotzka
     include Base
     # Returns new instance of Arstotzka::MethodBuilder
     #
-    # @param attr_names [Array] list of attributes to be fetched from the hash/json
+    # @param attr_names [Array<Symbol>] list of attributes to be fetched from the hash/json
     # @param klass [Class] class to receive the methods
     #   (using {https://www.rubydoc.info/gems/sinclair Sinclair})
     #

@@ -5,7 +5,7 @@ module Arstotzka
     include Arstotzka
     attr_reader :json
 
-    expose :id
+    expose 'id'
     expose :name, path: 'user'
     expose :father_name, full_path: 'father.name'
     expose :age, cached: true
@@ -22,6 +22,11 @@ module Arstotzka
       games.reject do |g|
         g.publisher == 'sega'
       end
+    end
+
+    def ==(other)
+      return false unless other.class == self.class
+      json == other.json
     end
   end
 end

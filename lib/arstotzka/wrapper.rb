@@ -66,7 +66,7 @@ module Arstotzka
 
     # @private
     attr_reader :options
-    delegate :klass, :type, to: :options
+    delegate :klass, :type, :after_each, to: :options
 
     # @private
     #
@@ -90,7 +90,7 @@ module Arstotzka
     #
     # @return [Arra]
     def wrap_array(array)
-      array.map { |v| wrap v }
+      array.map { |element| wrap element }
     end
 
     # @private
@@ -132,9 +132,9 @@ module Arstotzka
     #
     # @return [Object] result of method call
     def after(value)
-      return value unless options.after_each
+      return value unless after_each
 
-      options.instance.send(options.after_each, value)
+      options.instance.send(after_each, value)
     end
   end
 end
