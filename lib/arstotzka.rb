@@ -172,6 +172,7 @@ module Arstotzka
   autoload :Exception,      'arstotzka/exception'
   autoload :Fetcher,        'arstotzka/fetcher'
   autoload :FetcherBuilder, 'arstotzka/fetcher_builder'
+  autoload :KeyReader,      'arstotzka/key_reader'
   autoload :HashReader,     'arstotzka/hash_reader'
   autoload :MethodBuilder,  'arstotzka/method_builder'
   autoload :Options,        'arstotzka/options'

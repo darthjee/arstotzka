@@ -23,7 +23,7 @@ module Arstotzka
     def initialize(options_hash = {})
       self.options = options_hash
 
-      @keys = options.keys.map(&method(:change_case))
+      @keys = options.keys
     end
 
     # Reads the value of one key in the hash
@@ -63,9 +63,7 @@ module Arstotzka
     def read(hash, index)
       key = keys[index]
 
-      check_key!(hash, key)
-
-      hash.key?(key) ? hash[key] : hash[key.to_sym]
+      KeyReader.new(hash, key, options).read
     end
 
     # @private
@@ -84,61 +82,5 @@ module Arstotzka
 
     # @private
     attr_reader :keys, :options
-
-    # @private
-    #
-    # Checks if a hash contains or not the key
-    #
-    # if the key is not found, an execption is raised
-    #
-    # @raise Arstotzka::Exception::KeyNotFound
-    #
-    # @return [NilClass]
-    #
-    # @see #key?
-    def check_key!(hash, key)
-      return if key?(hash, key)
-      raise Exception::KeyNotFound
-    end
-
-    # @private
-    #
-    # Checks if a hash contains or not the key
-    #
-    # The check first happens using String key and,
-    # in case of not found, searches as symbol
-    #
-    # @param [Hash] hash Hash where the key will be found
-    # @param [String] key The key to be checked
-    #
-    # @return [Boolean]
-    #
-    # @see #check_key!
-    def key?(hash, key)
-      hash&.key?(key) || hash&.key?(key.to_sym)
-    end
-
-    # @private
-    #
-    # Transforms the key to have the correct case
-    #
-    # the possible cases (instance attribute) are
-    # - lower_camel: for cammel case with first letter lowercase
-    # - upper_camel: for cammel case with first letter uppercase
-    # - snake: for snake case
-    #
-    # @param [String] key the key to be transformed
-    #
-    # @return [String] the string transformed
-    def change_case(key)
-      case options.case
-      when :lower_camel
-        key.camelize(:lower)
-      when :upper_camel
-        key.camelize(:upper)
-      when :snake
-        key.underscore
-      end
-    end
   end
 end
