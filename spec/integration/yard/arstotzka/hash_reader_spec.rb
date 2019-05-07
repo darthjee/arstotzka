@@ -7,7 +7,7 @@ describe Arstotzka::HashReader do
 
   describe '#hash' do
     let(:klass)    { Arstotzka::Fetcher::Dummy }
-    let(:json)     { { key: SecureRandom.hex } }
+    let(:json)     { { key: 'value' } }
     let(:instance) { klass.new(json) }
     let(:options)  { { instance: instance } }
 
@@ -27,13 +27,11 @@ describe Arstotzka::HashReader do
     end
 
     context 'when fetching from class variable' do
-      let(:klass)    { Arstotzka::Fetcher::ClassVariable }
+      let(:klass) { Arstotzka::Fetcher::ClassVariable }
       let(:options)  { { instance: instance, json: :@@json } }
       let(:instance) { klass.new }
 
-      before do
-        klass.json = json
-      end
+      before { klass.json = json }
 
       it 'reads hash from class variable' do
         expect(reader.hash).to eq(json)

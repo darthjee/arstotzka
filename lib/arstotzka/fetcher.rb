@@ -11,10 +11,12 @@ module Arstotzka
     # Creates an instance of Artotzka::Fetcher
     #
     # @overload iniitalize(options_hash = {})
-    #   @param options_hash [Hash] options for {Crawler}, {Wrapper} and {Reader}
+    #   @param options_hash [Hash] options for {Crawler}, {Wrapper},
+    #   {Reader} and {HashReader}
     #
     # @overload iniitalize(options)
-    #   @param options [Arstotzka::Options] options for {Crawler}, {Wrapper} and {Reader}
+    #   @param options [Arstotzka::Options] options for {Crawler}, {Wrapper},
+    #   {Reader} and {HashReader}
     def initialize(options_hash = {})
       self.options = options_hash
     end
@@ -132,6 +134,11 @@ module Arstotzka
       @wrapper ||= Wrapper.new(options.merge(instance: instance))
     end
 
+    # @api private
+    #
+    # Reader responsible for fetching hash from instance
+    #
+    # @return [Arstotzka::HashReader]
     def hash_reader
       @hash_reader ||= HashReader.new(options)
     end

@@ -25,6 +25,7 @@ rules:
       - Arstotzka::Exception::FetcherBuilderNotFound#klass
       - Arstotzka::Fetcher#options
       - Arstotzka::FetcherBuilder#options
+      - Arstotzka::HashReader#options
       - Arstotzka::MethodBuilder#attr_names
       - Arstotzka::MethodBuilder#options
       - Arstotzka::Reader#keys
@@ -39,6 +40,7 @@ rules:
       - Arstotzka::Exception::FetcherBuilderNotFound#klass
       - Arstotzka::Fetcher#options
       - Arstotzka::FetcherBuilder#options
+      - Arstotzka::HashReader#options
       - Arstotzka::MethodBuilder#attr_names
       - Arstotzka::MethodBuilder#options
       - Arstotzka::Reader#keys
