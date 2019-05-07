@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 module Arstotzka
+  # @api private
+  #
+  # Class responsible for reading values from a hash
   class KeyReader
     include Base
 
@@ -16,8 +19,28 @@ module Arstotzka
       @base_key = base_key
     end
 
+    # Reads value from hash key
+    #
+    # @raise Arstotzka::Exception::KeyNotFound
+    #
+    # @return [Object]
+    #
+    # @example Simple usage
+    #   hash = { theKey: 'value' }
+    #   key  = { 'the_key' }
+    #   reader = Arstotzka::KeyReader.new(hash, key)
+    #
+    #   reader.read # returns 'value'
+    #
+    # @example
+    #   hash = { 'the_key' => 'value' }
+    #   key  = 'TheKey'
+    #   reader = Arstotzka::KeyReader.new(hash, key)
+    #
+    #   reader.read # returns 'value'
+    #
     def read
-      check_key!
+      raise Exception::KeyNotFound unless key?
 
       hash.key?(key) ? hash[key] : hash[key.to_sym]
     end
@@ -30,23 +53,6 @@ module Arstotzka
     #
     # Checks if hash contains or not the key
     #
-    # if the key is not found, an execption is raised
-    #
-    # @raise Arstotzka::Exception::KeyNotFound
-    #
-    # @return [NilClass]
-    #
-    # @see #key?
-    def check_key!
-      return if key?
-
-      raise Exception::KeyNotFound
-    end
-
-    # @private
-    #
-    # Checks if hash contains or not the key
-    #
     # The check first happens using String key and,
     # in case of not found, searches as symbol
     #
@@ -54,7 +60,8 @@ module Arstotzka
     #
     # @see #check_key!
     def key?
-      hash&.key?(key) || hash&.key?(key.to_sym)
+      return unless hash
+      hash.key?(key) || hash.key?(key.to_sym)
     end
 
     # @private
