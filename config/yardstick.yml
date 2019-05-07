@@ -19,7 +19,7 @@ rules:
   ReturnTag:
     enabled: true
     exclude:
-      - Arstotzka::Crawler#post_process
+      - Arstotzka::Crawler#block
       - Arstotzka::Crawler#options
       - Arstotzka::Exception::FetcherBuilderNotFound#attribute
       - Arstotzka::Exception::FetcherBuilderNotFound#klass
@@ -34,7 +34,7 @@ rules:
   Summary::Presence:
     enabled: true
     exclude:
-      - Arstotzka::Crawler#post_process
+      - Arstotzka::Crawler#block
       - Arstotzka::Crawler#options
       - Arstotzka::Exception::FetcherBuilderNotFound#attribute
       - Arstotzka::Exception::FetcherBuilderNotFound#klass
