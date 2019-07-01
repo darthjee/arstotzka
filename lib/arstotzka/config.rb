@@ -19,8 +19,12 @@ module Arstotzka
 
     add_configs DEFAULT_OPTIONS
 
-    def options
-      Options.new({})
+    def options(options_hash = {})
+      Options.new(
+        to_hash.symbolize_keys.merge(
+          options_hash.symbolize_keys
+        )
+      )
     end
   end
 end

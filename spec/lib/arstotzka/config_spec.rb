@@ -13,6 +13,80 @@ describe Arstotzka::Config do
     it do
       expect(config.options).to be_a(Arstotzka::Options)
     end
+
+    it 'generates options with default values' do
+      expect(config.options.to_h)
+        .to eq(described_class::DEFAULT_OPTIONS)
+    end
+
+    context 'when configuring it' do
+      let(:expected_options_hash) do
+        {
+          after:      :method,
+          after_each: :each_method,
+          cached:     true,
+          case:       :snake,
+          compact:    true,
+          default:    10,
+          flatten:    true,
+          full_path:  'path.key',
+          json:       :@hash,
+          klass:      Account,
+          path:       'path',
+          type:       :string
+        }
+      end
+
+      before do
+        Arstotzka.configure do |c|
+          after      :method
+          after_each :each_method
+          cached     true
+          c.case     :snake
+          compact    true
+          default    10
+          flatten    true
+          full_path  'path.key'
+          json       :@hash
+          klass      Account
+          path       'path'
+          type       :string
+        end
+      end
+
+      it 'generates options with given values' do
+        expect(config.options.to_h)
+          .to eq(expected_options_hash)
+      end
+    end
+
+    context 'when passing a hash' do
+      let(:options_hash) do
+        expected_options_hash
+      end
+
+      let(:expected_options_hash) do
+        {
+          after:      :method,
+          after_each: :each_method,
+          cached:     true,
+          case:       :snake,
+          compact:    true,
+          default:    10,
+          flatten:    true,
+          full_path:  'path.key',
+          json:       :@hash,
+          klass:      Account,
+          path:       'path',
+          type:       :string
+        }
+      end
+
+      it 'generates options with given values' do
+        expect(config.options(options_hash).to_h)
+          .to eq(expected_options_hash)
+      end
+    end
   end
 
   describe '#after' do
@@ -25,6 +99,20 @@ describe Arstotzka::Config do
 
       it 'returns configured value' do
         expect(config.after).to eq(:method)
+      end
+    end
+  end
+
+  describe '#after_each' do
+    it do
+      expect(config.after).to be_falsey
+    end
+
+    context 'when configuring value' do
+      before { Arstotzka.configure { after_each :each_method } }
+
+      it 'returns configured value' do
+        expect(config.after_each).to eq(:each_method)
       end
     end
   end
