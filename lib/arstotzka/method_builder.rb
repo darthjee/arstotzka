@@ -53,9 +53,10 @@ module Arstotzka
     #
     # @see https://www.rubydoc.info/gems/sinclair Sinclair
     # @see Arstotzka::Options
-    def initialize(attr_names, klass, options = {})
+    def initialize(attr_names, klass, options, cached: false)
       super(klass)
       self.options = options
+      @cached = cached
 
       @attr_names = attr_names
       init
@@ -64,8 +65,7 @@ module Arstotzka
     private
 
     # @private
-    attr_reader :attr_names, :options
-    delegate :path, :full_path, :cached, to: :options
+    attr_reader :attr_names, :options, :cached
 
     # @private
     #

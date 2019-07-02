@@ -24,7 +24,6 @@ describe Arstotzka::Config do
         {
           after:      :method,
           after_each: :each_method,
-          cached:     true,
           case:       :snake,
           compact:    true,
           default:    10,
@@ -41,7 +40,6 @@ describe Arstotzka::Config do
         Arstotzka.configure do |c|
           after      :method
           after_each :each_method
-          cached     true
           c.case     :snake
           compact    true
           default    10
@@ -69,7 +67,6 @@ describe Arstotzka::Config do
         {
           after:      :method,
           after_each: :each_method,
-          cached:     true,
           case:       :snake,
           compact:    true,
           default:    10,
@@ -113,20 +110,6 @@ describe Arstotzka::Config do
 
       it 'returns configured value' do
         expect(config.after_each).to eq(:each_method)
-      end
-    end
-  end
-
-  describe '#cached' do
-    it do
-      expect(config.cached).to be_falsey
-    end
-
-    context 'when configuring value' do
-      before { Arstotzka.configure { cached true } }
-
-      it 'returns configured value' do
-        expect(config.cached).to be_truthy
       end
     end
   end

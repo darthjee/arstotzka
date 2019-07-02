@@ -99,9 +99,9 @@ module Arstotzka
     # @see
     #   https://www.rubydoc.info/gems/activesupport/5.2.2/ActiveSupport/Concern
     #   ActiveSupport::Concern
-    def expose(*attr_names, **options_hash)
+    def expose(*attr_names, cached: false, **options_hash)
       options = Arstotzka.config.options(options_hash)
-      MethodBuilder.new(attr_names.map(&:to_sym), self, options).build
+      MethodBuilder.new(attr_names.map(&:to_sym), self, options, cached: cached).build
     end
 
     # @private

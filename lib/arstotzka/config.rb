@@ -14,7 +14,6 @@ module Arstotzka
     DEFAULT_OPTIONS = {
       after:      false,
       after_each: nil,
-      cached:     false,
       case:       :lower_camel,
       compact:    false,
       default:    nil,
@@ -52,7 +51,6 @@ module Arstotzka
     #   # {
     #   #   after:      false,
     #   #   after_each: nil,
-    #   #   cached:     false,
     #   #   case:       :snake,
     #   #   compact:    false,
     #   #   default:    nil,
