@@ -65,7 +65,7 @@ module Arstotzka
 
     # @private
     attr_reader :attr_names, :options
-    delegate :path, :full_path, :cached, to: :options
+    delegate :cached, to: :options
 
     # @private
     #
