@@ -291,7 +291,7 @@ module Arstotzka
       warn ":class has been deprecated, prefer 'expose klass: #{klass}'" if klass
       options[:klass] ||= klass
 
-      super(DEFAULT_OPTIONS.merge(options))
+      super(options)
     end
 
     # @private

@@ -7,7 +7,7 @@ describe Arstotzka::FetcherBuilder do
     describe '#build' do
       subject(:builder) { described_class.new(options) }
 
-      let(:options)  { Arstotzka::Options.new(options_hash) }
+      let(:options)  { Arstotzka.config.options(options_hash) }
       let(:fetcher)  { builder.build(instance) }
       let(:instance) { MyModel.new(hash) }
 

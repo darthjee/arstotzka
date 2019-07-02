@@ -18,7 +18,7 @@ module Arstotzka
     # @return [Arstotzka::Options]
     def options=(options)
       @options = if options.is_a?(Hash)
-                   Options.new(options)
+                   Arstotzka.config.options(options)
                  else
                    options
                  end

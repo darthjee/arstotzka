@@ -7,7 +7,7 @@ describe Arstotzka::MethodBuilder do
     subject(:builder) { described_class.new(attributes, klass, options) }
 
     let!(:instance) { klass.new(hash) }
-    let(:options)   { Arstotzka::Options.new(options_hash) }
+    let(:options)   { Arstotzka.config.options(options_hash) }
     let(:hash) do
       {
         'name' => { first: 'John', last: 'Williams' },
