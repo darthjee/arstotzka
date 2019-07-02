@@ -89,7 +89,7 @@ module Arstotzka
     # @see Sinclair
     def add_attr(attribute)
       klass.add_fetcher(attribute, options)
-      add_method attribute, attr_fetcher(attribute), cached: cached
+      add_method attribute, cached: cached, &attr_fetcher(attribute)
     end
 
     # Returns the code needed to initialize fetcher
@@ -101,11 +101,9 @@ module Arstotzka
     # @see Sinclair
     # @see Artotzka::Fetcher
     def attr_fetcher(attribute)
-      <<-CODE
-        begin
-          self.class.fetcher_for(:#{attribute}, self).fetch
-        end
-      CODE
+      proc do
+        self.class.fetcher_for(attribute, self).fetch
+      end
     end
   end
 end
