@@ -73,8 +73,6 @@ module Arstotzka
     # - upper_camel: for cammel case with first letter uppercase
     # - snake: for snake case
     #
-    # @param [String] key the key to be transformed
-    #
     # @return [String] the string transformed
     def key
       @key ||= case options.case
