@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe Arstotzka::MethodBuilder do
-  describe 'yard' do
+  xdescribe 'yard' do
     subject(:builder) { described_class.new(attributes, klass, options) }
 
     let!(:instance) { klass.new(hash) }

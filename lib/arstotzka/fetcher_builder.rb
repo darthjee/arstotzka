@@ -29,8 +29,6 @@ module Arstotzka
   #
   #   fetcher.fetch  # returns 101
   class FetcherBuilder
-    include Base
-
     # Creates an instance of Artotzka::FetcherBuilder
     #
     # @overload initialize(options_hash = {})
@@ -39,7 +37,7 @@ module Arstotzka
     # @overload initialize(options)
     #   @param options [Arstotzka::Options] options
     def initialize(options_hash = {})
-      self.options = options_hash
+      @options = options_hash
     end
 
     # Builds a fetcher responsible for fetchin a value
@@ -156,7 +154,11 @@ module Arstotzka
     #
     # @return Arstotzka::Fetcher
     def build(instance)
-      Fetcher.new(options.merge(instance: instance))
+      fetcher_options = Arstotzka.config.options(
+        options.merge(instance: instance)
+      )
+
+      Fetcher.new(fetcher_options)
     end
 
     private

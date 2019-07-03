@@ -38,7 +38,6 @@ module Arstotzka
   #
   # @see https://www.rubydoc.info/gems/sinclair Sinclair
   class MethodBuilder < Sinclair
-    include Base
     # Returns new instance of Arstotzka::MethodBuilder
     #
     # @param attr_names [Array<Symbol>] list of attributes to be fetched from the hash/json
@@ -55,7 +54,7 @@ module Arstotzka
     # @see Arstotzka::Options
     def initialize(attr_names, klass, options = {})
       super(klass)
-      self.options = options
+      @options = options
 
       @attr_names = attr_names
       init

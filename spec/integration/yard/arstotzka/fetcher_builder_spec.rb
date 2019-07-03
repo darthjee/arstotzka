@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe Arstotzka::FetcherBuilder do
-  describe 'yard' do
+  xdescribe 'yard' do
     describe '#build' do
       subject(:builder) { described_class.new(options) }
 
