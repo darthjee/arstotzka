@@ -65,7 +65,7 @@ module Arstotzka
 
     # @private
     attr_reader :attr_names, :options
-    delegate :cached, to: :options
+    delegate to: :options
 
     # @private
     #
@@ -89,7 +89,7 @@ module Arstotzka
     # @see Sinclair
     def add_attr(attribute)
       klass.add_fetcher(attribute, options)
-      add_method attribute, cached: cached, &attr_fetcher(attribute)
+      add_method attribute, &attr_fetcher(attribute)
     end
 
     # Returns the code needed to initialize fetcher
