@@ -89,19 +89,8 @@ module Arstotzka
     # @see Sinclair
     def add_attr(attribute)
       klass.add_fetcher(attribute, options)
-      add_method attribute, &attr_fetcher(attribute)
-    end
 
-    # Returns the code needed to initialize fetcher
-    #
-    # @param [String,Symbol] attribute name of method / attribute
-    #
-    # @return [String] method code
-    #
-    # @see Sinclair
-    # @see Artotzka::Fetcher
-    def attr_fetcher(attribute)
-      proc do
+      add_method attribute do
         self.class.fetcher_for(attribute, self).fetch
       end
     end
