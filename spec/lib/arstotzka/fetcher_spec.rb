@@ -177,4 +177,14 @@ describe Arstotzka::Fetcher do
       end
     end
   end
+
+  describe 'cached option' do
+    let(:options_hash) { { key: key, cached: true } }
+    let(:key)          { 'id' }
+
+    it 'retrieves attribute from base json' do
+      expect { json['id'] = Random.rand(1000) }
+        .not_to change(fetcher, :fetch)
+    end
+  end
 end

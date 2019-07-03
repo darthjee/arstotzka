@@ -82,10 +82,11 @@ module Arstotzka
     #                 #   Transaction.new(value: 50.23, type: 'income')
     #                 # ]
     def fetch
-      value = crawler.value(hash)
-      value.flatten! if flatten && value.is_a?(Array)
-      value = instance.send(after, value) if after
-      value
+      if cached
+        fetch_from_cache
+      else
+        fetch_value
+      end
     end
 
     # Checks if other equals self
@@ -106,9 +107,23 @@ module Arstotzka
     private
 
     # @private
-    delegate :instance, :after, :flatten, to: :options
+    delegate :cached, :key, :instance, :after, :flatten, to: :options
     delegate :wrap, to: :wrapper
     delegate :hash, to: :hash_reader
+
+    def fetch_from_cache
+      instance.instance_variable_get("@#{key}") ||
+        instance.instance_variable_set(
+          "@#{key}", fetch_value
+        )
+    end
+
+    def fetch_value
+      value = crawler.value(hash)
+      value.flatten! if flatten && value.is_a?(Array)
+      value = instance.send(after, value) if after
+      value
+    end
 
     # @private
     #
