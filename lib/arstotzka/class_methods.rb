@@ -100,7 +100,7 @@ module Arstotzka
     #   https://www.rubydoc.info/gems/activesupport/5.2.2/ActiveSupport/Concern
     #   ActiveSupport::Concern
     def expose(*attr_names, **options_hash)
-      options = Options.new(options_hash.symbolize_keys)
+      options = Arstotzka.config.options(options_hash)
       MethodBuilder.new(attr_names.map(&:to_sym), self, options).build
     end
 

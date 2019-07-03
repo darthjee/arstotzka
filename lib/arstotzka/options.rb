@@ -245,20 +245,7 @@ module Arstotzka
   #                      #   Linda Ariel
   #                      # ]
   class Options < ::OpenStruct
-    DEFAULT_OPTIONS = {
-      after:      false,
-      after_each: nil,
-      cached:     false,
-      case:       :lower_camel,
-      compact:    false,
-      default:    nil,
-      flatten:    false,
-      full_path:  nil,
-      json:       :json,
-      klass:      nil,
-      path:       nil,
-      type:       :none
-    }.freeze
+    DEFAULT_OPTIONS = Arstotzka::Config::DEFAULT_OPTIONS
 
     # Creates a new instance of Options
     #
@@ -304,7 +291,7 @@ module Arstotzka
       warn ":class has been deprecated, prefer 'expose klass: #{klass}'" if klass
       options[:klass] ||= klass
 
-      super(DEFAULT_OPTIONS.merge(options))
+      super(options)
     end
 
     # @private

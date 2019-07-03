@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe Arstotzka::Options do
-  subject(:options) { described_class.new(options_hash) }
+  subject(:options) { Arstotzka.config.options(options_hash) }
 
   context 'when initializing without options' do
     let(:options_hash) { {} }

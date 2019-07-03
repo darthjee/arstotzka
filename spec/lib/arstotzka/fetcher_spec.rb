@@ -7,7 +7,7 @@ describe Arstotzka::Fetcher do
     described_class.new options
   end
 
-  let(:options)  { Arstotzka::Options.new(options_hash.merge(instance: instance)) }
+  let(:options)  { Arstotzka.config.options(options_hash.merge(instance: instance)) }
   let(:instance) { Arstotzka::Fetcher::Dummy.new(json) }
   let(:json)     { load_json_fixture_file('arstotzka.json') }
   let(:value)    { fetcher.fetch }
