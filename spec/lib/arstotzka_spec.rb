@@ -200,4 +200,67 @@ describe Arstotzka do
       expect(value).to eq(json['user']['name'])
     end
   end
+
+  context 'when changing configuration of case after class declaration' do
+    let(:json)      { { the_value: 'snake', theValue: 'lower_camel', TheValue: 'upper_camel' } }
+    let(:attribute) { :the_value }
+    let(:dummy_class) do
+      Class.new(Arstotzka::Dummy) do
+        expose :the_value
+      end
+    end
+
+    after { described_class.reset_config }
+
+    context 'when changing case to snake' do
+      it 'changes the way the value is fetched' do
+        expect { described_class.configure { |c| c.case :snake } }
+          .to change(dummy, :the_value)
+          .from('lower_camel').to('snake')
+      end
+    end
+
+    context 'when changing case to upper_camel' do
+      it 'changes the way the value is fetched' do
+        expect { described_class.configure { |c| c.case :upper_camel } }
+          .to change(dummy, :the_value)
+          .from('lower_camel').to('upper_camel')
+      end
+    end
+
+    context 'when expose was set to cache' do
+      let(:dummy_class) do
+        Class.new(Arstotzka::Dummy) do
+          expose :the_value, cached: true
+        end
+      end
+
+      it 'does not change the way the value is fetched' do
+        expect { described_class.configure { |c| c.case :snake } }
+          .not_to change(dummy, :the_value)
+      end
+    end
+
+    context 'when arstotka was set to cache' do
+      before { described_class.configure { cached true } }
+
+      it 'does not change the way the value is fetched' do
+        expect { described_class.configure { |c| c.case :snake } }
+          .not_to change(dummy, :the_value)
+      end
+    end
+
+    context 'when expose defined the case' do
+      let(:dummy_class) do
+        Class.new(Arstotzka::Dummy) do
+          expose :the_value, case: :upper_camel
+        end
+      end
+
+      it 'does not change the way the value is fetched' do
+        expect { described_class.configure { |c| c.case :snake } }
+          .not_to change(dummy, :the_value)
+      end
+    end
+  end
 end
