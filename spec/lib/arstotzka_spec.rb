@@ -202,8 +202,8 @@ describe Arstotzka do
   end
 
   context 'when changing configuration of case after class declaration' do
-    let(:json)      { { the_value: 'snake', theValue: 'lower_camel', TheValue: 'upper_camel' } }
-    let(:attribute) { :the_value }
+    let(:json) { { the_value: 'snake', theValue: 'lower_camel', TheValue: 'upper_camel' } }
+
     let(:dummy_class) do
       Class.new(Arstotzka::Dummy) do
         expose :the_value
@@ -260,6 +260,106 @@ describe Arstotzka do
       it 'does not change the way the value is fetched' do
         expect { described_class.configure { |c| c.case :snake } }
           .not_to change(dummy, :the_value)
+      end
+    end
+  end
+
+  context 'when changing configuration of cached after class declaration' do
+    let(:json) { { the_value: 'old value' } }
+
+    let(:dummy_class) do
+      Class.new(Arstotzka::Dummy) do
+        expose :the_value, case: :snake
+      end
+    end
+
+    after { described_class.reset_config }
+
+    context 'when cached is defined as true after in the config' do
+      context 'when first method call is after value change' do
+        let(:block) do
+          proc do
+            described_class.configure { cached true }
+            json[:the_value] = :symbol
+          end
+        end
+
+        it 'caches after cache change' do
+          expect(&block).to change(dummy, :the_value)
+            .from('old value').to(:symbol)
+        end
+      end
+
+      context 'when first method call is before value change' do
+        let(:block) do
+          proc do
+            described_class.configure { cached true }
+            dummy.the_value
+            json[:the_value] = :symbol
+          end
+        end
+
+        it 'caches the original value' do
+          expect(&block).not_to change(dummy, :the_value)
+        end
+      end
+    end
+
+    context 'when cached is defined as false after in the config' do
+      before { described_class.configure { cached true } }
+
+      let(:block) do
+        proc do
+          described_class.configure { cached false }
+          json[:the_value] = :symbol
+        end
+      end
+
+      it 'changes value' do
+        expect(&block).to change(dummy, :the_value)
+          .from('old value').to(:symbol)
+      end
+    end
+
+    context 'when cached was defined in expose' do
+      context 'when cached was set as true' do
+        let(:dummy_class) do
+          Class.new(Arstotzka::Dummy) do
+            expose :the_value, case: :snake, cached: true
+          end
+        end
+
+        let(:block) do
+          proc do
+            described_class.configure { cached false }
+            json[:the_value] = :symbol
+          end
+        end
+
+        it 'does not change cached state' do
+          expect(&block).not_to change(dummy, :the_value)
+        end
+      end
+
+      context 'when cached was set as false' do
+        let(:dummy_class) do
+          Class.new(Arstotzka::Dummy) do
+            expose :the_value, case: :snake, cached: false
+          end
+        end
+
+        let(:block) do
+          proc do
+            described_class.configure { cached true }
+            dummy.the_value
+            json[:the_value] = :symbol
+          end
+        end
+
+        it 'does not change cached state' do
+          expect(&block).to change(dummy, :the_value)
+            .from('old value').to(:symbol)
+        end
       end
     end
   end
