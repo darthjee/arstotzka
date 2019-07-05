@@ -83,7 +83,7 @@ module Arstotzka
     #                 # ]
     def fetch
       if cached
-        fetch_from_cache
+        fetch_with_cache
       else
         fetch_value
       end
@@ -111,11 +111,14 @@ module Arstotzka
     delegate :wrap, to: :wrapper
     delegate :hash, to: :hash_reader
 
+    def fetch_with_cache
+      fetch_from_cache || instance.instance_variable_set(
+        "@#{key}", fetch_value
+      )
+    end
+
     def fetch_from_cache
-      instance.instance_variable_get("@#{key}") ||
-        instance.instance_variable_set(
-          "@#{key}", fetch_value
-        )
+      instance.instance_variable_get("@#{key}")
     end
 
     def fetch_value
