@@ -8,6 +8,8 @@ module Arstotzka
   class Fetcher
     include Base
 
+    autoload :Cache, 'arstotzka/fetcher/cache'
+
     # Creates an instance of Artotzka::Fetcher
     #
     # @overload iniitalize(options_hash = {})
@@ -82,11 +84,9 @@ module Arstotzka
     #                 #   Transaction.new(value: 50.23, type: 'income')
     #                 # ]
     def fetch
-      if cached
-        fetch_with_cache
-      else
+      Cache.new(options) do
         fetch_value
-      end
+      end.fetch
     end
 
     # Checks if other equals self
@@ -110,28 +110,6 @@ module Arstotzka
     delegate :cached, :key, :instance, :after, :flatten, to: :options
     delegate :wrap, to: :wrapper
     delegate :hash, to: :hash_reader
-
-    def fetch_with_cache
-      if is_cached?
-        fetch_from_cache
-      else
-        instance.instance_variable_set(
-          "@#{key}", fetch_value
-        )
-      end
-    end
-
-    def fetch_from_cache
-      instance.instance_variable_get("@#{key}")
-    end
-
-    def is_cached?
-      if cached == :full
-        instance.instance_variable_defined?("@#{key}")
-      else
-        instance.instance_variable_get("@#{key}")
-      end
-    end
 
     def fetch_value
       value = crawler.value(hash)
