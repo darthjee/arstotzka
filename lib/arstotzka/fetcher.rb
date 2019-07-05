@@ -112,13 +112,25 @@ module Arstotzka
     delegate :hash, to: :hash_reader
 
     def fetch_with_cache
-      fetch_from_cache || instance.instance_variable_set(
-        "@#{key}", fetch_value
-      )
+      if is_cached?
+        fetch_from_cache
+      else
+        instance.instance_variable_set(
+          "@#{key}", fetch_value
+        )
+      end
     end
 
     def fetch_from_cache
       instance.instance_variable_get("@#{key}")
+    end
+
+    def is_cached?
+      if cached == :full
+        instance.instance_variable_defined?("@#{key}")
+      else
+        instance.instance_variable_get("@#{key}")
+      end
     end
 
     def fetch_value
