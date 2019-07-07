@@ -111,6 +111,14 @@ module Arstotzka
     delegate :wrap, to: :wrapper
     delegate :hash, to: :hash_reader
 
+    # @private
+    #
+    # fetch value from Hash
+    #
+    # Value is fetched trhough the usage of {Crawler},
+    # and wrapped with {Wrapper}
+    #
+    # @return [Object]
     def fetch_value
       value = crawler.value(hash)
       value.flatten! if flatten && value.is_a?(Array)
