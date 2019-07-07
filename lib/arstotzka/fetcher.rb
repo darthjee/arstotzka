@@ -14,11 +14,11 @@ module Arstotzka
     #
     # @overload iniitalize(options_hash = {})
     #   @param options_hash [Hash] options for {Crawler}, {Wrapper},
-    #   {Reader} and {HashReader}
+    #   {Reader}, {Cache} and {HashReader}
     #
     # @overload iniitalize(options)
     #   @param options [Arstotzka::Options] options for {Crawler}, {Wrapper},
-    #   {Reader} and {HashReader}
+    #   {Reader}, {Cache} and {HashReader}
     def initialize(options_hash = {})
       self.options = options_hash
     end

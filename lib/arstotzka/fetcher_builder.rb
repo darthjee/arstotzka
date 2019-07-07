@@ -31,13 +31,9 @@ module Arstotzka
   class FetcherBuilder
     # Creates an instance of Artotzka::FetcherBuilder
     #
-    # @overload initialize(options_hash = {})
-    #   @param options_hash [Hash] options (see {Options})
-    #
-    # @overload initialize(options)
-    #   @param options [Arstotzka::Options] options
-    def initialize(options_hash = {})
-      @options = options_hash
+    # @param options [Hash] options (see {Options})
+    def initialize(options = {})
+      @options = options
     end
 
     # Builds a fetcher responsible for fetchin a value
