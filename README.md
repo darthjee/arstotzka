@@ -97,7 +97,13 @@ Options
 - after: Name of a method to be called after on the values returned
 - after_each: Name of a method to be called after each result
 - cached: Indicator that, once the value has been fetched, it should be cached (false by default)
+  - false : no cache
+  - true : simple cache where nil values are not considerated cached
+  - :full : full cache where even nil values are cached
 - case: Case of the keys from the json (lower_camel by default)
+  - :snake : snakecase (eg. `the_key`)
+  - :lower_camel : lower cammel case (eg. `theKey`)
+  - :upper_camel : upper cammel case (eg. `TheKey`)
 - compact: Indicator telling to ignore nil values inside array (false by default)
 - default: Default value (prior to casting and wrapping, see [Default](#default))
 - flatten: Indicator telling that to flattern the resulting array (false by default)
