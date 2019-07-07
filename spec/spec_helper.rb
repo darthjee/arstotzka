@@ -2,7 +2,7 @@
 
 require 'simplecov'
 SimpleCov.start do
-  add_filter 'spec/support/models/'
+  add_filter 'spec/'
 end
 
 require 'pry-nav'

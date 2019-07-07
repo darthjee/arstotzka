@@ -179,12 +179,42 @@ describe Arstotzka::Fetcher do
   end
 
   describe 'cached option' do
-    let(:options_hash) { { key: key, cached: true } }
-    let(:key)          { 'id' }
+    let(:key) { 'id' }
 
-    it 'retrieves attribute from base json' do
-      expect { json['id'] = Random.rand(1000) }
-        .not_to change(fetcher, :fetch)
+    context 'with cached true' do
+      let(:options_hash) { { key: key, cached: true } }
+
+      it 'retrieves attribute from cache' do
+        expect { json['id'] = Random.rand(1000) }
+          .not_to change(fetcher, :fetch)
+      end
+
+      context 'when initial value is nil' do
+        let(:json) { { id: nil } }
+
+        it 'does not cache nil values' do
+          expect { json['id'] = Random.rand(1000) }
+            .to change(fetcher, :fetch)
+        end
+      end
+    end
+
+    context 'with cached full' do
+      let(:options_hash) { { key: key, cached: :full } }
+
+      it 'retrieves attribute from cache' do
+        expect { json['id'] = Random.rand(1000) }
+          .not_to change(fetcher, :fetch)
+      end
+
+      context 'when initial value is nil' do
+        let(:json) { { id: nil } }
+
+        it 'caches nil values' do
+          expect { json['id'] = Random.rand(1000) }
+            .not_to change(fetcher, :fetch)
+        end
+      end
     end
   end
 end
