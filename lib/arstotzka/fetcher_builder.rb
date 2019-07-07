@@ -17,7 +17,7 @@ module Arstotzka
   #     end
   #   end
   #
-  #   options =  Arstotzka.config.options(key: :id, path: :person)
+  #   options = { key: :id, path: :person }
   #   builder = Arstotzka::FetcherBuilder.new(options)
   #   instance = MyModel.new(
   #     person: {
@@ -56,12 +56,12 @@ module Arstotzka
     #     end
     #   end
     #
-    #   options =  Arstotzka.config.options(
+    #   options = {
     #     key:       :player_ids,
     #     full_path: 'teams.players.person_id',
     #     flatten:   true,
     #     case:      :snake
-    #   )
+    #   }
     #   builder = Arstotzka::FetcherBuilder.new(options)
     #   hash = {
     #     teams: [
@@ -136,9 +136,9 @@ module Arstotzka
     #
     #   instance = StarGazer.new(hash)
     #
-    #   options = Arstotzka.config.options(
+    #   options = {
     #     key: :stars, klass: Star, after: :only_yellow
-    #   )
+    #   }
     #
     #   builder = Arstotzka::FetcherBuilder.new(options)
     #   fetcher = builder.build(instance)

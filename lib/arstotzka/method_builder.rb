@@ -23,13 +23,13 @@ module Arstotzka
   #     'cars' => 2.0
   #   )
   #
-  #   options = Arstotzka.config.options(full_path: 'name.first')
+  #   options = { full_path: 'name.first' }
   #   builder = Arstotzka::MethodBuilder.new([ :first_name ], MyModel, options)
   #   builder.build
   #
   #   instance.first_name # returns 'John'
   #
-  #   options = Arstotzka.config.options(type: :integer)
+  #   options = { type: :integer }
   #   builder = Arstotzka::MethodBuilder.new([ :age, 'cars' ], MyModel, options)
   #   builder.build
   #
