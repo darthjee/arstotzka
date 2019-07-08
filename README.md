@@ -97,13 +97,19 @@ Options
 - after: Name of a method to be called after on the values returned
 - after_each: Name of a method to be called after each result
 - cached: Indicator that, once the value has been fetched, it should be cached (false by default)
+  - false : no cache
+  - true : simple cache where nil values are not considerated cached
+  - :full : full cache where even nil values are cached
 - case: Case of the keys from the json (lower_camel by default)
+  - :snake : snakecase (eg. `the_key`)
+  - :lower_camel : lower cammel case (eg. `theKey`)
+  - :upper_camel : upper cammel case (eg. `TheKey`)
 - compact: Indicator telling to ignore nil values inside array (false by default)
 - default: Default value (prior to casting and wrapping, see [Default](#default))
 - flatten: Indicator telling that to flattern the resulting array (false by default)
 - full_path: Full path to fetch the value (empty by default)
 - klass: Class to be used when wrapping the final value
-- json: Method that contains the hash to be parsed (json by default)
+- json: Method that contains the hash to be parsed (`:json` by default)
 - path: Path where to find the sub hash that contains the key (empty by default)
 - type: Type that the value must be cast into ([TypeCast](#typecast))
 
@@ -195,3 +201,42 @@ star_gazer.favorite_star.name # returns "Sun"
 star_gazer.favorite_star.class # returns Star
 ```
 
+Configuration
+-------------
+Arstotzka can be configured changing the default options
+
+```ruby
+class Restaurant
+  include Arstotzka
+
+  expose :dishes, path: 'restaurant.complete_meals'
+
+  def initialize(hash)
+    @hash = hash
+  end
+end
+
+hash = {
+  restaurant: {
+    complete_meals: {
+      dishes: %w[
+        Goulash
+        Spaghetti
+        Pizza
+      ]
+    }
+  }
+}
+
+restaurant = Restaurant.new(hash)
+restaurant.dishes # raises NoMethodError as json method is
+                  # is not defined in Restaurant
+
+Arstotzka.configure { json :@hash }
+
+restaurant.dishes # returns nil as default case is lower_camel
+
+Arstotzka.configure { |c| c.case :snake }
+
+restaurant.dishes # return %s[Goulash Spaghetti Pizza]
+```

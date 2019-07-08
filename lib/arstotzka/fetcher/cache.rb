@@ -128,6 +128,8 @@ module Arstotzka
       # the instance variable name is the same name of
       # options.key (which is the same name of the method
       # created in the instance by {MethodBuilder}
+      #
+      # @return [Object]
       def fetch_from_cache
         instance.instance_variable_get("@#{key}")
       end
