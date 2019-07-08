@@ -11,7 +11,7 @@ module Arstotzka
   #
   # @example (see #options)
   class Config < Sinclair::Config
-    DEFAULT_OPTIONS = {
+    DEFAULT_CONFIGS = {
       after:      false,
       after_each: nil,
       cached:     false,
@@ -26,7 +26,7 @@ module Arstotzka
       type:       :none
     }.freeze
 
-    add_configs DEFAULT_OPTIONS
+    add_configs DEFAULT_CONFIGS
 
     # @api private
     #

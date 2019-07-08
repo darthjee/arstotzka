@@ -245,7 +245,7 @@ module Arstotzka
   #                      #   Linda Ariel
   #                      # ]
   class Options < ::OpenStruct
-    DEFAULT_OPTIONS = Arstotzka::Config::DEFAULT_OPTIONS
+    DEFAULT_OPTIONS = Arstotzka::Config::DEFAULT_CONFIGS
 
     # Creates a new instance of Options
     #

@@ -16,7 +16,7 @@ describe Arstotzka::Config do
 
     it 'generates options with default values' do
       expect(config.options.to_h)
-        .to eq(described_class::DEFAULT_OPTIONS)
+        .to eq(described_class::DEFAULT_CONFIGS)
     end
 
     context 'when configuring it' do
