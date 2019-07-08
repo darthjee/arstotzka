@@ -16,7 +16,11 @@ describe Arstotzka::Config do
 
     it 'generates options with default values' do
       expect(config.options.to_h)
-        .to eq(described_class::DEFAULT_CONFIGS)
+        .to eq(
+          described_class::DEFAULT_CONFIGS.merge(
+            path: nil, full_path: nil
+          )
+        )
     end
 
     context 'when configuring it' do
@@ -29,11 +33,11 @@ describe Arstotzka::Config do
           compact:    true,
           default:    10,
           flatten:    true,
-          full_path:  'path.key',
           json:       :@hash,
           klass:      Account,
-          path:       'path',
-          type:       :string
+          type:       :string,
+          path:       nil,
+          full_path:  nil
         }
       end
 
@@ -46,10 +50,8 @@ describe Arstotzka::Config do
           compact    true
           default    10
           flatten    true
-          full_path  'path.key'
           json       :@hash
           klass      Account
-          path       'path'
           type       :string
         end
       end
@@ -74,11 +76,11 @@ describe Arstotzka::Config do
           compact:    true,
           default:    10,
           flatten:    true,
-          full_path:  'path.key',
           json:       :@hash,
           klass:      Account,
-          path:       'path',
-          type:       :string
+          type:       :string,
+          path:       nil,
+          full_path:  nil
         }
       end
 
@@ -187,20 +189,6 @@ describe Arstotzka::Config do
     end
   end
 
-  describe '#full_path' do
-    it do
-      expect(config.full_path).to be_nil
-    end
-
-    context 'when configuring value' do
-      before { Arstotzka.configure { full_path 'path.key' } }
-
-      it 'returns configured value' do
-        expect(config.full_path).to eq('path.key')
-      end
-    end
-  end
-
   describe '#json' do
     it 'returns default json option' do
       expect(config.json).to eq(:json)
@@ -225,20 +213,6 @@ describe Arstotzka::Config do
 
       it 'returns configured value' do
         expect(config.klass).to eq(Account)
-      end
-    end
-  end
-
-  describe '#path' do
-    it do
-      expect(config.path).to be_nil
-    end
-
-    context 'when configuring value' do
-      before { Arstotzka.configure { path 'path' } }
-
-      it 'returns configured value' do
-        expect(config.path).to eq('path')
       end
     end
   end

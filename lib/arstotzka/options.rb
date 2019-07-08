@@ -245,7 +245,10 @@ module Arstotzka
   #                      #   Linda Ariel
   #                      # ]
   class Options < ::OpenStruct
-    DEFAULT_OPTIONS = Arstotzka::Config::DEFAULT_CONFIGS
+    DEFAULT_OPTIONS = Arstotzka::Config::DEFAULT_CONFIGS.merge(
+      full_path:  nil,
+      path:       nil
+    )
 
     # Creates a new instance of Options
     #
@@ -286,7 +289,8 @@ module Arstotzka
     #
     # @see Arstotzka::Options::DEFAULT_OPTIONS
     # @return [Arstotzka::Options]
-    def initialize(options)
+    def initialize(options_hash)
+      options = DEFAULT_OPTIONS.merge options_hash
       klass = options.delete(:class)
       warn ":class has been deprecated, prefer 'expose klass: #{klass}'" if klass
       options[:klass] ||= klass

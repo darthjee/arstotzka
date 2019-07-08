@@ -19,10 +19,8 @@ module Arstotzka
       compact:    false,
       default:    nil,
       flatten:    false,
-      full_path:  nil,
       json:       :json,
       klass:      nil,
-      path:       nil,
       type:       :none
     }.freeze
 
