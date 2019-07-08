@@ -55,10 +55,8 @@ module Arstotzka
     #   #   compact:    false,
     #   #   default:    nil,
     #   #   flatten:    false,
-    #   #   full_path:  nil,
     #   #   json:       :json,
     #   #   klass:      Person,
-    #   #   path:       nil,
     #   #   type:       :none
     #   # }
     def options(options_hash = {})

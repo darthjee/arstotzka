@@ -5,8 +5,7 @@ module Arstotzka
   #
   # Class responsible to hold the options
   #
-  # Options is initialized and merged with {DEFAULT_OPTIONS}
-  # when using {ClassMethods#expose}
+  # Options is initialized when using {ClassMethods#expose}
   #
   # @example Using options klass and after
   #   class Customer
@@ -245,17 +244,10 @@ module Arstotzka
   #                      #   Linda Ariel
   #                      # ]
   class Options < ::OpenStruct
-    DEFAULT_OPTIONS = Arstotzka::Config::DEFAULT_CONFIGS.merge(
-      full_path:  nil,
-      path:       nil
-    )
-
     # Creates a new instance of Options
     #
     # @param options [Hash] options hash
-    #
-    #   Options hash are initialized and merged with {DEFAULT_OPTIONS}
-    #   when using {ClassMethods#expose}
+    #   Options hash are initialized when using {ClassMethods#expose}
     #
     # @option options [String,Symbol] after: {Fetcher} option with the name of the method to be
     #   called once the value is fetched for mapping the value
@@ -289,8 +281,7 @@ module Arstotzka
     #
     # @see Arstotzka::Options::DEFAULT_OPTIONS
     # @return [Arstotzka::Options]
-    def initialize(options_hash)
-      options = DEFAULT_OPTIONS.merge options_hash
+    def initialize(options)
       klass = options.delete(:class)
       warn ":class has been deprecated, prefer 'expose klass: #{klass}'" if klass
       options[:klass] ||= klass
