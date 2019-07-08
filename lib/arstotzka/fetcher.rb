@@ -107,7 +107,7 @@ module Arstotzka
     private
 
     # @private
-    delegate :cached, :key, :instance, :after, :flatten, to: :options
+    delegate :instance, :after, :flatten, to: :options
     delegate :wrap, to: :wrapper
     delegate :hash, to: :hash_reader
 
@@ -122,8 +122,7 @@ module Arstotzka
     def fetch_value
       value = crawler.value(hash)
       value.flatten! if flatten && value.is_a?(Array)
-      value = instance.send(after, value) if after
-      value
+      after ? instance.send(after, value) : value
     end
 
     # @private
@@ -147,7 +146,7 @@ module Arstotzka
     #
     # @return [Arstotzka::Wrapper] the wrapper
     def wrapper
-      @wrapper ||= Wrapper.new(options.merge(instance: instance))
+      @wrapper ||= Wrapper.new(options)
     end
 
     # @api private
