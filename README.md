@@ -109,7 +109,7 @@ Options
 - flatten: Indicator telling that to flattern the resulting array (false by default)
 - full_path: Full path to fetch the value (empty by default)
 - klass: Class to be used when wrapping the final value
-- json: Method that contains the hash to be parsed (json by default)
+- json: Method that contains the hash to be parsed (`:json` by default)
 - path: Path where to find the sub hash that contains the key (empty by default)
 - type: Type that the value must be cast into ([TypeCast](#typecast))
 
@@ -201,3 +201,42 @@ star_gazer.favorite_star.name # returns "Sun"
 star_gazer.favorite_star.class # returns Star
 ```
 
+Configuration
+-------------
+Arstotzka can be configured changing the default options
+
+```ruby
+class Restaurant
+  include Arstotzka
+
+  expose :dishes, path: 'restaurant.complete_meals'
+
+  def initialize(hash)
+    @hash = hash
+  end
+end
+
+hash = {
+  restaurant: {
+    complete_meals: {
+      dishes: %w[
+        Goulash
+        Spaghetti
+        Pizza
+      ]
+    }
+  }
+}
+
+restaurant = Restaurant.new(hash)
+restaurant.dishes # raises NoMethodError as json method is
+                  # is not defined in Restaurant
+
+Arstotzka.configure { json :@hash }
+
+restaurant.dishes # returns nil as default case is lower_camel
+
+Arstotzka.configure { |c| c.case :snake }
+
+restaurant.dishes # return %s[Goulash Spaghetti Pizza]
+```
