@@ -24,6 +24,8 @@ rules:
       - Arstotzka::Exception::FetcherBuilderNotFound#attribute
       - Arstotzka::Exception::FetcherBuilderNotFound#klass
       - Arstotzka::Fetcher#options
+      - Arstotzka::Fetcher::Cache#block
+      - Arstotzka::Fetcher::Cache#options
       - Arstotzka::FetcherBuilder#options
       - Arstotzka::KeyReader#base_key
       - Arstotzka::KeyReader#hash
@@ -42,6 +44,9 @@ rules:
       - Arstotzka::Exception::FetcherBuilderNotFound#attribute
       - Arstotzka::Exception::FetcherBuilderNotFound#klass
       - Arstotzka::Fetcher#options
+      - Arstotzka::Fetcher::Cache#block
+      - Arstotzka::Fetcher::Cache#options
+      - Arstotzka::Fetcher::Cache#initialize
       - Arstotzka::FetcherBuilder#options
       - Arstotzka::KeyReader#base_key
       - Arstotzka::KeyReader#hash

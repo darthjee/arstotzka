@@ -17,7 +17,7 @@ module Arstotzka
   #     end
   #   end
   #
-  #   options =  Arstotzka::Options.new(key: :id, path: :person)
+  #   options = { key: :id, path: :person }
   #   builder = Arstotzka::FetcherBuilder.new(options)
   #   instance = MyModel.new(
   #     person: {
@@ -29,17 +29,11 @@ module Arstotzka
   #
   #   fetcher.fetch  # returns 101
   class FetcherBuilder
-    include Base
-
     # Creates an instance of Artotzka::FetcherBuilder
     #
-    # @overload initialize(options_hash = {})
-    #   @param options_hash [Hash] options (see {Options})
-    #
-    # @overload initialize(options)
-    #   @param options [Arstotzka::Options] options
-    def initialize(options_hash = {})
-      self.options = options_hash
+    # @param options [Hash] options (see {Options})
+    def initialize(options = {})
+      @options = options
     end
 
     # Builds a fetcher responsible for fetchin a value
@@ -62,12 +56,12 @@ module Arstotzka
     #     end
     #   end
     #
-    #   options =  Arstotzka::Options.new(
+    #   options = {
     #     key:       :player_ids,
     #     full_path: 'teams.players.person_id',
     #     flatten:   true,
     #     case:      :snake
-    #   )
+    #   }
     #   builder = Arstotzka::FetcherBuilder.new(options)
     #   hash = {
     #     teams: [
@@ -142,9 +136,9 @@ module Arstotzka
     #
     #   instance = StarGazer.new(hash)
     #
-    #   options = Arstotzka::Options.new(
+    #   options = {
     #     key: :stars, klass: Star, after: :only_yellow
-    #   )
+    #   }
     #
     #   builder = Arstotzka::FetcherBuilder.new(options)
     #   fetcher = builder.build(instance)
@@ -156,7 +150,11 @@ module Arstotzka
     #
     # @return Arstotzka::Fetcher
     def build(instance)
-      Fetcher.new(options.merge(instance: instance))
+      fetcher_options = Arstotzka.config.options(
+        options.merge(instance: instance)
+      )
+
+      Fetcher.new(fetcher_options)
     end
 
     private

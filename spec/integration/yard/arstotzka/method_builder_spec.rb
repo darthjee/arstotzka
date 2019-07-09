@@ -7,7 +7,6 @@ describe Arstotzka::MethodBuilder do
     subject(:builder) { described_class.new(attributes, klass, options) }
 
     let!(:instance) { klass.new(hash) }
-    let(:options)   { Arstotzka::Options.new(options_hash) }
     let(:hash) do
       {
         'name' => { first: 'John', last: 'Williams' },
@@ -17,9 +16,9 @@ describe Arstotzka::MethodBuilder do
     end
 
     describe '#first_name' do
-      let(:klass)        { Class.new(MyModel) }
-      let(:attributes)   { [:first_name] }
-      let(:options_hash) { { full_path: 'name.first' } }
+      let(:klass)      { Class.new(MyModel) }
+      let(:attributes) { [:first_name] }
+      let(:options)    { { full_path: 'name.first' } }
 
       before do
         builder.build
@@ -31,9 +30,9 @@ describe Arstotzka::MethodBuilder do
     end
 
     describe '#age' do
-      let(:klass)        { Class.new(MyModel) }
-      let(:attributes)   { %i[age cars] }
-      let(:options_hash) { { type: :integer } }
+      let(:klass)      { Class.new(MyModel) }
+      let(:attributes) { %i[age cars] }
+      let(:options)    { { type: :integer } }
 
       before do
         builder.build
@@ -49,9 +48,9 @@ describe Arstotzka::MethodBuilder do
     end
 
     describe '#cars' do
-      let(:klass)        { Class.new(MyModel) }
-      let(:attributes)   { %i[age cars] }
-      let(:options_hash) { { type: :integer } }
+      let(:klass)      { Class.new(MyModel) }
+      let(:attributes) { %i[age cars] }
+      let(:options)    { { type: :integer } }
 
       before do
         builder.build

@@ -164,7 +164,10 @@ require 'sinclair'
 # @see Arstotzka::MethodBuilder
 # @see Arstotzka::ClassMethods
 module Arstotzka
+  require 'arstotzka/config'
+
   extend ActiveSupport::Concern
+  extend Sinclair::Configurable
 
   autoload :Base,           'arstotzka/base'
   autoload :ClassMethods,   'arstotzka/class_methods'
@@ -179,4 +182,6 @@ module Arstotzka
   autoload :Reader,         'arstotzka/reader'
   autoload :TypeCast,       'arstotzka/type_cast'
   autoload :Wrapper,        'arstotzka/wrapper'
+
+  configurable_by Arstotzka::Config
 end

@@ -7,7 +7,7 @@ describe Arstotzka::Fetcher do
     described_class.new options
   end
 
-  let(:options)  { Arstotzka::Options.new(options_hash.merge(instance: instance)) }
+  let(:options)  { Arstotzka.config.options(options_hash.merge(instance: instance)) }
   let(:instance) { Arstotzka::Fetcher::Dummy.new(json) }
   let(:json)     { load_json_fixture_file('arstotzka.json') }
   let(:value)    { fetcher.fetch }
@@ -174,6 +174,46 @@ describe Arstotzka::Fetcher do
 
       it 'fetches hash from given method' do
         expect(fetcher.fetch).to eq('John Doe')
+      end
+    end
+  end
+
+  describe 'cached option' do
+    let(:key) { 'id' }
+
+    context 'with cached true' do
+      let(:options_hash) { { key: key, cached: true } }
+
+      it 'retrieves attribute from cache' do
+        expect { json['id'] = Random.rand(1000) }
+          .not_to change(fetcher, :fetch)
+      end
+
+      context 'when initial value is nil' do
+        let(:json) { { id: nil } }
+
+        it 'does not cache nil values' do
+          expect { json['id'] = Random.rand(1000) }
+            .to change(fetcher, :fetch)
+        end
+      end
+    end
+
+    context 'with cached full' do
+      let(:options_hash) { { key: key, cached: :full } }
+
+      it 'retrieves attribute from cache' do
+        expect { json['id'] = Random.rand(1000) }
+          .not_to change(fetcher, :fetch)
+      end
+
+      context 'when initial value is nil' do
+        let(:json) { { id: nil } }
+
+        it 'caches nil values' do
+          expect { json['id'] = Random.rand(1000) }
+            .not_to change(fetcher, :fetch)
+        end
       end
     end
   end

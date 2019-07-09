@@ -8,15 +8,17 @@ module Arstotzka
   class Fetcher
     include Base
 
+    autoload :Cache, 'arstotzka/fetcher/cache'
+
     # Creates an instance of Artotzka::Fetcher
     #
     # @overload iniitalize(options_hash = {})
     #   @param options_hash [Hash] options for {Crawler}, {Wrapper},
-    #   {Reader} and {HashReader}
+    #   {Reader}, {Cache} and {HashReader}
     #
     # @overload iniitalize(options)
     #   @param options [Arstotzka::Options] options for {Crawler}, {Wrapper},
-    #   {Reader} and {HashReader}
+    #   {Reader}, {Cache} and {HashReader}
     def initialize(options_hash = {})
       self.options = options_hash
     end
@@ -82,10 +84,9 @@ module Arstotzka
     #                 #   Transaction.new(value: 50.23, type: 'income')
     #                 # ]
     def fetch
-      value = crawler.value(hash)
-      value.flatten! if flatten && value.is_a?(Array)
-      value = instance.send(after, value) if after
-      value
+      Cache.new(options) do
+        fetch_value
+      end.fetch
     end
 
     # Checks if other equals self
@@ -112,6 +113,20 @@ module Arstotzka
 
     # @private
     #
+    # fetch value from Hash
+    #
+    # Value is fetched trhough the usage of {Crawler},
+    # and wrapped with {Wrapper}
+    #
+    # @return [Object]
+    def fetch_value
+      value = crawler.value(hash)
+      value.flatten! if flatten && value.is_a?(Array)
+      after ? instance.send(after, value) : value
+    end
+
+    # @private
+    #
     # Returns an instance of Aristotzka::Craler
     #
     # craler will be responsible to crawl the hash for
@@ -131,7 +146,7 @@ module Arstotzka
     #
     # @return [Arstotzka::Wrapper] the wrapper
     def wrapper
-      @wrapper ||= Wrapper.new(options.merge(instance: instance))
+      @wrapper ||= Wrapper.new(options)
     end
 
     # @api private

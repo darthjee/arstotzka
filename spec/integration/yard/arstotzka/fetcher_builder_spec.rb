@@ -7,12 +7,11 @@ describe Arstotzka::FetcherBuilder do
     describe '#build' do
       subject(:builder) { described_class.new(options) }
 
-      let(:options)  { Arstotzka::Options.new(options_hash) }
       let(:fetcher)  { builder.build(instance) }
       let(:instance) { MyModel.new(hash) }
 
-      context 'with sample usage' do
-        let(:options_hash) { { key: :id, path: :person } }
+      describe 'Building a simple fetcher' do
+        let(:options) { { key: :id, path: :person } }
 
         let(:hash) do
           {
@@ -27,8 +26,8 @@ describe Arstotzka::FetcherBuilder do
         end
       end
 
-      context 'with passing full path' do
-        let(:options_hash) do
+      describe 'Builder a fetcher using full path' do
+        let(:options) do
           {
             key:       :player_ids,
             full_path: 'teams.players.person_id',
@@ -62,7 +61,7 @@ describe Arstotzka::FetcherBuilder do
         end
       end
 
-      context 'when filtering the result' do
+      describe 'Post processing results' do
         let(:instance) { StarGazer.new(hash) }
         let(:hash) do
           {
@@ -75,15 +74,16 @@ describe Arstotzka::FetcherBuilder do
             ]
           }
         end
-        let(:options_hash) do
+        let(:options) do
           { key: :stars, klass: Star, after: :only_yellow }
         end
 
         it 'builds a fetcher capable of fetching and filtering value' do
-          expect(fetcher.fetch).to eq([
-                                        Star.new(name: 'Sun', color: 'yellow'),
-                                        Star.new(name: 'HB0124-C', color: 'yellow')
-                                      ])
+          expect(fetcher.fetch)
+            .to eq([
+                     Star.new(name: 'Sun', color: 'yellow'),
+                     Star.new(name: 'HB0124-C', color: 'yellow')
+                   ])
         end
       end
     end
