@@ -11,7 +11,7 @@ module Arstotzka
   #
   # @example (see #options)
   class Config < Sinclair::Config
-    DEFAULT_OPTIONS = {
+    DEFAULT_CONFIGS = {
       after:      false,
       after_each: nil,
       cached:     false,
@@ -19,14 +19,12 @@ module Arstotzka
       compact:    false,
       default:    nil,
       flatten:    false,
-      full_path:  nil,
       json:       :json,
       klass:      nil,
-      path:       nil,
       type:       :none
     }.freeze
 
-    add_configs DEFAULT_OPTIONS
+    add_configs DEFAULT_CONFIGS
 
     # @api private
     #
@@ -57,10 +55,8 @@ module Arstotzka
     #   #   compact:    false,
     #   #   default:    nil,
     #   #   flatten:    false,
-    #   #   full_path:  nil,
     #   #   json:       :json,
     #   #   klass:      Person,
-    #   #   path:       nil,
     #   #   type:       :none
     #   # }
     def options(options_hash = {})

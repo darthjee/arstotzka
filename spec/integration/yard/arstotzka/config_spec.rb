@@ -18,10 +18,8 @@ describe Arstotzka::Config do
           compact:    false,
           default:    nil,
           flatten:    false,
-          full_path:  nil,
           json:       :json,
           klass:      Person,
-          path:       nil,
           type:       :none
         }
       end
