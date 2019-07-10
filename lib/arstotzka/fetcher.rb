@@ -107,7 +107,7 @@ module Arstotzka
     private
 
     # @private
-    delegate :instance, :after, :flatten, to: :options
+    delegate :instance, to: :options
     delegate :wrap, to: :wrapper
     delegate :hash, to: :hash_reader
 
@@ -120,9 +120,11 @@ module Arstotzka
     #
     # @return [Object]
     def fetch_value
-      value = crawler.value(hash)
-      value.flatten! if flatten && value.is_a?(Array)
-      after ? instance.send(after, value) : value
+      post_processor.process crawler.value(hash)
+    end
+
+    def post_processor
+      @post_processor ||= PostProcessor.new(options)
     end
 
     # @private

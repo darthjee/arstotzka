@@ -179,6 +179,7 @@ module Arstotzka
   autoload :HashReader,     'arstotzka/hash_reader'
   autoload :MethodBuilder,  'arstotzka/method_builder'
   autoload :Options,        'arstotzka/options'
+  autoload :PostProcessor,  'arstotzka/post_processor'
   autoload :Reader,         'arstotzka/reader'
   autoload :TypeCast,       'arstotzka/type_cast'
   autoload :Wrapper,        'arstotzka/wrapper'
