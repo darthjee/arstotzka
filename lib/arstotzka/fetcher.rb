@@ -96,8 +96,7 @@ module Arstotzka
     # @return [TrueClass,FalseClass]
     def ==(other)
       return false unless other.class == self.class
-      options == other.options &&
-        instance == other.instance
+      options == other.options
     end
 
     protected
@@ -107,7 +106,6 @@ module Arstotzka
     private
 
     # @private
-    delegate :instance, to: :options
     delegate :wrap, to: :wrapper
     delegate :hash, to: :hash_reader
 
