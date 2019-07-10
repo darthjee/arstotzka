@@ -69,20 +69,6 @@ module Arstotzka
     #
     # Expose a field from the json/hash as a method
     #
-    # @param attr_name [Array<String,Symbol>] attributes being exposed
-    # @param options_hash [Hash] exposing options
-    # @option options_hash case [Symbol] case type of the keys (used by {Crawler})
-    #   - snake: snake_cased keys
-    #   - lower_camel: lowerCamelCased keys
-    #   - upper_camel: UperCamelCased keys
-    # @option options compact [Boolean] flag signallying if nil values should be removed of array
-    #   (used by {Crawler})
-    # @option options default [Object] default value to be returned when failing to fetch a value
-    #   (used by {Crawler})
-    # @option options_hash klass [Class] class to wrap the value (used by {Wrapper})
-    # @option options_hash type [String,Symbol] type to cast the value. The
-    #   possible type_cast is defined by {TypeCast} (used by {Wrapper})
-    #
     # @example
     #   class MyModel
     #     include Arstotzka

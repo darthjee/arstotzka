@@ -7,6 +7,17 @@ module Arstotzka
   class HashReader
     include Base
 
+    # Returns a new instance of HashReader
+    #
+    # @overload iniitalize(options_hash = {})
+    #   @param options_hash [Hash]
+    #
+    # @overload iniitalize(options)
+    #   @param options [Arstotzka::Options]
+    def initialize(options_hash = {})
+      self.options = options_hash
+    end
+
     # Retrieves the hash to be crawled from the instance
     #
     # @return [Hash]

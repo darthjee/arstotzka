@@ -4,6 +4,10 @@ module Arstotzka
   class PostProcessor
     include Base
 
+    def initialize(options_hash = {})
+      self.options = options_hash
+    end
+
     def process(value)
       value.flatten! if flatten && value.is_a?(Array)
 

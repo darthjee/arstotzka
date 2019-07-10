@@ -7,17 +7,11 @@ module Arstotzka
   class KeyReader
     include Base
 
+    # Creates a new instance of Reader
+    #
     # @param [Hash] hash Hash where the key will be found
     # @param [String] base_key The key to be checked
     #   (before case change)
-    #
-    # @overload iniitalize(hash, base_key, options_hash = {})
-    #   @param options_hash [Hash] global options shared
-    #   among all {Arstotzka}::Objects
-    #
-    # @overload iniitalize(hash, base_key, options)
-    #   @param options [Arstotzka::Options] global options
-    #   shared among all {Arstotzka}::Objects
     def initialize(hash, base_key, options_hash = {})
       self.options = options_hash
 

@@ -10,6 +10,19 @@ module Arstotzka
 
     autoload :Cache, 'arstotzka/fetcher/cache'
 
+    # Creates an instance of Artotzka::Fetcher
+    #
+    # @overload iniitalize(options_hash = {})
+    #   @param options_hash [Hash] options for {Crawler}, {Wrapper},
+    #   {Reader}, {Cache} and {HashReader}
+    #
+    # @overload iniitalize(options)
+    #   @param options [Arstotzka::Options] options for {Crawler}, {Wrapper},
+    #   {Reader}, {Cache} and {HashReader}
+    def initialize(options_hash = {})
+      self.options = options_hash
+    end
+
     # Crawls the hash for the value
     #
     # After the crawling, final transformation is applied on

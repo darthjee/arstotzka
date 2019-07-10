@@ -21,7 +21,7 @@ module Arstotzka
     #
     # @return [Arstotzka::Reader]
     def initialize(options_hash = {})
-      super(options_hash)
+      self.options = options_hash
 
       @keys = options.keys
     end
