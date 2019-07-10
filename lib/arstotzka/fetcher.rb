@@ -134,10 +134,9 @@ module Arstotzka
     #
     # @return [Arstotzka::Crawler] the crawler object
     def crawler
-      @crawler ||=
-        Crawler.new(options) do |value|
-          wrap(value)
-        end
+      @crawler ||= Crawler.new(options) do |value|
+        wrap(value)
+      end
     end
 
     # @private
