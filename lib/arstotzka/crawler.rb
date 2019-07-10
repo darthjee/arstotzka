@@ -18,8 +18,6 @@ module Arstotzka
   class Crawler
     include Base
 
-    # Creates a new instance of Crawler
-    #
     # @param block [Proc] block to be ran over the fetched value before returning it
     #
     # @overload initialize(options_hash={}, &block)
@@ -35,7 +33,7 @@ module Arstotzka
     # @overload initialize(options, &block)
     #   @param options [Arstotzka::Options] options of initialization object
     def initialize(options = {}, &block)
-      self.options = options
+      super(options)
       @block = block
     end
 

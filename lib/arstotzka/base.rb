@@ -5,6 +5,17 @@ module Arstotzka
   #
   # Common code to be used by classes
   module Base
+    # @overload iniitalize(options_hash = {})
+    #   @param options_hash [Hash] global options shared
+    #   among all {Arstotzka}::Objects
+    #
+    # @overload iniitalize(options)
+    #   @param options [Arstotzka::Options] global options
+    #   shared among all {Arstotzka}::Objects
+    def initialize(options)
+      self.options = options
+    end
+
     private
 
     # Sets the @options object
