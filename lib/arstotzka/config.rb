@@ -7,10 +7,11 @@ module Arstotzka
   #
   # Configuration is
   #
-  # @see https://www.rubydoc.info/gems/sinclair/1.4.0/Sinclair/Config Sinclair::Config
+  # @see https://www.rubydoc.info/gems/sinclair/1.4.1/Sinclair/Config Sinclair::Config
   #
   # @example (see #options)
   class Config < Sinclair::Config
+    # Default values for {ClassMethods#expose}
     DEFAULT_CONFIGS = {
       after:      false,
       after_each: nil,

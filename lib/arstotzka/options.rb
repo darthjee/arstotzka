@@ -251,8 +251,9 @@ module Arstotzka
     #
     # @option (see ClassMethods#expose)
     #
-    # @see Arstotzka::Options::DEFAULT_OPTIONS
     # @return [Arstotzka::Options]
+    #
+    # @see Config
     def initialize(options_hash)
       klass = options_hash.delete(:class)
       warn ":class has been deprecated, prefer 'expose klass: #{klass}'" if klass

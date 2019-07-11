@@ -152,6 +152,7 @@ module Arstotzka
     #
     # @return [Array<Sinclair::MethodDefinition>]
     #
+    # @see Config
     # @see MethodBuilder Arstotzka::MethodBuilder
     # @see
     #   https://www.rubydoc.info/gems/activesupport/5.2.2/ActiveSupport/Concern
