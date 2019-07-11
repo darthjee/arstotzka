@@ -5,9 +5,12 @@ module Arstotzka
   #
   # Arstotzka configuration
   #
-  # Configuration is
+  # Configuration of Arstotzka is done through
+  # +Arstotzka.configure+ which configures using
+  # {Arstotzka::Config} by +Sinclar::Configurable+
   #
-  # @see https://www.rubydoc.info/gems/sinclair/1.4.1/Sinclair/Config Sinclair::Config
+  # @see https://www.rubydoc.info/gems/sinclair/1.4.1/Sinclair/Config
+  #   Sinclair::Config
   #
   # @example (see #options)
   class Config < Sinclair::Config
