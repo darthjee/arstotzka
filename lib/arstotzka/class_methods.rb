@@ -104,8 +104,9 @@ module Arstotzka
     # @option options_hash default [Object] default value to be returned when failing
     #   to fetch a value (used by {Crawler})
     #
-    # @option options_hash flatten [Boolean] flag signallying if nil values should be
-    #   removed of array (applying +Array#flatten+) (used by {PostProcessor})
+    # @option options_hash flatten [Boolean] flag signallying if multi levels
+    #   arrays should be flattened to one level array (applying +Array#flatten+)
+    #   (used by {PostProcessor})
     #
     # @option options_hash full_path [String] full path of keys to be used in when
     #   not wanting to have the attribute defined as key. (eg. +'person.name'+)
