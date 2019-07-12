@@ -5,12 +5,48 @@ module Arstotzka
   #
   # Arstotzka configuration
   #
-  # Configuration is
+  # Configuration of Arstotzka is done through
+  # +Arstotzka.configure+ which configures using
+  # {Arstotzka::Config} by +Sinclar::Configurable+
   #
-  # @see https://www.rubydoc.info/gems/sinclair/1.4.0/Sinclair/Config Sinclair::Config
+  # @see https://www.rubydoc.info/gems/sinclair/1.4.1/Sinclair/Config
+  #   Sinclair::Config
+  #
+  # @example Redefining json method and case type
+  #   class Office
+  #     include Arstotzka
+  #
+  #     expose :employes, full_path: 'employes.first_name',
+  #                       compact: true
+  #
+  #     def initialize(hash)
+  #       @hash = hash
+  #     end
+  #   end
+  #
+  #   hash = {
+  #     employes: [{
+  #       first_name: 'Rob'
+  #     }, {
+  #       first_name: 'Klara'
+  #     }]
+  #   }
+  #
+  #   office = Office.new(hash)
+  #
+  #   office.employes # raises NoMethodError as json is not a method
+  #
+  #   Arstotzka.configure { json :@hash }
+  #
+  #   office.employes # returns []
+  #
+  #   Arstotzka.configure { |c| c.case :snake }
+  #
+  #   office.employes # returns %w[Rob Klara]
   #
   # @example (see #options)
   class Config < Sinclair::Config
+    # Default values for {ClassMethods#expose}
     DEFAULT_CONFIGS = {
       after:      false,
       after_each: nil,

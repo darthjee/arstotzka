@@ -22,8 +22,6 @@ module Arstotzka
     # @return [Arstotzka::Reader]
     def initialize(options_hash = {})
       self.options = options_hash
-
-      @keys = options.keys
     end
 
     # Reads the value of one key in the hash
@@ -81,6 +79,7 @@ module Arstotzka
     private
 
     # @private
-    attr_reader :keys, :options
+    attr_reader :options
+    delegate :keys, to: :options
   end
 end

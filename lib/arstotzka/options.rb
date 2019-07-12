@@ -246,47 +246,26 @@ module Arstotzka
   class Options < ::OpenStruct
     # Creates a new instance of Options
     #
-    # @param options [Hash] options hash
+    # @param options_hash [Hash] options hash
     #   Options hash are initialized when using {ClassMethods#expose}
     #
-    # @option options [String,Symbol] after: {Fetcher} option with the name of the method to be
-    #   called once the value is fetched for mapping the value
+    # @option (see ClassMethods#expose)
     #
-    # @option options [String,Symbol] after_each: {Wrapper} option with method that will be called
-    #   on each individual result (while after is called on the whole collection)
-    # @option options [Boolean] cached: flag if the result should be memorized instead of repeating
-    #   the crawling
-    # @option options [String,Symbol] case: {Reader} flag definining on which case will
-    #   the keys be defined
-    #   - lower_camel: keys in the hash are lowerCamelCase
-    #   - upper_camel: keys in the hash are UpperCamelCase
-    #   - snake: keys in the hash are snake_case
-    # @option options [Boolean] compact: {Crawler} flag to apply Array#compact thus
-    #   removing nil results
-    # @option options [Boolean] default: {Crawler} option to return default value instead of nil
-    # @option options [Boolean] flatten: {Fetcher} flag to aplly Array#flatten thus
-    #   avoing nested arrays
-    # @option options [String,Symbol] full_path: path of hash attributes to find exacttly where the
-    #   value live (ignoring the attribute name)
-    # @option options [Class] klass: {Fetcher} option that, when passed, wraps the individual
-    #   results in an instance of the given class
-    # @option options [String,Symbol] json: name of the method containing the hash to be crawled
-    # @option options [String,Symbol] path path of hash attributes to find the root
-    #   where the attribute live (then fetching it using the attribute name)
-    # @option options [String,Symbol] type:  {Fetcher} option declaring the type of the returned
-    #   value (to use casting) (see {TypeCast})
-    #   - integer
-    #   - string
-    #   - float
+    # @option options_hash instance [Object] instance whose method
+    #   was called
     #
-    # @see Arstotzka::Options::DEFAULT_OPTIONS
+    # @option options_hash key [Symbol,String] name of method called.
+    #   This will be used as instance variable when caching results
+    #
     # @return [Arstotzka::Options]
-    def initialize(options)
-      klass = options.delete(:class)
+    #
+    # @see Config
+    def initialize(options_hash)
+      klass = options_hash.delete(:class)
       warn ":class has been deprecated, prefer 'expose klass: #{klass}'" if klass
-      options[:klass] ||= klass
+      options_hash[:klass] ||= klass
 
-      super(options)
+      super(options_hash)
     end
 
     # @private

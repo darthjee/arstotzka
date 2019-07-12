@@ -48,6 +48,7 @@ module Arstotzka
     private
 
     attr_reader :hash, :base_key, :options
+    delegate :key, to: :key_changer
 
     # @private
     #
@@ -66,23 +67,11 @@ module Arstotzka
 
     # @private
     #
-    # Transforms the key to have the correct case
+    # Returns key changer for getting the correct key
     #
-    # the possible cases (instance attribute) are
-    # - lower_camel: for cammel case with first letter lowercase
-    # - upper_camel: for cammel case with first letter uppercase
-    # - snake: for snake case
-    #
-    # @return [String] the string transformed
-    def key
-      @key ||= case options.case
-               when :lower_camel
-                 base_key.camelize(:lower)
-               when :upper_camel
-                 base_key.camelize(:upper)
-               when :snake
-                 base_key.underscore
-               end
+    # @return [KeyChanger]
+    def key_changer
+      @key_changer ||= KeyChanger.new(base_key, options)
     end
   end
 end

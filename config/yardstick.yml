@@ -27,6 +27,8 @@ rules:
       - Arstotzka::Fetcher::Cache#block
       - Arstotzka::Fetcher::Cache#options
       - Arstotzka::FetcherBuilder#options
+      - Arstotzka::KeyChanger#base_key
+      - Arstotzka::KeyChanger#options
       - Arstotzka::KeyReader#base_key
       - Arstotzka::KeyReader#hash
       - Arstotzka::KeyReader#options
@@ -35,6 +37,7 @@ rules:
       - Arstotzka::MethodBuilder#options
       - Arstotzka::Reader#keys
       - Arstotzka::Reader#options
+      - Arstotzka::PostProcessor#options
       - Arstotzka::Wrapper#options
   Summary::Presence:
     enabled: true
@@ -48,6 +51,9 @@ rules:
       - Arstotzka::Fetcher::Cache#options
       - Arstotzka::Fetcher::Cache#initialize
       - Arstotzka::FetcherBuilder#options
+      - Arstotzka::KeyChanger#initialize
+      - Arstotzka::KeyChanger#base_key
+      - Arstotzka::KeyChanger#options
       - Arstotzka::KeyReader#base_key
       - Arstotzka::KeyReader#hash
       - Arstotzka::KeyReader#options
@@ -56,6 +62,8 @@ rules:
       - Arstotzka::MethodBuilder#options
       - Arstotzka::Reader#keys
       - Arstotzka::Reader#options
+      - Arstotzka::PostProcessor#initialize
+      - Arstotzka::PostProcessor#options
       - Arstotzka::Wrapper#options
   Summary::Length:
     enabled: true

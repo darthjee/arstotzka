@@ -96,8 +96,7 @@ module Arstotzka
     # @return [TrueClass,FalseClass]
     def ==(other)
       return false unless other.class == self.class
-      options == other.options &&
-        instance == other.instance
+      options == other.options
     end
 
     protected
@@ -107,7 +106,6 @@ module Arstotzka
     private
 
     # @private
-    delegate :instance, :after, :flatten, to: :options
     delegate :wrap, to: :wrapper
     delegate :hash, to: :hash_reader
 
@@ -120,9 +118,16 @@ module Arstotzka
     #
     # @return [Object]
     def fetch_value
-      value = crawler.value(hash)
-      value.flatten! if flatten && value.is_a?(Array)
-      after ? instance.send(after, value) : value
+      post_processor.process crawler.value(hash)
+    end
+
+    # @private
+    #
+    # post processor for wrapping and filtering collection before return
+    #
+    # @return [PostProcessor]
+    def post_processor
+      @post_processor ||= PostProcessor.new(options)
     end
 
     # @private
@@ -134,10 +139,9 @@ module Arstotzka
     #
     # @return [Arstotzka::Crawler] the crawler object
     def crawler
-      @crawler ||=
-        Crawler.new(options) do |value|
-          wrap(value)
-        end
+      @crawler ||= Crawler.new(options) do |value|
+        wrap(value)
+      end
     end
 
     # @private
