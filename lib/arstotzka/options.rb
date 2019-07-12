@@ -251,6 +251,12 @@ module Arstotzka
     #
     # @option (see ClassMethods#expose)
     #
+    # @option options_hash instance [Object] instance whose method
+    #   was called
+    #
+    # @option options_hash key [Symbol,String] name of method called.
+    #   This will be used as instance variable when caching results
+    #
     # @return [Arstotzka::Options]
     #
     # @see Config
