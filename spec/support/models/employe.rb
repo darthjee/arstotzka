@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class Employe
-  attr :name, :age, :company
+  attr_reader :name, :age, :company
 
   def initialize(name:, age:, company:)
     @name    = name

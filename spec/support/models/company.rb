@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Company
   def create_employes(people)
     people.map do |person|
