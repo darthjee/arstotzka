@@ -42,7 +42,7 @@ describe Arstotzka::PostProcessor do
 
       let(:expected) do
         [
-          Employe.new(name: 'Bob', age: 21, company: company),
+          Employe.new(name: 'Bob',   age: 21, company: company),
           Employe.new(name: 'Klara', age: 18, company: company)
         ]
       end

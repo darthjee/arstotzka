@@ -121,6 +121,11 @@ module Arstotzka
       post_processor.process crawler.value(hash)
     end
 
+    # @private
+    #
+    # post processor for wrapping and filtering collection before return
+    #
+    # @return [PostProcessor]
     def post_processor
       @post_processor ||= PostProcessor.new(options)
     end

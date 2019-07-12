@@ -19,6 +19,10 @@ module Arstotzka
     #     - +:upper_camel+ : UperCamelCased keys
     # @overload initialize(base_key, options)
     #   @param options [Option] options passed on expose
+    #
+    # @example
+    #   changer = Arstotzka::KeyChanger.new('the_key', case: :upper_camel)
+    #   changer.key # returns 'TheKey'
     def initialize(base_key, options_hash = {})
       self.options = options_hash
       @base_key = base_key

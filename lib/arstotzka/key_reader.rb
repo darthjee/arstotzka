@@ -65,6 +65,11 @@ module Arstotzka
       hash.key?(key) || hash.key?(key.to_sym)
     end
 
+    # @private
+    #
+    # Returns key changer for getting the correct key
+    #
+    # @return [KeyChanger]
     def key_changer
       @key_changer ||= KeyChanger.new(base_key, options)
     end

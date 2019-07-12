@@ -7,6 +7,64 @@ module Arstotzka
   #
   # PostProcessor proccess the whole collection and not
   # individual results
+  #
+  # @example Simple Usage
+  #   class Employe
+  #     attr_reader :name, :age, :company
+  #
+  #     def initialize(name:, age:, company:)
+  #       @name    = name
+  #       @age     = age
+  #       @company = company
+  #     end
+  #
+  #     def adult?
+  #       age >= 18
+  #     end
+  #
+  #     def ==(other)
+  #       return unless other.class == self.class
+  #       other.name == name &&
+  #         other.age == age &&
+  #         other.company == company
+  #     end
+  #   end
+  #
+  #   class Company
+  #     def create_employes(people)
+  #       people.map do |person|
+  #         Employe.new(company: self, **person)
+  #       end.select(&:adult?)
+  #     end
+  #   end
+  #
+  #   company = Company.new
+  #
+  #   options = {
+  #     after: :create_employes,
+  #     flatten: true,
+  #     instance: company
+  #   }
+  #
+  #   processor = Arstotzka::PostProcessor.new(options)
+  #
+  #   value = [
+  #     [
+  #       { name: 'Bob',   age: 21 },
+  #       { name: 'Rose',  age: 19 }
+  #     ], [
+  #       { name: 'Klara', age: 18 },
+  #       { name: 'Al',    age: 15 }
+  #     ]
+  #   ]
+  #
+  #   processor.process(value)
+  #
+  #   # returns [
+  #   #   Employe.new(name: 'Bob',   age: 21, company: company),
+  #   #   Employe.new(name: 'Rose',  age: 19, company: company),
+  #   #   Employe.new(name: 'Klara', age: 18, company: company)
+  #   # ]
   class PostProcessor
     include Base
 
@@ -19,8 +77,7 @@ module Arstotzka
     #   @option options_hash flatten [Boolean] flag signallying if multi levels
     #     arrays should be flattened to one level array (applying +Array#flatten+)
     # @overload initialize(options)
-    #   @param options [Hash] options passed by
-    #     {ClassMethods#expose}
+    #   @param options [Hash] options passed by {ClassMethods#expose}
     def initialize(options_hash = {})
       self.options = options_hash
     end
