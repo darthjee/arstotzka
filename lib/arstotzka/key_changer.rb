@@ -1,16 +1,29 @@
 # frozen_string_literal: true
 
 module Arstotzka
+  # @api private
+  #
+  # Class responsible for changing a key
   class KeyChanger
     include Base
 
+    # @param [String] base_key The key to be checked
+    #   (before case change)
+    #
+    # @overload initialize(base_key, options_hash)
+    #   @param options_hash [Hash] options passed on expose
+    #   @option options_hash case [Symbol] case type for key
+    #     transformation
+    #     - +:snake+ : snake_cased keys
+    #     - +:lower_camel+ : lowerCamelCased keys
+    #     - +:upper_camel+ : UperCamelCased keys
+    # @overload initialize(base_key, options)
+    #   @param options [Option] options passed on expose
     def initialize(base_key, options_hash = {})
       self.options = options_hash
       @base_key = base_key
     end
 
-    # @private
-    #
     # Transforms the key to have the correct case
     #
     # the possible cases (instance attribute) are

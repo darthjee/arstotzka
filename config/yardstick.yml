@@ -27,6 +27,8 @@ rules:
       - Arstotzka::Fetcher::Cache#block
       - Arstotzka::Fetcher::Cache#options
       - Arstotzka::FetcherBuilder#options
+      - Arstotzka::KeyChanger#base_key
+      - Arstotzka::KeyChanger#options
       - Arstotzka::KeyReader#base_key
       - Arstotzka::KeyReader#hash
       - Arstotzka::KeyReader#options
@@ -48,6 +50,9 @@ rules:
       - Arstotzka::Fetcher::Cache#options
       - Arstotzka::Fetcher::Cache#initialize
       - Arstotzka::FetcherBuilder#options
+      - Arstotzka::KeyChanger#initialize
+      - Arstotzka::KeyChanger#base_key
+      - Arstotzka::KeyChanger#options
       - Arstotzka::KeyReader#base_key
       - Arstotzka::KeyReader#hash
       - Arstotzka::KeyReader#options

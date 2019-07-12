@@ -93,7 +93,7 @@ module Arstotzka
     #   - +:full+ : cache even nil values
     #
     # @option options_hash case [Symbol] case type of the keys in the hash
-    #   (used by {Reader})
+    #   (used by {KeyChanger})
     #   - +:snake+ : snake_cased keys
     #   - +:lower_camel+ : lowerCamelCased keys
     #   - +:upper_camel+ : UperCamelCased keys
