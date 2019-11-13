@@ -24,3 +24,9 @@ Style/ClassVars:
 
 Layout/AlignHash:
   EnforcedColonStyle: table
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*_spec.rb'
+    - 'spec/support/**/*.rb'
+    - '*.gemspec'
