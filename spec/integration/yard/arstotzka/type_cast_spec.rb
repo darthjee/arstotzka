@@ -7,7 +7,8 @@ describe Arstotzka::TypeCast do
     {
       age: '10',
       payload: { 'key' => 'value' },
-      price: '1.75'
+      price: '1.75',
+      type: 'type_a'
     }
   end
 
@@ -27,6 +28,12 @@ describe Arstotzka::TypeCast do
     describe 'float' do
       it 'converts value to string' do
         expect(model.price).to eq(1.75)
+      end
+    end
+
+    describe 'symbol' do
+      it 'converts value to string' do
+        expect(model.type).to eq(:type_a)
       end
     end
 

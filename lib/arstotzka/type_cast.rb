@@ -14,12 +14,15 @@ module Arstotzka
   # - integer
   # - string
   # - float
+  # - symbol
   #
   # @example (see #to_integer)
   #
   # @example (see #to_string)
   #
   # @example (see #to_float)
+  #
+  # @example (see #to_symbol)
   #
   # @example Extending typecast
   #   class Car
@@ -87,10 +90,10 @@ module Arstotzka
     #
     #   TypeCaster.new(age: '10').age
     def to_integer(value)
-      value.to_i if value.present?
+      value.to_s.to_i if value.present?
     end
 
-    # converts value to string
+    # Converts value to string
     #
     # @return [String]
     #
@@ -116,7 +119,7 @@ module Arstotzka
       value.to_s
     end
 
-    # converts value to float
+    # Converts value to float
     #
     # @return [Float]
     #
@@ -124,7 +127,7 @@ module Arstotzka
     #   class TypeCaster
     #     include Arstotzka
     #
-    #     expose :price,   type: :float, json: :@hash
+    #     expose :price, type: :float, json: :@hash
     #
     #     def initialize(hash)
     #       @hash = hash
@@ -137,7 +140,31 @@ module Arstotzka
     #
     #   TypeCaster.new(price: '1.75').price # returns 1.75
     def to_float(value)
-      value.to_f if value.present?
+      value.to_s.to_f if value.present?
+    end
+
+    # Converts value to Symbol
+    #
+    # @return [Symbol]
+    #
+    # @example Casting to Symbol
+    #   class TypeCaster
+    #     include Arstotzka
+    #
+    #     expose :type, type: :symbol, json: :@hash
+    #
+    #     def initialize(hash)
+    #       @hash = hash
+    #     end
+    #   end
+    #
+    #   hash = {
+    #     type: 'type_a'
+    #   }
+    #
+    #   TypeCaster.new(type: 'type_a').type # returns :type_a
+    def to_symbol(value)
+      value.to_s.to_sym if value.present?
     end
   end
 end

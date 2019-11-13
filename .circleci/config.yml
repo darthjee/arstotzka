@@ -2,7 +2,9 @@ version: 2
 jobs:
   build:
     docker:
-      - image: darthjee/circleci_ruby_gems:0.1.0
+      - image: darthjee/circleci_ruby_gems:0.2.3
+        environment:
+          PROJECT: arstotzka
     steps:
       - checkout
       - run:
@@ -25,7 +27,10 @@ jobs:
           command: bundle exec rake verify_measurements
       - run:
           name: Check version documentation
-          command: scripts/check_readme.sh
+          command: check_readme.sh
       - run:
           name: Rubycritcs check
-          command: scripts/rubycritic.sh
+          command: rubycritic.sh
+      - run:
+          name: Check unit tests
+          command: check_specs

@@ -1,0 +1,6 @@
+ignore:
+  - lib/arstotzka/class_methods.rb
+  - lib/arstotzka/version.rb
+  - lib/arstotzka/base.rb
+  - lib/arstotzka/type_cast.rb
+  - lib/arstotzka/exception.rb
