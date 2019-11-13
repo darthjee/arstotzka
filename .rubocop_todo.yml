@@ -48,9 +48,3 @@ Metrics/BlockLength:
 # Offense count: 78
 RSpec/NestedGroups:
   Max: 5
-
-# Offense count: 1
-# Cop supports --auto-correct.
-Style/MultilineWhenThen:
-  Exclude:
-    - 'lib/arstotzka/hash_reader.rb'
