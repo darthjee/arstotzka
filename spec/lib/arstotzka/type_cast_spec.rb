@@ -20,6 +20,8 @@ describe Arstotzka::TypeCast do
       it 'returns the value' do
         expect(caster.to_integer(value)).to eq(value)
       end
+
+      it { expect(caster.to_integer(value)).to be_a(Integer) }
     end
 
     context 'when value is a string' do
@@ -28,6 +30,8 @@ describe Arstotzka::TypeCast do
       it 'returns integer' do
         expect(caster.to_integer(value)).to eq(10)
       end
+
+      it { expect(caster.to_integer(value)).to be_a(Integer) }
     end
 
     context 'when value is an empty string' do
@@ -40,6 +44,8 @@ describe Arstotzka::TypeCast do
       let(:value) { 'abc' }
 
       it { expect(caster.to_integer(value)).to eq(0) }
+
+      it { expect(caster.to_integer(value)).to be_a(Integer) }
     end
 
     context 'when value is a symbol' do
@@ -48,6 +54,8 @@ describe Arstotzka::TypeCast do
       it 'returns integer' do
         expect(caster.to_integer(value)).to eq(10)
       end
+
+      it { expect(caster.to_integer(value)).to be_a(Integer) }
     end
 
     context 'when value is a float' do
@@ -56,6 +64,8 @@ describe Arstotzka::TypeCast do
       it 'returns integer rounded down' do
         expect(caster.to_integer(value)).to eq(10)
       end
+
+      it { expect(caster.to_integer(value)).to be_a(Integer) }
     end
   end
 
@@ -112,6 +122,8 @@ describe Arstotzka::TypeCast do
       it 'returns float' do
         expect(caster.to_float(value)).to eq(value)
       end
+
+      it { expect(caster.to_float(value)).to be_a(Float) }
     end
 
     context 'when value is a string' do
@@ -120,6 +132,8 @@ describe Arstotzka::TypeCast do
       it 'returns float' do
         expect(caster.to_float(value)).to eq(10.0)
       end
+
+      it { expect(caster.to_float(value)).to be_a(Float) }
     end
 
     context 'when value is an empty string' do
@@ -132,6 +146,7 @@ describe Arstotzka::TypeCast do
       let(:value) { 'abc' }
 
       it { expect(caster.to_float(value)).to eq(0) }
+      it { expect(caster.to_float(value)).to be_a(Float) }
     end
 
     context 'when value is a symbol' do
@@ -140,6 +155,8 @@ describe Arstotzka::TypeCast do
       it 'returns float' do
         expect(caster.to_float(value)).to eq(10.0)
       end
+
+      it { expect(caster.to_float(value)).to be_a(Float) }
     end
 
     context 'when value is a float' do
