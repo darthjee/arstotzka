@@ -19,7 +19,7 @@ JSON keys)
 
 Yard Documentation
 -------------------
-https://www.rubydoc.info/gems/arstotzka/1.4.2
+https://www.rubydoc.info/gems/arstotzka/1.4.3
 
 Instalation
 ---------------
