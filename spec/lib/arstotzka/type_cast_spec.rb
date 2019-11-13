@@ -17,7 +17,7 @@ describe Arstotzka::TypeCast do
     context 'when value is an integer' do
       let(:value) { 10 }
 
-      it "returns the value" do
+      it 'returns the value' do
         expect(caster.to_integer(value)).to eq(value)
       end
     end
@@ -25,7 +25,7 @@ describe Arstotzka::TypeCast do
     context 'when value is a string' do
       let(:value) { '10' }
 
-      it "returns integer" do
+      it 'returns integer' do
         expect(caster.to_integer(value)).to eq(10)
       end
     end
@@ -45,7 +45,7 @@ describe Arstotzka::TypeCast do
     context 'when value is a symbol' do
       let(:value) { :'10' }
 
-      it "returns integer" do
+      it 'returns integer' do
         expect(caster.to_integer(value)).to eq(10)
       end
     end
@@ -53,8 +53,48 @@ describe Arstotzka::TypeCast do
     context 'when value is a float' do
       let(:value) { 10.7 }
 
-      it "returns integer rounded down" do
+      it 'returns integer rounded down' do
         expect(caster.to_integer(value)).to eq(10)
+      end
+    end
+  end
+
+  describe '.to_string' do
+    context 'when value is nil' do
+      let(:value) {}
+
+      it { expect(caster.to_string(value)).to eq('') }
+    end
+
+    context 'when value is a string' do
+      let(:value) { 'a' }
+
+      it 'returns value itself' do
+        expect(caster.to_string(value)).to eq(value)
+      end
+    end
+
+    context 'when value is a symbol' do
+      let(:value) { :a }
+
+      it 'returns converted string' do
+        expect(caster.to_string(value)).to eq('a')
+      end
+    end
+
+    context 'when value an integer' do
+      let(:value) { 10 }
+
+      it 'returns converted string' do
+        expect(caster.to_string(value)).to eq('10')
+      end
+    end
+
+    context 'when value a float' do
+      let(:value) { 10.5 }
+
+      it 'returns converted string' do
+        expect(caster.to_string(value)).to eq('10.5')
       end
     end
   end
