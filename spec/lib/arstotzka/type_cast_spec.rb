@@ -165,6 +165,48 @@ describe Arstotzka::TypeCast do
       it 'returns the value' do
         expect(caster.to_float(value)).to eq(10.7)
       end
+
+      it { expect(caster.to_float(value)).to be_a(Float) }
+    end
+  end
+
+  describe '.to_symbol' do
+    context 'when value is nil' do
+      let(:value) {}
+
+      it { expect(caster.to_symbol(value)).to be_nil }
+    end
+
+    context 'when value is a string' do
+      let(:value) { 'a' }
+
+      it 'returns symbol' do
+        expect(caster.to_symbol(value)).to eq(:a)
+      end
+    end
+
+    context 'when value is a symbol' do
+      let(:value) { :a }
+
+      it 'returns value' do
+        expect(caster.to_symbol(value)).to eq(value)
+      end
+    end
+
+    context 'when value an integer' do
+      let(:value) { 10 }
+
+      it 'returns converted symbol' do
+        expect(caster.to_symbol(value)).to eq(:'10')
+      end
+    end
+
+    context 'when value a float' do
+      let(:value) { 10.5 }
+
+      it 'returns converted symbol' do
+        expect(caster.to_symbol(value)).to eq(:'10.5')
+      end
     end
   end
 end

@@ -139,5 +139,9 @@ module Arstotzka
     def to_float(value)
       value.to_s.to_f if value.present?
     end
+
+    def to_symbol(value)
+      value.to_s.to_sym if value.present?
+    end
   end
 end
