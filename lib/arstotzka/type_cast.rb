@@ -137,7 +137,7 @@ module Arstotzka
     #
     #   TypeCaster.new(price: '1.75').price # returns 1.75
     def to_float(value)
-      value.to_f if value.present?
+      value.to_s.to_f if value.present?
     end
   end
 end
