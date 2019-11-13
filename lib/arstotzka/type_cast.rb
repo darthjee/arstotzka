@@ -87,7 +87,7 @@ module Arstotzka
     #
     #   TypeCaster.new(age: '10').age
     def to_integer(value)
-      value.to_i if value.present?
+      value.to_s.to_i if value.present?
     end
 
     # converts value to string
