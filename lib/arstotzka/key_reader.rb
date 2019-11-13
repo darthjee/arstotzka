@@ -62,6 +62,7 @@ module Arstotzka
     # @see #check_key!
     def key?
       return unless hash
+
       hash.key?(key) || hash.key?(key.to_sym)
     end
 

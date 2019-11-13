@@ -4,7 +4,7 @@ class Office
   include Arstotzka
 
   expose :employes, full_path: 'employes.first_name',
-                    compact: true
+                    compact:   true
 
   def initialize(hash)
     @hash = hash

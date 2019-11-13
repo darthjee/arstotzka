@@ -10,8 +10,8 @@ describe Arstotzka::PostProcessor do
 
     let(:options) do
       {
-        after: :create_employes,
-        flatten: true,
+        after:    :create_employes,
+        flatten:  true,
         instance: company
       }
     end

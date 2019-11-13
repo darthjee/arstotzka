@@ -15,6 +15,7 @@ class Collector
 
     def ==(other)
       return false if other.class != self.class
+
       name == other.name && played == other.played
     end
 

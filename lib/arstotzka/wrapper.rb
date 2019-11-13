@@ -59,6 +59,7 @@ module Arstotzka
     #   request.payload  # returns '{"key"=>"value"}'
     def wrap(value)
       return wrap_array(value) if value.is_a?(Array)
+
       wrap_element(value)
     end
 
@@ -123,6 +124,7 @@ module Arstotzka
     # @return [Object] instance of +options.klass+
     def wrap_in_class(value)
       return value unless klass
+
       klass.new(value)
     end
 

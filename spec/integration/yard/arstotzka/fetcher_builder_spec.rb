@@ -40,13 +40,13 @@ describe Arstotzka::FetcherBuilder do
           {
             teams: [
               {
-                name: 'Team War',
+                name:    'Team War',
                 players: [
                   { person_id: 101 },
                   { person_id: 102 }
                 ]
               }, {
-                name: 'Team not War',
+                name:    'Team not War',
                 players: [
                   { person_id: 201 },
                   { person_id: 202 }

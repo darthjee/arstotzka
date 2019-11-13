@@ -15,6 +15,7 @@ class Employe
 
   def ==(other)
     return unless other.class == self.class
+
     other.name == name &&
       other.age == age &&
       other.company == company
