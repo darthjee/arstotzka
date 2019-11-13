@@ -15,6 +15,6 @@ end
 shared_examples 'casts basic types' do
   it_behaves_like 'a result that is type cast',
                   integer: Integer,
-                  float: Float,
-                  string: String
+                  float:   Float,
+                  string:  String
 end

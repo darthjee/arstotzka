@@ -5,10 +5,10 @@ describe Arstotzka::TypeCast do
 
   let(:hash) do
     {
-      age: '10',
+      age:     '10',
       payload: { 'key' => 'value' },
-      price: '1.75',
-      type: 'type_a'
+      price:   '1.75',
+      type:    'type_a'
     }
   end
 

@@ -7,17 +7,17 @@ describe MyParser do
 
   let(:hash) do
     {
-      id: 10,
-      person: {
+      id:       10,
+      person:   {
         name: 'Robert',
-        age: 22
+        age:  22
       },
       accounts: [
         { balance: '$ 1000.50', type: 'checking' },
         { balance: '$ 150.10', type: 'savings' },
         { balance: '$ -100.24', type: 'checking' }
       ],
-      loans: [
+      loans:    [
         { value: '$ 300.50', bank: 'the_bank' },
         { value: '$ 150.10', type: 'the_other_bank' },
         { value: '$ 100.24', type: 'the_same_bank' }

@@ -23,8 +23,8 @@ describe Arstotzka do
     let(:instance) { klass.new({}) }
     let(:expected) do
       Arstotzka::Fetcher.new(
-        key: :name,
-        path: 'user',
+        key:      :name,
+        path:     'user',
         instance: instance
       )
     end

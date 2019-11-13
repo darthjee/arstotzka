@@ -38,7 +38,7 @@ describe Arstotzka::Crawler do
         let(:hash) do
           {
             'companies' => [{
-              name: 'Lucas Pope',
+              name:  'Lucas Pope',
               games: [{
                 'name' => 'papers, please'
               }, {

@@ -89,16 +89,16 @@ describe Arstotzka::Wrapper do
 
         it_behaves_like 'a result that is type cast',
                         integer: NilClass,
-                        float: NilClass,
-                        string: String
+                        float:   NilClass,
+                        string:  String
 
         context 'when passing klass parameter' do
           let(:options) { { type: type, klass: Arstotzka::Wrapper::Dummy } }
 
           it_behaves_like 'a result that is type cast',
                           integer: NilClass,
-                          float: NilClass,
-                          string: Arstotzka::Wrapper::Dummy
+                          float:   NilClass,
+                          string:  Arstotzka::Wrapper::Dummy
         end
       end
 

@@ -21,3 +21,6 @@ Style/ClassAndModuleChildren:
 Style/ClassVars:
   Exclude:
     - spec/support/models/arstotzka/fetcher/class_variable.rb
+
+Layout/AlignHash:
+  EnforcedColonStyle: table
