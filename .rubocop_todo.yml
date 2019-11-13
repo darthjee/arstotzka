@@ -45,11 +45,6 @@ Layout/EmptyLineAfterGuardClause:
 Metrics/BlockLength:
   Max: 31
 
-# Offense count: 1
-RSpec/AnyInstance:
-  Exclude:
-    - 'spec/lib/arstotzka/options_spec.rb'
-
 # Offense count: 78
 RSpec/NestedGroups:
   Max: 5

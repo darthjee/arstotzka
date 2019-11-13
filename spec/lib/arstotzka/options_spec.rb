@@ -160,10 +160,12 @@ describe Arstotzka::Options do
   end
 
   describe '#klass' do
+    # rubocop:disable RSpec/AnyInstance
     before do
       allow_any_instance_of(described_class)
         .to receive(:warn)
     end
+    # rubocop:enable RSpec/AnyInstance
 
     context 'when initializing with old class key' do
       let(:options_hash) { { class: Star } }
