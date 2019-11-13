@@ -63,7 +63,8 @@ module Arstotzka
       @hash ||= case json.to_s
                 when /^@@.*/
                   instance.class.class_variable_get(json)
-                when /^@.*/ instance.instance_variable_get(json)
+                when /^@.*/
+                  instance.instance_variable_get(json)
                 else
                   instance.send(json)
                 end
