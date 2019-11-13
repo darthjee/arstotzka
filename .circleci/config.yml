@@ -4,7 +4,7 @@ jobs:
     docker:
       - image: darthjee/circleci_ruby_gems:0.2.3
         environment:
-          PROJECT: sinclair
+          PROJECT: arstotzka
     steps:
       - checkout
       - run:
