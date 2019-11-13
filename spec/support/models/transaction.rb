@@ -14,6 +14,7 @@ class Transaction
 
   def ==(other)
     return false unless other.class == self.class
+
     other.value == value && other.type == type
   end
 end

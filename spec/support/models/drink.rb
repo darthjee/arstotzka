@@ -14,6 +14,7 @@ class Drink
 
   def ==(other)
     return false unless other.class == self.class
+
     other.name == name &&
       other.price == price
   end

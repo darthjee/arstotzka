@@ -22,23 +22,6 @@ Layout/AlignHash:
     - 'spec/lib/arstotzka/fetcher_spec.rb'
     - 'spec/lib/arstotzka/options_spec.rb'
 
-# Offense count: 13
-# Cop supports --auto-correct.
-Layout/EmptyLineAfterGuardClause:
-  Exclude:
-    - 'lib/arstotzka/fetcher.rb'
-    - 'lib/arstotzka/key_reader.rb'
-    - 'lib/arstotzka/options.rb'
-    - 'lib/arstotzka/wrapper.rb'
-    - 'spec/support/models/arstotzka/dummy.rb'
-    - 'spec/support/models/collector/game.rb'
-    - 'spec/support/models/customer.rb'
-    - 'spec/support/models/drink.rb'
-    - 'spec/support/models/employe.rb'
-    - 'spec/support/models/person.rb'
-    - 'spec/support/models/star.rb'
-    - 'spec/support/models/transaction.rb'
-
 # Offense count: 1
 # Configuration parameters: CountComments, ExcludedMethods.
 # ExcludedMethods: refine

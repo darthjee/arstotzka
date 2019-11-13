@@ -26,6 +26,7 @@ module Arstotzka
 
     def ==(other)
       return false unless other.class == self.class
+
       json == other.json
     end
   end
