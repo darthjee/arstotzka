@@ -71,6 +71,9 @@ module Arstotzka
 
     # Converts a value to integer
     #
+    # @param value [Object] object to be converted
+    #   to integer
+    #
     # @return [Integer]
     #
     # @example Casting to Integer
@@ -94,6 +97,9 @@ module Arstotzka
     end
 
     # Converts value to string
+    #
+    # @param value [Object] object to be converted
+    #   to string
     #
     # @return [String]
     #
@@ -121,6 +127,9 @@ module Arstotzka
 
     # Converts value to float
     #
+    # @param value [Object] object to be converted
+    #   to float
+    #
     # @return [Float]
     #
     # @example Casting to Float
@@ -144,6 +153,9 @@ module Arstotzka
     end
 
     # Converts value to Symbol
+    #
+    # @param value [Object] object to be converted
+    #   to symbol
     #
     # @return [Symbol]
     #
