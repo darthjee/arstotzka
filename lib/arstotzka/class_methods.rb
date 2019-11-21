@@ -127,6 +127,14 @@ module Arstotzka
     #   - +string+
     #   - +float+
     #
+    # @return [Array<Sinclair::MethodDefinition>]
+    #
+    # @see Config
+    # @see MethodBuilder Arstotzka::MethodBuilder
+    # @see
+    #   https://www.rubydoc.info/gems/activesupport/5.2.2/ActiveSupport/Concern
+    #   ActiveSupport::Concern
+    #
     # @example
     #   class MyModel
     #     include Arstotzka
@@ -150,14 +158,6 @@ module Arstotzka
     #   instance.first_name # returns 'John'
     #   instance.age        # returns 20
     #   instance.cars       # returns 2
-    #
-    # @return [Array<Sinclair::MethodDefinition>]
-    #
-    # @see Config
-    # @see MethodBuilder Arstotzka::MethodBuilder
-    # @see
-    #   https://www.rubydoc.info/gems/activesupport/5.2.2/ActiveSupport/Concern
-    #   ActiveSupport::Concern
     def expose(*attr_names, **options_hash)
       MethodBuilder.new(attr_names.map(&:to_sym), self, options_hash).build
     end
