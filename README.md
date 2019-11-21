@@ -1,6 +1,6 @@
 Arstotzka
 ========
-[![CircleCI](https://circleci.com/gh/darthjee/arstotzka.svg?style=svg)](https://circleci.com/gh/darthjee/arstotzka)
+[![Build Status](https://circleci.com/gh/darthjee/arstotzka.svg?style=shield)](https://circleci.com/gh/darthjee/arstotzka)
 [![Code Climate](https://codeclimate.com/github/darthjee/arstotzka/badges/gpa.svg)](https://codeclimate.com/github/darthjee/arstotzka)
 [![Test Coverage](https://codeclimate.com/github/darthjee/arstotzka/badges/coverage.svg)](https://codeclimate.com/github/darthjee/arstotzka/coverage)
 [![Issue Count](https://codeclimate.com/github/darthjee/arstotzka/badges/issue_count.svg)](https://codeclimate.com/github/darthjee/arstotzka)
