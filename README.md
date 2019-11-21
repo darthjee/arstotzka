@@ -1,9 +1,12 @@
 Arstotzka
 ========
+[![Build Status](https://circleci.com/gh/darthjee/arstotzka.svg?style=shield)](https://circleci.com/gh/darthjee/arstotzka)
 [![Code Climate](https://codeclimate.com/github/darthjee/arstotzka/badges/gpa.svg)](https://codeclimate.com/github/darthjee/arstotzka)
 [![Test Coverage](https://codeclimate.com/github/darthjee/arstotzka/badges/coverage.svg)](https://codeclimate.com/github/darthjee/arstotzka/coverage)
 [![Issue Count](https://codeclimate.com/github/darthjee/arstotzka/badges/issue_count.svg)](https://codeclimate.com/github/darthjee/arstotzka)
 [![Gem Version](https://badge.fury.io/rb/arstotzka.svg)](https://badge.fury.io/rb/arstotzka)
+[![Inline docs](http://inch-ci.org/github/darthjee/arstotzka.svg)](http://inch-ci.org/github/darthjee/arstotzka)
+[![Reviewed by Hound](https://img.shields.io/badge/Reviewed_by-Hound-8E64B0.svg)](https://houndci.com)
 
 ![arstotzka](https://raw.githubusercontent.com/darthjee/arstotzka/master/arstotzka.jpg)
 
@@ -19,7 +22,7 @@ JSON keys)
 
 Yard Documentation
 -------------------
-https://www.rubydoc.info/gems/arstotzka/1.4.3
+[https://www.rubydoc.info/gems/arstotzka/1.4.4](https://www.rubydoc.info/gems/arstotzka/1.4.4)
 
 Instalation
 ---------------
