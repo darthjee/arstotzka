@@ -20,8 +20,6 @@ module Arstotzka
 
     # Creates a new instance of Crawler
     #
-    # @param block [Proc] block to be ran over the fetched value before returning it
-    #
     # @overload initialize(options_hash={}, &block)
     #   @param options [Hash] options of initialization
     #   @option options keys [Array] keys of keys to be crawled
@@ -31,9 +29,11 @@ module Arstotzka
     #     - upper_camel: UperCamelCased keys
     #   @option options compact [Boolean] flag signallying if nil values should be removed of array
     #   @option options default [Object] default value to be returned when failing to fetch a value
+    #   @param block [Proc] block to be ran over the fetched value before returning it
     #
     # @overload initialize(options, &block)
     #   @param options [Arstotzka::Options] options of initialization object
+    #   @param block [Proc] block to be ran over the fetched value before returning it
     def initialize(options = {}, &block)
       self.options = options
       @block = block

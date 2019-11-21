@@ -13,15 +13,16 @@ module Arstotzka
     class Cache
       include Base
 
-      # @param block [Proc] block to be executed in case
-      #   variable is not cached
-      #
       # @overload initialize(options, &block)
       #   @param options [Arstotzka::Options] options passed
-      #   as options object
+      #     as options object
+      #   @param block [Proc] block to be executed in case
+      #     variable is not cached
       #
       # @overload initialize(options_hash, &block)
       #   @param options_hash [Hash] opttions passed as hash
+      #   @param block [Proc] block to be executed in case
+      #     variable is not cached
       def initialize(options_hash = {}, &block)
         self.options = options_hash
         @block = block
