@@ -27,8 +27,10 @@ module Arstotzka
     #     - snake: snake_cased keys
     #     - lower_camel: lowerCamelCased keys
     #     - upper_camel: UperCamelCased keys
-    #   @option options_hash compact [Boolean] flag signallying if nil values should be removed of array
-    #   @option options_hash default [Object] default value to be returned when failing to fetch a value
+    #   @option options_hash compact [TrueClass,FalseClass] flag signallying if
+    #     nil values should be removed of array
+    #   @option options_hash default [Object] default value to be returned when
+    #     failing to fetch a value
     #   @param block [Proc] block to be ran over the fetched value before returning it
     #
     # @overload initialize(options, &block)
@@ -94,9 +96,42 @@ module Arstotzka
 
     private
 
-    # @private
     attr_reader :block, :options
+    # @method block
+    # @api private
+    # @private
+    #
+    # Proc to be ran over the fetched value before returning it
+    #
+    # @return [Proc]
+
+    # @method options
+    # @api private
+    # @private
+    #
+    # Options of initialization object
+    #
+    # @return [Arstotzka::Options]
+
     delegate :compact, :default, to: :options
+    # @method compact
+    # @api private
+    # @private
+    #
+    # Flag for compacting the resulting array
+    #
+    # When this flag is true, all nil elements are removed
+    # from the resulting array
+    #
+    # @return [TrueClass,FalseClass]
+
+    # @method default
+    # @api private
+    # @private
+    #
+    # Default value to be returned when failing to fetch a value
+    #
+    # @return [Object]
 
     # Fetch the value from hash by crawling the keys
     #
