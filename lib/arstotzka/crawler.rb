@@ -31,11 +31,13 @@ module Arstotzka
     #     nil values should be removed of array
     #   @option options_hash default [Object] default value to be returned when
     #     failing to fetch a value
-    #   @param block [Proc] block to be ran over the fetched value before returning it
+    #   @param block [Proc] block to be ran over the
+    #     fetched value before returning it
     #
     # @overload initialize(options, &block)
     #   @param options [Arstotzka::Options] options of initialization object
-    #   @param block [Proc] block to be ran over the fetched value before returning it
+    #   @param block [Proc] block to be ran over the
+    #     fetched value before returning it
     #
     # @example (see Arstotzka::Crawler)
     def initialize(options = {}, &block)
