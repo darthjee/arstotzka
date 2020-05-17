@@ -14,11 +14,11 @@ RUN bundle_builder.sh
 #######################
 #FINAL IMAGE
 FROM base
-RUN mkdir lib/azeroth -p
+RUN mkdir lib/arstotzka -p
 
 COPY --chown=app:app --from=builder /home/app/bundle/ /usr/local/bundle/
 
 COPY --chown=app ./*.gemspec ./Gemfile /home/app/app/
-COPY --chown=app ./lib/azeroth/version.rb /home/app/app/lib/azeroth/
+COPY --chown=app ./lib/arstotzka/version.rb /home/app/app/lib/arstotzka/
 
 RUN bundle install
