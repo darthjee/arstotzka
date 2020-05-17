@@ -243,7 +243,9 @@ module Arstotzka
   #                      #   Danny LJ Robert Richard
   #                      #   Linda Ariel
   #                      # ]
-  class Options < ::OpenStruct
+  class Options < Sinclair::Options
+    with_options Config::DEFAULT_CONFIGS
+    with_options :full_path, :key, :instance, :path
     # Creates a new instance of Options
     #
     # @param options_hash [Hash] options hash
@@ -266,6 +268,25 @@ module Arstotzka
       options_hash[:klass] ||= klass
 
       super(options_hash)
+    end
+
+    def to_h
+      {
+        after:      after,
+        after_each: after_each,
+        cached:     cached,
+        case:       self.case,
+        compact:    compact,
+        default:    default,
+        flatten:    flatten,
+        json:       json,
+        klass:      klass,
+        type:       type,
+        full_path:  full_path,
+        key:        key,
+        instance:   instance,
+        path:       path
+      }
     end
 
     # @private
