@@ -243,7 +243,9 @@ module Arstotzka
   #                      #   Danny LJ Robert Richard
   #                      #   Linda Ariel
   #                      # ]
-  class Options < ::OpenStruct
+  class Options < Sinclair::Options
+    with_options Config::DEFAULT_CONFIGS
+    with_options :full_path, :key, :instance, :path
     # Creates a new instance of Options
     #
     # @param options_hash [Hash] options hash

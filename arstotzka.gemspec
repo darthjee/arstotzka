@@ -20,7 +20,7 @@ Gem::Specification.new do |gem|
   gem.require_paths = ['lib']
 
   gem.add_runtime_dependency 'activesupport', '~> 5.2.0'
-  gem.add_runtime_dependency 'sinclair',      '>= 1.6.4'
+  gem.add_runtime_dependency 'sinclair',      '>= 1.6.5'
 
   gem.add_development_dependency 'bundler',            '1.16.1'
   gem.add_development_dependency 'pry',                '0.12.2'
