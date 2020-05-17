@@ -55,7 +55,11 @@ describe Arstotzka::Config do
           flatten:    false,
           json:       :json,
           klass:      Person,
-          type:       :none
+          type:       :none,
+          full_path:  nil,
+          key:        nil,
+          instance:   nil,
+          path:       nil
         }
       end
 

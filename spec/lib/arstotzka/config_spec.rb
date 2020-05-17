@@ -10,13 +10,22 @@ describe Arstotzka::Config do
   end
 
   describe '#options' do
+    let(:expected_options_hash) do
+      described_class::DEFAULT_CONFIGS.merge(
+        full_path: nil,
+        key:       nil,
+        instance:  nil,
+        path:      nil
+      )
+    end
+
     it do
       expect(config.options).to be_a(Arstotzka::Options)
     end
 
     it 'generates options with default values' do
       expect(config.options.to_h)
-        .to eq(described_class::DEFAULT_CONFIGS)
+        .to eq(expected_options_hash)
     end
 
     context 'when configuring it' do
@@ -31,7 +40,11 @@ describe Arstotzka::Config do
           flatten:    true,
           json:       :@hash,
           klass:      Account,
-          type:       :string
+          type:       :string,
+          full_path:  nil,
+          key:        nil,
+          instance:   nil,
+          path:       nil
         }
       end
 
@@ -72,7 +85,11 @@ describe Arstotzka::Config do
           flatten:    true,
           json:       :@hash,
           klass:      Account,
-          type:       :string
+          type:       :string,
+          full_path:  nil,
+          key:        nil,
+          instance:   nil,
+          path:       nil
         }
       end
 
