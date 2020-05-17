@@ -163,7 +163,7 @@ describe Arstotzka::Fetcher do
       end
     end
 
-    context 'when json is an instance variable' do
+    context 'when json is an class variable' do
       let(:instance)     { described_class::ClassVariable.new }
       let(:hash)         { { name: 'John Doe' } }
       let(:options_hash) { { key: :name, json: :@@json } }

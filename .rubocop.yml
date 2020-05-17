@@ -18,7 +18,7 @@ Style/ClassVars:
   Exclude:
     - spec/support/models/arstotzka/fetcher/class_variable.rb
 
-Layout/AlignHash:
+Layout/HashAlignment:
   EnforcedColonStyle: table
 
 Metrics/BlockLength:
@@ -26,3 +26,12 @@ Metrics/BlockLength:
     - 'spec/**/*_spec.rb'
     - 'spec/support/**/*.rb'
     - '*.gemspec'
+
+Style/HashEachMethods:
+  Enabled: true
+
+Style/HashTransformKeys:
+  Enabled: true
+
+Style/HashTransformValues:
+  Enabled: true

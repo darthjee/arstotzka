@@ -1,4 +1,4 @@
-# frozen_string_literal: truie
+# frozen_string_literal: true
 
 describe Arstotzka::Wrapper do
   subject(:wrapper) { described_class.new(klass: klass, type: type) }
