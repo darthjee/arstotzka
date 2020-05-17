@@ -270,25 +270,6 @@ module Arstotzka
       super(options_hash)
     end
 
-    def to_h
-      {
-        after:      after,
-        after_each: after_each,
-        cached:     cached,
-        case:       self.case,
-        compact:    compact,
-        default:    default,
-        flatten:    flatten,
-        json:       json,
-        klass:      klass,
-        type:       type,
-        full_path:  full_path,
-        key:        key,
-        instance:   instance,
-        path:       path
-      }
-    end
-
     # @private
     #
     # Creates a new instance mergin the given hash with @options
