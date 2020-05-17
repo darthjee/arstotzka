@@ -49,6 +49,7 @@ describe Arstotzka::Options do
         ]
       end
 
+      # rubocop:disable RSpec/LeakyConstantDeclaration
       before do
         module Arstotzka::TypeCast
           def to_symbolized_hash(value)
@@ -56,12 +57,14 @@ describe Arstotzka::Options do
           end
         end
       end
+      # rubocop:enable RSpec/LeakyConstantDeclaration
 
       it 'returns inflated drinks' do
         expect(instance.drinks).to eq(expected)
       end
     end
 
+    # rubocop:disable RSpec/SubjectStub
     describe 'Using cached, compact, after and full_path' do
       let(:clazz) { Application }
 
@@ -85,9 +88,7 @@ describe Arstotzka::Options do
       end
 
       before do
-        # rubocop:disable RSpec/SubjectStub
         allow(instance).to receive(:warn)
-        # rubocop:enable RSpec/SubjectStub
       end
 
       it 'Returns created users' do
@@ -100,6 +101,7 @@ describe Arstotzka::Options do
         expect(instance).to have_received(:warn).exactly(3).times
       end
     end
+    # rubocop:enable RSpec/SubjectStub
 
     describe 'working with snake case hash' do
       let(:clazz) { JobSeeker }
