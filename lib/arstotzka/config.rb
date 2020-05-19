@@ -57,7 +57,8 @@ module Arstotzka
       flatten:    false,
       json:       :json,
       klass:      nil,
-      type:       :none
+      type:       :none,
+      before_wrap: nil,
     }.freeze
 
     add_configs DEFAULT_CONFIGS
@@ -93,7 +94,8 @@ module Arstotzka
     #   #   flatten:    false,
     #   #   json:       :json,
     #   #   klass:      Person,
-    #   #   type:       :none
+    #   #   type:       :none,
+    #   #   befor_wrap: nil
     #   # }
     def options(options_hash = {})
       Options.new(
