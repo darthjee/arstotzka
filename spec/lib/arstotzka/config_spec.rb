@@ -44,7 +44,8 @@ describe Arstotzka::Config do
           full_path:  nil,
           key:        nil,
           instance:   nil,
-          path:       nil
+          path:       nil,
+          before:     :before_action,
         }
       end
 
@@ -60,6 +61,7 @@ describe Arstotzka::Config do
           json       :@hash
           klass      Account
           type       :string
+          before     :before_action
         end
       end
 
@@ -89,7 +91,8 @@ describe Arstotzka::Config do
           full_path:  nil,
           key:        nil,
           instance:   nil,
-          path:       nil
+          path:       nil,
+          before:     nil,
         }
       end
 
