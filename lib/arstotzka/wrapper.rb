@@ -84,6 +84,11 @@ module Arstotzka
       after(value)
     end
 
+    # @private
+    #
+    # Apply before option call
+    #
+    # @return [Object]
     def apply_before(value)
       return value unless options.before
 
