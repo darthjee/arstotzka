@@ -50,8 +50,10 @@ describe Arstotzka::Wrapper do
     end
 
     context 'with klass and before option as symbol' do
-      let(:instance) { Arstotzka::Fetcher::Dummy.new(json) }
-      let(:options) { { klass: OpenStruct, before: :ensure_age } }
+      let(:instance) { Arstotzka::Fetcher::Dummy.new(hash) }
+      let(:options)  do
+        { klass: OpenStruct, before: :ensure_age, instance: instance }
+      end
 
       it 'creates new instance from given class' do
         expect(result).to be_a(OpenStruct)
@@ -83,7 +85,7 @@ describe Arstotzka::Wrapper do
         end
 
         it 'updates the hash before ' do
-          expect(result.age).to all(eq(10))
+          expect(result.map(&:age)).to all(eq(10))
         end
       end
     end

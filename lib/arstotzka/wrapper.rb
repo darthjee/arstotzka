@@ -75,12 +75,19 @@ module Arstotzka
     #
     # @return [Object]
     def wrap_element(value)
+      value = apply_before(value)
       value = cast(value)
       return if value.nil?
 
       value = wrap_in_class(value)
 
       after(value)
+    end
+
+    def apply_before(value)
+      return value unless options.before
+
+      options.instance.send(options.before, value)
     end
 
     # @private
