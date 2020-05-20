@@ -58,7 +58,7 @@ module Arstotzka
       json:       :json,
       klass:      nil,
       type:       :none,
-      before: nil,
+      before:     nil
     }.freeze
 
     add_configs DEFAULT_CONFIGS

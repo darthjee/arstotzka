@@ -55,11 +55,11 @@ describe Arstotzka::Wrapper do
         { klass: OpenStruct, before: :ensure_age, instance: instance }
       end
 
+      let(:hash) { { name: 'Joe' } }
+
       it 'creates new instance from given class' do
         expect(result).to be_a(OpenStruct)
       end
-
-      let(:hash) { { name: 'Joe'} }
 
       it 'uses the given value on object initialization' do
         expect(result.name).to eq(hash[:name])
@@ -162,17 +162,17 @@ describe Arstotzka::Wrapper do
         let(:value) { '' }
 
         it_behaves_like 'a result that is type cast',
-          integer: NilClass,
-          float:   NilClass,
-          string:  String
+                        integer: NilClass,
+                        float:   NilClass,
+                        string:  String
 
         context 'when passing klass parameter' do
           let(:options) { { type: type, klass: Arstotzka::Wrapper::Dummy } }
 
           it_behaves_like 'a result that is type cast',
-            integer: NilClass,
-            float:   NilClass,
-            string:  Arstotzka::Wrapper::Dummy
+                          integer: NilClass,
+                          float:   NilClass,
+                          string:  Arstotzka::Wrapper::Dummy
         end
       end
 

@@ -45,7 +45,7 @@ describe Arstotzka::Config do
           key:        nil,
           instance:   nil,
           path:       nil,
-          before:     :before_action,
+          before:     :before_action
         }
       end
 
@@ -92,7 +92,7 @@ describe Arstotzka::Config do
           key:        nil,
           instance:   nil,
           path:       nil,
-          before:     nil,
+          before:     nil
         }
       end
 
