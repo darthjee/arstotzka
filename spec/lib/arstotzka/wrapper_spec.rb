@@ -90,6 +90,39 @@ describe Arstotzka::Wrapper do
       end
     end
 
+    context 'with after_each option as symbol' do
+      let(:instance) { Group.new(hash) }
+      let(:options) do
+        { after_each: :create_person, instance: instance }
+      end
+
+      let(:hash) { 'Fred' }
+
+      it 'Runs before each on each element' do
+        expect(result).to be_a(Person)
+      end
+
+      it 'uses the given value on object initialization' do
+        expect(result.name).to eq('Fred')
+      end
+
+      context 'when hash is an array' do
+        let(:hash) { %w[Wilma Fred Dino] }
+
+        it do
+          expect(result).to be_a(Array)
+        end
+
+        it 'Runs before each on each element' do
+          expect(result).to all(be_a(Person))
+        end
+
+        it 'uses the given value on object initialization' do
+          expect(result.first.name).to eq('Wilma')
+        end
+      end
+    end
+
     context 'with type otpion' do
       let(:type)    { :integer }
       let(:value)   { '1' }
