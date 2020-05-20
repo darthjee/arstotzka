@@ -21,7 +21,7 @@ JSON keys)
 
 Yard Documentation
 -------------------
-[https://www.rubydoc.info/gems/arstotzka/1.5.0](https://www.rubydoc.info/gems/arstotzka/1.5.0)
+[https://www.rubydoc.info/gems/arstotzka/1.6.0](https://www.rubydoc.info/gems/arstotzka/1.6.0)
 
 Instalation
 ---------------
@@ -114,6 +114,7 @@ Options
 - json: Method that contains the hash to be parsed (`:json` by default)
 - path: Path where to find the sub hash that contains the key (empty by default)
 - type: Type that the value must be cast into ([TypeCast](#typecast))
+- before: method to be ran on result before any wrapping
 
 ## TypeCast
 The type casting, when the option `type` is passed, is done through the `Arstotzka::TypeCast` which can

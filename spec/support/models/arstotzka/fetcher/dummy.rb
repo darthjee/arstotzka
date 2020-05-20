@@ -10,6 +10,10 @@ module Arstotzka
       private
 
       attr_reader :json
+
+      def ensure_age(hash)
+        hash.merge(age: 10)
+      end
     end
   end
 end
