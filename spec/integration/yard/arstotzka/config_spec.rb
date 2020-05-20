@@ -59,7 +59,8 @@ describe Arstotzka::Config do
           full_path:  nil,
           key:        nil,
           instance:   nil,
-          path:       nil
+          path:       nil,
+          before:     nil
         }
       end
 

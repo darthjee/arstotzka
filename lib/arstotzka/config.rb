@@ -95,7 +95,10 @@ module Arstotzka
     #   #   json:       :json,
     #   #   klass:      Person,
     #   #   type:       :none,
-    #   #   befor_wrap: nil
+    #   #   full_path:  nil,
+    #   #   key:        nil,
+    #   #   instance:   nil,
+    #   #   befor:      nil
     #   # }
     def options(options_hash = {})
       Options.new(
