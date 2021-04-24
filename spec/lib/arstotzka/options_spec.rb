@@ -291,5 +291,31 @@ describe Arstotzka::Options do
         end
       end
     end
+
+    context 'when full_path is a symbol' do
+      let(:full_path) { :account }
+
+      context 'when path is nil' do
+        it 'returns splitted full path' do
+          expect(options.keys).to eq(%w[account])
+        end
+      end
+
+      context 'when path is empty' do
+        let(:path) { '' }
+
+        it 'returns splitted full path' do
+          expect(options.keys).to eq(%w[account])
+        end
+      end
+
+      context 'when path is not empty' do
+        let(:path) { 'account.person' }
+
+        it 'returns splitted full path' do
+          expect(options.keys).to eq(%w[account])
+        end
+      end
+    end
   end
 end
