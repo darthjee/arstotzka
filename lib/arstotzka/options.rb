@@ -283,7 +283,7 @@ module Arstotzka
     #
     # @return [Array<String>]
     def keys
-      return full_path.split('.') if full_path
+      return full_path.to_s.split('.') if full_path
       return [key.to_s] unless path&.present?
 
       [path, key].compact.join('.').split('.')
