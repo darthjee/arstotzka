@@ -20,26 +20,4 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency 'activesupport', '>= 7.2.4'
   gem.add_dependency 'sinclair',      '>= 3.1.0'
-
-  gem.add_development_dependency 'bundler',            '>= 4.0.24'
-  gem.add_development_dependency 'pry',                '0.14.2'
-  gem.add_development_dependency 'pry-nav',            '1.0.0'
-  gem.add_development_dependency 'rake',               '13.4.2'
-  gem.add_development_dependency 'reek',               '6.5.0'
-  gem.add_development_dependency 'rspec',              '3.13.2'
-  gem.add_development_dependency 'rspec-core',         '3.13.7'
-  gem.add_development_dependency 'rspec-expectations', '3.13.6'
-  gem.add_development_dependency 'rspec-mocks',        '3.13.9'
-  gem.add_development_dependency 'rspec-support',      '3.13.8'
-  gem.add_development_dependency 'rubocop',            '1.92.2'
-  gem.add_development_dependency 'rubocop-rake',       '0.7.1'
-  gem.add_development_dependency 'rubocop-rspec',      '3.10.2'
-  gem.add_development_dependency 'rubycritic',         '5.0.0'
-  gem.add_development_dependency 'simplecov',          '0.22.0'
-  gem.add_development_dependency 'simplecov-html',     '0.13.2'
-  gem.add_development_dependency 'simplecov-lcov',     '0.9.0'
-  gem.add_development_dependency 'yard',               '0.9.45'
-  gem.add_development_dependency 'yardstick',          '0.9.9'
-
-  gem.add_development_dependency 'safe_attribute_assignment'
 end
