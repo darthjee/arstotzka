@@ -23,6 +23,11 @@ Yard Documentation
 -------------------
 [https://www.rubydoc.info/gems/arstotzka/1.6.2](https://www.rubydoc.info/gems/arstotzka/1.6.2)
 
+
+**Current Release**: [1.6.2](https://github.com/darthjee/arstotzka/tree/1.6.2)
+
+**Next release**: [1.6.3](https://github.com/darthjee/arstotzka/compare/1.6.2...main)
+
 Instalation
 ---------------
 1. Add Arstotzka to your `Gemfile` and `bundle install`:
