@@ -1,6 +1,8 @@
 Arstotzka
 ========
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/darthjee/magicka/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/darthjee/magicka/tree/main)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/a47f4d69263240b38c5b3248e609fb68)](https://app.codacy.com/gh/darthjee/arstotzka/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Coverage/a47f4d69263240b38c5b3248e609fb68)](https://app.codacy.com/gh/darthjee/arstotzka/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_coverage)
 [![Gem Version](https://badge.fury.io/rb/arstotzka.svg)](https://badge.fury.io/rb/arstotzka)
 [![Inline docs](http://inch-ci.org/github/darthjee/arstotzka.svg)](http://inch-ci.org/github/darthjee/arstotzka)
 
