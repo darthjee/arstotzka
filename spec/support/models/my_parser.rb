@@ -24,6 +24,6 @@ class MyParser
 
   models = File.expand_path('spec/support/models/my_parser/*.rb')
   Dir[models].each do |file|
-    autoload file.gsub(%r{.*\/(.*)\..*}, '\1').camelize.to_sym, file
+    autoload file.gsub(%r{.*/(.*)\..*}, '\1').camelize.to_sym, file
   end
 end

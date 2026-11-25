@@ -1,6 +1,18 @@
 # frozen_string_literal: true
 
 require 'simplecov'
+require 'simplecov-lcov'
+
+SimpleCov::Formatter::LcovFormatter.config do |config|
+  config.report_with_single_file = true
+  config.single_report_path = 'coverage/lcov/project.lcov'
+end
+
+SimpleCov.formatters = [
+  SimpleCov::Formatter::HTMLFormatter,
+  SimpleCov::Formatter::LcovFormatter
+]
+
 SimpleCov.start do
   add_filter 'spec/'
 end
@@ -11,7 +23,7 @@ require 'safe_attribute_assignment'
 require 'sinclair/matchers'
 
 support_files = File.expand_path('spec/support/**/*.rb')
-Dir[support_files].sort.each { |file| require file }
+Dir[support_files].sort.each { |file| require file } # rubocop:disable Lint/RedundantDirGlobSort
 
 RSpec.configure do |config|
   config.run_all_when_everything_filtered = true
@@ -21,7 +33,4 @@ RSpec.configure do |config|
   config.include Sinclair::Matchers
 
   config.order = 'random'
-
-  config.before do
-  end
 end

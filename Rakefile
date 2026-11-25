@@ -9,4 +9,6 @@ require './config/rubycritc'
 RSpec::Core::RakeTask.new
 
 task default: :spec
+
+desc 'Run specs'
 task test: :spec

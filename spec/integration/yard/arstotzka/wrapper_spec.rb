@@ -37,7 +37,7 @@ describe Arstotzka::Wrapper do
         end
 
         it 'casts before wrapping' do
-          expect(request.payload).to eq('{"key"=>"value"}')
+          expect(request.payload).to eq('{"key" => "value"}')
         end
       end
     end

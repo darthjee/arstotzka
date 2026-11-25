@@ -267,7 +267,7 @@ module Arstotzka
       warn ":class has been deprecated, prefer 'expose klass: #{klass}'" if klass
       options_hash[:klass] ||= klass
 
-      super(options_hash)
+      super
     end
 
     # @private

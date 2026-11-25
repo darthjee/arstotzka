@@ -56,7 +56,7 @@ module Arstotzka
     #   wrapper = Arstotzka::Wrapper.new(type: :string, klass: Request)
     #   request = wrapper.wrap(value)
     #
-    #   request.payload  # returns '{"key"=>"value"}'
+    #   request.payload  # returns '{"key" => "value"}'
     def wrap(value)
       return wrap_array(value) if value.is_a?(Array)
 
@@ -67,6 +67,7 @@ module Arstotzka
 
     # @private
     attr_reader :options
+
     delegate :klass, :type, :after_each, to: :options
 
     # @private
@@ -133,11 +134,26 @@ module Arstotzka
     #
     # Wrap resulting value in class
     #
+    # When the value is a +Hash+ and the class initializer
+    # accepts keyword arguments, the hash is passed as keywords
+    #
     # @return [Object] instance of +options.klass+
     def wrap_in_class(value)
       return value unless klass
+      return klass.new(**value) if value.is_a?(Hash) && keyword_initializer?
 
       klass.new(value)
+    end
+
+    # @private
+    #
+    # Checks if +options.klass+ initializer accepts keyword arguments
+    #
+    # @return [TrueClass,FalseClass]
+    def keyword_initializer?
+      klass.instance_method(:initialize).parameters.any? do |type, _|
+        %i[key keyreq keyrest].include?(type)
+      end
     end
 
     # @private

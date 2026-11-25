@@ -59,6 +59,7 @@ module Arstotzka
 
     # @private
     attr_reader :attr_names, :options
+
     delegate to: :options
 
     # @private

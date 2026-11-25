@@ -21,7 +21,12 @@ JSON keys)
 
 Yard Documentation
 -------------------
-[https://www.rubydoc.info/gems/arstotzka/1.6.2](https://www.rubydoc.info/gems/arstotzka/1.6.2)
+[https://www.rubydoc.info/gems/arstotzka/1.7.0](https://www.rubydoc.info/gems/arstotzka/1.7.0)
+
+
+**Current Release**: [1.7.0](https://github.com/darthjee/arstotzka/tree/1.7.0)
+
+**Next release**: [1.8.0](https://github.com/darthjee/arstotzka/compare/1.7.0...main)
 
 Instalation
 ---------------

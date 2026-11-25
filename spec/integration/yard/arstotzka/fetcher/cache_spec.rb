@@ -55,7 +55,7 @@ describe Arstotzka::Fetcher::Cache do
           expect(cache.fetch).to eq(5050)
         end
 
-        it ' does not recalculates when cache is not nil' do
+        it 'does not recalculates when cache is not nil' do
           cache.fetch
           settings[:calculate] = true
           cache.fetch

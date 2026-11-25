@@ -80,6 +80,7 @@ module Arstotzka
 
     # @private
     attr_reader :options
+
     delegate :keys, to: :options
   end
 end

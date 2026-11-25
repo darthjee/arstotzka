@@ -3,7 +3,7 @@
 module Arstotzka
   module TypeCast
     def to_car(hash)
-      Car.new(hash.symbolize_keys)
+      Car.new(**hash.symbolize_keys)
     end
   end
 end

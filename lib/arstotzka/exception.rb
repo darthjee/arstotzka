@@ -17,6 +17,7 @@ module Arstotzka
       #
       # @return [FetcherBuilderNotFound]
       def initialize(attribute, klass)
+        super()
         @attribute = attribute
         @klass = klass
       end

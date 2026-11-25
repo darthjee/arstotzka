@@ -3,6 +3,7 @@
 class Game
   include Arstotzka
   include SafeAttributeAssignment
+
   attr_reader :json
 
   expose :name, :publisher

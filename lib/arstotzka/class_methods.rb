@@ -43,7 +43,7 @@ module Arstotzka
     # @return [TrueClass,FalseClass]
     def fetcher_for?(attribute)
       return true if fetcher_builders.key?(attribute)
-      return unless superclass.include?(Arstotzka)
+      return false unless superclass.include?(Arstotzka)
 
       superclass.fetcher_for?(attribute)
     end

@@ -22,7 +22,7 @@ describe Arstotzka::Config do
       end
 
       let(:error_message) do
-        "undefined method `json' for #{office}\nDid you mean?  JSON"
+        "undefined method 'json' for an instance of Office"
       end
 
       it do

@@ -8,6 +8,7 @@ describe Arstotzka::ClassMethods do
     let(:klass) do
       Class.new(MyModel) do
         include Arstotzka
+
         expose :first_name, full_path: 'name.first'
         expose :age, 'cars', type: :integer
       end

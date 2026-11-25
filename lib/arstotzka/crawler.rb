@@ -99,6 +99,7 @@ module Arstotzka
     private
 
     attr_reader :block, :options
+
     # @method block
     # @api private
     # @private
