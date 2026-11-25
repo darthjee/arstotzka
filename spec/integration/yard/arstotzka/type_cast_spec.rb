@@ -21,7 +21,7 @@ describe Arstotzka::TypeCast do
 
     describe 'string' do
       it 'converts value to string' do
-        expect(model.payload).to eq('{"key"=>"value"}')
+        expect(model.payload).to eq('{"key" => "value"}')
       end
     end
 

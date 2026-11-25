@@ -37,7 +37,7 @@ module Arstotzka
   #   module Arstotzka
   #     module TypeCast
   #       def to_car(hash)
-  #         Car.new(hash.symbolize_keys)
+  #         Car.new(**hash.symbolize_keys)
   #       end
   #     end
   #   end
@@ -120,7 +120,7 @@ module Arstotzka
     #
     #   model.TypeCaster.new(hash)
     #
-    #   model.payload # returns '{"key"=>"value"}'
+    #   model.payload # returns '{"key" => "value"}'
     def to_string(value)
       value.to_s
     end
