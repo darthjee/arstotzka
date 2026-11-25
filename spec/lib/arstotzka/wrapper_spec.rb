@@ -3,8 +3,9 @@
 require 'spec_helper'
 
 describe Arstotzka::Wrapper do
+  subject { described_class.new options }
+
   let(:options) { {} }
-  let(:subject) { described_class.new options }
   let(:hash)    { { a: 1 } }
 
   describe '#wrap' do
@@ -65,7 +66,7 @@ describe Arstotzka::Wrapper do
         expect(result.name).to eq(hash[:name])
       end
 
-      it 'updates the hash before ' do
+      it 'updates the hash before' do
         expect(result.age).to eq(10)
       end
 
@@ -84,7 +85,7 @@ describe Arstotzka::Wrapper do
           expect(result.map(&:name)).to all(eq(hash[:name]))
         end
 
-        it 'updates the hash before ' do
+        it 'updates the hash before' do
           expect(result.map(&:age)).to all(eq(10))
         end
       end

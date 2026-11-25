@@ -9,7 +9,7 @@ describe Arstotzka::TypeCast do
 
   describe '.to_integer' do
     context 'when value is nil' do
-      let(:value) {}
+      let(:value) { nil }
 
       it { expect(caster.to_integer(value)).to be_nil }
     end
@@ -71,7 +71,7 @@ describe Arstotzka::TypeCast do
 
   describe '.to_string' do
     context 'when value is nil' do
-      let(:value) {}
+      let(:value) { nil }
 
       it { expect(caster.to_string(value)).to eq('') }
     end
@@ -111,7 +111,7 @@ describe Arstotzka::TypeCast do
 
   describe '.to_float' do
     context 'when value is nil' do
-      let(:value) {}
+      let(:value) { nil }
 
       it { expect(caster.to_float(value)).to be_nil }
     end
@@ -172,7 +172,7 @@ describe Arstotzka::TypeCast do
 
   describe '.to_symbol' do
     context 'when value is nil' do
-      let(:value) {}
+      let(:value) { nil }
 
       it { expect(caster.to_symbol(value)).to be_nil }
     end

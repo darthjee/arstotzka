@@ -160,7 +160,7 @@ describe Arstotzka::Options do
   end
 
   # rubocop:disable RSpec/SubjectStub
-  # rubocop:disable RSpec/AnyInstance
+  # rubocop:disable-next RSpec/AnyInstance
   describe '#klass' do
     before do
       allow_any_instance_of(described_class)
@@ -191,7 +191,6 @@ describe Arstotzka::Options do
       end
     end
   end
-  # rubocop:enable RSpec/AnyInstance
   # rubocop:enable RSpec/SubjectStub
 
   describe '#merge' do

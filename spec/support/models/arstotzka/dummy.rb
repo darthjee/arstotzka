@@ -3,6 +3,7 @@
 module Arstotzka
   class Dummy
     include Arstotzka
+
     attr_reader :json
 
     expose 'id'

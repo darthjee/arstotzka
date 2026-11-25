@@ -103,6 +103,7 @@ module Arstotzka
       private
 
       attr_reader :block, :options
+
       delegate :cached, :key, :instance, to: :options
 
       # @private

@@ -67,6 +67,7 @@ module Arstotzka
 
     # @private
     attr_reader :options
+
     delegate :klass, :type, :after_each, to: :options
 
     # @private

@@ -48,6 +48,7 @@ module Arstotzka
     private
 
     attr_reader :hash, :base_key, :options
+
     delegate :key, to: :key_changer
 
     # @private
@@ -61,7 +62,7 @@ module Arstotzka
     #
     # @see #check_key!
     def key?
-      return unless hash
+      return false unless hash
 
       hash.key?(key) || hash.key?(key.to_sym)
     end

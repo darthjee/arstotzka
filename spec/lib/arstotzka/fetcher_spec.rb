@@ -85,7 +85,7 @@ describe Arstotzka::Fetcher do
       { after: :sum, key: :value }
     end
 
-    it 'applies after call ' do
+    it 'applies after call' do
       expect(fetcher.fetch).to eq(325)
     end
   end

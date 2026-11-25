@@ -10,17 +10,16 @@ Gem::Specification.new do |gem|
   gem.authors               = ['Darthjee']
   gem.email                 = ['dev@gmail.com']
   gem.summary               = 'Arstotzka'
-  gem.description           = gem.description
+  gem.description           = 'Fetch values from nested hashes / JSON declaratively'
   gem.homepage              = 'https://github.com/darthjee/arstotzka'
   gem.required_ruby_version = '>= 3.4.0'
 
   gem.files         = `git ls-files`.split($INPUT_RECORD_SEPARATOR)
   gem.executables   = gem.files.grep(%r{^bin/}) { |f| File.basename(f) }
-  gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ['lib']
 
-  gem.add_runtime_dependency 'activesupport', '>= 7.2.4'
-  gem.add_runtime_dependency 'sinclair',      '>= 3.1.0'
+  gem.add_dependency 'activesupport', '>= 7.2.4'
+  gem.add_dependency 'sinclair',      '>= 3.1.0'
 
   gem.add_development_dependency 'bundler',            '>= 4.0.24'
   gem.add_development_dependency 'pry',                '0.14.2'

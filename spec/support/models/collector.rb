@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative './collector/game'
+require_relative 'collector/game'
 
 class Collector
   include Arstotzka

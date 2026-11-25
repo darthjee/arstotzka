@@ -1,14 +1,14 @@
-require: rubocop-rspec
+plugins:
+  - rubocop-rspec
+  - rubocop-rake
 inherit_from: .rubocop_todo.yml
 
 AllCops:
-  TargetRubyVersion: 2.5
+  TargetRubyVersion: 3.4
+  NewCops: enable
 
-Metrics/LineLength:
+Layout/LineLength:
   Max: 100
-
-RSpec/AlignLeftLetBrace:
-  Enabled: true
 
 Style/ClassAndModuleChildren:
   Exclude:
@@ -35,3 +35,16 @@ Style/HashTransformKeys:
 
 Style/HashTransformValues:
   Enabled: true
+
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+
+Gemspec/DevelopmentDependencies:
+  Enabled: false
+
+Gemspec/RequireMFA:
+  Enabled: false
+
+Style/OpenStructUse:
+  Exclude:
+    - 'spec/**/*.rb'
